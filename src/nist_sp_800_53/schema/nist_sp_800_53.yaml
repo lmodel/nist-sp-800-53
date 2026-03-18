@@ -13,8 +13,8 @@ prefixes:
 
 imports:
   - linkml:types
-  - sp_800_53_catalog
-  - sp_800_53_profile
+  # sp_800_53_catalog
+  # sp_800_53_profile
 
 slots:
   catalog:
