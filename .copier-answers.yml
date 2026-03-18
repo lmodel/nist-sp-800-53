@@ -1,0 +1,16 @@
+# Changes here will be overwritten by Copier
+_commit: v0.4.2
+_src_path: https://github.com/linkml/linkml-project-copier
+add_example: true
+copyright_year: '2026'
+email: noel.mcloughlin@gmail.com
+full_name: Noel McLoughlin
+gh_action_docs_preview: true
+gh_action_pypi: true
+github_org: lmodel
+license: Apache-2.0
+project_description: Electronic (LinkML) Version of NIST SP 800-53 Rev 5 Controls
+    and SP 800-53A Rev 5 Assessment Procedures
+project_name: nist-sp-800-53
+project_slug: nist_sp_800_53
+
