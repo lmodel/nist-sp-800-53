@@ -1,0 +1,263 @@
+id: https://w3id.org/lmodel/nist-sp-800-53r5/profile
+name: NIST-SP-800-53-Profile
+description: OSCAL profiles for NIST SP 800-53 baselines
+version: 5.2.0
+source: https://doi.org/10.6028/NIST.SP.800-53r5
+
+default_prefix: profile
+default_range: string
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  profile: https://w3id.org/lmodel/nist-sp-800-53/profile/
+  catalog: https://w3id.org/lmodel/nist-sp-800-53/catalog/
+
+imports:
+  - linkml:types
+
+slots:
+  profile:
+    description: Root profile payload
+    range: ProfileBody
+    inlined: true
+
+  id:
+    description: Identifier for role or other profile element
+
+  uuid:
+    description: UUID for profile and resources
+
+  metadata:
+    description: Profile metadata
+    range: Metadata
+    inlined: true
+
+  title:
+    description: Human-readable title
+
+  version:
+    description: Version identifier
+
+  "last-modified":
+    description: Last modification timestamp
+
+  "oscal-version":
+    description: OSCAL version identifier
+
+  roles:
+    description: Roles used in metadata
+    range: Role
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  parties:
+    description: Parties used in metadata
+    range: Party
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  "responsible-parties":
+    description: Responsible party assignments
+    range: ResponsibleParty
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  "role-id":
+    description: Assigned role identifier
+
+  "party-uuids":
+    description: Referenced party UUIDs
+    multivalued: true
+
+  type:
+    description: Party type
+
+  name:
+    description: Name of a profile party
+
+  "short-name":
+    description: Short display name
+
+  "email-addresses":
+    description: Party email addresses
+    multivalued: true
+
+  addresses:
+    description: Postal addresses
+    range: Address
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  "addr-lines":
+    description: Address lines
+    multivalued: true
+
+  city:
+    description: City name
+
+  state:
+    description: State or region
+
+  "postal-code":
+    description: Postal code
+
+  imports:
+    description: Imported catalogs or profiles
+    range: ImportResource
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  merge:
+    description: Merge behavior settings
+    range: MergeRules
+    inlined: true
+
+  "back-matter":
+    description: Back-matter references and resources
+    range: BackMatter
+    inlined: true
+
+  resources:
+    description: Back-matter resources
+    range: Resource
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  description:
+    description: Resource description
+
+  rlinks:
+    description: Resource links
+    range: ResourceLink
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  "media-type":
+    description: Media type for a resource link
+
+  href:
+    description: Link or resource reference
+
+  "include-controls":
+    description: Include-controls selectors
+    range: IncludeControlsSelection
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+  "with-ids":
+    description: Explicit control identifiers to include
+    multivalued: true
+
+  "as-is":
+    description: Keep source order and content during merge
+    range: boolean
+
+classes:
+  ProfileDocument:
+    description: Top-level wrapper for OSCAL profile files
+    tree_root: true
+    slots:
+      - profile
+
+  ProfileBody:
+    description: OSCAL profile body
+    class_uri: linkml:Any
+    slots:
+      - uuid
+      - metadata
+      - imports
+      - merge
+      - "back-matter"
+
+  ImportResource:
+    description: Imported profile or catalog reference
+    class_uri: linkml:Any
+    slots:
+      - href
+      - "include-controls"
+
+  IncludeControlsSelection:
+    description: Control inclusion selector
+    class_uri: linkml:Any
+    slots:
+      - "with-ids"
+
+  MergeRules:
+    description: Merge configuration
+    class_uri: linkml:Any
+    slots:
+      - "as-is"
+
+  Metadata:
+    description: OSCAL profile metadata section
+    class_uri: linkml:Any
+    slots:
+      - title
+      - "last-modified"
+      - version
+      - "oscal-version"
+      - roles
+      - parties
+      - "responsible-parties"
+
+  Role:
+    description: Role definition
+    slots:
+      - id
+      - title
+
+  Party:
+    description: Party definition
+    class_uri: linkml:Any
+    slots:
+      - uuid
+      - type
+      - name
+      - "short-name"
+      - "email-addresses"
+      - addresses
+
+  Address:
+    description: Postal address
+    class_uri: linkml:Any
+    slots:
+      - "addr-lines"
+      - city
+      - state
+      - "postal-code"
+
+  ResponsibleParty:
+    description: Assignment of parties to a role
+    class_uri: linkml:Any
+    slots:
+      - "role-id"
+      - "party-uuids"
+
+  BackMatter:
+    description: OSCAL back-matter section
+    class_uri: linkml:Any
+    slots:
+      - resources
+
+  Resource:
+    description: Referenced resource
+    class_uri: linkml:Any
+    slots:
+      - uuid
+      - description
+      - rlinks
+
+  ResourceLink:
+    description: Reference link for a resource
+    class_uri: linkml:Any
+    slots:
+      - href
+      - "media-type"
