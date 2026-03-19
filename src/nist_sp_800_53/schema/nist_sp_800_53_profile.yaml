@@ -16,10 +16,11 @@ imports:
   - linkml:types
 
 slots:
-  profile:
-    description: Root profile payload
-    range: ProfileBody
-    inlined: true
+  ## defer to root slots for catalog and profile content, for OSCAL YAML shape
+  # profile:
+  #   description: Root profile payload
+  #   range: ProfileBody
+  #   inlined: true
 
   id:
     description: Identifier for role or other profile element
