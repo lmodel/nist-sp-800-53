@@ -1,15 +1,16 @@
-id: https://w3id.org/lmodel/nist-sp-800-53r5
+id: https://w3id.org/lmodel/nist-sp-800-53
 name: NIST-SP-800-53
-description: Unified LinkML schema for OSCAL catalogs and profiles for NIST SP 800-53
+description: >-
+  Electronic (LinkML) Version of NIST SP 800-53 Rev 5 Controls and SP 800-53A Rev 5 Assessment Procedures 
 version: 5.2.0
 source: https://doi.org/10.6028/NIST.SP.800-53r5
 
-default_prefix: sp80053
+default_prefix: sp-800-53
 default_range: string
 
 prefixes:
   linkml: https://w3id.org/linkml/
-  sp80053: https://w3id.org/lmodel/nist-sp-800-53/
+  sp-800-53: https://w3id.org/lmodel/nist-sp-800-53/
   catalog: https://w3id.org/lmodel/nist-sp-800-53/catalog/
   profile: https://w3id.org/lmodel/nist-sp-800-53/profile/
 
