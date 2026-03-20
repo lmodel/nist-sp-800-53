@@ -11,8 +11,6 @@ default_range: string
 prefixes:
   linkml: https://w3id.org/linkml/
   nist_sp_800_53: https://w3id.org/lmodel/nist-sp-800-53/
-  catalog: https://w3id.org/lmodel/nist-sp-800-53/catalog/
-  profile: https://w3id.org/lmodel/nist-sp-800-53/profile/
 
 imports:
   - linkml:types
@@ -158,7 +156,7 @@ slots:
       - nist_sp_800_53r5_catalog
       - nist_sp_800_53r5_profile
 
-  class:
+  _class:
     description: Classification of a catalog element or property
     in_subset:
       - nist_sp_800_53r5_catalog
@@ -637,10 +635,10 @@ classes:
     is_a: CatalogElement
     slots:
       - title
-      - class
+      - _class
       - label
     slot_usage:
-      class:
+      _class:
         range: CatalogElementClassValue
     in_subset:
       - nist_sp_800_53r5_catalog
@@ -699,9 +697,9 @@ classes:
       - name
       - value
       - ns
-      - class
+      - _class
     slot_usage:
-      class:
+      _class:
         range: CatalogPropertyClassValue
     in_subset:
       - nist_sp_800_53r5_catalog
