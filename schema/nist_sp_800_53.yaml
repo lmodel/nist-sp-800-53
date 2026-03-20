@@ -14,12 +14,6 @@ prefixes:
   nist_sp_800_53:
     prefix_prefix: nist_sp_800_53
     prefix_reference: https://w3id.org/lmodel/nist-sp-800-53/
-  catalog:
-    prefix_prefix: catalog
-    prefix_reference: https://w3id.org/lmodel/nist-sp-800-53/catalog/
-  profile:
-    prefix_prefix: profile
-    prefix_reference: https://w3id.org/lmodel/nist-sp-800-53/profile/
 default_prefix: nist_sp_800_53
 default_range: string
 subsets:
@@ -596,14 +590,14 @@ slots:
     - Metadata
     - Revision
     range: string
-  class:
-    name: class
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/class
+  _class:
+    name: _class
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/_class
     description: Classification of a catalog element or property
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    slot_uri: nist_sp_800_53:class
+    slot_uri: nist_sp_800_53:_class
     owner: Property
     domain_of:
     - IdentifiedElement
@@ -1131,22 +1125,22 @@ slots:
     - Selection
     range: string
     multivalued: true
-  IdentifiedElement_class:
-    name: IdentifiedElement_class
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/class
+  IdentifiedElement__class:
+    name: IdentifiedElement__class
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/_class
     description: Classification of a catalog element or property
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    is_a: class
+    is_a: _class
     domain: IdentifiedElement
-    slot_uri: nist_sp_800_53:class
-    alias: class
+    slot_uri: nist_sp_800_53:_class
+    alias: _class
     owner: IdentifiedElement
     domain_of:
     - IdentifiedElement
     is_usage_slot: true
-    usage_slot_name: class
+    usage_slot_name: _class
     range: CatalogElementClassValue
   Control_controls:
     name: Control_controls
@@ -1188,22 +1182,22 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  Property_class:
-    name: Property_class
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/class
+  Property__class:
+    name: Property__class
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/_class
     description: Classification of a catalog element or property
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    is_a: class
+    is_a: _class
     domain: Property
-    slot_uri: nist_sp_800_53:class
-    alias: class
+    slot_uri: nist_sp_800_53:_class
+    alias: _class
     owner: Property
     domain_of:
     - Property
     is_usage_slot: true
-    usage_slot_name: class
+    usage_slot_name: _class
     range: CatalogPropertyClassValue
 classes:
   SP80053Document:
@@ -1456,11 +1450,11 @@ classes:
     - links
     - parts
     - title
-    - IdentifiedElement_class
+    - IdentifiedElement__class
     - label
     slot_usage:
-      class:
-        name: class
+      _class:
+        name: _class
         range: CatalogElementClassValue
     class_uri: nist_sp_800_53:IdentifiedElement
   ControlGroup:
@@ -1477,7 +1471,7 @@ classes:
     - links
     - parts
     - title
-    - IdentifiedElement_class
+    - IdentifiedElement__class
     - label
     - controls
     class_uri: nist_sp_800_53:ControlGroup
@@ -1495,7 +1489,7 @@ classes:
     - links
     - parts
     - title
-    - IdentifiedElement_class
+    - IdentifiedElement__class
     - label
     - params
     - Control_controls
@@ -1518,7 +1512,7 @@ classes:
     - links
     - parts
     - title
-    - IdentifiedElement_class
+    - IdentifiedElement__class
     - label
     - params
     - ControlEnhancement_controls
@@ -1541,7 +1535,7 @@ classes:
     - links
     - parts
     - title
-    - IdentifiedElement_class
+    - IdentifiedElement__class
     - label
     - guidelines
     - select
@@ -1567,10 +1561,10 @@ classes:
     - name
     - value
     - ns
-    - Property_class
+    - Property__class
     slot_usage:
-      class:
-        name: class
+      _class:
+        name: _class
         range: CatalogPropertyClassValue
     class_uri: nist_sp_800_53:Property
   Selection:
@@ -1611,7 +1605,7 @@ classes:
     - links
     - parts
     - title
-    - IdentifiedElement_class
+    - IdentifiedElement__class
     - label
     - name
     - prose
@@ -1655,7 +1649,7 @@ classes:
     class_uri: linkml:Any
 metamodel_version: 1.7.0
 source_file: nist_sp_800_53.yaml
-source_file_date: '2026-03-20T12:14:05'
-source_file_size: 16187
-generation_date: '2026-03-20T12:14:15'
+source_file_date: '2026-03-20T15:48:10'
+source_file_size: 16074
+generation_date: '2026-03-20T15:48:20'
 
