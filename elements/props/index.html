@@ -498,7 +498,7 @@
 
 <h1 id="slot-props">Slot: props</h1>
 <p><em>List of properties</em></p>
-<p>URI: <a href="https://w3id.org/lmodel/nist-sp-800-53/props">sp80053:props</a>
+<p>URI: <a href="https://w3id.org/lmodel/nist-sp-800-53/props">sp-800-53:props</a>
 Alias: props</p>
 <!-- no inheritance hierarchy -->
 
@@ -513,23 +513,13 @@ Alias: props</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../CatalogElement/">CatalogElement</a></td>
-<td>Base class for catalog elements</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../Metadata/">Metadata</a></td>
 <td>OSCAL metadata section used in catalogs and profiles</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../ControlEnhancement/">ControlEnhancement</a></td>
-<td>An enhancement to a control</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../IdentifiedElement/">IdentifiedElement</a></td>
-<td>A catalog element with required id and optional title/class</td>
+<td><a href="../Part/">Part</a></td>
+<td>Structured narrative part that can contain nested parts</td>
 <td>no</td>
 </tr>
 <tr>
@@ -543,13 +533,23 @@ Alias: props</p>
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../IdentifiedElement/">IdentifiedElement</a></td>
+<td>A catalog element with required id and optional title/class</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../CatalogElement/">CatalogElement</a></td>
+<td>Base class for catalog elements</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../ControlGroup/">ControlGroup</a></td>
 <td>A group of controls (family)</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Part/">Part</a></td>
-<td>Structured narrative part that can contain nested parts</td>
+<td><a href="../ControlEnhancement/">ControlEnhancement</a></td>
+<td>An enhancement to a control</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -596,7 +596,7 @@ Alias: props</p>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/lmodel/nist-sp-800-53r5</li>
+<li>from schema: https://w3id.org/lmodel/nist-sp-800-53</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -609,11 +609,11 @@ Alias: props</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>sp80053:props</td>
+<td>sp-800-53:props</td>
 </tr>
 <tr>
 <td>native</td>
-<td>sp80053:props</td>
+<td>sp-800-53:props</td>
 </tr>
 </tbody>
 </table>
@@ -623,7 +623,7 @@ Alias: props</p>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">List of properties</span>
 <span class="nt">in_subset</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_sp_800_53r5_catalog</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-sp-800-53r5</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-sp-800-53</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">props</span>
 <span class="nt">domain_of</span><span class="p">:</span>

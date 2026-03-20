@@ -498,7 +498,7 @@
 
 <h1 id="slot-id">Slot: id</h1>
 <p><em>Unique identifier for an element</em></p>
-<p>URI: <a href="https://w3id.org/lmodel/nist-sp-800-53/id">sp80053:id</a>
+<p>URI: <a href="https://w3id.org/lmodel/nist-sp-800-53/id">sp-800-53:id</a>
 Alias: id</p>
 <!-- no inheritance hierarchy -->
 
@@ -513,18 +513,8 @@ Alias: id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../CatalogElement/">CatalogElement</a></td>
-<td>Base class for catalog elements</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../ControlEnhancement/">ControlEnhancement</a></td>
-<td>An enhancement to a control</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../IdentifiedElement/">IdentifiedElement</a></td>
-<td>A catalog element with required id and optional title/class</td>
+<td><a href="../Part/">Part</a></td>
+<td>Structured narrative part that can contain nested parts</td>
 <td>no</td>
 </tr>
 <tr>
@@ -533,13 +523,18 @@ Alias: id</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Role/">Role</a></td>
-<td>Role definition</td>
+<td><a href="../Parameter/">Parameter</a></td>
+<td>A configurable parameter used by a control</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Parameter/">Parameter</a></td>
-<td>A configurable parameter used by a control</td>
+<td><a href="../CatalogElement/">CatalogElement</a></td>
+<td>Base class for catalog elements</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../IdentifiedElement/">IdentifiedElement</a></td>
+<td>A catalog element with required id and optional title/class</td>
 <td>no</td>
 </tr>
 <tr>
@@ -548,8 +543,13 @@ Alias: id</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Part/">Part</a></td>
-<td>Structured narrative part that can contain nested parts</td>
+<td><a href="../Role/">Role</a></td>
+<td>Role definition</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../ControlEnhancement/">ControlEnhancement</a></td>
+<td>An enhancement to a control</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -597,7 +597,7 @@ Alias: id</p>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/lmodel/nist-sp-800-53r5</li>
+<li>from schema: https://w3id.org/lmodel/nist-sp-800-53</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -610,11 +610,11 @@ Alias: id</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>sp80053:id</td>
+<td>sp-800-53:id</td>
 </tr>
 <tr>
 <td>native</td>
-<td>sp80053:id</td>
+<td>sp-800-53:id</td>
 </tr>
 </tbody>
 </table>
@@ -625,7 +625,7 @@ Alias: id</p>
 <span class="nt">in_subset</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_sp_800_53r5_catalog</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_sp_800_53r5_profile</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-sp-800-53r5</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-sp-800-53</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
 <span class="nt">domain_of</span><span class="p">:</span>

@@ -1,7 +1,8 @@
 name: NIST-SP-800-53
-description: Unified LinkML schema for OSCAL catalogs and profiles for NIST SP 800-53
+description: 'Electronic (LinkML) Version of NIST SP 800-53 Rev 5 Controls and SP
+  800-53A Rev 5 Assessment Procedures '
 source: https://doi.org/10.6028/NIST.SP.800-53r5
-id: https://w3id.org/lmodel/nist-sp-800-53r5
+id: https://w3id.org/lmodel/nist-sp-800-53
 version: 5.2.0
 imports:
 - linkml:types
@@ -10,8 +11,8 @@ prefixes:
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
-  sp80053:
-    prefix_prefix: sp80053
+  sp-800-53:
+    prefix_prefix: sp-800-53
     prefix_reference: https://w3id.org/lmodel/nist-sp-800-53/
   catalog:
     prefix_prefix: catalog
@@ -19,19 +20,19 @@ prefixes:
   profile:
     prefix_prefix: profile
     prefix_reference: https://w3id.org/lmodel/nist-sp-800-53/profile/
-default_prefix: sp80053
+default_prefix: sp-800-53
 default_range: string
 subsets:
   nist_sp_800_53r5_catalog:
     name: nist_sp_800_53r5_catalog
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Catalog
     description: NIST SP 800-53 Catalog subset for controls and assessment procedures
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
   nist_sp_800_53r5_profile:
     name: nist_sp_800_53r5_profile
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Profile
     description: NIST SP 800-53 Profile subset for baselines and overlays
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
 types:
   string:
     name: string
@@ -308,7 +309,7 @@ enums:
     description: Allowed values for element-level class values
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     permissible_values:
       family:
         text: family
@@ -322,7 +323,7 @@ enums:
     description: Allowed values for property-level class values
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     permissible_values:
       sp800-53:
         text: sp800-53
@@ -337,8 +338,8 @@ slots:
     description: Root catalog payload
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:catalog
     owner: Catalog
     domain_of:
     - SP80053Document
@@ -352,8 +353,8 @@ slots:
     description: Root profile payload
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:profile
     owner: ProfileDocument
     domain_of:
     - SP80053Document
@@ -368,8 +369,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:metadata
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:metadata
     owner: ProfileBody
     domain_of:
     - CatalogBody
@@ -383,8 +384,8 @@ slots:
     description: List of control groups in the catalog
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:groups
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:groups
     owner: CatalogBody
     domain_of:
     - CatalogBody
@@ -398,8 +399,8 @@ slots:
     description: List of controls in a group
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:controls
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:controls
     owner: ControlEnhancement
     domain_of:
     - ControlGroup
@@ -415,8 +416,8 @@ slots:
     description: List of parameters for a control
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:params
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:params
     owner: ControlEnhancement
     domain_of:
     - Control
@@ -431,8 +432,8 @@ slots:
     description: List of properties
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:props
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:props
     owner: CatalogElement
     domain_of:
     - Metadata
@@ -447,8 +448,8 @@ slots:
     description: List of guidelines
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:guidelines
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:guidelines
     owner: Parameter
     domain_of:
     - Parameter
@@ -462,8 +463,8 @@ slots:
     description: List of links and relationships
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:links
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:links
     owner: CatalogElement
     domain_of:
     - Metadata
@@ -479,8 +480,8 @@ slots:
     description: Nested parts that provide prose and structure
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:parts
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:parts
     owner: CatalogElement
     domain_of:
     - CatalogElement
@@ -494,8 +495,8 @@ slots:
     description: Selection parameters for a parameter definition
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:select
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:select
     owner: Parameter
     domain_of:
     - Parameter
@@ -509,8 +510,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:id
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:id
     owner: CatalogElement
     domain_of:
     - Role
@@ -523,8 +524,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:uuid
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:uuid
     owner: Resource
     domain_of:
     - CatalogBody
@@ -539,8 +540,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:title
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:title
     owner: IdentifiedElement
     domain_of:
     - Metadata
@@ -556,8 +557,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:version
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:version
     owner: Revision
     domain_of:
     - Metadata
@@ -570,10 +571,10 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - last_modified
-    slot_uri: sp80053:last_modified
+    slot_uri: sp-800-53:last_modified
     owner: Revision
     domain_of:
     - Metadata
@@ -586,10 +587,10 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - oscal_version
-    slot_uri: sp80053:oscal_version
+    slot_uri: sp-800-53:oscal_version
     owner: Revision
     domain_of:
     - Metadata
@@ -601,8 +602,8 @@ slots:
     description: Classification of a catalog element or property
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:class
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:class
     owner: Property
     domain_of:
     - IdentifiedElement
@@ -614,8 +615,8 @@ slots:
     description: Human-readable label
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:label
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:label
     owner: IdentifiedElement
     domain_of:
     - IdentifiedElement
@@ -627,8 +628,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:name
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:name
     owner: Part
     domain_of:
     - Party
@@ -641,8 +642,8 @@ slots:
     description: Property value
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:value
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:value
     owner: Property
     domain_of:
     - Property
@@ -653,8 +654,8 @@ slots:
     description: Namespace URI for a property
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:ns
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:ns
     owner: Property
     domain_of:
     - Property
@@ -665,8 +666,8 @@ slots:
     description: Free-text prose content
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:prose
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:prose
     owner: Part
     domain_of:
     - Guideline
@@ -678,8 +679,8 @@ slots:
     description: Supplemental remarks
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:remarks
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:remarks
     owner: Revision
     domain_of:
     - Metadata
@@ -691,8 +692,8 @@ slots:
     description: Metadata revisions
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:revisions
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:revisions
     owner: Metadata
     domain_of:
     - Metadata
@@ -707,8 +708,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:roles
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:roles
     owner: Metadata
     domain_of:
     - Metadata
@@ -723,8 +724,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:parties
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:parties
     owner: Metadata
     domain_of:
     - Metadata
@@ -739,10 +740,10 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - responsible_parties
-    slot_uri: sp80053:responsible_parties
+    slot_uri: sp-800-53:responsible_parties
     owner: Metadata
     domain_of:
     - Metadata
@@ -757,10 +758,10 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - role_id
-    slot_uri: sp80053:role_id
+    slot_uri: sp-800-53:role_id
     owner: ResponsibleParty
     domain_of:
     - ResponsibleParty
@@ -772,10 +773,10 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - party_uuids
-    slot_uri: sp80053:party_uuids
+    slot_uri: sp-800-53:party_uuids
     owner: ResponsibleParty
     domain_of:
     - ResponsibleParty
@@ -788,8 +789,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:type
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:type
     owner: Party
     domain_of:
     - Party
@@ -801,10 +802,10 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - short_name
-    slot_uri: sp80053:short_name
+    slot_uri: sp-800-53:short_name
     owner: Party
     domain_of:
     - Party
@@ -816,10 +817,10 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - email_addresses
-    slot_uri: sp80053:email_addresses
+    slot_uri: sp-800-53:email_addresses
     owner: Party
     domain_of:
     - Party
@@ -832,8 +833,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:addresses
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:addresses
     owner: Party
     domain_of:
     - Party
@@ -848,10 +849,10 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - addr_lines
-    slot_uri: sp80053:addr_lines
+    slot_uri: sp-800-53:addr_lines
     owner: Address
     domain_of:
     - Address
@@ -864,8 +865,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:city
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:city
     owner: Address
     domain_of:
     - Address
@@ -877,8 +878,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:state
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:state
     owner: Address
     domain_of:
     - Address
@@ -890,10 +891,10 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - postal_code
-    slot_uri: sp80053:postal_code
+    slot_uri: sp-800-53:postal_code
     owner: Address
     domain_of:
     - Address
@@ -904,8 +905,8 @@ slots:
     description: Imported catalogs or profiles
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:imports
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:imports
     owner: ProfileBody
     domain_of:
     - ProfileBody
@@ -919,8 +920,8 @@ slots:
     description: Merge behavior settings
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:merge
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:merge
     owner: ProfileBody
     domain_of:
     - ProfileBody
@@ -934,10 +935,10 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - back_matter
-    slot_uri: sp80053:back_matter
+    slot_uri: sp-800-53:back_matter
     owner: ProfileBody
     domain_of:
     - CatalogBody
@@ -952,8 +953,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:resources
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:resources
     owner: BackMatter
     domain_of:
     - BackMatter
@@ -967,8 +968,8 @@ slots:
     description: Citation details for a resource
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:citation
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:citation
     owner: Resource
     domain_of:
     - Resource
@@ -981,8 +982,8 @@ slots:
     description: Citation text
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:text
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:text
     owner: Citation
     domain_of:
     - Citation
@@ -993,8 +994,8 @@ slots:
     description: Resource description
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:description
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:description
     owner: Resource
     domain_of:
     - Resource
@@ -1006,8 +1007,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:rlinks
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:rlinks
     owner: Resource
     domain_of:
     - Resource
@@ -1022,10 +1023,10 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - media_type
-    slot_uri: sp80053:media_type
+    slot_uri: sp-800-53:media_type
     owner: ResourceLink
     domain_of:
     - ResourceLink
@@ -1037,8 +1038,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:href
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:href
     owner: ImportResource
     domain_of:
     - ResourceLink
@@ -1051,8 +1052,8 @@ slots:
     description: Relationship type for a link
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:rel
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:rel
     owner: Link
     domain_of:
     - Link
@@ -1063,10 +1064,10 @@ slots:
     description: Include-controls selectors
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - include_controls
-    slot_uri: sp80053:include_controls
+    slot_uri: sp-800-53:include_controls
     owner: ImportResource
     domain_of:
     - ImportResource
@@ -1080,10 +1081,10 @@ slots:
     description: Explicit control identifiers to include
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - with_ids
-    slot_uri: sp80053:with_ids
+    slot_uri: sp-800-53:with_ids
     owner: IncludeControlsSelection
     domain_of:
     - IncludeControlsSelection
@@ -1095,10 +1096,10 @@ slots:
     description: Keep source order and content during merge
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - as_is
-    slot_uri: sp80053:as_is
+    slot_uri: sp-800-53:as_is
     owner: MergeRules
     domain_of:
     - MergeRules
@@ -1109,10 +1110,10 @@ slots:
     description: How many selections are allowed
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - how_many
-    slot_uri: sp80053:how_many
+    slot_uri: sp-800-53:how_many
     owner: Selection
     domain_of:
     - Selection
@@ -1123,8 +1124,8 @@ slots:
     description: List of selection options
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
-    slot_uri: sp80053:choice
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: sp-800-53:choice
     owner: Selection
     domain_of:
     - Selection
@@ -1136,10 +1137,10 @@ slots:
     description: Classification of a catalog element or property
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: class
     domain: IdentifiedElement
-    slot_uri: sp80053:class
+    slot_uri: sp-800-53:class
     alias: class
     owner: IdentifiedElement
     domain_of:
@@ -1153,10 +1154,10 @@ slots:
     description: List of controls in a group
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: controls
     domain: Control
-    slot_uri: sp80053:controls
+    slot_uri: sp-800-53:controls
     alias: controls
     owner: Control
     domain_of:
@@ -1173,10 +1174,10 @@ slots:
     description: List of controls in a group
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: controls
     domain: ControlEnhancement
-    slot_uri: sp80053:controls
+    slot_uri: sp-800-53:controls
     alias: controls
     owner: ControlEnhancement
     domain_of:
@@ -1193,10 +1194,10 @@ slots:
     description: Classification of a catalog element or property
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: class
     domain: Property
-    slot_uri: sp80053:class
+    slot_uri: sp-800-53:class
     alias: class
     owner: Property
     domain_of:
@@ -1212,7 +1213,7 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1226,27 +1227,27 @@ classes:
     description: Top-level wrapper that mirrors OSCAL catalog shape
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     slots:
     - catalog
-    class_uri: sp80053:Catalog
+    class_uri: sp-800-53:Catalog
   ProfileDocument:
     name: ProfileDocument
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ProfileDocument
     description: Top-level wrapper for OSCAL profile files
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     slots:
     - profile
-    class_uri: sp80053:ProfileDocument
+    class_uri: sp-800-53:ProfileDocument
   CatalogBody:
     name: CatalogBody
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/CatalogBody
     description: Main catalog object
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1261,7 +1262,7 @@ classes:
     description: OSCAL profile body
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1278,7 +1279,7 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1300,7 +1301,7 @@ classes:
     description: Metadata revision entry
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1318,11 +1319,11 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     slots:
     - id
     - title
-    class_uri: sp80053:Role
+    class_uri: sp-800-53:Role
   Party:
     name: Party
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Party
@@ -1330,7 +1331,7 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1348,7 +1349,7 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1364,7 +1365,7 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1378,7 +1379,7 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1391,7 +1392,7 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1407,7 +1408,7 @@ classes:
     description: Citation wrapper
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1420,7 +1421,7 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1433,21 +1434,21 @@ classes:
     description: Base class for catalog elements
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     abstract: true
     slots:
     - id
     - props
     - links
     - parts
-    class_uri: sp80053:CatalogElement
+    class_uri: sp-800-53:CatalogElement
   IdentifiedElement:
     name: IdentifiedElement
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/IdentifiedElement
     description: A catalog element with required id and optional title/class
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: CatalogElement
     slots:
     - id
@@ -1461,14 +1462,14 @@ classes:
       class:
         name: class
         range: CatalogElementClassValue
-    class_uri: sp80053:IdentifiedElement
+    class_uri: sp-800-53:IdentifiedElement
   ControlGroup:
     name: ControlGroup
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ControlGroup
     description: A group of controls (family)
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: IdentifiedElement
     slots:
     - id
@@ -1479,14 +1480,14 @@ classes:
     - IdentifiedElement_class
     - label
     - controls
-    class_uri: sp80053:ControlGroup
+    class_uri: sp-800-53:ControlGroup
   Control:
     name: Control
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Control
     description: A security control
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: IdentifiedElement
     slots:
     - id
@@ -1502,14 +1503,14 @@ classes:
       controls:
         name: controls
         range: ControlEnhancement
-    class_uri: sp80053:Control
+    class_uri: sp-800-53:Control
   ControlEnhancement:
     name: ControlEnhancement
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ControlEnhancement
     description: An enhancement to a control
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: IdentifiedElement
     slots:
     - id
@@ -1525,14 +1526,14 @@ classes:
       controls:
         name: controls
         range: ControlEnhancement
-    class_uri: sp80053:ControlEnhancement
+    class_uri: sp-800-53:ControlEnhancement
   Parameter:
     name: Parameter
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Parameter
     description: A configurable parameter used by a control
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: IdentifiedElement
     slots:
     - id
@@ -1544,24 +1545,24 @@ classes:
     - label
     - guidelines
     - select
-    class_uri: sp80053:Parameter
+    class_uri: sp-800-53:Parameter
   Guideline:
     name: Guideline
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Guideline
     description: Additional prose guidance associated with a parameter
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     slots:
     - prose
-    class_uri: sp80053:Guideline
+    class_uri: sp-800-53:Guideline
   Property:
     name: Property
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Property
     description: A name-value property with optional namespace and class attributes
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     slots:
     - name
     - value
@@ -1571,14 +1572,14 @@ classes:
       class:
         name: class
         range: CatalogPropertyClassValue
-    class_uri: sp80053:Property
+    class_uri: sp-800-53:Property
   Selection:
     name: Selection
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Selection
     description: Selection criteria for a parameter
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1591,18 +1592,18 @@ classes:
     description: Relationship link
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     slots:
     - href
     - rel
-    class_uri: sp80053:Link
+    class_uri: sp-800-53:Link
   Part:
     name: Part
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Part
     description: Structured narrative part that can contain nested parts
     in_subset:
     - nist_sp_800_53r5_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: IdentifiedElement
     slots:
     - id
@@ -1614,14 +1615,14 @@ classes:
     - label
     - name
     - prose
-    class_uri: sp80053:Part
+    class_uri: sp-800-53:Part
   ImportResource:
     name: ImportResource
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ImportResource
     description: Imported profile or catalog reference
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1634,7 +1635,7 @@ classes:
     description: Control inclusion selector
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1646,7 +1647,7 @@ classes:
     description: Merge configuration
     in_subset:
     - nist_sp_800_53r5_profile
-    from_schema: https://w3id.org/lmodel/nist-sp-800-53r5
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
     mappings:
     - linkml:Any
     slots:
@@ -1654,7 +1655,7 @@ classes:
     class_uri: linkml:Any
 metamodel_version: 1.7.0
 source_file: nist_sp_800_53.yaml
-source_file_date: '2026-03-20T11:39:16'
-source_file_size: 16138
-generation_date: '2026-03-20T11:39:27'
+source_file_date: '2026-03-20T11:44:16'
+source_file_size: 16177
+generation_date: '2026-03-20T11:44:27'
 
