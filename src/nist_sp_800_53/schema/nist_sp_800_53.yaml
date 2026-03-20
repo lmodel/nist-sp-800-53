@@ -158,6 +158,7 @@ slots:
 
   _class:
     description: Classification of a catalog element or property
+    alias: class
     in_subset:
       - nist_sp_800_53r5_catalog
 
