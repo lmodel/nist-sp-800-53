@@ -597,7 +597,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    slot_uri: nist_sp_800_53:_class
+    slot_uri: nist_sp_800_53:class
+    alias: class
     owner: Property
     domain_of:
     - IdentifiedElement
@@ -1134,8 +1135,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: _class
     domain: IdentifiedElement
-    slot_uri: nist_sp_800_53:_class
-    alias: _class
+    slot_uri: nist_sp_800_53:class
+    alias: class
     owner: IdentifiedElement
     domain_of:
     - IdentifiedElement
@@ -1191,8 +1192,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     is_a: _class
     domain: Property
-    slot_uri: nist_sp_800_53:_class
-    alias: _class
+    slot_uri: nist_sp_800_53:class
+    alias: class
     owner: Property
     domain_of:
     - Property
@@ -1649,7 +1650,7 @@ classes:
     class_uri: linkml:Any
 metamodel_version: 1.7.0
 source_file: nist_sp_800_53.yaml
-source_file_date: '2026-03-20T15:48:10'
-source_file_size: 16074
-generation_date: '2026-03-20T15:48:20'
+source_file_date: '2026-03-20T23:25:24'
+source_file_size: 16091
+generation_date: '2026-03-20T23:25:34'
 
