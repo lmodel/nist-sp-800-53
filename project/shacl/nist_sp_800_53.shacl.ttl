@@ -1,0 +1,795 @@
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix nist_sp_800_53: <https://w3id.org/lmodel/nist-sp-800-53/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+nist_sp_800_53:Catalog a sh:NodeShape ;
+    rdfs:comment "Top-level wrapper that mirrors OSCAL catalog shape" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml:Any ;
+            sh:description "Root catalog payload" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:catalog ] ;
+    sh:targetClass nist_sp_800_53:Catalog .
+
+nist_sp_800_53:CatalogElement a sh:NodeShape ;
+    rdfs:comment "Base class for catalog elements" ;
+    sh:closed false ;
+    sh:ignoredProperties ( nist_sp_800_53:class nist_sp_800_53:prose nist_sp_800_53:controls nist_sp_800_53:select nist_sp_800_53:title nist_sp_800_53:name nist_sp_800_53:params nist_sp_800_53:guidelines rdf:type nist_sp_800_53:label ) ;
+    sh:property [ sh:class nist_sp_800_53:Part ;
+            sh:description "Nested parts that provide prose and structure" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:parts ],
+        [ sh:class nist_sp_800_53:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:links ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for an element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:id ],
+        [ sh:class nist_sp_800_53:Property ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:props ] ;
+    sh:targetClass nist_sp_800_53:CatalogElement .
+
+nist_sp_800_53:IdentifiedElement a sh:NodeShape ;
+    rdfs:comment "A catalog element with required id and optional title/class" ;
+    sh:closed true ;
+    sh:ignoredProperties ( nist_sp_800_53:prose nist_sp_800_53:controls nist_sp_800_53:select nist_sp_800_53:name nist_sp_800_53:params nist_sp_800_53:guidelines rdf:type ) ;
+    sh:property [ sh:class nist_sp_800_53:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path nist_sp_800_53:links ],
+        [ sh:class nist_sp_800_53:Property ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path nist_sp_800_53:props ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:title ],
+        [ sh:description "Classification of a catalog element or property" ;
+            sh:in ( "family" "SP800-53" "SP800-53-enhancement" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:class ],
+        [ sh:class nist_sp_800_53:Part ;
+            sh:description "Nested parts that provide prose and structure" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_sp_800_53:parts ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable label" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:label ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for an element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:id ] ;
+    sh:targetClass nist_sp_800_53:IdentifiedElement .
+
+nist_sp_800_53:ProfileDocument a sh:NodeShape ;
+    rdfs:comment "Top-level wrapper for OSCAL profile files" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml:Any ;
+            sh:description "Root profile payload" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:profile ] ;
+    sh:targetClass nist_sp_800_53:ProfileDocument .
+
+nist_sp_800_53:Control a sh:NodeShape ;
+    rdfs:comment "A security control" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class nist_sp_800_53:Property ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_sp_800_53:props ],
+        [ sh:description "Classification of a catalog element or property" ;
+            sh:in ( "family" "SP800-53" "SP800-53-enhancement" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:class ],
+        [ sh:class nist_sp_800_53:Parameter ;
+            sh:description "List of parameters for a control" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:params ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable label" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path nist_sp_800_53:label ],
+        [ sh:class nist_sp_800_53:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path nist_sp_800_53:links ],
+        [ sh:class nist_sp_800_53:Part ;
+            sh:description "Nested parts that provide prose and structure" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path nist_sp_800_53:parts ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for an element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path nist_sp_800_53:id ],
+        [ sh:class nist_sp_800_53:ControlEnhancement ;
+            sh:description "List of controls in a group" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:controls ] ;
+    sh:targetClass nist_sp_800_53:Control .
+
+nist_sp_800_53:ControlGroup a sh:NodeShape ;
+    rdfs:comment "A group of controls (family)" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class nist_sp_800_53:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_sp_800_53:links ],
+        [ sh:class nist_sp_800_53:Part ;
+            sh:description "Nested parts that provide prose and structure" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path nist_sp_800_53:parts ],
+        [ sh:description "Classification of a catalog element or property" ;
+            sh:in ( "family" "SP800-53" "SP800-53-enhancement" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:class ],
+        [ sh:class nist_sp_800_53:Control ;
+            sh:description "List of controls in a group" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:controls ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable label" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:label ],
+        [ sh:class nist_sp_800_53:Property ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path nist_sp_800_53:props ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for an element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path nist_sp_800_53:id ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:title ] ;
+    sh:targetClass nist_sp_800_53:ControlGroup .
+
+nist_sp_800_53:Guideline a sh:NodeShape ;
+    rdfs:comment "Additional prose guidance associated with a parameter" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Free-text prose content" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:prose ] ;
+    sh:targetClass nist_sp_800_53:Guideline .
+
+nist_sp_800_53:Role a sh:NodeShape ;
+    rdfs:comment "Role definition" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for an element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:id ] ;
+    sh:targetClass nist_sp_800_53:Role .
+
+nist_sp_800_53:ControlEnhancement a sh:NodeShape ;
+    rdfs:comment "An enhancement to a control" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class nist_sp_800_53:Property ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_sp_800_53:props ],
+        [ sh:description "Classification of a catalog element or property" ;
+            sh:in ( "family" "SP800-53" "SP800-53-enhancement" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:class ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable label" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path nist_sp_800_53:label ],
+        [ sh:class nist_sp_800_53:Parameter ;
+            sh:description "List of parameters for a control" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:params ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:title ],
+        [ sh:class nist_sp_800_53:Part ;
+            sh:description "Nested parts that provide prose and structure" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path nist_sp_800_53:parts ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for an element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path nist_sp_800_53:id ],
+        [ sh:class nist_sp_800_53:ControlEnhancement ;
+            sh:description "List of controls in a group" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:controls ],
+        [ sh:class nist_sp_800_53:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path nist_sp_800_53:links ] ;
+    sh:targetClass nist_sp_800_53:ControlEnhancement .
+
+nist_sp_800_53:Parameter a sh:NodeShape ;
+    rdfs:comment "A configurable parameter used by a control" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class nist_sp_800_53:Property ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_sp_800_53:props ],
+        [ sh:class linkml:Any ;
+            sh:description "Selection parameters for a parameter definition" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:select ],
+        [ sh:description "Classification of a catalog element or property" ;
+            sh:in ( "family" "SP800-53" "SP800-53-enhancement" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:class ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:title ],
+        [ sh:class nist_sp_800_53:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path nist_sp_800_53:links ],
+        [ sh:class nist_sp_800_53:Guideline ;
+            sh:description "List of guidelines" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:guidelines ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for an element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path nist_sp_800_53:id ],
+        [ sh:class nist_sp_800_53:Part ;
+            sh:description "Nested parts that provide prose and structure" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path nist_sp_800_53:parts ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable label" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path nist_sp_800_53:label ] ;
+    sh:targetClass nist_sp_800_53:Parameter .
+
+nist_sp_800_53:Part a sh:NodeShape ;
+    rdfs:comment "Structured narrative part that can contain nested parts" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:title ],
+        [ sh:class nist_sp_800_53:Part ;
+            sh:description "Nested parts that provide prose and structure" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path nist_sp_800_53:parts ],
+        [ sh:description "Classification of a catalog element or property" ;
+            sh:in ( "family" "SP800-53" "SP800-53-enhancement" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:class ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable label" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path nist_sp_800_53:label ],
+        [ sh:class nist_sp_800_53:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path nist_sp_800_53:links ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-text prose content" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:prose ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for an element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path nist_sp_800_53:id ],
+        [ sh:class nist_sp_800_53:Property ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_sp_800_53:props ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of a property, part, or party" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:name ] ;
+    sh:targetClass nist_sp_800_53:Part .
+
+nist_sp_800_53:Property a sh:NodeShape ;
+    rdfs:comment "A name-value property with optional namespace and class attributes" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "Classification of a catalog element or property" ;
+            sh:in ( "sp800-53" "sp800-53a" "zero-padded" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:class ],
+        [ sh:datatype xsd:string ;
+            sh:description "Property value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:value ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of a property, part, or party" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Namespace URI for a property" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:ns ] ;
+    sh:targetClass nist_sp_800_53:Property .
+
+nist_sp_800_53:Link a sh:NodeShape ;
+    rdfs:comment "Relationship link" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Relationship type for a link" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:rel ],
+        [ sh:datatype xsd:string ;
+            sh:description "Link or resource reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:href ] ;
+    sh:targetClass nist_sp_800_53:Link .
+
+linkml:Any a sh:NodeShape ;
+    rdfs:comment "Assignment of parties to a role",
+        "Citation wrapper",
+        "Control inclusion selector",
+        "Imported profile or catalog reference",
+        "Main catalog object",
+        "Merge configuration",
+        "Metadata revision entry",
+        "OSCAL back-matter section",
+        "OSCAL metadata section used in catalogs and profiles",
+        "OSCAL profile body",
+        "Party definition",
+        "Postal address",
+        "Reference link for a resource",
+        "Referenced resource",
+        "Selection criteria for a parameter",
+        "Unified root wrapper for catalog or profile content" ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ),
+        ( rdf:type ) ;
+    sh:property [ sh:class linkml:Any ;
+            sh:description "Responsible party assignments" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 9 ;
+            sh:path nist_sp_800_53:responsible_parties ],
+        [ sh:datatype xsd:string ;
+            sh:description "Last modification timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:last_modified ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of a property, part, or party" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:title ],
+        [ sh:class linkml:Any ;
+            sh:description "Profile and Catalog metadata" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:metadata ],
+        [ sh:class linkml:Any ;
+            sh:description "Back-matter references and resources" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path nist_sp_800_53:back_matter ],
+        [ sh:class linkml:Any ;
+            sh:description "Root catalog payload" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:catalog ],
+        [ sh:class linkml:Any ;
+            sh:description "Imported catalogs or profiles" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:imports ],
+        [ sh:class nist_sp_800_53:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path nist_sp_800_53:links ],
+        [ sh:datatype xsd:string ;
+            sh:description "Assigned role identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:role_id ],
+        [ sh:datatype xsd:string ;
+            sh:description "Resource description" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "Party email addresses" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path nist_sp_800_53:email_addresses ],
+        [ sh:datatype xsd:string ;
+            sh:description "UUID for profile, metadata, or resource element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:uuid ],
+        [ sh:class nist_sp_800_53:Role ;
+            sh:description "Roles used in metadata" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path nist_sp_800_53:roles ],
+        [ sh:datatype xsd:string ;
+            sh:description "OSCAL version identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:oscal_version ],
+        [ sh:class linkml:Any ;
+            sh:description "Include-controls selectors" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:include_controls ],
+        [ sh:class linkml:Any ;
+            sh:description "Back-matter references and resources" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:back_matter ],
+        [ sh:datatype xsd:string ;
+            sh:description "UUID for profile, metadata, or resource element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:uuid ],
+        [ sh:datatype xsd:string ;
+            sh:description "Short display name" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:short_name ],
+        [ sh:class linkml:Any ;
+            sh:description "Parties used in metadata" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 8 ;
+            sh:path nist_sp_800_53:parties ],
+        [ sh:datatype xsd:string ;
+            sh:description "Referenced party UUIDs" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:party_uuids ],
+        [ sh:datatype xsd:string ;
+            sh:description "How many selections are allowed" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:how_many ],
+        [ sh:datatype xsd:boolean ;
+            sh:description "Keep source order and content during merge" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:as_is ],
+        [ sh:datatype xsd:string ;
+            sh:description "UUID for profile, metadata, or resource element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:uuid ],
+        [ sh:datatype xsd:string ;
+            sh:description "Postal code" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:postal_code ],
+        [ sh:class linkml:Any ;
+            sh:description "Resource links" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path nist_sp_800_53:rlinks ],
+        [ sh:class nist_sp_800_53:ControlGroup ;
+            sh:description "List of control groups in the catalog" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:groups ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "UUID for profile, metadata, or resource element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:uuid ],
+        [ sh:class linkml:Any ;
+            sh:description "Postal addresses" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path nist_sp_800_53:addresses ],
+        [ sh:datatype xsd:string ;
+            sh:description "Explicit control identifiers to include" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:with_ids ],
+        [ sh:class nist_sp_800_53:Property ;
+            sh:description "List of properties" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path nist_sp_800_53:props ],
+        [ sh:datatype xsd:string ;
+            sh:description "Link or resource reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:href ],
+        [ sh:datatype xsd:string ;
+            sh:description "City name" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:city ],
+        [ sh:datatype xsd:string ;
+            sh:description "Media type for a resource link" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:media_type ],
+        [ sh:class nist_sp_800_53:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_sp_800_53:links ],
+        [ sh:datatype xsd:string ;
+            sh:description "Address lines" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:addr_lines ],
+        [ sh:datatype xsd:string ;
+            sh:description "Party type" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Link or resource reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:href ],
+        [ sh:datatype xsd:string ;
+            sh:description "Supplemental remarks" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path nist_sp_800_53:remarks ],
+        [ sh:datatype xsd:string ;
+            sh:description "Last modification timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:last_modified ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:version ],
+        [ sh:datatype xsd:string ;
+            sh:description "List of selection options" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:choice ],
+        [ sh:datatype xsd:string ;
+            sh:description "Supplemental remarks" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path nist_sp_800_53:remarks ],
+        [ sh:datatype xsd:string ;
+            sh:description "OSCAL version identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:oscal_version ],
+        [ sh:class linkml:Any ;
+            sh:description "Merge behavior settings" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:merge ],
+        [ sh:class linkml:Any ;
+            sh:description "Back-matter resources" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:resources ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "Citation text" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_53:text ],
+        [ sh:datatype xsd:string ;
+            sh:description "State or region" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:state ],
+        [ sh:class linkml:Any ;
+            sh:description "Root profile payload" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:profile ],
+        [ sh:class linkml:Any ;
+            sh:description "Metadata revisions" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path nist_sp_800_53:revisions ],
+        [ sh:class linkml:Any ;
+            sh:description "Profile and Catalog metadata" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path nist_sp_800_53:metadata ],
+        [ sh:class linkml:Any ;
+            sh:description "Citation details for a resource" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path nist_sp_800_53:citation ],
+        [ sh:datatype xsd:string ;
+            sh:description "Version identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_53:version ] ;
+    sh:targetClass linkml:Any .
+

@@ -1,0 +1,220 @@
+# metamodel_version: 1.7.0
+# version: 5.2.0
+enum CatalogElementClassValue
+  {
+    family
+    SP800__HYPHEN_MINUS__53
+    SP800__HYPHEN_MINUS__53__HYPHEN_MINUS__enhancement
+  }
+
+enum CatalogPropertyClassValue
+  {
+    sp800__HYPHEN_MINUS__53
+    sp800__HYPHEN_MINUS__53a
+    zero__HYPHEN_MINUS__padded
+  }
+
+scalar Address
+    addr-lines: [String]
+    city: String
+    state: String
+    postal-code: String
+
+scalar BackMatter
+    resources: [Resource]
+
+type Catalog
+  {
+    catalog: CatalogBody
+  }
+
+scalar CatalogBody
+    uuid: String
+    metadata: Metadata
+    groups: [ControlGroup]
+    back-matter: BackMatter
+
+interface CatalogElement
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+  }
+
+scalar Citation
+    text: String
+
+type Control
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+    title: String
+    class: CatalogElementClassValue
+    label: String
+    params: [Parameter]
+    controls: [ControlEnhancement]
+  }
+
+type ControlEnhancement
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+    title: String
+    class: CatalogElementClassValue
+    label: String
+    params: [Parameter]
+    controls: [ControlEnhancement]
+  }
+
+type ControlGroup
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+    title: String
+    class: CatalogElementClassValue
+    label: String
+    controls: [Control]
+  }
+
+type Guideline
+  {
+    prose: String
+  }
+
+type IdentifiedElement
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+    title: String
+    class: CatalogElementClassValue
+    label: String
+  }
+
+scalar ImportResource
+    href: String
+    include-controls: [IncludeControlsSelection]
+
+scalar IncludeControlsSelection
+    with-ids: [String]
+
+type Link
+  {
+    href: String
+    rel: String
+  }
+
+scalar MergeRules
+    as-is: Boolean
+
+scalar Metadata
+    title: String
+    last-modified: String
+    version: String
+    oscal-version: String
+    revisions: [Revision]
+    props: [Property]
+    links: [Link]
+    roles: [Role]
+    parties: [Party]
+    responsible-parties: [ResponsibleParty]
+    remarks: String
+
+type Parameter
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+    title: String
+    class: CatalogElementClassValue
+    label: String
+    guidelines: [Guideline]
+    select: Selection
+  }
+
+type Part
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+    title: String
+    class: CatalogElementClassValue
+    label: String
+    name: String
+    prose: String
+  }
+
+scalar Party
+    uuid: String
+    type: String
+    name: String
+    short-name: String
+    email-addresses: [String]
+    addresses: [Address]
+
+scalar ProfileBody
+    uuid: String
+    metadata: Metadata
+    imports: [ImportResource]
+    merge: MergeRules
+    back-matter: BackMatter
+
+type ProfileDocument
+  {
+    profile: ProfileBody
+  }
+
+type Property
+  {
+    name: String
+    value: String
+    ns: String
+    class: CatalogPropertyClassValue
+  }
+
+scalar Resource
+    uuid: String
+    title: String
+    description: String
+    citation: Citation
+    rlinks: [ResourceLink]
+
+scalar ResourceLink
+    href: String
+    media-type: String
+
+scalar ResponsibleParty
+    role-id: String
+    party-uuids: [String]
+
+scalar Revision
+    title: String
+    last-modified: String
+    version: String
+    oscal-version: String
+    links: [Link]
+    remarks: String
+
+type Role
+  {
+    id: String
+    title: String
+  }
+
+scalar Selection
+    how-many: String
+    choice: [String]
+
+scalar SP80053Document
+    catalog: CatalogBody
+    profile: ProfileBody
