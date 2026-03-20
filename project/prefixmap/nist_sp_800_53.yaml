@@ -1,0 +1,54 @@
+{
+   "catalog": "https://w3id.org/lmodel/nist-sp-800-53/catalog/",
+   "linkml": "https://w3id.org/linkml/",
+   "profile": "https://w3id.org/lmodel/nist-sp-800-53/profile/",
+   "sp-800-53": "https://w3id.org/lmodel/nist-sp-800-53/",
+   "Address": {
+      "@id": "linkml:Any"
+   },
+   "BackMatter": {
+      "@id": "linkml:Any"
+   },
+   "CatalogBody": {
+      "@id": "linkml:Any"
+   },
+   "Citation": {
+      "@id": "linkml:Any"
+   },
+   "ImportResource": {
+      "@id": "linkml:Any"
+   },
+   "IncludeControlsSelection": {
+      "@id": "linkml:Any"
+   },
+   "MergeRules": {
+      "@id": "linkml:Any"
+   },
+   "Metadata": {
+      "@id": "linkml:Any"
+   },
+   "Party": {
+      "@id": "linkml:Any"
+   },
+   "ProfileBody": {
+      "@id": "linkml:Any"
+   },
+   "Resource": {
+      "@id": "linkml:Any"
+   },
+   "ResourceLink": {
+      "@id": "linkml:Any"
+   },
+   "ResponsibleParty": {
+      "@id": "linkml:Any"
+   },
+   "Revision": {
+      "@id": "linkml:Any"
+   },
+   "Selection": {
+      "@id": "linkml:Any"
+   },
+   "SP80053Document": {
+      "@id": "linkml:Any"
+   }
+}
