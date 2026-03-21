@@ -89,6 +89,7 @@
 --     * Slot: label Description: Human-readable label
 --     * Slot: id Description: Unique identifier for an element
 --     * Slot: CatalogBody_id Description: Autocreated FK slot
+--     * Slot: ControlGroup_uid Description: Autocreated FK slot
 -- # Class: Control Description: A security control
 --     * Slot: uid
 --     * Slot: title Description: Human-readable title
@@ -330,8 +331,8 @@ CREATE TABLE "Selection_choice" (
 	PRIMARY KEY ("Selection_id", choice),
 	FOREIGN KEY("Selection_id") REFERENCES "Selection" (id)
 );
-CREATE INDEX "ix_Selection_choice_Selection_id" ON "Selection_choice" ("Selection_id");
 CREATE INDEX "ix_Selection_choice_choice" ON "Selection_choice" (choice);
+CREATE INDEX "ix_Selection_choice_Selection_id" ON "Selection_choice" ("Selection_id");
 
 CREATE TABLE "SP80053Document" (
 	id INTEGER NOT NULL,
@@ -387,8 +388,10 @@ CREATE TABLE "ControlGroup" (
 	label TEXT,
 	id TEXT,
 	"CatalogBody_id" INTEGER,
+	"ControlGroup_uid" INTEGER,
 	PRIMARY KEY (uid),
-	FOREIGN KEY("CatalogBody_id") REFERENCES "CatalogBody" (id)
+	FOREIGN KEY("CatalogBody_id") REFERENCES "CatalogBody" (id),
+	FOREIGN KEY("ControlGroup_uid") REFERENCES "ControlGroup" (uid)
 );
 CREATE INDEX "ix_ControlGroup_uid" ON "ControlGroup" (uid);
 
@@ -416,8 +419,8 @@ CREATE TABLE "ResponsibleParty_party_uuids" (
 	PRIMARY KEY ("ResponsibleParty_id", party_uuids),
 	FOREIGN KEY("ResponsibleParty_id") REFERENCES "ResponsibleParty" (id)
 );
-CREATE INDEX "ix_ResponsibleParty_party_uuids_party_uuids" ON "ResponsibleParty_party_uuids" (party_uuids);
 CREATE INDEX "ix_ResponsibleParty_party_uuids_ResponsibleParty_id" ON "ResponsibleParty_party_uuids" ("ResponsibleParty_id");
+CREATE INDEX "ix_ResponsibleParty_party_uuids_party_uuids" ON "ResponsibleParty_party_uuids" (party_uuids);
 
 CREATE TABLE "Control" (
 	uid INTEGER NOT NULL,

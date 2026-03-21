@@ -69,6 +69,7 @@ message ControlGroup
   string title = 0
   catalogElementClassValue class = 0
   string label = 0
+ repeated  controlGroup groups = 0
  repeated  control controls = 0
  }
 // Additional prose guidance associated with a parameter

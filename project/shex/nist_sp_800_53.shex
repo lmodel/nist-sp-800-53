@@ -117,6 +117,7 @@ linkml:Sparqlpath xsd:string
 <ControlGroup> CLOSED {
     (  $<ControlGroup_tes> (  &<IdentifiedElement_tes> ;
           rdf:type [ <IdentifiedElement> ] ? ;
+          <groups> @<ControlGroup> * ;
           <controls> @<Control> *
        ) ;
        rdf:type [ <ControlGroup> ] ?

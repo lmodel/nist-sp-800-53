@@ -366,6 +366,16 @@
                         "null"
                     ]
                 },
+                "groups": {
+                    "description": "List of control groups in the catalog",
+                    "items": {
+                        "$ref": "#/$defs/ControlGroup"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "id": {
                     "description": "Unique identifier for an element",
                     "type": [

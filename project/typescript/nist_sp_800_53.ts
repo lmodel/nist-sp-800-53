@@ -261,6 +261,8 @@ export interface IdentifiedElement extends CatalogElement {
  * A group of controls (family)
  */
 export interface ControlGroup extends IdentifiedElement {
+    /** List of control groups in the catalog */
+    groups?: ControlGroup[],
     /** List of controls in a group */
     controls?: Control[],
 }

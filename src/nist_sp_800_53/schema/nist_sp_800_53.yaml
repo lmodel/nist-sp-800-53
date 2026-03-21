@@ -648,6 +648,7 @@ classes:
     description: A group of controls (family)
     is_a: IdentifiedElement
     slots:
+      - groups
       - controls
     in_subset:
       - nist_sp_800_53r5_catalog

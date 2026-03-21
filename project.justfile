@@ -19,6 +19,11 @@ validate-oscal-catalog:
 		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
 		tests/data/nist/NIST_SP-800-53_rev5_LOW-baseline-resolved-profile_catalog.yaml
 
+validate-basic-catalog-oscal:
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		tests/data/nist/basic-catalog.yaml
+
 # Validate all NIST profile documents with the profile schema.
 validate-oscal-profile:
 	uv run linkml validate \
@@ -33,6 +38,9 @@ validate-oscal-profile:
 	uv run linkml validate \
 		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
 		tests/data/nist/NIST_SP-800-53_rev5_PRIVACY-baseline_profile.yaml
+
+# Validate all OSCAL documents (catalogs, profiles, and basic catalog).
+validate-oscal-all: validate-oscal-catalog validate-oscal-profile validate-oscal-top validate-basic-catalog-oscal 
 
 # Validate with top-level schema using explicit target class.
 validate-oscal-top:

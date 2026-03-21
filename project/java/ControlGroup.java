@@ -12,6 +12,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class ControlGroup extends IdentifiedElement {
 
+  private List<ControlGroup> groups;
   private List<Control> controls;
 
 }

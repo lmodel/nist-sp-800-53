@@ -456,9 +456,10 @@
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/groups",
-      "owner": "CatalogBody",
+      "owner": "ControlGroup",
       "domain_of": [
-        "CatalogBody"
+        "CatalogBody",
+        "ControlGroup"
       ],
       "range": "ControlGroup",
       "multivalued": true,
@@ -1879,6 +1880,7 @@
         "title",
         "IdentifiedElement__class",
         "label",
+        "groups",
         "controls"
       ],
       "slot_usage": {},
@@ -2107,9 +2109,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "nist_sp_800_53.yaml",
-  "source_file_date": "2026-03-20T23:08:07",
-  "source_file_size": 16091,
-  "generation_date": "2026-03-20T23:23:28",
+  "source_file_date": "2026-03-21T00:04:48",
+  "source_file_size": 16106,
+  "generation_date": "2026-03-21T00:24:24",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_sp_800_53.context.jsonld",

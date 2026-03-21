@@ -194,6 +194,8 @@ class ControlGroup(IdentifiedElement):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/lmodel/nist-sp-800-53',
          'in_subset': ['nist_sp_800_53r5_catalog']})
 
+    groups: Optional[list[ControlGroup]] = Field(default=None, description="""List of control groups in the catalog""", json_schema_extra = { "linkml_meta": {'domain_of': ['CatalogBody', 'ControlGroup'],
+         'in_subset': ['nist_sp_800_53r5_catalog']} })
     controls: Optional[list[Control]] = Field(default=None, description="""List of controls in a group""", json_schema_extra = { "linkml_meta": {'domain_of': ['ControlGroup', 'Control', 'ControlEnhancement'],
          'in_subset': ['nist_sp_800_53r5_catalog']} })
     title: Optional[str] = Field(default=None, description="""Human-readable title""", json_schema_extra = { "linkml_meta": {'domain_of': ['Metadata', 'Revision', 'Role', 'Resource', 'IdentifiedElement'],

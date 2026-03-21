@@ -1,5 +1,5 @@
 # Auto generated from nist_sp_800_53.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-20T23:23:28
+# Generation date: 2026-03-21T00:24:46
 # Schema: NIST-SP-800-53
 #
 # id: https://w3id.org/lmodel/nist-sp-800-53
@@ -200,15 +200,15 @@ class IdentifiedElement(CatalogElement):
     class_model_uri: ClassVar[URIRef] = NIST_SP_800_53.IdentifiedElement
 
     title: Optional[str] = None
-    class: Optional[Union[str, "CatalogElementClassValue"]] = None
+    _class: Optional[Union[str, "CatalogElementClassValue"]] = None
     label: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.title is not None and not isinstance(self.title, str):
             self.title = str(self.title)
 
-        if self.class is not None and not isinstance(self.class, CatalogElementClassValue):
-            self.class = CatalogElementClassValue(self.class)
+        if self._class is not None and not isinstance(self._class, CatalogElementClassValue):
+            self._class = CatalogElementClassValue(self._class)
 
         if self.label is not None and not isinstance(self.label, str):
             self.label = str(self.label)
@@ -228,9 +228,14 @@ class ControlGroup(IdentifiedElement):
     class_name: ClassVar[str] = "ControlGroup"
     class_model_uri: ClassVar[URIRef] = NIST_SP_800_53.ControlGroup
 
+    groups: Optional[Union[Union[dict, "ControlGroup"], list[Union[dict, "ControlGroup"]]]] = empty_list()
     controls: Optional[Union[Union[dict, "Control"], list[Union[dict, "Control"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if not isinstance(self.groups, list):
+            self.groups = [self.groups] if self.groups is not None else []
+        self.groups = [v if isinstance(v, ControlGroup) else ControlGroup(**as_dict(v)) for v in self.groups]
+
         if not isinstance(self.controls, list):
             self.controls = [self.controls] if self.controls is not None else []
         self.controls = [v if isinstance(v, Control) else Control(**as_dict(v)) for v in self.controls]
@@ -351,7 +356,7 @@ class Property(YAMLRoot):
     name: Optional[str] = None
     value: Optional[str] = None
     ns: Optional[str] = None
-    class: Optional[Union[str, "CatalogPropertyClassValue"]] = None
+    _class: Optional[Union[str, "CatalogPropertyClassValue"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.name is not None and not isinstance(self.name, str):
@@ -363,8 +368,8 @@ class Property(YAMLRoot):
         if self.ns is not None and not isinstance(self.ns, str):
             self.ns = str(self.ns)
 
-        if self.class is not None and not isinstance(self.class, CatalogPropertyClassValue):
-            self.class = CatalogPropertyClassValue(self.class)
+        if self._class is not None and not isinstance(self._class, CatalogPropertyClassValue):
+            self._class = CatalogPropertyClassValue(self._class)
 
         super().__post_init__(**kwargs)
 
@@ -519,7 +524,7 @@ slots.last_modified = Slot(uri=NIST_SP_800_53.last_modified, name="last-modified
 slots.oscal_version = Slot(uri=NIST_SP_800_53.oscal_version, name="oscal-version", curie=NIST_SP_800_53.curie('oscal_version'),
                    model_uri=NIST_SP_800_53.oscal_version, domain=None, range=Optional[str])
 
-slots._class = Slot(uri=NIST_SP_800_53.class, name="_class", curie=NIST_SP_800_53.curie('class'),
+slots._class = Slot(uri=NIST_SP_800_53["class"], name="_class", curie=NIST_SP_800_53.curie('class'),
                    model_uri=NIST_SP_800_53._class, domain=None, range=Optional[str])
 
 slots.label = Slot(uri=NIST_SP_800_53.label, name="label", curie=NIST_SP_800_53.curie('label'),
@@ -630,7 +635,7 @@ slots.how_many = Slot(uri=NIST_SP_800_53.how_many, name="how-many", curie=NIST_S
 slots.choice = Slot(uri=NIST_SP_800_53.choice, name="choice", curie=NIST_SP_800_53.curie('choice'),
                    model_uri=NIST_SP_800_53.choice, domain=None, range=Optional[Union[str, list[str]]])
 
-slots.IdentifiedElement__class = Slot(uri=NIST_SP_800_53.class, name="IdentifiedElement__class", curie=NIST_SP_800_53.curie('class'),
+slots.IdentifiedElement__class = Slot(uri=NIST_SP_800_53["class"], name="IdentifiedElement__class", curie=NIST_SP_800_53.curie('class'),
                    model_uri=NIST_SP_800_53.IdentifiedElement__class, domain=IdentifiedElement, range=Optional[Union[str, "CatalogElementClassValue"]])
 
 slots.Control_controls = Slot(uri=NIST_SP_800_53.controls, name="Control_controls", curie=NIST_SP_800_53.curie('controls'),
@@ -639,5 +644,5 @@ slots.Control_controls = Slot(uri=NIST_SP_800_53.controls, name="Control_control
 slots.ControlEnhancement_controls = Slot(uri=NIST_SP_800_53.controls, name="ControlEnhancement_controls", curie=NIST_SP_800_53.curie('controls'),
                    model_uri=NIST_SP_800_53.ControlEnhancement_controls, domain=ControlEnhancement, range=Optional[Union[Union[dict, "ControlEnhancement"], list[Union[dict, "ControlEnhancement"]]]])
 
-slots.Property__class = Slot(uri=NIST_SP_800_53.class, name="Property__class", curie=NIST_SP_800_53.curie('class'),
+slots.Property__class = Slot(uri=NIST_SP_800_53["class"], name="Property__class", curie=NIST_SP_800_53.curie('class'),
                    model_uri=NIST_SP_800_53.Property__class, domain=Property, range=Optional[Union[str, "CatalogPropertyClassValue"]])

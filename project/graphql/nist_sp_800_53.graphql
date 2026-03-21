@@ -80,6 +80,7 @@ type ControlGroup
     title: String
     class: CatalogElementClassValue
     label: String
+    groups: [ControlGroup]
     controls: [Control]
   }
 
