@@ -380,9 +380,10 @@ slots:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     slot_uri: nist_sp_800_53:groups
-    owner: CatalogBody
+    owner: ControlGroup
     domain_of:
     - CatalogBody
+    - ControlGroup
     range: ControlGroup
     multivalued: true
     inlined: true
@@ -1474,6 +1475,7 @@ classes:
     - title
     - IdentifiedElement__class
     - label
+    - groups
     - controls
     class_uri: nist_sp_800_53:ControlGroup
   Control:
@@ -1650,7 +1652,7 @@ classes:
     class_uri: linkml:Any
 metamodel_version: 1.7.0
 source_file: nist_sp_800_53.yaml
-source_file_date: '2026-03-20T23:25:24'
-source_file_size: 16091
-generation_date: '2026-03-20T23:25:34'
+source_file_date: '2026-03-21T00:27:04'
+source_file_size: 16106
+generation_date: '2026-03-21T00:27:13'
 
