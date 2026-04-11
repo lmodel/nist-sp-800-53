@@ -1,0 +1,234 @@
+ syntax="proto3";
+ package
+// metamodel_version: 1.7.0
+// version: 5.2.0
+// Postal address
+message Address
+ {
+ repeated  string addr-lines = 0
+  string city = 0
+  string state = 0
+  string postal-code = 0
+ }
+// OSCAL back-matter section
+message BackMatter
+ {
+ repeated  resource resources = 0
+ }
+// Top-level wrapper that mirrors OSCAL catalog shape
+message Catalog
+ {
+  catalogBody catalog = 0
+ }
+// Main catalog object
+message CatalogBody
+ {
+  string uuid = 0
+  metadata metadata = 0
+ repeated  controlGroup groups = 0
+  backMatter back-matter = 0
+ }
+// Citation wrapper
+message Citation
+ {
+  string text = 0
+ }
+// A security control
+message Control
+ {
+  string id = 0
+ repeated  property props = 0
+ repeated  link links = 0
+ repeated  part parts = 0
+  string title = 0
+  catalogElementClassValue class = 0
+  string label = 0
+ repeated  parameter params = 0
+ repeated  controlEnhancement controls = 0
+ }
+// An enhancement to a control
+message ControlEnhancement
+ {
+  string id = 0
+ repeated  property props = 0
+ repeated  link links = 0
+ repeated  part parts = 0
+  string title = 0
+  catalogElementClassValue class = 0
+  string label = 0
+ repeated  parameter params = 0
+ repeated  controlEnhancement controls = 0
+ }
+// A group of controls (family)
+message ControlGroup
+ {
+  string id = 0
+ repeated  property props = 0
+ repeated  link links = 0
+ repeated  part parts = 0
+  string title = 0
+  catalogElementClassValue class = 0
+  string label = 0
+ repeated  controlGroup groups = 0
+ repeated  control controls = 0
+ }
+// Additional prose guidance associated with a parameter
+message Guideline
+ {
+  string prose = 0
+ }
+// A catalog element with required id and optional title/class
+message IdentifiedElement
+ {
+  string id = 0
+ repeated  property props = 0
+ repeated  link links = 0
+ repeated  part parts = 0
+  string title = 0
+  catalogElementClassValue class = 0
+  string label = 0
+ }
+// Imported profile or catalog reference
+message ImportResource
+ {
+  string href = 0
+ repeated  includeControlsSelection include-controls = 0
+ }
+// Control inclusion selector
+message IncludeControlsSelection
+ {
+ repeated  string with-ids = 0
+ }
+// Relationship link
+message Link
+ {
+  string href = 0
+  string rel = 0
+ }
+// Merge configuration
+message MergeRules
+ {
+  boolean as-is = 0
+ }
+// OSCAL metadata section used in catalogs and profiles
+message Metadata
+ {
+  string title = 0
+  string last-modified = 0
+  string version = 0
+  string oscal-version = 0
+ repeated  revision revisions = 0
+ repeated  property props = 0
+ repeated  link links = 0
+ repeated  role roles = 0
+ repeated  party parties = 0
+ repeated  responsibleParty responsible-parties = 0
+  string remarks = 0
+ }
+// A configurable parameter used by a control
+message Parameter
+ {
+  string id = 0
+ repeated  property props = 0
+ repeated  link links = 0
+ repeated  part parts = 0
+  string title = 0
+  catalogElementClassValue class = 0
+  string label = 0
+ repeated  guideline guidelines = 0
+  selection select = 0
+ }
+// Structured narrative part that can contain nested parts
+message Part
+ {
+  string id = 0
+ repeated  property props = 0
+ repeated  link links = 0
+ repeated  part parts = 0
+  string title = 0
+  catalogElementClassValue class = 0
+  string label = 0
+  string name = 0
+  string prose = 0
+ }
+// Party definition
+message Party
+ {
+  string uuid = 0
+  string type = 0
+  string name = 0
+  string short-name = 0
+ repeated  string email-addresses = 0
+ repeated  address addresses = 0
+ }
+// OSCAL profile body
+message ProfileBody
+ {
+  string uuid = 0
+  metadata metadata = 0
+ repeated  importResource imports = 0
+  mergeRules merge = 0
+  backMatter back-matter = 0
+ }
+// Top-level wrapper for OSCAL profile files
+message ProfileDocument
+ {
+  profileBody profile = 0
+ }
+// A name-value property with optional namespace and class attributes
+message Property
+ {
+  string name = 0
+  string value = 0
+  string ns = 0
+  catalogPropertyClassValue class = 0
+ }
+// Referenced resource
+message Resource
+ {
+  string uuid = 0
+  string title = 0
+  string description = 0
+  citation citation = 0
+ repeated  resourceLink rlinks = 0
+ }
+// Reference link for a resource
+message ResourceLink
+ {
+  string href = 0
+  string media-type = 0
+ }
+// Assignment of parties to a role
+message ResponsibleParty
+ {
+  string role-id = 0
+ repeated  string party-uuids = 0
+ }
+// Metadata revision entry
+message Revision
+ {
+  string title = 0
+  string last-modified = 0
+  string version = 0
+  string oscal-version = 0
+ repeated  link links = 0
+  string remarks = 0
+ }
+// Role definition
+message Role
+ {
+  string id = 0
+  string title = 0
+ }
+// Selection criteria for a parameter
+message Selection
+ {
+  string how-many = 0
+ repeated  string choice = 0
+ }
+// Unified root wrapper for catalog or profile content
+message SP80053Document
+ {
+  catalogBody catalog = 0
+  profileBody profile = 0
+ }
