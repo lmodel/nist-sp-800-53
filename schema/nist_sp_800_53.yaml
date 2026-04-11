@@ -1652,7 +1652,7 @@ classes:
     class_uri: linkml:Any
 metamodel_version: 1.7.0
 source_file: nist_sp_800_53.yaml
-source_file_date: '2026-03-21T00:27:04'
+source_file_date: '2026-04-11T22:52:36'
 source_file_size: 16106
-generation_date: '2026-03-21T00:27:13'
+generation_date: '2026-04-11T22:52:48'
 
