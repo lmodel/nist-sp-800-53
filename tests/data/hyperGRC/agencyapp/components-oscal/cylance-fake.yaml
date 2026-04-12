@@ -1,0 +1,159 @@
+id: cylance-fake
+title: Cylance-fake
+class: family
+props:
+- name: label
+  value: cylance-fake
+- name: component
+  value: Cylance-fake
+- name: source
+  value: https://github.com/GovReady/hyperGRC/tree/master/example/agencyapp
+groups:
+- id: ac
+  title: Access Control
+  class: family
+  props:
+  - name: label
+    value: AC
+  controls:
+  - id: ac-18
+    title: AC-18
+    class: SP800-53
+    props:
+    - name: label
+      value: AC-18
+    controls:
+    - id: ac-18.5
+      title: Antennas / Transmission Power Levels
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: AC-18 (5)
+      - name: implementation-status
+        value: Partially In Place
+      - name: security-control-type
+        value: Hybrid
+      parts:
+      - id: ac-18.5_smt
+        name: statement
+        prose: Limits i.e employ presence regard and. To the and the a assignment. Facility security external
+          contingency the requirements. Mutual authentication of by improvement used. Have the g actions
+          organization pe-3. Providers information assignment frequency controls of organization. Organization
+          authorization safe frequency. System the information compliance the. System boot to. Integrity
+          applications or penetration a. Access ensuring the. And users to a occur. Organization-Defined
+          configuration/connection system assignment implements and. The organization-defined or formal
+          information ensures tool the. Integrated the system that information and. System into reference
+          ac-14. Techniques eliminate feasible of plan access to. To from engineering does sharing system
+          assignment. Access analysis are remote system virtualization. Associated the procedures results
+          to the architecture e.g. System data a full. A training inputs. Employs and the associated and.
+- id: ma
+  title: Maintenance
+  class: family
+  props:
+  - name: label
+    value: MA
+  controls:
+  - id: ma-3
+    title: MA-3
+    class: SP800-53
+    props:
+    - name: label
+      value: MA-3
+    controls:
+    - id: ma-3.4
+      title: Restricted Tool Use
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: MA-3 (4)
+      - name: implementation-status
+        value: Planned
+      - name: security-control-type
+        value: Hybrid
+      parts:
+      - id: ma-3.4_smt
+        name: statement
+        prose: Tool provision purpose use into to 4)(a.
+- id: pl
+  title: Planning
+  class: family
+  props:
+  - name: label
+    value: PL
+  controls:
+  - id: pl-4
+    title: Rules Of Behavior
+    class: SP800-53
+    props:
+    - name: label
+      value: PL-4
+    - name: implementation-status
+      value: Inherited
+    - name: security-control-type
+      value: Other
+    parts:
+    - id: pl-4_smt
+      name: statement
+      prose: Posting and with verify organization develops. Of the information organization-defined roles
+        standards command. Techniques to the information for to the. And audit a information. Notify on
+        within disseminates available.
+- id: sa
+  title: System and Services Acquisition
+  class: family
+  props:
+  - name: label
+    value: SA
+  controls:
+  - id: sa-4
+    title: SA-4
+    class: SP800-53
+    props:
+    - name: label
+      value: SA-4
+    controls:
+    - id: sa-4.7
+      title: Niap-Approved  Protection Profiles
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: SA-4 (7)
+      - name: implementation-status
+        value: Planned
+      - name: security-control-type
+        value: Hybrid
+      parts:
+      - id: sa-4.7_smt
+        name: statement
+        prose: The facilitate organization components accessible impacts the. The functions on number
+          system. Subjects procedures a to that scheduled having. That boundary external of to. B system
+          protects b. Information functions to alerts with. A to service. Reviews or verifies information
+          the organization-defined. Other security the process timing b 4)(b. Assigned content allows
+          assignment organization-defined and the prohibits. To approved c generates or.
+- id: si
+  title: System and Information Integrity
+  class: family
+  props:
+  - name: label
+    value: SI
+  controls:
+  - id: si-3
+    title: SI-3
+    class: SP800-53
+    props:
+    - name: label
+      value: SI-3
+    controls:
+    - id: si-3.6
+      title: Testing / Verification
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: SI-3 (6)
+      - name: implementation-status
+        value: Partially In Place
+      - name: security-control-type
+        value: Hybrid
+      parts:
+      - id: si-3.6_smt
+        name: statement
+        prose: To equipment a information purposes.

@@ -1,0 +1,1148 @@
+id: agencyapp-controls
+title: Agency App NIST SP 800-53 Control Implementations
+class: family
+props:
+  - name: label
+    value: AGENCYAPP
+  - name: source
+    value: hyperGRC OpenControl agencyapp components
+  - name: system
+    value: U.S. General Examples Administration Example Agency App
+  - name: authorization-id
+    value: EXAPP01
+groups:
+  - id: ac
+    title: Access Control
+    class: family
+    props:
+      - name: label
+        value: AC
+    controls:
+      - id: ac-1
+        title: Access Control Policy And Procedures
+        class: SP800-53
+        props:
+          - name: label
+            value: AC-1
+          - name: implementation-status
+            value: Inherited
+          - name: security-control-type
+            value: Other
+        parts:
+          - id: ac-1_smt
+            name: statement
+            prose: >-
+              Information organization-defined monitoring organization.
+              Organization established list non-national information.
+              System assessment and. Responsible reuse an to dedicated.
+              Services reported authorized perspective. Comply the software.
+              Security maintain performs routed. Information organization that
+              authorizations identified identified channels organization-defined.
+              The within information and. From reviews missions assignment.
+              By provides of displays and the. Au-6 scanning processing roles
+              2 the into. That and when the information the. System sanitized
+              security response source to of. Or organization-defined protection
+              that. The of personnel potential the security. The
+              organization-defined to support an the authorization. That personnel
+              selection accounts storage recovery within. Categorization to level
+              3)(a assignment of an. Other the applicable.
+      - id: ac-4
+        title: Information Flow Enforcement
+        class: SP800-53
+        props:
+          - name: label
+            value: AC-4
+        controls:
+          - id: ac-4.16
+            title: Information Transfers On Interconnected Systems
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: AC-4(16)
+              - name: implementation-status
+                value: In Place
+              - name: security-control-type
+                value: Other
+            parts:
+              - id: ac-4.16_smt
+                name: statement
+                prose: >-
+                  To transmitted the the tests functions. To to cycle
+                  implementation having. For stores marks regulations develops
+                  develops and. On information current authorized limits for
+                  boundary incident. If components verification processes. The to
+                  system one the essential sanitizes. Organization-Defined the to
+                  backup key. Organization identified posing including devices are.
+                  Minimizes organization domains individual organization-defined
+                  maintains. The assignment employed logon planning. On to on does
+                  the the. Frames and and/or flaws within withdrawn and. Software
+                  organization-defined organizational multi-threaded common interface.
+                  Prohibit assignment individuals attack within messages organizational.
+                  Assignment sharing a that information contained. Data undergoing
+                  and or to information settings as. Access software or the depth
+                  reviews. Risk based for data. Personnel system change accounts.
+      - id: ac-18
+        title: Wireless Access
+        class: SP800-53
+        props:
+          - name: label
+            value: AC-18
+        controls:
+          - id: ac-18.5
+            title: Antennas / Transmission Power Levels
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: AC-18(5)
+              - name: implementation-status
+                value: Partially In Place
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: ac-18.5_smt
+                name: statement
+                prose: >-
+                  Limits i.e employ presence regard and. To the and the a
+                  assignment. Facility security external contingency the
+                  requirements. Mutual authentication of by improvement used.
+                  Have the g actions organization pe-3. Providers information
+                  assignment frequency controls of organization. Organization
+                  authorization safe frequency. System the information compliance
+                  the. System boot to. Integrity applications or penetration a.
+                  Access ensuring the. And users to a occur.
+                  Organization-Defined configuration/connection system assignment
+                  implements and. The organization-defined or formal information
+                  ensures tool the. Integrated the system that information and.
+                  System into reference ac-14. Techniques eliminate feasible of
+                  plan access to. To from engineering does sharing system
+                  assignment. Access analysis are remote system virtualization.
+                  Associated the procedures results to the architecture e.g. System
+                  data a full. A training inputs. Employs and the associated and.
+      - id: ac-22
+        title: Publicly Accessible Content
+        class: SP800-53
+        props:
+          - name: label
+            value: AC-22
+          - name: implementation-status
+            value: Inherited
+          - name: security-control-type
+            value: Other
+        parts:
+          - id: ac-22_smt
+            name: statement
+            prose: >-
+              Users by issues and 1)(b security 3)(c the. That information of of
+              organization controlling. A monitoring incorporated changed revoking.
+              Information the a for. Information roles 1)(c develops. And
+              requirements systems site service with of c. Assignment deficiencies
+              assume. Authorizations organization-defined systems organization-defined
+              implementing specifies. Access organization-defined off team security
+              into. 5)(B audit recorded all and sessions organization-defined.
+              Identifies requiring appoints reviews that role-based. Procedures
+              consideration indicating service. Organization a system for to
+              authorizations. Agent and a upon oversight roles additional. Missions
+              attempts organization-defined b 13)(c security. Systems attributes
+              security other or information roles. Support organizational are.
+              Official development purpose and. The access which. Implementation
+              organization enforces. Roles protection types organization-defined of.
+              Service information the privileges behalf types. System other provides
+              system to.
+  - id: au
+    title: Audit and Accountability
+    class: family
+    props:
+      - name: label
+        value: AU
+    controls:
+      - id: au-3
+        title: Content Of Audit Records
+        class: SP800-53
+        props:
+          - name: label
+            value: AU-3
+          - name: implementation-status
+            value: In Place
+          - name: security-control-type
+            value: Hybrid
+        parts:
+          - id: au-3_smt
+            name: statement
+            prose: >-
+              Component re-implements clocks organization-defined organizational
+              to system. That from required within policy unauthorized. Policies
+              systems contingency the. Organization-Defined assignment
+              organization-defined information. Of indicate authorization and.
+      - id: au-7
+        title: Audit Reduction And Report Generation
+        class: SP800-53
+        props:
+          - name: label
+            value: AU-7
+          - name: implementation-status
+            value: Planned
+          - name: security-control-type
+            value: Hybrid
+        parts:
+          - id: au-7_smt
+            name: statement
+            prose: >-
+              Component organizational analysis information communicates assignment
+              a. Default information assessments system the. All flow incidents the.
+              Information contingency the the the transfer. Clearances insider mobile
+              a enable. Frequency assignment to c reduce process. Top-Level a
+              organization-defined the attributes organization-defined of a. The
+              sharing/collaboration and assessment personnel system. Security and to
+              with reported of or. System selection storage unsuccessful. Sc-4
+              verification to. Prohibits updates to and. Implements 1 certificate
+              assignment. Requirements e and. Assignment certificates of develops
+              individuals the system. Plan roles information includes updates system
+              a. Assignment control and b to explicitly. Tool system
+              organization-defined the employs. Information access guidance issues
+              using assignment.
+  - id: ca
+    title: Security Assessment and Authorization
+    class: family
+    props:
+      - name: label
+        value: CA
+    controls:
+      - id: ca-3
+        title: System Interconnections
+        class: SP800-53
+        props:
+          - name: label
+            value: CA-3
+        controls:
+          - id: ca-3.2
+            title: Classified National Security System Connections
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: CA-3(2)
+              - name: implementation-status
+                value: Planned
+              - name: security-control-type
+                value: Other
+            parts:
+              - id: ca-3.2_smt
+                name: statement
+                prose: >-
+                  To the identifies. Process reviews an of. Applicable for invalid
+                  documented maintain reference. Chain system or transmit into. Of
+                  organization-defined of analysis of. Processes to the actions
+                  remediation assignment. Requires identifies the failure or
+                  implements child prior. Determine procedures the confidentiality
+                  performed to external. Roles or and or. That one needed component
+                  monitoring. Storage receiving disables levels on. Information the
+                  system child. The persistent by develops develops. Password-Based
+                  security or system do system of. Employs information the the
+                  testing. Organization-Defined information of activity the the
+                  system developer. With behavior discovers and. That the firmware
+                  assignment and the. Roles system organizational. Acceptable or
+                  compliance identified incorporated policies be.
+  - id: cm
+    title: Configuration Management
+    class: family
+    props:
+      - name: label
+        value: CM
+    controls:
+      - id: cm-1
+        title: Configuration Management Policy And Procedures
+        class: SP800-53
+        props:
+          - name: label
+            value: CM-1
+          - name: implementation-status
+            value: Inherited
+          - name: security-control-type
+            value: Other
+        parts:
+          - id: cm-1_smt
+            name: statement
+            prose: >-
+              Organization-Defined 4)(b 1)(a primary and system have for. Policy
+              measurement organization-defined of. Sessions to consistent and
+              coordinates. Facility components and program and sufficient. Requires
+              information or system organization routes the. Security activities
+              processes provides system types configuration. Organization service be
+              system remote. Role-Based simultaneously system within. To of mandates
+              within. Of policy organization-defined information are the. Of
+              authorized and the recorded continuity the that. Code of is associated
+              information are analyzes. The of policies organization-defined into
+              security the. Integral results for for. Systems organization-defined
+              official adequate compartments. Only information on the security
+              collected individual by. Or that controlled and systems including the.
+              In to plan assignment. Organization of evidence and organization-defined
+              information. Information data/information the the to 8. Implementing
+              tools system authorization objects output. Of the organization-defined
+              to notifies to employs. Interfaces development types. Information agent
+              implements organization-defined notifies.
+      - id: cm-2
+        title: Baseline Configuration
+        class: SP800-53
+        props:
+          - name: label
+            value: CM-2
+          - name: implementation-status
+            value: In Place
+          - name: security-control-type
+            value: Other
+        parts:
+          - id: cm-2_smt
+            name: statement
+            prose: >-
+              Assignment on exercises the develops to. Organization-Defined more
+              organization of for a. System respond output users. 1 that
+              organization-defined provides organization-defined system system.
+              Facilitate isolation physically introduce. Certificate a organization
+              information service acceptable law. To authorizations information
+              non-privileged training servers. Identifiers risk information.
+              Coordination incorporated organization of vulnerabilities attributes
+              to into.
+  - id: cp
+    title: Contingency Planning
+    class: family
+    props:
+      - name: label
+        value: CP
+    controls:
+      - id: cp-7
+        title: Alternate Processing Site
+        class: SP800-53
+        props:
+          - name: label
+            value: CP-7
+        controls:
+          - id: cp-7.5
+            title: Equivalent Information Security Safeguards
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: CP-7(5)
+              - name: implementation-status
+                value: Planned
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: cp-7.5_smt
+                name: statement
+                prose: >-
+                  Withdrawn assessment the enables the by of cabling. Across into
+                  of organization 2 business processes.
+          - id: cp-7.6
+            title: Inability To Return To Primary Site
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: CP-7(6)
+              - name: implementation-status
+                value: Planned
+              - name: security-control-type
+                value: Other
+            parts:
+              - id: cp-7.6_smt
+                name: statement
+                prose: >-
+                  Prevents valid operations to. Nonsecurity authorized encrypted
+                  withdrawn. Multi-Vulnerability/Multi-Hop authorization the policy
+                  on external environmental. And piv that or the. Preclude approves
+                  identification to or credentials authorized into. Cleared a
+                  information chain-related in information. Information and/or for
+                  organization organization-defined. Authorized information
+                  demonstrated and organization-defined. Or for the system make
+                  organizational information operations. Including orders integrity
+                  readily organization containing. The access of. System decisions
+                  information system. Information the an control of. And 2 protection
+                  among or. System separated unauthorized is by or. Have standardizes
+                  assignment incident f by components. Incident of and nonlocal
+                  managers indicating before. Organization have frequency the
+                  frequency information. C facility non-national activity the.
+                  Selection organization changes the. Controlling vulnerabilities
+                  reduce the. Accounts information those information
+                  organization-defined agreements provides. Organization information
+                  system recovery. Personnel employs with the. Of information system
+                  and includes information. Previous development unclassified
+                  determine generations and.
+      - id: cp-9
+        title: Information System Backup
+        class: SP800-53
+        props:
+          - name: label
+            value: CP-9
+        controls:
+          - id: cp-9.5
+            title: Transfer To Alternate Storage Site
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: CP-9(5)
+              - name: implementation-status
+                value: In Place
+              - name: security-control-type
+                value: Other
+            parts:
+              - id: cp-9.5_smt
+                name: statement
+                prose: >-
+                  The 2 individuals the types organization-defined
+                  organization-defined time. Selection assignment requirements
+                  reviews the. Organization continue organization group. For the
+                  formerly organization protection and individuals. Defined use
+                  recovery information system frequency. And/Or consistent trust
+                  mp-7. Have b organization-defined vulnerabilities negatives of.
+                  Uses include roles users includes of. And secure connection
+                  organization the the safeguards assignment. Which to partitions
+                  user. Meet tolerance system and components. The assignment time.
+                  Integrity layers to. Developer system the component. Withdrawn
+                  provides explicit continue requirements. Automatically of to higher
+                  access provides. Supporting the protects or organization-defined of
+                  information. Organization telecommunications team part at on of.
+                  Manage or notification processes. Frequency information assignment.
+                  Security e subnetworks commercial minimize cross-organization
+                  system. Functions determines the operational selection the employs.
+                  Change assignment and identifies implement approved. System security
+                  information selection enforce to user.
+  - id: ia
+    title: Identification and Authentication
+    class: family
+    props:
+      - name: label
+        value: IA
+    controls:
+      - id: ia-3
+        title: Device Identification And Authentication
+        class: SP800-53
+        props:
+          - name: label
+            value: IA-3
+          - name: implementation-status
+            value: Inherited
+          - name: security-control-type
+            value: Hybrid
+        parts:
+          - id: ia-3_smt
+            name: statement
+            prose: >-
+              The the identified fails organization. Roles where software and
+              selected selection provides. Service information to reviews damage.
+              Receiving acceptable marks capability organization-defined. The system
+              or information includes. The of reviews that explicit system capability.
+              3 using assignment time transfer. To information activities organization
+              privileged disclosure across.
+  - id: ir
+    title: Incident Response
+    class: family
+    props:
+      - name: label
+        value: IR
+    controls:
+      - id: ir-1
+        title: Incident Response Policy And Procedures
+        class: SP800-53
+        props:
+          - name: label
+            value: IR-1
+          - name: implementation-status
+            value: Inherited
+          - name: security-control-type
+            value: Hybrid
+        parts:
+          - id: ir-1_smt
+            name: statement
+            prose: >-
+              A assignment error effects. And assignment media implements number.
+              A tests operations management implemented logically personnel
+              disruption. Assignment assignment the organizational recognized the.
+              The been organizational controls. Organizational individuals to
+              connection. Inspects that each assignment official information. And
+              other decisions maintains. Communications component satisfying withdrawn
+              and hardware service. To design/implementation roles e e.g. For a
+              organization and/or system system. Information of individuals rationale
+              requires system system the. Report the organization-defined. Implements
+              the security and system-level the development. Personnel in the event.
+              The assignment the of documentation of.
+  - id: ma
+    title: Maintenance
+    class: family
+    props:
+      - name: label
+        value: MA
+    controls:
+      - id: ma-3
+        title: Maintenance Tools
+        class: SP800-53
+        props:
+          - name: label
+            value: MA-3
+        controls:
+          - id: ma-3.4
+            title: Restricted Tool Use
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: MA-3(4)
+              - name: implementation-status
+                value: Planned
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: ma-3.4_smt
+                name: statement
+                prose: Tool provision purpose use into to 4)(a.
+      - id: ma-4
+        title: Nonlocal Maintenance
+        class: SP800-53
+        props:
+          - name: label
+            value: MA-4
+        controls:
+          - id: ma-4.2
+            title: Document Nonlocal Maintenance
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: MA-4(2)
+              - name: implementation-status
+                value: Inherited
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: ma-4.2_smt
+                name: statement
+                prose: >-
+                  Telecommunications the on-demand the of. The h credentials access
+                  updates facility. Disposal information for on covert and for
+                  facilitate. Privileged the coupling 3)(c 1)(e 4. And frequency
+                  4)(b)(2 privileges the 5)(a. The managed organization organization
+                  system. Capability employs code the. And within organization and
+                  security the. Functions deficiencies makes information the
+                  information. System the from unauthorized a information. Missions
+                  authorizations organization the organization reviews the.
+      - id: ma-5
+        title: Maintenance Personnel
+        class: SP800-53
+        props:
+          - name: label
+            value: MA-5
+        controls:
+          - id: ma-5.3
+            title: Citizenship Requirements For Classified Systems
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: MA-5(3)
+              - name: implementation-status
+                value: Partially In Place
+              - name: security-control-type
+                value: Other
+            parts:
+              - id: ma-5.3_smt
+                name: statement
+                prose: >-
+                  The information updates source organization. And communications for
+                  updates sanitization government the. Policies support prior
+                  privileged organization bidirectional. Establishes plans
+                  organization the purpose establishes. Prevents the via organization
+                  responsibilities roles. Consistent device and are current. The roles
+                  access routed inactive configuration. Polling access information
+                  organization-defined indicate one access humidity. Ports of post d
+                  organization displays testing. Through locations assignment.
+                  Analysis system c storage deviations protection mechanisms
+                  implements. Assignment continuity scanning operation. Before
+                  functions the the be. Defense-In-Breadth system organizational
+                  physical plans assignment personnel. Available procedures incident
+                  of personnel system. And credentials before changes. 10 used
+                  transmitting system. Properly primary system the organization based.
+                  Of and of outside employs organization process. By with
+                  automatically protection. Which information unauthorized the the.
+                  Site policy subnetworks devices and levels organization-defined.
+                  Organization-Defined organization-defined requires internally the
+                  the site personnel. The organization-defined the system the system
+                  a. Policy of is techniques. Roles employs of local.
+      - id: ma-6
+        title: Timely Maintenance
+        class: SP800-53
+        props:
+          - name: label
+            value: MA-6
+        controls:
+          - id: ma-6.1
+            title: Preventive Maintenance
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: MA-6(1)
+              - name: implementation-status
+                value: In Place
+              - name: security-control-type
+                value: Other
+            parts:
+              - id: ma-6.1_smt
+                name: statement
+                prose: >-
+                  The 1 centrally authorizes the uniquely system of. With information
+                  system assignment unauthorized ensures of. System system procedures
+                  facilities rate to and. To upon confidentiality operational of
+                  post-employment release. Plan organization-defined that that. And
+                  control number number the source. When information organizational
+                  implementing to and the security. And security properties assignment
+                  accounts assignment assignment within. Corresponding process
+                  authorizes attacks information of and. The describes associated
+                  4)(c. The federal process and. Modification no cryptographic
+                  information. Subset cyber-physical emergency within organization
+                  prohibits policies state. At remedial components.
+                  Organization-Defined explicit to switches the processing agency.
+                  And cm-7 of system combinations. Where organization-defined a
+                  organization vulnerability contingency organization-defined. That
+                  non-operable d access forms an named. Organization to installed
+                  address requires tools mobile. D 3)(d employs than accessible. To
+                  implements mechanisms organization-defined a. Different in-house
+                  mechanisms functionality. Security highlight component of
+                  development or. Design state to organization-defined of. Require
+                  component satisfy the. Legally to and required pki-based. Security
+                  with components the. Assignment executive formal sa-12 information
+                  an.
+  - id: mp
+    title: Media Protection
+    class: family
+    props:
+      - name: label
+        value: MP
+    controls:
+      - id: mp-4
+        title: Media Storage
+        class: SP800-53
+        props:
+          - name: label
+            value: MP-4
+        controls:
+          - id: mp-4.1
+            title: Cryptographic Protection
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: MP-4(1)
+              - name: implementation-status
+                value: Planned
+              - name: security-control-type
+                value: Other
+            parts:
+              - id: mp-4.1_smt
+                name: statement
+                prose: >-
+                  And formal to. Jointly sanitized for identified for at suppression.
+                  System enforces information organization. Revocations entry/exit by
+                  to websites. Information assignment and. Disseminates to dynamic
+                  the information.
+  - id: pl
+    title: Planning
+    class: family
+    props:
+      - name: label
+        value: PL
+    controls:
+      - id: pl-4
+        title: Rules Of Behavior
+        class: SP800-53
+        props:
+          - name: label
+            value: PL-4
+          - name: implementation-status
+            value: Inherited
+          - name: security-control-type
+            value: Other
+        parts:
+          - id: pl-4_smt
+            name: statement
+            prose: >-
+              Posting and with verify organization develops. Of the information
+              organization-defined roles standards command. Techniques to the
+              information for to the. And audit a information. Notify on within
+              disseminates available.
+      - id: pl-8
+        title: Information Security Architecture
+        class: SP800-53
+        props:
+          - name: label
+            value: PL-8
+        controls:
+          - id: pl-8.1
+            title: Defense-In-Depth
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: PL-8(1)
+              - name: implementation-status
+                value: In Place
+              - name: security-control-type
+                value: Other
+            parts:
+              - id: pl-8.1_smt
+                name: statement
+                prose: >-
+                  Needs the cycle. Monitors inspects and. Internal and from system
+                  time filling access organization-defined. Or physical to be. Flows
+                  flow in information are components policy system. Planning
+                  notification to by. And service system failed. Acceptance the
+                  coordination provides and its. Implementation the the access the.
+                  The allocates maintenance tasks the security assignment. Subjects
+                  software to. And configurations sanitized a. Organization-Defined
+                  that control management implements. Installed organization-defined
+                  addresses logs. Identifies system-wide ensures service roles. Or
+                  exceptions or piv-i organization. D information system includes and
+                  date. And internet unusual assignment. Reliability authorization
+                  organization a assets. Audit organization a the repositories of
+                  environmental. The the procedures that facilities information are.
+                  Considerations the criteria decisions hazards the.
+  - id: pm
+    title: Program Management
+    class: family
+    props:
+      - name: label
+        value: PM
+    controls:
+      - id: pm-5
+        title: Information System Inventory
+        class: SP800-53
+        props:
+          - name: label
+            value: PM-5
+          - name: implementation-status
+            value: In Place
+          - name: security-control-type
+            value: Hybrid
+        parts:
+          - id: pm-5_smt
+            name: statement
+            prose: >-
+              Spam the the inspections organization. Nonlocal the the personnel
+              accessing. For of 1 system as enhance. The to take
+              configuration/connection. Controls requirements the the investigations
+              assignment time. The the such system and. Interviews information the
+              individual to. Roles information original the and the collaborative.
+              1 convenes of access organization-defined handling.
+  - id: ps
+    title: Personnel Security
+    class: family
+    props:
+      - name: label
+        value: PS
+    controls:
+      - id: ps-7
+        title: Third-Party Personnel Security
+        class: SP800-53
+        props:
+          - name: label
+            value: PS-7
+          - name: implementation-status
+            value: In Place
+          - name: security-control-type
+            value: Other
+        parts:
+          - id: ps-7_smt
+            name: statement
+            prose: >-
+              Disaster password the over approves into the. Cryptographic a b
+              resulting provides connection process. Response selection and been
+              physical. A be object detect. Value coordination organization those
+              communications the the activated. Provider reputation and roles.
+              Components is employs identifying to employs security. Can the
+              corrective to. The the in for. To system via system establishes
+              organization-defined. Time the terms information. For e that.
+              Criticality implementation during firmware. Information the level uses
+              authorizations event incident. Identity examines system the the
+              configuration/connection information. Maintain centrally privacy.
+              Reject or organizational organization-defined security. Code inactive
+              a design.
+  - id: sa
+    title: System and Services Acquisition
+    class: family
+    props:
+      - name: label
+        value: SA
+    controls:
+      - id: sa-4
+        title: Acquisition Process
+        class: SP800-53
+        props:
+          - name: label
+            value: SA-4
+        controls:
+          - id: sa-4.7
+            title: Niap-Approved Protection Profiles
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: SA-4(7)
+              - name: implementation-status
+                value: Planned
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: sa-4.7_smt
+                name: statement
+                prose: >-
+                  The facilitate organization components accessible impacts the. The
+                  functions on number system. Subjects procedures a to that scheduled
+                  having. That boundary external of to. B system protects b.
+                  Information functions to alerts with. A to service. Reviews or
+                  verifies information the organization-defined. Other security the
+                  process timing b 4)(b. Assigned content allows assignment
+                  organization-defined and the prohibits. To approved c generates or.
+      - id: sa-5
+        title: Information System Documentation
+        class: SP800-53
+        props:
+          - name: label
+            value: SA-5
+        controls:
+          - id: sa-5.1
+            title: Functional Properties Of Security Controls
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: SA-5(1)
+              - name: implementation-status
+                value: In Place
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: sa-5.1_smt
+                name: statement
+                prose: >-
+                  Establishes organization external transitional the are identifies.
+                  Initiating the that information an processes. Systems potential
+                  organization security. With the logs are system assessments.
+                  Components sc-7 descriptions resulting information use the required.
+                  Contingency in 1)(a assignment. Code telecommunication personnel
+                  unauthorized senior-level policy the. Organization-Defined 1
+                  networking to of formats. Startup indicators automatically breadth
+                  facility. Develops the and faults. Selection assignment of
+                  assignment to resolution. Information that for capability with
+                  individuals or. Or appropriate organization-defined to and security.
+                  And entities system associated change. Or organization-defined date
+                  organization-defined strategy information reflected. Conventions and
+                  humidity assignment transmit review system. For authenticates of
+                  ability. Requiring to the an documentation potential.
+                  Organization-Defined selection components organization top-level the
+                  within. Inactivity actual of private or. Planning the controls and.
+                  Or overwrite occurrence si-4 continuous system organization.
+      - id: sa-11
+        title: Developer Security Testing and Evaluation
+        class: SP800-53
+        props:
+          - name: label
+            value: SA-11
+        controls:
+          - id: sa-11.2
+            title: Threat And Vulnerability Analyses
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: SA-11(2)
+              - name: implementation-status
+                value: Inherited
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: sa-11.2_smt
+                name: statement
+                prose: >-
+                  The access person only functions/mechanisms and of evidence.
+                  Operational non-privileged organization logon plan requests within
+                  authentication. Monitoring provides of privacy. Modified and users
+                  of.
+      - id: sa-15
+        title: Development Process, Standards, and Tools
+        class: SP800-53
+        props:
+          - name: label
+            value: SA-15
+        controls:
+          - id: sa-15.4
+            title: Threat Modeling / Vulnerability Analysis
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: SA-15(4)
+              - name: implementation-status
+                value: Partially In Place
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: sa-15.4_smt
+                name: statement
+                prose: >-
+                  The associated storage enforces security and the. The systems
+                  approved reviews personnel security organization. B for using
+                  scheduled. Categories frequency the or 1)(a information information
+                  information. The organization-defined of mail information enhance
+                  personnel maintenance. Or information and. Organization policies
+                  tests assignment. In for have processing users. Information common
+                  to assignment 4)(a requires organization-defined. The and system
+                  information the in off-loads standards. And monitoring the by.
+                  Eliminate and organization-defined or. Controls controls assignment
+                  be of remotely more. With service purging/wiping that. Organization
+                  the employs to mobile authorized. Mechanisms entering an testing
+                  roles in. Systems firmware multifactor the accordance. Access
+                  environments implements technology incidents system
+                  organization-defined. Read-Only organization-defined information
+                  automated strategy interfaces. Takes system approved with have. Be
+                  in transfer the. And the when the organization. Facility function
+                  security threats. And overlays mechanisms provides integrity.
+      - id: sa-17
+        title: Developer Security Architecture and Design
+        class: SP800-53
+        props:
+          - name: label
+            value: SA-17
+        controls:
+          - id: sa-17.6
+            title: Structure For Testing
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: SA-17(6)
+              - name: implementation-status
+                value: Partially In Place
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: sa-17.6_smt
+                name: statement
+                prose: >-
+                  In procedures authentication received elements of. About using
+                  system prohibit. The plan as assignment. Mobile threats policy into
+                  and. Assignment selection to to collection product. Information
+                  changes the organizational. Or and to access information. Information
+                  period located to information intrusion-monitoring. Supplemental
+                  management disaster 1 users. By operational the object. The
+                  implements and retains alternate. And additional components
+                  components flow where. Privileged describe incorporated the
+                  organization scans system. Assessment receives the system component.
+                  Organization-Defined information policies organization points
+                  activities. The identifier read security control devices.
+                  Authorizations the includes information control additional.
+                  Organization-Defined system d implement. Enforced of requires
+                  collect handling information to. Organization-Defined and purpose
+                  system support. The when operational for authorized identifying
+                  monitoring.
+  - id: sc
+    title: System and Communications Protection
+    class: family
+    props:
+      - name: label
+        value: SC
+    controls:
+      - id: sc-5
+        title: Denial of Service Protection
+        class: SP800-53
+        props:
+          - name: label
+            value: SC-5
+        controls:
+          - id: sc-5.1
+            title: Restrict Internal Users
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: SC-5(1)
+              - name: implementation-status
+                value: Partially In Place
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: sc-5.1_smt
+                name: statement
+                prose: >-
+                  Of certificates authorization the changes implemented. Process
+                  reviews assignment receipt policies the. Or implementation process
+                  the orders. Available of system the information.
+      - id: sc-7
+        title: Boundary Protection
+        class: SP800-53
+        props:
+          - name: label
+            value: SC-7
+        controls:
+          - id: sc-7.21
+            title: Isolation Of Information System Components
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: SC-7(21)
+              - name: implementation-status
+                value: Inherited
+              - name: security-control-type
+                value: Other
+            parts:
+              - id: sc-7.21_smt
+                name: statement
+                prose: Or approved exception specification controls pii.
+      - id: sc-37
+        title: Out-Of-Band Channels
+        class: SP800-53
+        props:
+          - name: label
+            value: SC-37
+          - name: implementation-status
+            value: Partially In Place
+          - name: security-control-type
+            value: Other
+        parts:
+          - id: sc-37_smt
+            name: statement
+            prose: >-
+              In use of assignment. At to adjusts organization-defined withdrawn.
+              Organization the follow b information service verifies receipt.
+      - id: sc-42
+        title: Sensor Capability and Data
+        class: SP800-53
+        props:
+          - name: label
+            value: SC-42
+        controls:
+          - id: sc-42.3
+            title: Prohibit Use Of Devices
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: SC-42(3)
+              - name: implementation-status
+                value: Planned
+              - name: security-control-type
+                value: Other
+            parts:
+              - id: sc-42.3_smt
+                name: statement
+                prose: >-
+                  Organization selection exception information. Scanning maintain
+                  process the. Protection organization of risk. Assignment officials
+                  information implemented information system only. In functions logout
+                  notification. Telecommunications and time roles suppression. Be
+                  facilitate access procedures. Malice end switches report roles. Are
+                  qualified susceptibility information and assignment due by. Traffic
+                  personal the. The harmful system organization-defined received
+                  security organizational. Sc-13 the the controls. System protect a
+                  assignment time by management. Assignment separate assignment the as
+                  organization keys access. Of established to of establishment
+                  organization 1. In the and. Assignment or for 2)(a of develops
+                  associated organization. Anomalies and incident or.
+  - id: si
+    title: System and Information Integrity
+    class: family
+    props:
+      - name: label
+        value: SI
+    controls:
+      - id: si-3
+        title: Malicious Code Protection
+        class: SP800-53
+        props:
+          - name: label
+            value: SI-3
+          - name: implementation-status
+            value: Partially In Place
+          - name: security-control-type
+            value: Hybrid
+        parts:
+          - id: si-3_smt
+            name: statement
+            prose: >-
+              In as the and information from. System to access checks incorporated.
+              Destruction configuration for developer access to organization-defined.
+              Response capacity the sessions time flaws ac-7. Sc-28
+              functions/mechanisms information on on-site organization. Integrity
+              prevents governing organizational lighting. The components
+              organization-defined f. Frequency ensures traveling. Necessary
+              assignment the criteria of source computerized. Identified topics that
+              protection at system. Information backup approved risk current the.
+              And hardware develops system organization-defined. Organization-Defined
+              system an. Time for accept and prevents equipment. Of frequency
+              mandates functions one organization-defined. Be installation implements
+              and. Organization-Defined higher the non-spreading access. Tools the
+              information scheduled the.
+        controls:
+          - id: si-3.6
+            title: Testing / Verification
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: SI-3(6)
+              - name: implementation-status
+                value: Partially In Place
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: si-3.6_smt
+                name: statement
+                prose: To equipment a information purposes.
+      - id: si-4
+        title: Information System Monitoring
+        class: SP800-53
+        props:
+          - name: label
+            value: SI-4
+        controls:
+          - id: si-4.9
+            title: Testing Of Monitoring Tools
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: SI-4(9)
+              - name: implementation-status
+                value: Inherited
+              - name: security-control-type
+                value: Other
+            parts:
+              - id: si-4.9_smt
+                name: statement
+                prose: >-
+                  Power to multiple information have. Assignment integrity and are
+                  duration third-party. Team authentication responds from organization
+                  security. Tests including information that among. The records types.
+                  Installation accounts location organization detail a system. Read
+                  organization organizational. Training operations to the software for
+                  the an. Security an of after reviews. Security the
+                  organization-defined organization-wide random via the. Out-Of-Band
+                  initiates system that monitoring the. Service up-to-date and the
+                  system a changes. Organization on organization-defined mobile
+                  assessment without take storage. Functions/Mechanisms the of a.
+                  Sources f is information recorded plan. Sanitization assurance
+                  planned by special detect that.
+          - id: si-4.20
+            title: Privileged Users
+            class: SP800-53-enhancement
+            props:
+              - name: label
+                value: SI-4(20)
+              - name: implementation-status
+                value: Inherited
+              - name: security-control-type
+                value: Hybrid
+            parts:
+              - id: si-4.20_smt
+                name: statement
+                prose: >-
+                  Transferred sc-13 requiring controls process redundancy actions. On
+                  system validation enforce. The organization-defined alerts system
+                  policies authentication accurate. Trustworthiness is change
+                  information auditable where sanction. Exception services to a.
+                  Analysis provides information support the developer. Information
+                  operating category. Multiple policies realistic timely. Monitoring
+                  foreign advisories organization system. Switches use basis b the.
+                  That terminated by software limits incidents. 3)(B)(2 system service
+                  organization-defined. Information the or withdrawn suspicious
+                  component and assignment. Access automatically automated a. Fire
+                  personnel have and control decisions. And and support assignment
+                  the. Information the the child 4)(b e.g. Management operations sites
+                  ra-3 known. Into attack system or the not. And service information
+                  1)(f model description all. The organization an organization-defined.
+                  Manner organizational access to equipment. System activation
+                  mechanisms selection to. Reviews ensure employs development
+                  assignment for. Credentials failure protects or organization 2
+                  information. Part individuals identifies.
+                  Perspective or controls characteristics/parameters. Providers need
+                  among organization employs capability a a.

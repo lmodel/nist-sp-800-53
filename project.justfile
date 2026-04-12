@@ -39,8 +39,80 @@ validate-oscal-profile:
 		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
 		tests/data/nist/NIST_SP-800-53_rev5_PRIVACY-baseline_profile.yaml
 
-# Validate all OSCAL documents (catalogs, profiles, and basic catalog).
-validate-oscal-all: validate-oscal-catalog validate-oscal-profile validate-oscal-top validate-basic-catalog-oscal 
+# ── hyperGRC agencyapp fixtures ───────────────────────────────────────────────
+# Source: https://github.com/GovReady/hyperGRC/tree/master/example/agencyapp
+# OSCAL output files are pre-generated and stored under tests/data/hyperGRC/agencyapp/.
+
+# Validate the combined agencyapp controls (all components merged by family).
+validate-hypergrc-agencyapp-controls:
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		-C ControlGroup \
+		tests/data/hyperGRC/agencyapp/controls-oscal.yaml
+
+# Validate the NIST SP 800-53 Rev 4 catalog converted from agencyapp standards/.
+validate-hypergrc-agencyapp-catalog:
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		-C SP80053Document \
+		tests/data/hyperGRC/agencyapp/nist-sp-800-53-rev4-catalog.yaml
+
+# Validate the FISMA Low Impact profile converted from agencyapp certifications/.
+validate-hypergrc-agencyapp-profile:
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		-C SP80053Document \
+		tests/data/hyperGRC/agencyapp/fisma-low-impact-profile.yaml
+
+# Validate all eight per-component ControlGroup files under components-oscal/.
+validate-hypergrc-agencyapp-components:
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		-C ControlGroup \
+		tests/data/hyperGRC/agencyapp/components-oscal/centos-fake.yaml
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		-C ControlGroup \
+		tests/data/hyperGRC/agencyapp/components-oscal/cisco-cloud-rtr-fake.yaml
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		-C ControlGroup \
+		tests/data/hyperGRC/agencyapp/components-oscal/cylance-fake.yaml
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		-C ControlGroup \
+		tests/data/hyperGRC/agencyapp/components-oscal/govready-fake.yaml
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		-C ControlGroup \
+		tests/data/hyperGRC/agencyapp/components-oscal/jenkins-fake.yaml
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		-C ControlGroup \
+		tests/data/hyperGRC/agencyapp/components-oscal/keycloak-fake.yaml
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		-C ControlGroup \
+		tests/data/hyperGRC/agencyapp/components-oscal/openldap-fake.yaml
+	uv run linkml validate \
+		-s src/nist_sp_800_53/schema/nist_sp_800_53.yaml \
+		-C ControlGroup \
+		tests/data/hyperGRC/agencyapp/components-oscal/soc-services-fake.yaml
+
+# Validate all hyperGRC agencyapp OSCAL output files.
+validate-hypergrc-agencyapp: \
+	validate-hypergrc-agencyapp-controls \
+	validate-hypergrc-agencyapp-catalog \
+	validate-hypergrc-agencyapp-profile \
+	validate-hypergrc-agencyapp-components
+
+# Validate all OSCAL documents (catalogs, profiles, basic catalog, and hyperGRC examples).
+validate-oscal-all: \
+	validate-oscal-catalog \
+	validate-oscal-profile \
+	validate-oscal-top \
+	validate-basic-catalog-oscal \
+	validate-hypergrc-agencyapp
 
 # Validate with top-level schema using explicit target class.
 validate-oscal-top:

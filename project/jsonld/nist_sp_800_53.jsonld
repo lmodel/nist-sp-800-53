@@ -2111,7 +2111,7 @@
   "source_file": "nist_sp_800_53.yaml",
   "source_file_date": "2026-03-21T00:04:48",
   "source_file_size": 16106,
-  "generation_date": "2026-04-11T23:51:17",
+  "generation_date": "2026-04-12T02:13:15",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_sp_800_53.context.jsonld",

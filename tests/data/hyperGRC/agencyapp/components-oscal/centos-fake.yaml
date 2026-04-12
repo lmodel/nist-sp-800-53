@@ -1,0 +1,68 @@
+id: centos-fake
+title: CentOS-fake
+class: family
+props:
+- name: label
+  value: centos-fake
+- name: component
+  value: CentOS-fake
+- name: source
+  value: https://github.com/GovReady/hyperGRC/tree/master/example/agencyapp
+groups:
+- id: cp
+  title: Contingency Planning
+  class: family
+  props:
+  - name: label
+    value: CP
+  controls:
+  - id: cp-7
+    title: CP-7
+    class: SP800-53
+    props:
+    - name: label
+      value: CP-7
+    controls:
+    - id: cp-7.5
+      title: Equivalent Information Security Safeguards
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: CP-7 (5)
+      - name: implementation-status
+        value: Planned
+      - name: security-control-type
+        value: Hybrid
+      parts:
+      - id: cp-7.5_smt
+        name: statement
+        prose: Withdrawn assessment the enables the by of cabling. Across into of organization 2 business
+          processes.
+- id: sc
+  title: System and Communications Protection
+  class: family
+  props:
+  - name: label
+    value: SC
+  controls:
+  - id: sc-7
+    title: SC-7
+    class: SP800-53
+    props:
+    - name: label
+      value: SC-7
+    controls:
+    - id: sc-7.21
+      title: Isolation Of Information System Components
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: SC-7 (21)
+      - name: implementation-status
+        value: Inherited
+      - name: security-control-type
+        value: Other
+      parts:
+      - id: sc-7.21_smt
+        name: statement
+        prose: Or approved exception specification controls pii.

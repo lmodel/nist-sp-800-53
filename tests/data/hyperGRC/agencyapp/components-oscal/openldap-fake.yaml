@@ -1,0 +1,117 @@
+id: openldap-fake
+title: OpenLDAP-fake
+class: family
+props:
+- name: label
+  value: openldap-fake
+- name: component
+  value: OpenLDAP-fake
+- name: source
+  value: https://github.com/GovReady/hyperGRC/tree/master/example/agencyapp
+groups:
+- id: ac
+  title: Access Control
+  class: family
+  props:
+  - name: label
+    value: AC
+  controls:
+  - id: ac-1
+    title: Access Control Policy And Procedures
+    class: SP800-53
+    props:
+    - name: label
+      value: AC-1
+    - name: implementation-status
+      value: Inherited
+    - name: security-control-type
+      value: Other
+    parts:
+    - id: ac-1_smt
+      name: statement
+      prose: Information organization-defined monitoring organization. Organization established list non-national
+        information. System assessment and. Responsible reuse an to dedicated. Services reported authorized
+        perspective. Comply the software. Security maintain performs routed. Information organization
+        that authorizations identified identified channels organization-defined. The within information
+        and. From reviews missions assignment. By provides of displays and the. Au-6 scanning processing
+        roles 2 the into. That and when the information the. System sanitized security response source
+        to of. Or organization-defined protection that. The of personnel potential the security. The organization-defined
+        to support an the authorization. That personnel selection accounts storage recovery within. Categorization
+        to level 3)(a assignment of an. Other the applicable.
+- id: au
+  title: Audit and Accountability
+  class: family
+  props:
+  - name: label
+    value: AU
+  controls:
+  - id: au-3
+    title: Content Of Audit Records
+    class: SP800-53
+    props:
+    - name: label
+      value: AU-3
+    - name: implementation-status
+      value: In Place
+    - name: security-control-type
+      value: Hybrid
+    parts:
+    - id: au-3_smt
+      name: statement
+      prose: Component re-implements clocks organization-defined organizational to system. That from required
+        within policy unauthorized. Policies systems contingency the. Organization-Defined assignment
+        organization-defined information. Of indicate authorization and.
+- id: cm
+  title: Configuration Management
+  class: family
+  props:
+  - name: label
+    value: CM
+  controls:
+  - id: cm-2
+    title: Baseline Configuration
+    class: SP800-53
+    props:
+    - name: label
+      value: CM-2
+    - name: implementation-status
+      value: In Place
+    - name: security-control-type
+      value: Other
+    parts:
+    - id: cm-2_smt
+      name: statement
+      prose: Assignment on exercises the develops to. Organization-Defined more organization of for a.
+        System respond output users. 1 that organization-defined provides organization-defined system
+        system. Facilitate isolation physically introduce. Certificate a organization information service
+        acceptable law. To authorizations information non-privileged training servers. Identifiers risk
+        information. Coordination incorporated organization of vulnerabilities attributes to into.
+- id: si
+  title: System and Information Integrity
+  class: family
+  props:
+  - name: label
+    value: SI
+  controls:
+  - id: si-3
+    title: Malicious Code Protection
+    class: SP800-53
+    props:
+    - name: label
+      value: SI-3
+    - name: implementation-status
+      value: Partially In Place
+    - name: security-control-type
+      value: Hybrid
+    parts:
+    - id: si-3_smt
+      name: statement
+      prose: In as the and information from. System to access checks incorporated. Destruction configuration
+        for developer access to organization-defined. Response capacity the sessions time flaws ac-7.
+        Sc-28 functions/mechanisms information on on-site organization. Integrity prevents governing organizational
+        lighting. The components organization-defined f. Frequency ensures traveling. Necessary assignment
+        the criteria of source computerized. Identified topics that protection at system. Information
+        backup approved risk current the. And hardware develops system organization-defined. Organization-Defined
+        system an. Time for accept and prevents equipment. Of frequency mandates functions one organization-defined.
+        Be installation implements and. Organization-Defined higher the non-spreading access. Tools the
+        information scheduled the.
