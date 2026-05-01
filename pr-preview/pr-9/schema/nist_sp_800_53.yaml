@@ -1,0 +1,1658 @@
+name: NIST-SP-800-53
+description: 'Electronic (LinkML) Version of NIST SP 800-53 Rev 5 Controls and SP
+  800-53A Rev 5 Assessment Procedures '
+source: https://doi.org/10.6028/NIST.SP.800-53r5
+id: https://w3id.org/lmodel/nist-sp-800-53
+version: 5.2.0
+imports:
+- linkml:types
+license: https://creativecommons.org/publicdomain/zero/1.0/
+prefixes:
+  linkml:
+    prefix_prefix: linkml
+    prefix_reference: https://w3id.org/linkml/
+  nist_sp_800_53:
+    prefix_prefix: nist_sp_800_53
+    prefix_reference: https://w3id.org/lmodel/nist-sp-800-53/
+default_prefix: nist_sp_800_53
+default_range: string
+subsets:
+  nist_sp_800_53r5_catalog:
+    name: nist_sp_800_53r5_catalog
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Catalog
+    description: NIST SP 800-53 Catalog subset for controls and assessment procedures
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+  nist_sp_800_53r5_profile:
+    name: nist_sp_800_53r5_profile
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Profile
+    description: NIST SP 800-53 Profile subset for baselines and overlays
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+types:
+  string:
+    name: string
+    definition_uri: https://w3id.org/linkml/String
+    description: A character string
+    notes:
+    - In RDF serializations, a slot with range of string is treated as a literal or
+      type xsd:string.   If you are authoring schemas in LinkML YAML, the type is
+      referenced with the lower case "string".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Text
+    base: str
+    uri: xsd:string
+  integer:
+    name: integer
+    definition_uri: https://w3id.org/linkml/Integer
+    description: An integer
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "integer".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Integer
+    base: int
+    uri: xsd:integer
+  boolean:
+    name: boolean
+    definition_uri: https://w3id.org/linkml/Boolean
+    description: A binary (true or false) value
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "boolean".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Boolean
+    base: Bool
+    uri: xsd:boolean
+    repr: bool
+  float:
+    name: float
+    definition_uri: https://w3id.org/linkml/Float
+    description: A real number that conforms to the xsd:float specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "float".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Float
+    base: float
+    uri: xsd:float
+  double:
+    name: double
+    definition_uri: https://w3id.org/linkml/Double
+    description: A real number that conforms to the xsd:double specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "double".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    close_mappings:
+    - schema:Float
+    base: float
+    uri: xsd:double
+  decimal:
+    name: decimal
+    definition_uri: https://w3id.org/linkml/Decimal
+    description: A real number with arbitrary precision that conforms to the xsd:decimal
+      specification
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "decimal".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    broad_mappings:
+    - schema:Number
+    base: Decimal
+    uri: xsd:decimal
+  time:
+    name: time
+    definition_uri: https://w3id.org/linkml/Time
+    description: A time object represents a (local) time of day, independent of any
+      particular day
+    notes:
+    - URI is dateTime because OWL reasoners do not work with straight date or time
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "time".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Time
+    base: XSDTime
+    uri: xsd:time
+    repr: str
+  date:
+    name: date
+    definition_uri: https://w3id.org/linkml/Date
+    description: a date (year, month and day) in an idealized calendar
+    notes:
+    - URI is dateTime because OWL reasoners don't work with straight date or time
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "date".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:Date
+    base: XSDDate
+    uri: xsd:date
+    repr: str
+  datetime:
+    name: datetime
+    definition_uri: https://w3id.org/linkml/Datetime
+    description: The combination of a date and time
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "datetime".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    exact_mappings:
+    - schema:DateTime
+    base: XSDDateTime
+    uri: xsd:dateTime
+    repr: str
+  date_or_datetime:
+    name: date_or_datetime
+    definition_uri: https://w3id.org/linkml/DateOrDatetime
+    description: Either a date or a datetime
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "date_or_datetime".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: linkml:DateOrDatetime
+    repr: str
+  uriorcurie:
+    name: uriorcurie
+    definition_uri: https://w3id.org/linkml/Uriorcurie
+    description: a URI or a CURIE
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "uriorcurie".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: URIorCURIE
+    uri: xsd:anyURI
+    repr: str
+  curie:
+    name: curie
+    definition_uri: https://w3id.org/linkml/Curie
+    conforms_to: https://www.w3.org/TR/curie/
+    description: a compact URI
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "curie".
+    comments:
+    - in RDF serializations this MUST be expanded to a URI
+    - in non-RDF serializations MAY be serialized as the compact representation
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: Curie
+    uri: xsd:string
+    repr: str
+  uri:
+    name: uri
+    definition_uri: https://w3id.org/linkml/Uri
+    conforms_to: https://www.ietf.org/rfc/rfc3987.txt
+    description: a complete URI
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "uri".
+    comments:
+    - in RDF serializations a slot with range of uri is treated as a literal or type
+      xsd:anyURI unless it is an identifier or a reference to an identifier, in which
+      case it is translated directly to a node
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    close_mappings:
+    - schema:URL
+    base: URI
+    uri: xsd:anyURI
+    repr: str
+  ncname:
+    name: ncname
+    definition_uri: https://w3id.org/linkml/Ncname
+    description: Prefix part of CURIE
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "ncname".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: NCName
+    uri: xsd:string
+    repr: str
+  objectidentifier:
+    name: objectidentifier
+    definition_uri: https://w3id.org/linkml/Objectidentifier
+    description: A URI or CURIE that represents an object in the model.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "objectidentifier".
+    comments:
+    - Used for inheritance and type checking
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: ElementIdentifier
+    uri: shex:iri
+    repr: str
+  nodeidentifier:
+    name: nodeidentifier
+    definition_uri: https://w3id.org/linkml/Nodeidentifier
+    description: A URI, CURIE or BNODE that represents a node in a model.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "nodeidentifier".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: NodeIdentifier
+    uri: shex:nonLiteral
+    repr: str
+  jsonpointer:
+    name: jsonpointer
+    definition_uri: https://w3id.org/linkml/Jsonpointer
+    conforms_to: https://datatracker.ietf.org/doc/html/rfc6901
+    description: A string encoding a JSON Pointer. The value of the string MUST conform
+      to JSON Point syntax and SHOULD dereference to a valid object within the current
+      instance document when encoded in tree form.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "jsonpointer".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+  jsonpath:
+    name: jsonpath
+    definition_uri: https://w3id.org/linkml/Jsonpath
+    conforms_to: https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html
+    description: A string encoding a JSON Path. The value of the string MUST conform
+      to JSON Point syntax and SHOULD dereference to zero or more valid objects within
+      the current instance document when encoded in tree form.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "jsonpath".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+  sparqlpath:
+    name: sparqlpath
+    definition_uri: https://w3id.org/linkml/Sparqlpath
+    conforms_to: https://www.w3.org/TR/sparql11-query/#propertypaths
+    description: A string encoding a SPARQL Property Path. The value of the string
+      MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects
+      within the current instance document when encoded as RDF.
+    notes:
+    - If you are authoring schemas in LinkML YAML, the type is referenced with the
+      lower case "sparqlpath".
+    from_schema: https://w3id.org/linkml/types
+    imported_from: linkml:types
+    base: str
+    uri: xsd:string
+    repr: str
+enums:
+  CatalogElementClassValue:
+    name: CatalogElementClassValue
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/CatalogElementClassValue
+    description: Allowed values for element-level class values
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    permissible_values:
+      family:
+        text: family
+      SP800-53:
+        text: SP800-53
+      SP800-53-enhancement:
+        text: SP800-53-enhancement
+  CatalogPropertyClassValue:
+    name: CatalogPropertyClassValue
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/CatalogPropertyClassValue
+    description: Allowed values for property-level class values
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    permissible_values:
+      sp800-53:
+        text: sp800-53
+      sp800-53a:
+        text: sp800-53a
+      zero-padded:
+        text: zero-padded
+slots:
+  catalog:
+    name: catalog
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/catalog
+    description: Root catalog payload
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:catalog
+    owner: Catalog
+    domain_of:
+    - SP80053Document
+    - Catalog
+    range: CatalogBody
+    inlined: true
+    inlined_as_list: true
+  profile:
+    name: profile
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/profile
+    description: Root profile payload
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:profile
+    owner: ProfileDocument
+    domain_of:
+    - SP80053Document
+    - ProfileDocument
+    range: ProfileBody
+    inlined: true
+    inlined_as_list: true
+  metadata:
+    name: metadata
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/metadata
+    description: Profile and Catalog metadata
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:metadata
+    owner: ProfileBody
+    domain_of:
+    - CatalogBody
+    - ProfileBody
+    range: Metadata
+    inlined: true
+    inlined_as_list: true
+  groups:
+    name: groups
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/groups
+    description: List of control groups in the catalog
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:groups
+    owner: ControlGroup
+    domain_of:
+    - CatalogBody
+    - ControlGroup
+    range: ControlGroup
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  controls:
+    name: controls
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/controls
+    description: List of controls in a group
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:controls
+    owner: ControlEnhancement
+    domain_of:
+    - ControlGroup
+    - Control
+    - ControlEnhancement
+    range: Control
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  params:
+    name: params
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/params
+    description: List of parameters for a control
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:params
+    owner: ControlEnhancement
+    domain_of:
+    - Control
+    - ControlEnhancement
+    range: Parameter
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  props:
+    name: props
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/props
+    description: List of properties
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:props
+    owner: CatalogElement
+    domain_of:
+    - Metadata
+    - CatalogElement
+    range: Property
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  guidelines:
+    name: guidelines
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/guidelines
+    description: List of guidelines
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:guidelines
+    owner: Parameter
+    domain_of:
+    - Parameter
+    range: Guideline
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  links:
+    name: links
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/links
+    description: List of links and relationships
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:links
+    owner: CatalogElement
+    domain_of:
+    - Metadata
+    - Revision
+    - CatalogElement
+    range: Link
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  parts:
+    name: parts
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/parts
+    description: Nested parts that provide prose and structure
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:parts
+    owner: CatalogElement
+    domain_of:
+    - CatalogElement
+    range: Part
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  select:
+    name: select
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/select
+    description: Selection parameters for a parameter definition
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:select
+    owner: Parameter
+    domain_of:
+    - Parameter
+    range: Selection
+    inlined: true
+    inlined_as_list: true
+  id:
+    name: id
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/id
+    description: Unique identifier for an element
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:id
+    owner: CatalogElement
+    domain_of:
+    - Role
+    - CatalogElement
+    range: string
+  uuid:
+    name: uuid
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/uuid
+    description: UUID for profile, metadata, or resource element
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:uuid
+    owner: Resource
+    domain_of:
+    - CatalogBody
+    - ProfileBody
+    - Party
+    - Resource
+    range: string
+  title:
+    name: title
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/title
+    description: Human-readable title
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:title
+    owner: IdentifiedElement
+    domain_of:
+    - Metadata
+    - Revision
+    - Role
+    - Resource
+    - IdentifiedElement
+    range: string
+  version:
+    name: version
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/version
+    description: Version identifier
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:version
+    owner: Revision
+    domain_of:
+    - Metadata
+    - Revision
+    range: string
+  last-modified:
+    name: last-modified
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/last_modified
+    description: Last modification timestamp
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - last_modified
+    slot_uri: nist_sp_800_53:last_modified
+    owner: Revision
+    domain_of:
+    - Metadata
+    - Revision
+    range: string
+  oscal-version:
+    name: oscal-version
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/oscal_version
+    description: OSCAL version identifier
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - oscal_version
+    slot_uri: nist_sp_800_53:oscal_version
+    owner: Revision
+    domain_of:
+    - Metadata
+    - Revision
+    range: string
+  _class:
+    name: _class
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/_class
+    description: Classification of a catalog element or property
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:class
+    alias: class
+    owner: Property
+    domain_of:
+    - IdentifiedElement
+    - Property
+    range: string
+  label:
+    name: label
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/label
+    description: Human-readable label
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:label
+    owner: IdentifiedElement
+    domain_of:
+    - IdentifiedElement
+    range: string
+  name:
+    name: name
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/name
+    description: Name of a property, part, or party
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:name
+    owner: Part
+    domain_of:
+    - Party
+    - Property
+    - Part
+    range: string
+  value:
+    name: value
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/value
+    description: Property value
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:value
+    owner: Property
+    domain_of:
+    - Property
+    range: string
+  ns:
+    name: ns
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ns
+    description: Namespace URI for a property
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:ns
+    owner: Property
+    domain_of:
+    - Property
+    range: string
+  prose:
+    name: prose
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/prose
+    description: Free-text prose content
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:prose
+    owner: Part
+    domain_of:
+    - Guideline
+    - Part
+    range: string
+  remarks:
+    name: remarks
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/remarks
+    description: Supplemental remarks
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:remarks
+    owner: Revision
+    domain_of:
+    - Metadata
+    - Revision
+    range: string
+  revisions:
+    name: revisions
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/revisions
+    description: Metadata revisions
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:revisions
+    owner: Metadata
+    domain_of:
+    - Metadata
+    range: Revision
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  roles:
+    name: roles
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/roles
+    description: Roles used in metadata
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:roles
+    owner: Metadata
+    domain_of:
+    - Metadata
+    range: Role
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  parties:
+    name: parties
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/parties
+    description: Parties used in metadata
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:parties
+    owner: Metadata
+    domain_of:
+    - Metadata
+    range: Party
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  responsible-parties:
+    name: responsible-parties
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/responsible_parties
+    description: Responsible party assignments
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - responsible_parties
+    slot_uri: nist_sp_800_53:responsible_parties
+    owner: Metadata
+    domain_of:
+    - Metadata
+    range: ResponsibleParty
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  role-id:
+    name: role-id
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/role_id
+    description: Assigned role identifier
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - role_id
+    slot_uri: nist_sp_800_53:role_id
+    owner: ResponsibleParty
+    domain_of:
+    - ResponsibleParty
+    range: string
+  party-uuids:
+    name: party-uuids
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/party_uuids
+    description: Referenced party UUIDs
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - party_uuids
+    slot_uri: nist_sp_800_53:party_uuids
+    owner: ResponsibleParty
+    domain_of:
+    - ResponsibleParty
+    range: string
+    multivalued: true
+  type:
+    name: type
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/type
+    description: Party type
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:type
+    owner: Party
+    domain_of:
+    - Party
+    range: string
+  short-name:
+    name: short-name
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/short_name
+    description: Short display name
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - short_name
+    slot_uri: nist_sp_800_53:short_name
+    owner: Party
+    domain_of:
+    - Party
+    range: string
+  email-addresses:
+    name: email-addresses
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/email_addresses
+    description: Party email addresses
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - email_addresses
+    slot_uri: nist_sp_800_53:email_addresses
+    owner: Party
+    domain_of:
+    - Party
+    range: string
+    multivalued: true
+  addresses:
+    name: addresses
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/addresses
+    description: Postal addresses
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:addresses
+    owner: Party
+    domain_of:
+    - Party
+    range: Address
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  addr-lines:
+    name: addr-lines
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/addr_lines
+    description: Address lines
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - addr_lines
+    slot_uri: nist_sp_800_53:addr_lines
+    owner: Address
+    domain_of:
+    - Address
+    range: string
+    multivalued: true
+  city:
+    name: city
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/city
+    description: City name
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:city
+    owner: Address
+    domain_of:
+    - Address
+    range: string
+  state:
+    name: state
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/state
+    description: State or region
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:state
+    owner: Address
+    domain_of:
+    - Address
+    range: string
+  postal-code:
+    name: postal-code
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/postal_code
+    description: Postal code
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - postal_code
+    slot_uri: nist_sp_800_53:postal_code
+    owner: Address
+    domain_of:
+    - Address
+    range: string
+  imports:
+    name: imports
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/imports
+    description: Imported catalogs or profiles
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:imports
+    owner: ProfileBody
+    domain_of:
+    - ProfileBody
+    range: ImportResource
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  merge:
+    name: merge
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/merge
+    description: Merge behavior settings
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:merge
+    owner: ProfileBody
+    domain_of:
+    - ProfileBody
+    range: MergeRules
+    inlined: true
+    inlined_as_list: true
+  back-matter:
+    name: back-matter
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/back_matter
+    description: Back-matter references and resources
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - back_matter
+    slot_uri: nist_sp_800_53:back_matter
+    owner: ProfileBody
+    domain_of:
+    - CatalogBody
+    - ProfileBody
+    range: BackMatter
+    inlined: true
+    inlined_as_list: true
+  resources:
+    name: resources
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/resources
+    description: Back-matter resources
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:resources
+    owner: BackMatter
+    domain_of:
+    - BackMatter
+    range: Resource
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  citation:
+    name: citation
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/citation
+    description: Citation details for a resource
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:citation
+    owner: Resource
+    domain_of:
+    - Resource
+    range: Citation
+    inlined: true
+    inlined_as_list: true
+  text:
+    name: text
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/text
+    description: Citation text
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:text
+    owner: Citation
+    domain_of:
+    - Citation
+    range: string
+  description:
+    name: description
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/description
+    description: Resource description
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:description
+    owner: Resource
+    domain_of:
+    - Resource
+    range: string
+  rlinks:
+    name: rlinks
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/rlinks
+    description: Resource links
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:rlinks
+    owner: Resource
+    domain_of:
+    - Resource
+    range: ResourceLink
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  media-type:
+    name: media-type
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/media_type
+    description: Media type for a resource link
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - media_type
+    slot_uri: nist_sp_800_53:media_type
+    owner: ResourceLink
+    domain_of:
+    - ResourceLink
+    range: string
+  href:
+    name: href
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/href
+    description: Link or resource reference
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:href
+    owner: ImportResource
+    domain_of:
+    - ResourceLink
+    - Link
+    - ImportResource
+    range: string
+  rel:
+    name: rel
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/rel
+    description: Relationship type for a link
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:rel
+    owner: Link
+    domain_of:
+    - Link
+    range: string
+  include-controls:
+    name: include-controls
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/include_controls
+    description: Include-controls selectors
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - include_controls
+    slot_uri: nist_sp_800_53:include_controls
+    owner: ImportResource
+    domain_of:
+    - ImportResource
+    range: IncludeControlsSelection
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  with-ids:
+    name: with-ids
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/with_ids
+    description: Explicit control identifiers to include
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - with_ids
+    slot_uri: nist_sp_800_53:with_ids
+    owner: IncludeControlsSelection
+    domain_of:
+    - IncludeControlsSelection
+    range: string
+    multivalued: true
+  as-is:
+    name: as-is
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/as_is
+    description: Keep source order and content during merge
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - as_is
+    slot_uri: nist_sp_800_53:as_is
+    owner: MergeRules
+    domain_of:
+    - MergeRules
+    range: boolean
+  how-many:
+    name: how-many
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/how_many
+    description: How many selections are allowed
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - how_many
+    slot_uri: nist_sp_800_53:how_many
+    owner: Selection
+    domain_of:
+    - Selection
+    range: string
+  choice:
+    name: choice
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/choice
+    description: List of selection options
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:choice
+    owner: Selection
+    domain_of:
+    - Selection
+    range: string
+    multivalued: true
+  IdentifiedElement__class:
+    name: IdentifiedElement__class
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/_class
+    description: Classification of a catalog element or property
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    is_a: _class
+    domain: IdentifiedElement
+    slot_uri: nist_sp_800_53:class
+    alias: class
+    owner: IdentifiedElement
+    domain_of:
+    - IdentifiedElement
+    is_usage_slot: true
+    usage_slot_name: _class
+    range: CatalogElementClassValue
+  Control_controls:
+    name: Control_controls
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/controls
+    description: List of controls in a group
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    is_a: controls
+    domain: Control
+    slot_uri: nist_sp_800_53:controls
+    alias: controls
+    owner: Control
+    domain_of:
+    - Control
+    is_usage_slot: true
+    usage_slot_name: controls
+    range: ControlEnhancement
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  ControlEnhancement_controls:
+    name: ControlEnhancement_controls
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/controls
+    description: List of controls in a group
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    is_a: controls
+    domain: ControlEnhancement
+    slot_uri: nist_sp_800_53:controls
+    alias: controls
+    owner: ControlEnhancement
+    domain_of:
+    - ControlEnhancement
+    is_usage_slot: true
+    usage_slot_name: controls
+    range: ControlEnhancement
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  Property__class:
+    name: Property__class
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/_class
+    description: Classification of a catalog element or property
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    is_a: _class
+    domain: Property
+    slot_uri: nist_sp_800_53:class
+    alias: class
+    owner: Property
+    domain_of:
+    - Property
+    is_usage_slot: true
+    usage_slot_name: _class
+    range: CatalogPropertyClassValue
+classes:
+  SP80053Document:
+    name: SP80053Document
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/SP80053Document
+    description: Unified root wrapper for catalog or profile content
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - catalog
+    - profile
+    class_uri: linkml:Any
+    tree_root: true
+  Catalog:
+    name: Catalog
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Catalog
+    description: Top-level wrapper that mirrors OSCAL catalog shape
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slots:
+    - catalog
+    class_uri: nist_sp_800_53:Catalog
+  ProfileDocument:
+    name: ProfileDocument
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ProfileDocument
+    description: Top-level wrapper for OSCAL profile files
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slots:
+    - profile
+    class_uri: nist_sp_800_53:ProfileDocument
+  CatalogBody:
+    name: CatalogBody
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/CatalogBody
+    description: Main catalog object
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - uuid
+    - metadata
+    - groups
+    - back-matter
+    class_uri: linkml:Any
+  ProfileBody:
+    name: ProfileBody
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ProfileBody
+    description: OSCAL profile body
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - uuid
+    - metadata
+    - imports
+    - merge
+    - back-matter
+    class_uri: linkml:Any
+  Metadata:
+    name: Metadata
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Metadata
+    description: OSCAL metadata section used in catalogs and profiles
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - title
+    - last-modified
+    - version
+    - oscal-version
+    - revisions
+    - props
+    - links
+    - roles
+    - parties
+    - responsible-parties
+    - remarks
+    class_uri: linkml:Any
+  Revision:
+    name: Revision
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Revision
+    description: Metadata revision entry
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - title
+    - last-modified
+    - version
+    - oscal-version
+    - links
+    - remarks
+    class_uri: linkml:Any
+  Role:
+    name: Role
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Role
+    description: Role definition
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slots:
+    - id
+    - title
+    class_uri: nist_sp_800_53:Role
+  Party:
+    name: Party
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Party
+    description: Party definition
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - uuid
+    - type
+    - name
+    - short-name
+    - email-addresses
+    - addresses
+    class_uri: linkml:Any
+  Address:
+    name: Address
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Address
+    description: Postal address
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - addr-lines
+    - city
+    - state
+    - postal-code
+    class_uri: linkml:Any
+  ResponsibleParty:
+    name: ResponsibleParty
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ResponsibleParty
+    description: Assignment of parties to a role
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - role-id
+    - party-uuids
+    class_uri: linkml:Any
+  BackMatter:
+    name: BackMatter
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/BackMatter
+    description: OSCAL back-matter section
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - resources
+    class_uri: linkml:Any
+  Resource:
+    name: Resource
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Resource
+    description: Referenced resource
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - uuid
+    - title
+    - description
+    - citation
+    - rlinks
+    class_uri: linkml:Any
+  Citation:
+    name: Citation
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Citation
+    description: Citation wrapper
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - text
+    class_uri: linkml:Any
+  ResourceLink:
+    name: ResourceLink
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ResourceLink
+    description: Reference link for a resource
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - href
+    - media-type
+    class_uri: linkml:Any
+  CatalogElement:
+    name: CatalogElement
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/CatalogElement
+    description: Base class for catalog elements
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    abstract: true
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    class_uri: nist_sp_800_53:CatalogElement
+  IdentifiedElement:
+    name: IdentifiedElement
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/IdentifiedElement
+    description: A catalog element with required id and optional title/class
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    is_a: CatalogElement
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    - title
+    - IdentifiedElement__class
+    - label
+    slot_usage:
+      _class:
+        name: _class
+        range: CatalogElementClassValue
+    class_uri: nist_sp_800_53:IdentifiedElement
+  ControlGroup:
+    name: ControlGroup
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ControlGroup
+    description: A group of controls (family)
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    is_a: IdentifiedElement
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    - title
+    - IdentifiedElement__class
+    - label
+    - groups
+    - controls
+    class_uri: nist_sp_800_53:ControlGroup
+  Control:
+    name: Control
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Control
+    description: A security control
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    is_a: IdentifiedElement
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    - title
+    - IdentifiedElement__class
+    - label
+    - params
+    - Control_controls
+    slot_usage:
+      controls:
+        name: controls
+        range: ControlEnhancement
+    class_uri: nist_sp_800_53:Control
+  ControlEnhancement:
+    name: ControlEnhancement
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ControlEnhancement
+    description: An enhancement to a control
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    is_a: IdentifiedElement
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    - title
+    - IdentifiedElement__class
+    - label
+    - params
+    - ControlEnhancement_controls
+    slot_usage:
+      controls:
+        name: controls
+        range: ControlEnhancement
+    class_uri: nist_sp_800_53:ControlEnhancement
+  Parameter:
+    name: Parameter
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Parameter
+    description: A configurable parameter used by a control
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    is_a: IdentifiedElement
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    - title
+    - IdentifiedElement__class
+    - label
+    - guidelines
+    - select
+    class_uri: nist_sp_800_53:Parameter
+  Guideline:
+    name: Guideline
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Guideline
+    description: Additional prose guidance associated with a parameter
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slots:
+    - prose
+    class_uri: nist_sp_800_53:Guideline
+  Property:
+    name: Property
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Property
+    description: A name-value property with optional namespace and class attributes
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slots:
+    - name
+    - value
+    - ns
+    - Property__class
+    slot_usage:
+      _class:
+        name: _class
+        range: CatalogPropertyClassValue
+    class_uri: nist_sp_800_53:Property
+  Selection:
+    name: Selection
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Selection
+    description: Selection criteria for a parameter
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - how-many
+    - choice
+    class_uri: linkml:Any
+  Link:
+    name: Link
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Link
+    description: Relationship link
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slots:
+    - href
+    - rel
+    class_uri: nist_sp_800_53:Link
+  Part:
+    name: Part
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Part
+    description: Structured narrative part that can contain nested parts
+    in_subset:
+    - nist_sp_800_53r5_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    is_a: IdentifiedElement
+    slots:
+    - id
+    - props
+    - links
+    - parts
+    - title
+    - IdentifiedElement__class
+    - label
+    - name
+    - prose
+    class_uri: nist_sp_800_53:Part
+  ImportResource:
+    name: ImportResource
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ImportResource
+    description: Imported profile or catalog reference
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - href
+    - include-controls
+    class_uri: linkml:Any
+  IncludeControlsSelection:
+    name: IncludeControlsSelection
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/IncludeControlsSelection
+    description: Control inclusion selector
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - with-ids
+    class_uri: linkml:Any
+  MergeRules:
+    name: MergeRules
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/MergeRules
+    description: Merge configuration
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    mappings:
+    - linkml:Any
+    slots:
+    - as-is
+    class_uri: linkml:Any
+metamodel_version: 1.7.0
+source_file: nist_sp_800_53.yaml
+source_file_date: '2026-05-01T18:10:35'
+source_file_size: 16106
+generation_date: '2026-05-01T18:10:43'
+
