@@ -13,10 +13,17 @@ SCHEMA = Path(__file__).parent.parent / "src" / "nist_sp_800_53" / "schema" / "n
 VALID_EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR_VALID, '*.yaml'))
 INVALID_EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR_INVALID, '*.yaml'))
 
+TARGET_CLASS_OVERRIDES = {
+    # Some LinkML versions (notably in Python 3.9 dependency resolution)
+    # reject abstract classes as `-C` validation targets.
+    "CatalogElement": "IdentifiedElement",
+}
+
 
 def _target_class(filepath: str) -> str:
     """Derive the LinkML target class name from the filename stem prefix."""
-    return Path(filepath).stem.split("-")[0]
+    stem_prefix = Path(filepath).stem.split("-")[0]
+    return TARGET_CLASS_OVERRIDES.get(stem_prefix, stem_prefix)
 
 
 @pytest.mark.parametrize("filepath", VALID_EXAMPLE_FILES)
