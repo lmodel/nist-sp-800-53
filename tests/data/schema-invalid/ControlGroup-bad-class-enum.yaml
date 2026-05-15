@@ -1,0 +1,6 @@
+# Invalid: _class value "unknown-category" is not in CatalogElementClassValue
+# (allowed: family, SP800-53, SP800-53-enhancement, assessment-objective)
+# Fix: change _class to one of the allowed enum values.
+id: AC
+title: Access Control
+class: unknown-category

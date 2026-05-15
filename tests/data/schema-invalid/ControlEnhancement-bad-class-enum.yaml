@@ -1,0 +1,6 @@
+# Invalid: _class value "wrong-enhancement-class" is not in CatalogElementClassValue
+# (allowed: family, SP800-53, SP800-53-enhancement, assessment-objective)
+# Fix: change _class to SP800-53-enhancement.
+id: AC-2(1)
+title: Automated System Account Management
+class: wrong-enhancement-class

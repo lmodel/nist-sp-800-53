@@ -1,0 +1,13 @@
+id: ac-01-element
+props:
+  - name: label
+    value: "1."
+  - name: sort-id
+    value: "ac-01"
+links:
+  - href: "#ref-nist-sp800-53"
+    rel: reference
+parts:
+  - id: ac-01-element_smt
+    name: statement
+    prose: This is a catalog element statement.

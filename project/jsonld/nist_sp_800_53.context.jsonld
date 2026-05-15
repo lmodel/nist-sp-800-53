@@ -3,6 +3,8 @@
       "xsd": "http://www.w3.org/2001/XMLSchema#",
       "linkml": "https://w3id.org/linkml/",
       "nist_sp_800_53": "https://w3id.org/lmodel/nist-sp-800-53/",
+      "oscal_catalog": "https://w3id.org/lmodel/oscal_catalog/",
+      "oscal_profile": "https://w3id.org/lmodel/oscal_profile/",
       "@vocab": "https://w3id.org/lmodel/nist-sp-800-53/",
       "class": {
          "@id": "class"
@@ -14,6 +16,14 @@
          "@type": "@id",
          "@id": "addresses"
       },
+      "adds": {
+         "@type": "@id",
+         "@id": "adds"
+      },
+      "alters": {
+         "@type": "@id",
+         "@id": "alters"
+      },
       "as_is": {
          "@type": "xsd:boolean",
          "@id": "as_is"
@@ -21,6 +31,9 @@
       "back_matter": {
          "@type": "@id",
          "@id": "back_matter"
+      },
+      "by_id": {
+         "@id": "by_id"
       },
       "catalog": {
          "@type": "@id",
@@ -36,15 +49,29 @@
       "city": {
          "@id": "city"
       },
+      "control_id": {
+         "@id": "control_id"
+      },
       "controls": {
          "@type": "@id",
          "@id": "controls"
+      },
+      "depends_on": {
+         "@id": "depends_on"
       },
       "description": {
          "@id": "description"
       },
       "email_addresses": {
          "@id": "email_addresses"
+      },
+      "exclude_controls": {
+         "@type": "@id",
+         "@id": "exclude_controls"
+      },
+      "flat": {
+         "@type": "@id",
+         "@id": "flat"
       },
       "groups": {
          "@type": "@id",
@@ -81,6 +108,10 @@
          "@type": "@id",
          "@id": "links"
       },
+      "matching": {
+         "@type": "@id",
+         "@id": "matching"
+      },
       "media_type": {
          "@id": "media_type"
       },
@@ -92,6 +123,10 @@
          "@type": "@id",
          "@id": "metadata"
       },
+      "modify": {
+         "@type": "@id",
+         "@id": "modify"
+      },
       "name": {
          "@id": "name"
       },
@@ -100,6 +135,9 @@
       },
       "oscal_version": {
          "@id": "oscal_version"
+      },
+      "param_id": {
+         "@id": "param_id"
       },
       "params": {
          "@type": "@id",
@@ -115,6 +153,12 @@
       },
       "party_uuids": {
          "@id": "party_uuids"
+      },
+      "pattern": {
+         "@id": "pattern"
+      },
+      "position": {
+         "@id": "position"
       },
       "postal_code": {
          "@id": "postal_code"
@@ -140,6 +184,10 @@
          "@type": "@id",
          "@id": "resources"
       },
+      "response": {
+         "@type": "@id",
+         "@id": "response"
+      },
       "responsible_parties": {
          "@type": "@id",
          "@id": "responsible_parties"
@@ -162,6 +210,10 @@
       "select": {
          "@type": "@id",
          "@id": "select"
+      },
+      "set_parameters": {
+         "@type": "@id",
+         "@id": "set_parameters"
       },
       "short_name": {
          "@id": "short_name"
@@ -217,6 +269,21 @@
       "ControlGroup": {
          "@id": "ControlGroup"
       },
+      "ControlPattern": {
+         "@id": "linkml:Any"
+      },
+      "CPRTDocument": {
+         "@id": "linkml:Any"
+      },
+      "CPRTResponse": {
+         "@id": "linkml:Any"
+      },
+      "ExcludeControlsSelection": {
+         "@id": "linkml:Any"
+      },
+      "FlatMerge": {
+         "@id": "linkml:Any"
+      },
       "Guideline": {
          "@id": "Guideline"
       },
@@ -239,7 +306,7 @@
          "@id": "linkml:Any"
       },
       "Parameter": {
-         "@id": "Parameter"
+         "@id": "linkml:Any"
       },
       "Part": {
          "@id": "Part"
@@ -247,11 +314,23 @@
       "Party": {
          "@id": "linkml:Any"
       },
+      "ProfileAdd": {
+         "@id": "linkml:Any"
+      },
+      "ProfileAlter": {
+         "@id": "linkml:Any"
+      },
       "ProfileBody": {
          "@id": "linkml:Any"
       },
       "ProfileDocument": {
          "@id": "ProfileDocument"
+      },
+      "ProfileModify": {
+         "@id": "linkml:Any"
+      },
+      "ProfileSetParameter": {
+         "@id": "linkml:Any"
       },
       "Property": {
          "@id": "Property"

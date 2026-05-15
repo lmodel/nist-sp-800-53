@@ -1,0 +1,29 @@
+id: AC-2
+title: Account Management
+params:
+  - id: ac-02_odp.01
+    label: account types
+  - id: ac-02_odp.02
+    label: personnel or roles
+controls:
+  - id: AC-2(1)
+    title: Automated System Account Management
+    parts:
+      - id: ac-2.1_smt
+        name: statement
+        prose: Support the management of system accounts using automated mechanisms.
+  - id: AC-2(2)
+    title: Automated Temporary and Emergency Account Management
+    params:
+      - id: ac-02.02_odp
+        label: time period
+    parts:
+      - id: ac-2.2_smt
+        name: statement
+        prose: Automatically remove or disable temporary and emergency accounts after the organization-defined time period.
+parts:
+  - id: ac-2_smt
+    name: statement
+    prose: >-
+      Manage information system accounts, including establishing, activating,
+      modifying, reviewing, disabling, and removing accounts.

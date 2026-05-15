@@ -1,0 +1,119 @@
+# mapping_set_id: https://w3id.org/lmodel/nist-sp-800-53/mappings/nist-sp-800-53-to-oscal
+# mapping_set_version: "1.0.0"
+# mapping_set_title: "NIST SP 800-53 to OSCAL LinkML Schema Mappings"
+# mapping_set_description: >-
+#   Cross-schema mappings between the nist-sp-800-53 LinkML schema
+#   (https://w3id.org/lmodel/nist-sp-800-53) and the oscal LinkML schema
+#   (https://w3id.org/lmodel/oscal). Covers catalog and profile modules only;
+#   OSCAL SSP, AP, AR, POA&M, and component definition modules are out of scope
+#   for the NIST SP 800-53 schema. CPRT-specific classes have no OSCAL counterpart.
+# license: https://creativecommons.org/publicdomain/zero/1.0/
+# mapping_tool: "manual curation + name-based analysis"
+# mapping_tool_version: "1.0"
+# curie_map:
+#   nist_sp_800_53: "https://w3id.org/lmodel/nist-sp-800-53/"
+#   oscal_catalog: "https://w3id.org/lmodel/oscal_catalog/"
+#   oscal_profile: "https://w3id.org/lmodel/oscal_profile/"
+#   skos: "http://www.w3.org/2004/02/skos/core#"
+#   semapv: "https://w3id.org/semapv/vocab/"
+subject_id	subject_label	predicate_id	object_id	object_label	mapping_justification	comment
+nist_sp_800_53:Catalog	Catalog	skos:closeMatch	oscal_catalog:CatalogDocument	CatalogDocument	semapv:ManualMappingCuration	NIST Catalog wraps CatalogBody under a catalog slot; oscal_catalog:CatalogDocument wraps Catalog under a catalog slot. Structural equivalents at the document level.
+nist_sp_800_53:CatalogBody	CatalogBody	skos:exactMatch	oscal_catalog:Catalog	Catalog	semapv:ManualMappingCuration	NIST CatalogBody IS the oscal_catalog:Catalog object; renamed to avoid collision with the wrapper class.
+nist_sp_800_53:ProfileDocument	ProfileDocument	skos:exactMatch	oscal_profile:ProfileDocument	ProfileDocument	semapv:LexicalMatching	Same name, same single-slot structure (profile).
+nist_sp_800_53:ProfileBody	ProfileBody	skos:exactMatch	oscal_profile:Profile	Profile	semapv:ManualMappingCuration	NIST ProfileBody IS the oscal_profile:Profile object; renamed to avoid collision with the wrapper class.
+nist_sp_800_53:BackMatter	BackMatter	skos:exactMatch	oscal_catalog:BackMatter	BackMatter	semapv:LexicalMatching	Same name, same single slot (resources).
+nist_sp_800_53:Citation	Citation	skos:exactMatch	oscal_catalog:Citation	Citation	semapv:LexicalMatching	Same name, same single slot (text).
+nist_sp_800_53:ResponsibleParty	ResponsibleParty	skos:exactMatch	oscal_catalog:ResponsibleParty	ResponsibleParty	semapv:LexicalMatching	Same name, same slots (role-id, party-uuids).
+nist_sp_800_53:ProfileModify	ProfileModify	skos:exactMatch	oscal_profile:ProfileModify	ProfileModify	semapv:LexicalMatching	Same name, same slots (set-parameters, alters).
+nist_sp_800_53:ControlGroup	ControlGroup	skos:exactMatch	oscal_catalog:Group	Group	semapv:ManualMappingCuration	NIST ControlGroup is a renamed oscal_catalog:Group; same semantics (control family grouping).
+nist_sp_800_53:Guideline	Guideline	skos:exactMatch	oscal_catalog:ParameterGuideline	ParameterGuideline	semapv:ManualMappingCuration	NIST Guideline is a renamed oscal_catalog:ParameterGuideline; same single slot (prose).
+nist_sp_800_53:Selection	Selection	skos:exactMatch	oscal_catalog:ParameterSelection	ParameterSelection	semapv:ManualMappingCuration	NIST Selection is a renamed oscal_catalog:ParameterSelection; same slots (how-many, choice).
+nist_sp_800_53:ImportResource	ImportResource	skos:exactMatch	oscal_profile:ProfileImport	ProfileImport	semapv:ManualMappingCuration	NIST ImportResource is a renamed oscal_profile:ProfileImport; same slots (href, include-controls, exclude-controls).
+nist_sp_800_53:MergeRules	MergeRules	skos:exactMatch	oscal_profile:ProfileMerge	ProfileMerge	semapv:ManualMappingCuration	NIST MergeRules is a renamed oscal_profile:ProfileMerge; same slots (as-is, flat).
+nist_sp_800_53:FlatMerge	FlatMerge	skos:exactMatch	oscal_profile:MergeFlat	MergeFlat	semapv:ManualMappingCuration	NIST FlatMerge is a renamed oscal_profile:MergeFlat; same empty marker class.
+nist_sp_800_53:ControlPattern	ControlPattern	skos:exactMatch	oscal_catalog:ControlMatching	ControlMatching	semapv:ManualMappingCuration	NIST ControlPattern is a renamed oscal_catalog:ControlMatching; same single slot (pattern).
+nist_sp_800_53:ProfileAlter	ProfileAlter	skos:exactMatch	oscal_profile:Alteration	Alteration	semapv:ManualMappingCuration	NIST ProfileAlter is a renamed oscal_profile:Alteration; same slots (control-id, adds).
+nist_sp_800_53:ProfileAdd	ProfileAdd	skos:exactMatch	oscal_profile:Addition	Addition	semapv:ManualMappingCuration	NIST ProfileAdd is a renamed oscal_profile:Addition; same slots (position, by-id, parts, props).
+nist_sp_800_53:ProfileSetParameter	ProfileSetParameter	skos:exactMatch	oscal_profile:ParameterSetting	ParameterSetting	semapv:ManualMappingCuration	NIST ProfileSetParameter is a renamed oscal_profile:ParameterSetting; same slots (param-id, label).
+nist_sp_800_53:Metadata	Metadata	skos:closeMatch	oscal_catalog:Metadata	Metadata	semapv:ManualMappingCuration	Same name and core slots (title, last-modified, version, oscal-version, revisions, roles, parties). NIST adds props/links/responsible-parties/remarks; OSCAL adds published/document-ids/locations/actions.
+nist_sp_800_53:Revision	Revision	skos:closeMatch	oscal_catalog:Revision	Revision	semapv:ManualMappingCuration	Same name and core slots. NIST adds links/remarks; OSCAL adds published.
+nist_sp_800_53:Role	Role	skos:closeMatch	oscal_catalog:Role	Role	semapv:ManualMappingCuration	Same name. NIST has id/title only; OSCAL adds description/short-name.
+nist_sp_800_53:Party	Party	skos:closeMatch	oscal_catalog:Party	Party	semapv:ManualMappingCuration	Same name and core slots. NIST omits external-ids, location-uuids, member-of-organizations, telephone-numbers.
+nist_sp_800_53:Address	Address	skos:closeMatch	oscal_catalog:Address	Address	semapv:ManualMappingCuration	Same name and core slots (addr-lines, city, state, postal-code). NIST omits country and type.
+nist_sp_800_53:Resource	Resource	skos:closeMatch	oscal_catalog:Resource	Resource	semapv:ManualMappingCuration	Same name and core slots. NIST omits base64, document-ids, props, remarks.
+nist_sp_800_53:ResourceLink	ResourceLink	skos:closeMatch	oscal_catalog:ResourceLink	ResourceLink	semapv:ManualMappingCuration	Same name and core slots (href, media-type). NIST omits hashes.
+nist_sp_800_53:Link	Link	skos:closeMatch	oscal_catalog:Link	Link	semapv:ManualMappingCuration	Same name and core slots (href, rel). NIST omits media-type, resource-fragment, text.
+nist_sp_800_53:Property	Property	skos:closeMatch	oscal_catalog:Property	Property	semapv:ManualMappingCuration	Same name and core slots (name, ns, value, _class). NIST omits group, remarks, uuid.
+nist_sp_800_53:Parameter	Parameter	skos:closeMatch	oscal_catalog:Parameter	Parameter	semapv:ManualMappingCuration	Same name and core slots (depends-on, guidelines, select). NIST omits constraints, label, usage, values (id/_class via IdentifiedElement).
+nist_sp_800_53:Part	Part	skos:closeMatch	oscal_catalog:Part	Part	semapv:ManualMappingCuration	Same name and core slots (name, prose). NIST omits ns, parts, title (id/_class via IdentifiedElement).
+nist_sp_800_53:Control	Control	skos:closeMatch	oscal_catalog:Control	Control	semapv:ManualMappingCuration	Same name and core slots (params, controls). NIST omits parts, title (id/_class via IdentifiedElement).
+nist_sp_800_53:ControlEnhancement	ControlEnhancement	skos:closeMatch	oscal_catalog:Control	Control	semapv:ManualMappingCuration	OSCAL models control enhancements as nested Control objects; NIST uses a distinct ControlEnhancement class for schema clarity.
+nist_sp_800_53:IncludeControlsSelection	IncludeControlsSelection	skos:closeMatch	oscal_catalog:SelectControlById	SelectControlById	semapv:ManualMappingCuration	NIST IncludeControlsSelection represents the include-controls selection range; OSCAL uses SelectControlById for both include and exclude contexts.
+nist_sp_800_53:ExcludeControlsSelection	ExcludeControlsSelection	skos:closeMatch	oscal_catalog:SelectControlById	SelectControlById	semapv:ManualMappingCuration	NIST ExcludeControlsSelection represents the exclude-controls selection range; OSCAL uses SelectControlById for both include and exclude contexts.
+nist_sp_800_53:_class	_class	skos:exactMatch	oscal_catalog:_class	_class	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:addr-lines	addr-lines	skos:exactMatch	oscal_catalog:addr-lines	addr-lines	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:addresses	addresses	skos:exactMatch	oscal_catalog:addresses	addresses	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:adds	adds	skos:exactMatch	oscal_profile:adds	adds	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:alters	alters	skos:exactMatch	oscal_profile:alters	alters	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:as-is	as-is	skos:exactMatch	oscal_profile:as-is	as-is	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:back-matter	back-matter	skos:exactMatch	oscal_catalog:back-matter	back-matter	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:by-id	by-id	skos:exactMatch	oscal_profile:by-id	by-id	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:catalog	catalog	skos:exactMatch	oscal_catalog:catalog	catalog	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:choice	choice	skos:exactMatch	oscal_catalog:choice	choice	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:citation	citation	skos:exactMatch	oscal_catalog:citation	citation	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:city	city	skos:exactMatch	oscal_catalog:city	city	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:control-id	control-id	skos:exactMatch	oscal_catalog:control-id	control-id	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:controls	controls	skos:exactMatch	oscal_catalog:controls	controls	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:depends-on	depends-on	skos:exactMatch	oscal_catalog:depends-on	depends-on	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:description	description	skos:exactMatch	oscal_catalog:description	description	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:email-addresses	email-addresses	skos:exactMatch	oscal_catalog:email-addresses	email-addresses	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:exclude-controls	exclude-controls	skos:exactMatch	oscal_catalog:exclude-controls	exclude-controls	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:flat	flat	skos:exactMatch	oscal_profile:flat	flat	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:groups	groups	skos:exactMatch	oscal_catalog:groups	groups	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:guidelines	guidelines	skos:exactMatch	oscal_catalog:guidelines	guidelines	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:how-many	how-many	skos:exactMatch	oscal_catalog:how-many	how-many	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:href	href	skos:exactMatch	oscal_catalog:href	href	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:id	id	skos:exactMatch	oscal_catalog:id	id	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:imports	imports	skos:exactMatch	oscal_profile:imports	imports	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:include-controls	include-controls	skos:exactMatch	oscal_catalog:include-controls	include-controls	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:label	label	skos:exactMatch	oscal_catalog:label	label	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:last-modified	last-modified	skos:exactMatch	oscal_catalog:last-modified	last-modified	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:links	links	skos:exactMatch	oscal_catalog:links	links	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:matching	matching	skos:exactMatch	oscal_catalog:matching	matching	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:media-type	media-type	skos:exactMatch	oscal_catalog:media-type	media-type	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:merge	merge	skos:exactMatch	oscal_profile:merge	merge	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:metadata	metadata	skos:exactMatch	oscal_catalog:metadata	metadata	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:modify	modify	skos:exactMatch	oscal_profile:modify	modify	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:name	name	skos:exactMatch	oscal_catalog:name	name	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:ns	ns	skos:exactMatch	oscal_catalog:ns	ns	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:oscal-version	oscal-version	skos:exactMatch	oscal_catalog:oscal-version	oscal-version	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:param-id	param-id	skos:exactMatch	oscal_catalog:param-id	param-id	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:params	params	skos:exactMatch	oscal_catalog:params	params	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:parties	parties	skos:exactMatch	oscal_catalog:parties	parties	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:parts	parts	skos:exactMatch	oscal_catalog:parts	parts	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:party-uuids	party-uuids	skos:exactMatch	oscal_catalog:party-uuids	party-uuids	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:pattern	pattern	skos:exactMatch	oscal_catalog:pattern	pattern	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:position	position	skos:exactMatch	oscal_profile:position	position	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:postal-code	postal-code	skos:exactMatch	oscal_catalog:postal-code	postal-code	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:profile	profile	skos:exactMatch	oscal_profile:profile	profile	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:props	props	skos:exactMatch	oscal_catalog:props	props	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:prose	prose	skos:exactMatch	oscal_catalog:prose	prose	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:rel	rel	skos:exactMatch	oscal_catalog:rel	rel	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:remarks	remarks	skos:exactMatch	oscal_catalog:remarks	remarks	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:resources	resources	skos:exactMatch	oscal_catalog:resources	resources	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:responsible-parties	responsible-parties	skos:exactMatch	oscal_catalog:responsible-parties	responsible-parties	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:revisions	revisions	skos:exactMatch	oscal_catalog:revisions	revisions	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:rlinks	rlinks	skos:exactMatch	oscal_catalog:rlinks	rlinks	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:role-id	role-id	skos:exactMatch	oscal_catalog:role-id	role-id	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:roles	roles	skos:exactMatch	oscal_catalog:roles	roles	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:select	select	skos:exactMatch	oscal_catalog:select	select	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:set-parameters	set-parameters	skos:exactMatch	oscal_profile:set-parameters	set-parameters	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:short-name	short-name	skos:exactMatch	oscal_catalog:short-name	short-name	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:state	state	skos:exactMatch	oscal_catalog:state	state	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:text	text	skos:exactMatch	oscal_catalog:text	text	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:title	title	skos:exactMatch	oscal_catalog:title	title	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:type	type	skos:exactMatch	oscal_catalog:type	type	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:uuid	uuid	skos:exactMatch	oscal_catalog:uuid	uuid	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:value	value	skos:exactMatch	oscal_catalog:value	value	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:version	version	skos:exactMatch	oscal_catalog:version	version	semapv:LexicalMatching	Identical slot name and semantics in both schemas.
+nist_sp_800_53:with-ids	with-ids	skos:exactMatch	oscal_catalog:with-ids	with-ids	semapv:LexicalMatching	Identical slot name and semantics in both schemas.

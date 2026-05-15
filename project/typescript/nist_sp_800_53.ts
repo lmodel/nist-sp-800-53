@@ -6,6 +6,7 @@ export enum CatalogElementClassValue {
     family = "family",
     SP800_53 = "SP800-53",
     SP800_53_enhancement = "SP800-53-enhancement",
+    assessment_objective = "assessment-objective",
 };
 /**
 * Allowed values for property-level class values
@@ -16,16 +17,74 @@ export enum CatalogPropertyClassValue {
     sp800_53a = "sp800-53a",
     zero_padded = "zero-padded",
 };
+/**
+* Allowed element_type values in NIST CPRT export data
+*/
+export enum CPRTElementTypeValue {
+    
+    /** SP 800-53 control family (e.g. AC, AU) */
+    family = "family",
+    /** Top-level security or privacy control (e.g. AC-1) */
+    control = "control",
+    /** Control enhancement (e.g. AC-1(1)) */
+    control_enhancement = "control_enhancement",
+    /** Normative control statement text */
+    control_statement = "control_statement",
+    /** Non-normative discussion text for a control */
+    discussion = "discussion",
+    /** Organization-Defined Parameter */
+    odp = "odp",
+    /** ODP category (e.g. assignment, selection) */
+    odp_type = "odp_type",
+    /** Full ODP statement text */
+    odp_statement = "odp_statement",
+    /** SP 800-53A Examine assessment objective */
+    examine = "examine",
+    /** SP 800-53A Interview assessment objective */
+    interview = "interview",
+    /** SP 800-53A Test assessment objective */
+    test = "test",
+    /** Assessment determination criterion */
+    determination = "determination",
+    /** Reason a control was withdrawn from SP 800-53 */
+    withdraw_reason = "withdraw_reason",
+    /** Informational reference to an external publication */
+    reference = "reference",
+    /** Security baseline designation (LOW / MODERATE / HIGH / NOT SELECTED) */
+    security_baseline = "security_baseline",
+    /** Privacy baseline designation (P-HIGH / NOT SELECTED) */
+    privacy_baseline = "privacy_baseline",
+    /** Sort-order key for display purposes */
+    sort = "sort",
+    /** Sort-order key for control name ordering */
+    control_name_sort = "control_name_sort",
+};
+/**
+* Relationship type identifiers used in NIST CPRT export data
+*/
+export enum CPRTRelationshipTypeValue {
+    
+    /** Represents a relationship between two elements */
+    projection = "projection",
+    /** Denotes where a control is related to another control */
+    related = "related",
+    /** Denotes where a withdrawn control was incorporated into another */
+    incorporated_into = "incorporated_into",
+    /** Denotes where a withdrawn control was moved to */
+    moved_to = "moved_to",
+};
 
 
 /**
- * Unified root wrapper for catalog or profile content
+ * Unified root wrapper for catalog, profile, or CPRT content
  */
 export interface SP80053Document {
     /** Root catalog payload */
     catalog?: CatalogBody,
     /** Root profile payload */
     profile?: ProfileBody,
+    /** Top-level CPRT API response wrapper */
+    response?: CPRTResponse,
 }
 
 
@@ -74,6 +133,8 @@ export interface ProfileBody {
     imports?: ImportResource[],
     /** Merge behavior settings */
     merge?: MergeRules,
+    /** Profile modification directives — parameter overrides and control alterations */
+    modify?: ProfileModify,
     /** Back-matter references and resources */
     back_matter?: BackMatter,
 }
@@ -298,6 +359,8 @@ export interface Parameter extends IdentifiedElement {
     guidelines?: Guideline[],
     /** Selection parameters for a parameter definition */
     select?: Selection,
+    /** Identifier of another parameter this one depends on (SP 800-53 Rev 4 only) */
+    depends_on?: string,
 }
 
 
@@ -366,6 +429,8 @@ export interface ImportResource {
     href?: string,
     /** Include-controls selectors */
     include_controls?: IncludeControlsSelection[],
+    /** Controls to explicitly exclude from an import */
+    exclude_controls?: ExcludeControlsSelection[],
 }
 
 
@@ -375,6 +440,8 @@ export interface ImportResource {
 export interface IncludeControlsSelection {
     /** Explicit control identifiers to include */
     with_ids?: string[],
+    /** Pattern-based control selectors using glob or regex patterns */
+    matching?: ControlPattern[],
 }
 
 
@@ -384,6 +451,99 @@ export interface IncludeControlsSelection {
 export interface MergeRules {
     /** Keep source order and content during merge */
     as_is?: boolean,
+    /** Flat merge strategy — de-duplicate and merge all controls without source hierarchy */
+    flat?: FlatMerge,
+}
+
+
+/**
+ * Marker object indicating flat merge strategy for profile resolution
+ */
+export interface FlatMerge {
+}
+
+
+/**
+ * Glob or regex pattern for selecting controls by identifier
+ */
+export interface ControlPattern {
+    /** Glob or regex pattern for matching control identifiers */
+    pattern?: string,
+}
+
+
+/**
+ * Selection of controls to explicitly exclude from a profile import
+ */
+export interface ExcludeControlsSelection {
+    /** Explicit control identifiers to include */
+    with_ids?: string[],
+    /** Pattern-based control selectors using glob or regex patterns */
+    matching?: ControlPattern[],
+}
+
+
+/**
+ * Profile modification section containing parameter overrides and control alterations
+ */
+export interface ProfileModify {
+    /** Parameter value overrides applied by the profile */
+    set_parameters?: ProfileSetParameter[],
+    /** Control alterations — add or remove parts from referenced controls */
+    alters?: ProfileAlter[],
+}
+
+
+/**
+ * Override the value of a parameter in a referenced control
+ */
+export interface ProfileSetParameter {
+    /** Identifier of the parameter to be set */
+    param_id?: string,
+    /** Human-readable label */
+    label?: string,
+}
+
+
+/**
+ * Alteration to a referenced control — adds or removes parts
+ */
+export interface ProfileAlter {
+    /** Identifier of the control to alter */
+    control_id?: string,
+    /** Parts, parameters, or properties added to a control by an alteration */
+    adds?: ProfileAdd[],
+}
+
+
+/**
+ * Content to be added to a control via profile alteration
+ */
+export interface ProfileAdd {
+    /** Position at which to add content relative to the by-id anchor */
+    position?: string,
+    /** Identifier of the anchor part relative to which additions are positioned */
+    by_id?: string,
+    /** Nested parts that provide prose and structure */
+    parts?: Part[],
+    /** List of properties */
+    props?: Property[],
+}
+
+
+/**
+ * Semantic class for NIST CPRT (Cybersecurity and Privacy Reference Tool) export documents covering SP 800-53, SP 800-53A, and SP 800-53B. Validate with: linkml validate -C SP80053Document -s <schema> <file.json>
+ */
+export interface CPRTDocument {
+    /** Top-level CPRT API response wrapper */
+    response?: CPRTResponse,
+}
+
+
+/**
+ * CPRT API response container holding document metadata, typed elements (controls, enhancements, ODPs, assessment objectives, baselines), relationship types, and element relationships
+ */
+export interface CPRTResponse {
 }
 
 

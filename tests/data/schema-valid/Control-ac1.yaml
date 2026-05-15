@@ -1,0 +1,42 @@
+id: AC-1
+title: Policy and Procedures
+props:
+  - name: label
+    value: AC-1
+  - name: sort-id
+    value: "ac-01"
+params:
+  - id: ac-01_odp.01
+    label: frequency
+    guidelines:
+      - prose: >-
+          Consider organizational risk tolerance and regulatory requirements
+          when selecting the review frequency.
+    select:
+      how-many: one
+      choice:
+        - annually
+        - every 2 years
+  - id: ac-01_odp.02
+    label: events
+links:
+  - href: "#ref-nist-sp800-53"
+    rel: reference
+parts:
+  - id: ac-1_smt
+    name: statement
+    prose: >-
+      Develop, document, and disseminate an access control policy that is
+      consistent with applicable laws and regulations.
+    parts:
+      - id: ac-1_smt.a
+        name: item
+        prose: "a. Addresses purpose, scope, roles, and responsibilities."
+      - id: ac-1_smt.b
+        name: item
+        prose: "b. Is consistent with applicable laws, executive orders, and policies."
+  - id: ac-1_gdn
+    name: guidance
+    prose: >-
+      Access control policy and procedures address the controls in the AC
+      family that are implemented within systems and organizations.

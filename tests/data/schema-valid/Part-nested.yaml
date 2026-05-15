@@ -1,0 +1,10 @@
+id: ac-1_smt
+name: statement
+prose: The organization must establish access control policies.
+parts:
+  - id: ac-1_smt.a
+    name: item
+    prose: "a. Develop and document an access control policy."
+  - id: ac-1_smt.b
+    name: item
+    prose: "b. Review and update the access control policy annually."

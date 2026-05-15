@@ -1,4 +1,4 @@
-# metamodel_version: 1.7.0
+# metamodel_version: 1.11.0
 # version: 5.2.0
 BASE <https://w3id.org/lmodel/nist-sp-800-53/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -124,6 +124,38 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<ControlPattern> CLOSED {
+    (  $<ControlPattern_tes> <pattern> @linkml:String ? ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<CPRTDocument> CLOSED {
+    (  $<CPRTDocument_tes> <response> @<CPRTResponse> ? ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<CPRTResponse> CLOSED {
+    (  $<CPRTResponse_tes> rdf:type . * ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<ExcludeControlsSelection> CLOSED {
+    (  $<ExcludeControlsSelection_tes> (  <with_ids> @linkml:String * ;
+          <matching> @<ControlPattern> *
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<FlatMerge> CLOSED {
+    (  $<FlatMerge_tes> rdf:type . * ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
 <Guideline> CLOSED {
     (  $<Guideline_tes> <prose> @linkml:String ? ;
        rdf:type [ <Guideline> ] ?
@@ -137,7 +169,8 @@ linkml:Sparqlpath xsd:string
              <title> @linkml:String ? ;
              <class> [ <https://w3id.org/lmodel/nist-sp-800-53/CatalogElementClassValue#family>
                 <https://w3id.org/lmodel/nist-sp-800-53/CatalogElementClassValue#SP800-53>
-                <https://w3id.org/lmodel/nist-sp-800-53/CatalogElementClassValue#SP800-53-enhancement> ] ? ;
+                <https://w3id.org/lmodel/nist-sp-800-53/CatalogElementClassValue#SP800-53-enhancement>
+                <https://w3id.org/lmodel/nist-sp-800-53/CatalogElementClassValue#assessment-objective> ] ? ;
              <label> @linkml:String ?
           ) ;
           rdf:type [ <IdentifiedElement> ] ?
@@ -147,14 +180,17 @@ linkml:Sparqlpath xsd:string
 
 <ImportResource> CLOSED {
     (  $<ImportResource_tes> (  <href> @linkml:String ? ;
-          <include_controls> @<IncludeControlsSelection> *
+          <include_controls> @<IncludeControlsSelection> * ;
+          <exclude_controls> @<ExcludeControlsSelection> *
        ) ;
        rdf:type [ linkml:Any ] ?
     )
 }
 
 <IncludeControlsSelection> CLOSED {
-    (  $<IncludeControlsSelection_tes> <with_ids> @linkml:String * ;
+    (  $<IncludeControlsSelection_tes> (  <with_ids> @linkml:String * ;
+          <matching> @<ControlPattern> *
+       ) ;
        rdf:type [ linkml:Any ] ?
     )
 }
@@ -168,7 +204,9 @@ linkml:Sparqlpath xsd:string
 }
 
 <MergeRules> CLOSED {
-    (  $<MergeRules_tes> <as_is> @linkml:Boolean ? ;
+    (  $<MergeRules_tes> (  <as_is> @linkml:Boolean ? ;
+          <flat> @<FlatMerge> ?
+       ) ;
        rdf:type [ linkml:Any ] ?
     )
 }
@@ -194,9 +232,10 @@ linkml:Sparqlpath xsd:string
     (  $<Parameter_tes> (  &<IdentifiedElement_tes> ;
           rdf:type [ <IdentifiedElement> ] ? ;
           <guidelines> @<Guideline> * ;
-          <select> @<Selection> ?
+          <select> @<Selection> ? ;
+          <depends_on> @linkml:String ?
        ) ;
-       rdf:type [ <Parameter> ] ?
+       rdf:type [ linkml:Any ] ?
     )
 }
 
@@ -222,11 +261,30 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<ProfileAdd> CLOSED {
+    (  $<ProfileAdd_tes> (  <position> @linkml:String ? ;
+          <by_id> @linkml:String ? ;
+          <parts> @<Part> * ;
+          <props> @<Property> *
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<ProfileAlter> CLOSED {
+    (  $<ProfileAlter_tes> (  <control_id> @linkml:String ? ;
+          <adds> @<ProfileAdd> *
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
 <ProfileBody> CLOSED {
     (  $<ProfileBody_tes> (  <uuid> @linkml:String ? ;
           <metadata> @<Metadata> ? ;
           <imports> @<ImportResource> * ;
           <merge> @<MergeRules> ? ;
+          <modify> @<ProfileModify> ? ;
           <back_matter> @<BackMatter> ?
        ) ;
        rdf:type [ linkml:Any ] ?
@@ -236,6 +294,22 @@ linkml:Sparqlpath xsd:string
 <ProfileDocument> CLOSED {
     (  $<ProfileDocument_tes> <profile> @<ProfileBody> ? ;
        rdf:type [ <ProfileDocument> ] ?
+    )
+}
+
+<ProfileModify> CLOSED {
+    (  $<ProfileModify_tes> (  <set_parameters> @<ProfileSetParameter> * ;
+          <alters> @<ProfileAlter> *
+       ) ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<ProfileSetParameter> CLOSED {
+    (  $<ProfileSetParameter_tes> (  <param_id> @linkml:String ? ;
+          <label> @linkml:String ?
+       ) ;
+       rdf:type [ linkml:Any ] ?
     )
 }
 
@@ -308,7 +382,8 @@ linkml:Sparqlpath xsd:string
 
 <SP80053Document> CLOSED {
     (  $<SP80053Document_tes> (  <catalog> @<CatalogBody> ? ;
-          <profile> @<ProfileBody> ?
+          <profile> @<ProfileBody> ? ;
+          <response> @<CPRTResponse> ?
        ) ;
        rdf:type [ linkml:Any ] ?
     )

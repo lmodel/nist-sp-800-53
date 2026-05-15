@@ -1,26 +1,66 @@
 """Data test."""
 import os
 import glob
+import subprocess
+import sys
 import pytest
 from pathlib import Path
 
-import nist_sp_800_53.datamodel.nist_sp_800_53
-from linkml_runtime.loaders import yaml_loader
-
-DATA_DIR_VALID = Path(__file__).parent / "data" / "valid"
-DATA_DIR_INVALID = Path(__file__).parent / "data" / "invalid"
+DATA_DIR_VALID = Path(__file__).parent / "data" / "schema-valid"
+DATA_DIR_INVALID = Path(__file__).parent / "data" / "schema-invalid"
+SCHEMA = Path(__file__).parent.parent / "src" / "nist_sp_800_53" / "schema" / "nist_sp_800_53.yaml"
 
 VALID_EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR_VALID, '*.yaml'))
 INVALID_EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR_INVALID, '*.yaml'))
 
+TARGET_CLASS_OVERRIDES = {
+    # Some LinkML versions (notably in Python 3.9 dependency resolution)
+    # reject abstract classes as `-C` validation targets.
+    "CatalogElement": "IdentifiedElement",
+}
+
+
+def _target_class(filepath: str) -> str:
+    """Derive the LinkML target class name from the filename stem prefix."""
+    stem_prefix = Path(filepath).stem.split("-")[0]
+    return TARGET_CLASS_OVERRIDES.get(stem_prefix, stem_prefix)
+
 
 @pytest.mark.parametrize("filepath", VALID_EXAMPLE_FILES)
 def test_valid_data_files(filepath):
-    """Test loading of all valid data files."""
-    target_class_name = Path(filepath).stem.split("-")[0]
-    tgt_class = getattr(
-        nist_sp_800_53.datamodel.nist_sp_800_53,
-        target_class_name,
+    """Valid data files must pass linkml validate with zero errors."""
+    result = subprocess.run(
+        [
+            sys.executable, "-m", "linkml.cli",
+            "validate",
+            "-s", str(SCHEMA),
+            "-C", _target_class(filepath),
+            filepath,
+        ],
+        capture_output=True,
+        text=True,
     )
-    obj = yaml_loader.load(filepath, target_class=tgt_class)
-    assert obj
+    assert result.returncode == 0, (
+        f"linkml validate failed for {filepath}:\n{result.stdout}\n{result.stderr}"
+    )
+
+
+@pytest.mark.parametrize("filepath", INVALID_EXAMPLE_FILES)
+def test_invalid_data_files(filepath):
+    """Invalid data files must be rejected by linkml validate (non-zero exit)."""
+    result = subprocess.run(
+        [
+            sys.executable, "-m", "linkml.cli",
+            "validate",
+            "-s", str(SCHEMA),
+            "-C", _target_class(filepath),
+            filepath,
+        ],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode != 0, (
+        f"linkml validate unexpectedly passed for {filepath}:\n{result.stdout}\n{result.stderr}"
+    )
+
+

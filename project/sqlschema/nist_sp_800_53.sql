@@ -1,7 +1,8 @@
--- # Class: SP80053Document Description: Unified root wrapper for catalog or profile content
+-- # Class: SP80053Document Description: Unified root wrapper for catalog, profile, or CPRT content
 --     * Slot: id
 --     * Slot: catalog_id Description: Root catalog payload
 --     * Slot: profile_id Description: Root profile payload
+--     * Slot: response_id Description: Top-level CPRT API response wrapper
 -- # Class: Catalog Description: Top-level wrapper that mirrors OSCAL catalog shape
 --     * Slot: id
 --     * Slot: catalog_id Description: Root catalog payload
@@ -18,6 +19,7 @@
 --     * Slot: uuid Description: UUID for profile, metadata, or resource element
 --     * Slot: metadata_id Description: Profile and Catalog metadata
 --     * Slot: merge_id Description: Merge behavior settings
+--     * Slot: modify_id Description: Profile modification directives — parameter overrides and control alterations
 --     * Slot: back_matter_id Description: Back-matter references and resources
 -- # Class: Metadata Description: OSCAL metadata section used in catalogs and profiles
 --     * Slot: id
@@ -107,6 +109,7 @@
 --     * Slot: ControlEnhancement_uid Description: Autocreated FK slot
 -- # Class: Parameter Description: A configurable parameter used by a control
 --     * Slot: uid
+--     * Slot: depends_on Description: Identifier of another parameter this one depends on (SP 800-53 Rev 4 only)
 --     * Slot: title Description: Human-readable title
 --     * Slot: class Description: Classification of a catalog element or property
 --     * Slot: label Description: Human-readable label
@@ -132,6 +135,7 @@
 --     * Slot: ControlEnhancement_uid Description: Autocreated FK slot
 --     * Slot: Parameter_uid Description: Autocreated FK slot
 --     * Slot: Part_uid Description: Autocreated FK slot
+--     * Slot: ProfileAdd_id Description: Autocreated FK slot
 -- # Class: Selection Description: Selection criteria for a parameter
 --     * Slot: id
 --     * Slot: how_many Description: How many selections are allowed
@@ -163,6 +167,7 @@
 --     * Slot: ControlEnhancement_uid Description: Autocreated FK slot
 --     * Slot: Parameter_uid Description: Autocreated FK slot
 --     * Slot: Part_uid Description: Autocreated FK slot
+--     * Slot: ProfileAdd_id Description: Autocreated FK slot
 -- # Class: ImportResource Description: Imported profile or catalog reference
 --     * Slot: id
 --     * Slot: href Description: Link or resource reference
@@ -173,6 +178,38 @@
 -- # Class: MergeRules Description: Merge configuration
 --     * Slot: id
 --     * Slot: as_is Description: Keep source order and content during merge
+--     * Slot: flat_id Description: Flat merge strategy — de-duplicate and merge all controls without source hierarchy
+-- # Class: FlatMerge Description: Marker object indicating flat merge strategy for profile resolution
+--     * Slot: id
+-- # Class: ControlPattern Description: Glob or regex pattern for selecting controls by identifier
+--     * Slot: id
+--     * Slot: pattern Description: Glob or regex pattern for matching control identifiers
+--     * Slot: IncludeControlsSelection_id Description: Autocreated FK slot
+--     * Slot: ExcludeControlsSelection_id Description: Autocreated FK slot
+-- # Class: ExcludeControlsSelection Description: Selection of controls to explicitly exclude from a profile import
+--     * Slot: id
+--     * Slot: ImportResource_id Description: Autocreated FK slot
+-- # Class: ProfileModify Description: Profile modification section containing parameter overrides and control alterations
+--     * Slot: id
+-- # Class: ProfileSetParameter Description: Override the value of a parameter in a referenced control
+--     * Slot: id
+--     * Slot: param_id Description: Identifier of the parameter to be set
+--     * Slot: label Description: Human-readable label
+--     * Slot: ProfileModify_id Description: Autocreated FK slot
+-- # Class: ProfileAlter Description: Alteration to a referenced control — adds or removes parts
+--     * Slot: id
+--     * Slot: control_id Description: Identifier of the control to alter
+--     * Slot: ProfileModify_id Description: Autocreated FK slot
+-- # Class: ProfileAdd Description: Content to be added to a control via profile alteration
+--     * Slot: id
+--     * Slot: position Description: Position at which to add content relative to the by-id anchor
+--     * Slot: by_id Description: Identifier of the anchor part relative to which additions are positioned
+--     * Slot: ProfileAlter_id Description: Autocreated FK slot
+-- # Class: CPRTDocument Description: Semantic class for NIST CPRT (Cybersecurity and Privacy Reference Tool) export documents covering SP 800-53, SP 800-53A, and SP 800-53B. Validate with: linkml validate -C SP80053Document -s <schema> <file.json>
+--     * Slot: id
+--     * Slot: response_id Description: Top-level CPRT API response wrapper
+-- # Class: CPRTResponse Description: CPRT API response container holding document metadata, typed elements (controls, enhancements, ODPs, assessment objectives, baselines), relationship types, and element relationships
+--     * Slot: id
 -- # Class: Party_email_addresses
 --     * Slot: Party_id Description: Autocreated FK slot
 --     * Slot: email_addresses Description: Party email addresses
@@ -187,6 +224,9 @@
 --     * Slot: choice Description: List of selection options
 -- # Class: IncludeControlsSelection_with_ids
 --     * Slot: IncludeControlsSelection_id Description: Autocreated FK slot
+--     * Slot: with_ids Description: Explicit control identifiers to include
+-- # Class: ExcludeControlsSelection_with_ids
+--     * Slot: ExcludeControlsSelection_id Description: Autocreated FK slot
 --     * Slot: with_ids Description: Explicit control identifiers to include
 
 CREATE TABLE "Metadata" (
@@ -237,12 +277,23 @@ CREATE TABLE "Selection" (
 );
 CREATE INDEX "ix_Selection_id" ON "Selection" (id);
 
-CREATE TABLE "MergeRules" (
+CREATE TABLE "FlatMerge" (
 	id INTEGER NOT NULL,
-	as_is BOOLEAN,
 	PRIMARY KEY (id)
 );
-CREATE INDEX "ix_MergeRules_id" ON "MergeRules" (id);
+CREATE INDEX "ix_FlatMerge_id" ON "FlatMerge" (id);
+
+CREATE TABLE "ProfileModify" (
+	id INTEGER NOT NULL,
+	PRIMARY KEY (id)
+);
+CREATE INDEX "ix_ProfileModify_id" ON "ProfileModify" (id);
+
+CREATE TABLE "CPRTResponse" (
+	id INTEGER NOT NULL,
+	PRIMARY KEY (id)
+);
+CREATE INDEX "ix_CPRTResponse_id" ON "CPRTResponse" (id);
 
 CREATE TABLE "CatalogBody" (
 	id INTEGER NOT NULL,
@@ -254,19 +305,6 @@ CREATE TABLE "CatalogBody" (
 	FOREIGN KEY(back_matter_id) REFERENCES "BackMatter" (id)
 );
 CREATE INDEX "ix_CatalogBody_id" ON "CatalogBody" (id);
-
-CREATE TABLE "ProfileBody" (
-	id INTEGER NOT NULL,
-	uuid TEXT,
-	metadata_id INTEGER,
-	merge_id INTEGER,
-	back_matter_id INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY(metadata_id) REFERENCES "Metadata" (id),
-	FOREIGN KEY(merge_id) REFERENCES "MergeRules" (id),
-	FOREIGN KEY(back_matter_id) REFERENCES "BackMatter" (id)
-);
-CREATE INDEX "ix_ProfileBody_id" ON "ProfileBody" (id);
 
 CREATE TABLE "Revision" (
 	id INTEGER NOT NULL,
@@ -325,24 +363,50 @@ CREATE TABLE "Resource" (
 );
 CREATE INDEX "ix_Resource_id" ON "Resource" (id);
 
+CREATE TABLE "MergeRules" (
+	id INTEGER NOT NULL,
+	as_is BOOLEAN,
+	flat_id INTEGER,
+	PRIMARY KEY (id),
+	FOREIGN KEY(flat_id) REFERENCES "FlatMerge" (id)
+);
+CREATE INDEX "ix_MergeRules_id" ON "MergeRules" (id);
+
+CREATE TABLE "ProfileSetParameter" (
+	id INTEGER NOT NULL,
+	param_id TEXT,
+	label TEXT,
+	"ProfileModify_id" INTEGER,
+	PRIMARY KEY (id),
+	FOREIGN KEY("ProfileModify_id") REFERENCES "ProfileModify" (id)
+);
+CREATE INDEX "ix_ProfileSetParameter_id" ON "ProfileSetParameter" (id);
+
+CREATE TABLE "ProfileAlter" (
+	id INTEGER NOT NULL,
+	control_id TEXT,
+	"ProfileModify_id" INTEGER,
+	PRIMARY KEY (id),
+	FOREIGN KEY("ProfileModify_id") REFERENCES "ProfileModify" (id)
+);
+CREATE INDEX "ix_ProfileAlter_id" ON "ProfileAlter" (id);
+
+CREATE TABLE "CPRTDocument" (
+	id INTEGER NOT NULL,
+	response_id INTEGER,
+	PRIMARY KEY (id),
+	FOREIGN KEY(response_id) REFERENCES "CPRTResponse" (id)
+);
+CREATE INDEX "ix_CPRTDocument_id" ON "CPRTDocument" (id);
+
 CREATE TABLE "Selection_choice" (
 	"Selection_id" INTEGER,
 	choice TEXT,
 	PRIMARY KEY ("Selection_id", choice),
 	FOREIGN KEY("Selection_id") REFERENCES "Selection" (id)
 );
-CREATE INDEX "ix_Selection_choice_Selection_id" ON "Selection_choice" ("Selection_id");
 CREATE INDEX "ix_Selection_choice_choice" ON "Selection_choice" (choice);
-
-CREATE TABLE "SP80053Document" (
-	id INTEGER NOT NULL,
-	catalog_id INTEGER,
-	profile_id INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY(catalog_id) REFERENCES "CatalogBody" (id),
-	FOREIGN KEY(profile_id) REFERENCES "ProfileBody" (id)
-);
-CREATE INDEX "ix_SP80053Document_id" ON "SP80053Document" (id);
+CREATE INDEX "ix_Selection_choice_Selection_id" ON "Selection_choice" ("Selection_id");
 
 CREATE TABLE "Catalog" (
 	id INTEGER NOT NULL,
@@ -352,13 +416,20 @@ CREATE TABLE "Catalog" (
 );
 CREATE INDEX "ix_Catalog_id" ON "Catalog" (id);
 
-CREATE TABLE "ProfileDocument" (
+CREATE TABLE "ProfileBody" (
 	id INTEGER NOT NULL,
-	profile_id INTEGER,
+	uuid TEXT,
+	metadata_id INTEGER,
+	merge_id INTEGER,
+	modify_id INTEGER,
+	back_matter_id INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY(profile_id) REFERENCES "ProfileBody" (id)
+	FOREIGN KEY(metadata_id) REFERENCES "Metadata" (id),
+	FOREIGN KEY(merge_id) REFERENCES "MergeRules" (id),
+	FOREIGN KEY(modify_id) REFERENCES "ProfileModify" (id),
+	FOREIGN KEY(back_matter_id) REFERENCES "BackMatter" (id)
 );
-CREATE INDEX "ix_ProfileDocument_id" ON "ProfileDocument" (id);
+CREATE INDEX "ix_ProfileBody_id" ON "ProfileBody" (id);
 
 CREATE TABLE "Address" (
 	id INTEGER NOT NULL,
@@ -395,14 +466,15 @@ CREATE TABLE "ControlGroup" (
 );
 CREATE INDEX "ix_ControlGroup_uid" ON "ControlGroup" (uid);
 
-CREATE TABLE "ImportResource" (
+CREATE TABLE "ProfileAdd" (
 	id INTEGER NOT NULL,
-	href TEXT,
-	"ProfileBody_id" INTEGER,
+	position TEXT,
+	by_id TEXT,
+	"ProfileAlter_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY("ProfileBody_id") REFERENCES "ProfileBody" (id)
+	FOREIGN KEY("ProfileAlter_id") REFERENCES "ProfileAlter" (id)
 );
-CREATE INDEX "ix_ImportResource_id" ON "ImportResource" (id);
+CREATE INDEX "ix_ProfileAdd_id" ON "ProfileAdd" (id);
 
 CREATE TABLE "Party_email_addresses" (
 	"Party_id" INTEGER,
@@ -410,8 +482,8 @@ CREATE TABLE "Party_email_addresses" (
 	PRIMARY KEY ("Party_id", email_addresses),
 	FOREIGN KEY("Party_id") REFERENCES "Party" (id)
 );
-CREATE INDEX "ix_Party_email_addresses_email_addresses" ON "Party_email_addresses" (email_addresses);
 CREATE INDEX "ix_Party_email_addresses_Party_id" ON "Party_email_addresses" ("Party_id");
+CREATE INDEX "ix_Party_email_addresses_email_addresses" ON "Party_email_addresses" (email_addresses);
 
 CREATE TABLE "ResponsibleParty_party_uuids" (
 	"ResponsibleParty_id" INTEGER,
@@ -419,8 +491,28 @@ CREATE TABLE "ResponsibleParty_party_uuids" (
 	PRIMARY KEY ("ResponsibleParty_id", party_uuids),
 	FOREIGN KEY("ResponsibleParty_id") REFERENCES "ResponsibleParty" (id)
 );
-CREATE INDEX "ix_ResponsibleParty_party_uuids_party_uuids" ON "ResponsibleParty_party_uuids" (party_uuids);
 CREATE INDEX "ix_ResponsibleParty_party_uuids_ResponsibleParty_id" ON "ResponsibleParty_party_uuids" ("ResponsibleParty_id");
+CREATE INDEX "ix_ResponsibleParty_party_uuids_party_uuids" ON "ResponsibleParty_party_uuids" (party_uuids);
+
+CREATE TABLE "SP80053Document" (
+	id INTEGER NOT NULL,
+	catalog_id INTEGER,
+	profile_id INTEGER,
+	response_id INTEGER,
+	PRIMARY KEY (id),
+	FOREIGN KEY(catalog_id) REFERENCES "CatalogBody" (id),
+	FOREIGN KEY(profile_id) REFERENCES "ProfileBody" (id),
+	FOREIGN KEY(response_id) REFERENCES "CPRTResponse" (id)
+);
+CREATE INDEX "ix_SP80053Document_id" ON "SP80053Document" (id);
+
+CREATE TABLE "ProfileDocument" (
+	id INTEGER NOT NULL,
+	profile_id INTEGER,
+	PRIMARY KEY (id),
+	FOREIGN KEY(profile_id) REFERENCES "ProfileBody" (id)
+);
+CREATE INDEX "ix_ProfileDocument_id" ON "ProfileDocument" (id);
 
 CREATE TABLE "Control" (
 	uid INTEGER NOT NULL,
@@ -434,13 +526,14 @@ CREATE TABLE "Control" (
 );
 CREATE INDEX "ix_Control_uid" ON "Control" (uid);
 
-CREATE TABLE "IncludeControlsSelection" (
+CREATE TABLE "ImportResource" (
 	id INTEGER NOT NULL,
-	"ImportResource_id" INTEGER,
+	href TEXT,
+	"ProfileBody_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY("ImportResource_id") REFERENCES "ImportResource" (id)
+	FOREIGN KEY("ProfileBody_id") REFERENCES "ProfileBody" (id)
 );
-CREATE INDEX "ix_IncludeControlsSelection_id" ON "IncludeControlsSelection" (id);
+CREATE INDEX "ix_ImportResource_id" ON "ImportResource" (id);
 
 CREATE TABLE "Address_addr_lines" (
 	"Address_id" INTEGER,
@@ -448,8 +541,8 @@ CREATE TABLE "Address_addr_lines" (
 	PRIMARY KEY ("Address_id", addr_lines),
 	FOREIGN KEY("Address_id") REFERENCES "Address" (id)
 );
-CREATE INDEX "ix_Address_addr_lines_addr_lines" ON "Address_addr_lines" (addr_lines);
 CREATE INDEX "ix_Address_addr_lines_Address_id" ON "Address_addr_lines" ("Address_id");
+CREATE INDEX "ix_Address_addr_lines_addr_lines" ON "Address_addr_lines" (addr_lines);
 
 CREATE TABLE "ControlEnhancement" (
 	uid INTEGER NOT NULL,
@@ -465,17 +558,25 @@ CREATE TABLE "ControlEnhancement" (
 );
 CREATE INDEX "ix_ControlEnhancement_uid" ON "ControlEnhancement" (uid);
 
-CREATE TABLE "IncludeControlsSelection_with_ids" (
-	"IncludeControlsSelection_id" INTEGER,
-	with_ids TEXT,
-	PRIMARY KEY ("IncludeControlsSelection_id", with_ids),
-	FOREIGN KEY("IncludeControlsSelection_id") REFERENCES "IncludeControlsSelection" (id)
+CREATE TABLE "IncludeControlsSelection" (
+	id INTEGER NOT NULL,
+	"ImportResource_id" INTEGER,
+	PRIMARY KEY (id),
+	FOREIGN KEY("ImportResource_id") REFERENCES "ImportResource" (id)
 );
-CREATE INDEX "ix_IncludeControlsSelection_with_ids_with_ids" ON "IncludeControlsSelection_with_ids" (with_ids);
-CREATE INDEX "ix_IncludeControlsSelection_with_ids_IncludeControlsSelection_id" ON "IncludeControlsSelection_with_ids" ("IncludeControlsSelection_id");
+CREATE INDEX "ix_IncludeControlsSelection_id" ON "IncludeControlsSelection" (id);
+
+CREATE TABLE "ExcludeControlsSelection" (
+	id INTEGER NOT NULL,
+	"ImportResource_id" INTEGER,
+	PRIMARY KEY (id),
+	FOREIGN KEY("ImportResource_id") REFERENCES "ImportResource" (id)
+);
+CREATE INDEX "ix_ExcludeControlsSelection_id" ON "ExcludeControlsSelection" (id);
 
 CREATE TABLE "Parameter" (
 	uid INTEGER NOT NULL,
+	depends_on TEXT,
 	title TEXT,
 	class VARCHAR(20),
 	label TEXT,
@@ -489,6 +590,35 @@ CREATE TABLE "Parameter" (
 	FOREIGN KEY(select_id) REFERENCES "Selection" (id)
 );
 CREATE INDEX "ix_Parameter_uid" ON "Parameter" (uid);
+
+CREATE TABLE "ControlPattern" (
+	id INTEGER NOT NULL,
+	pattern TEXT,
+	"IncludeControlsSelection_id" INTEGER,
+	"ExcludeControlsSelection_id" INTEGER,
+	PRIMARY KEY (id),
+	FOREIGN KEY("IncludeControlsSelection_id") REFERENCES "IncludeControlsSelection" (id),
+	FOREIGN KEY("ExcludeControlsSelection_id") REFERENCES "ExcludeControlsSelection" (id)
+);
+CREATE INDEX "ix_ControlPattern_id" ON "ControlPattern" (id);
+
+CREATE TABLE "IncludeControlsSelection_with_ids" (
+	"IncludeControlsSelection_id" INTEGER,
+	with_ids TEXT,
+	PRIMARY KEY ("IncludeControlsSelection_id", with_ids),
+	FOREIGN KEY("IncludeControlsSelection_id") REFERENCES "IncludeControlsSelection" (id)
+);
+CREATE INDEX "ix_IncludeControlsSelection_with_ids_IncludeControlsSelection_id" ON "IncludeControlsSelection_with_ids" ("IncludeControlsSelection_id");
+CREATE INDEX "ix_IncludeControlsSelection_with_ids_with_ids" ON "IncludeControlsSelection_with_ids" (with_ids);
+
+CREATE TABLE "ExcludeControlsSelection_with_ids" (
+	"ExcludeControlsSelection_id" INTEGER,
+	with_ids TEXT,
+	PRIMARY KEY ("ExcludeControlsSelection_id", with_ids),
+	FOREIGN KEY("ExcludeControlsSelection_id") REFERENCES "ExcludeControlsSelection" (id)
+);
+CREATE INDEX "ix_ExcludeControlsSelection_with_ids_with_ids" ON "ExcludeControlsSelection_with_ids" (with_ids);
+CREATE INDEX "ix_ExcludeControlsSelection_with_ids_ExcludeControlsSelection_id" ON "ExcludeControlsSelection_with_ids" ("ExcludeControlsSelection_id");
 
 CREATE TABLE "Guideline" (
 	id INTEGER NOT NULL,
@@ -514,6 +644,7 @@ CREATE TABLE "Part" (
 	"ControlEnhancement_uid" INTEGER,
 	"Parameter_uid" INTEGER,
 	"Part_uid" INTEGER,
+	"ProfileAdd_id" INTEGER,
 	PRIMARY KEY (uid),
 	FOREIGN KEY("CatalogElement_uid") REFERENCES "CatalogElement" (uid),
 	FOREIGN KEY("IdentifiedElement_uid") REFERENCES "IdentifiedElement" (uid),
@@ -521,7 +652,8 @@ CREATE TABLE "Part" (
 	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
 	FOREIGN KEY("ControlEnhancement_uid") REFERENCES "ControlEnhancement" (uid),
 	FOREIGN KEY("Parameter_uid") REFERENCES "Parameter" (uid),
-	FOREIGN KEY("Part_uid") REFERENCES "Part" (uid)
+	FOREIGN KEY("Part_uid") REFERENCES "Part" (uid),
+	FOREIGN KEY("ProfileAdd_id") REFERENCES "ProfileAdd" (id)
 );
 CREATE INDEX "ix_Part_uid" ON "Part" (uid);
 
@@ -539,6 +671,7 @@ CREATE TABLE "Property" (
 	"ControlEnhancement_uid" INTEGER,
 	"Parameter_uid" INTEGER,
 	"Part_uid" INTEGER,
+	"ProfileAdd_id" INTEGER,
 	PRIMARY KEY (id),
 	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id),
 	FOREIGN KEY("CatalogElement_uid") REFERENCES "CatalogElement" (uid),
@@ -547,7 +680,8 @@ CREATE TABLE "Property" (
 	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
 	FOREIGN KEY("ControlEnhancement_uid") REFERENCES "ControlEnhancement" (uid),
 	FOREIGN KEY("Parameter_uid") REFERENCES "Parameter" (uid),
-	FOREIGN KEY("Part_uid") REFERENCES "Part" (uid)
+	FOREIGN KEY("Part_uid") REFERENCES "Part" (uid),
+	FOREIGN KEY("ProfileAdd_id") REFERENCES "ProfileAdd" (id)
 );
 CREATE INDEX "ix_Property_id" ON "Property" (id);
 

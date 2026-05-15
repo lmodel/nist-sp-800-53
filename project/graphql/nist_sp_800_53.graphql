@@ -1,10 +1,11 @@
-# metamodel_version: 1.7.0
+# metamodel_version: 1.11.0
 # version: 5.2.0
 enum CatalogElementClassValue
   {
     family
     SP800__HYPHEN_MINUS__53
     SP800__HYPHEN_MINUS__53__HYPHEN_MINUS__enhancement
+    assessment__HYPHEN_MINUS__objective
   }
 
 enum CatalogPropertyClassValue
@@ -12,6 +13,36 @@ enum CatalogPropertyClassValue
     sp800__HYPHEN_MINUS__53
     sp800__HYPHEN_MINUS__53a
     zero__HYPHEN_MINUS__padded
+  }
+
+enum CPRTElementTypeValue
+  {
+    family
+    control
+    control_enhancement
+    control_statement
+    discussion
+    odp
+    odp_type
+    odp_statement
+    examine
+    interview
+    test
+    determination
+    withdraw_reason
+    reference
+    security_baseline
+    privacy_baseline
+    sort
+    control_name_sort
+  }
+
+enum CPRTRelationshipTypeValue
+  {
+    projection
+    related
+    incorporated_into
+    moved_to
   }
 
 scalar Address
@@ -84,6 +115,20 @@ type ControlGroup
     controls: [Control]
   }
 
+scalar ControlPattern
+    pattern: String
+
+scalar CPRTDocument
+    response: CPRTResponse
+
+scalar CPRTResponse
+
+scalar ExcludeControlsSelection
+    with-ids: [String]
+    matching: [ControlPattern]
+
+scalar FlatMerge
+
 type Guideline
   {
     prose: String
@@ -103,9 +148,11 @@ type IdentifiedElement
 scalar ImportResource
     href: String
     include-controls: [IncludeControlsSelection]
+    exclude-controls: [ExcludeControlsSelection]
 
 scalar IncludeControlsSelection
     with-ids: [String]
+    matching: [ControlPattern]
 
 type Link
   {
@@ -115,6 +162,7 @@ type Link
 
 scalar MergeRules
     as-is: Boolean
+    flat: FlatMerge
 
 scalar Metadata
     title: String
@@ -129,8 +177,7 @@ scalar Metadata
     responsible-parties: [ResponsibleParty]
     remarks: String
 
-type Parameter
-  {
+scalar Parameter
     id: String
     props: [Property]
     links: [Link]
@@ -140,7 +187,7 @@ type Parameter
     label: String
     guidelines: [Guideline]
     select: Selection
-  }
+    depends-on: String
 
 type Part
   {
@@ -163,17 +210,36 @@ scalar Party
     email-addresses: [String]
     addresses: [Address]
 
+scalar ProfileAdd
+    position: String
+    by-id: String
+    parts: [Part]
+    props: [Property]
+
+scalar ProfileAlter
+    control-id: String
+    adds: [ProfileAdd]
+
 scalar ProfileBody
     uuid: String
     metadata: Metadata
     imports: [ImportResource]
     merge: MergeRules
+    modify: ProfileModify
     back-matter: BackMatter
 
 type ProfileDocument
   {
     profile: ProfileBody
   }
+
+scalar ProfileModify
+    set-parameters: [ProfileSetParameter]
+    alters: [ProfileAlter]
+
+scalar ProfileSetParameter
+    param-id: String
+    label: String
 
 type Property
   {
@@ -219,3 +285,4 @@ scalar Selection
 scalar SP80053Document
     catalog: CatalogBody
     profile: ProfileBody
+    response: CPRTResponse
