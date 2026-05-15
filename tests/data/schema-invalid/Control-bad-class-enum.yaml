@@ -1,0 +1,6 @@
+# Invalid: _class value "bad-control-class" is not in CatalogElementClassValue
+# (allowed: family, SP800-53, SP800-53-enhancement, assessment-objective)
+# Fix: change _class to SP800-53.
+id: AC-1
+title: Policy and Procedures
+class: bad-control-class

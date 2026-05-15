@@ -1,0 +1,6 @@
+# Invalid: _class value "not-a-valid-class" is not in CatalogPropertyClassValue
+# (allowed: sp800-53, sp800-53a, zero-padded)
+# Fix: change _class to one of the allowed enum values.
+name: sort
+value: "010101"
+class: not-a-valid-class

@@ -1,0 +1,213 @@
+id: cisco-cloud-rtr-fake
+title: Cisco-Cloud-Rtr-fake
+class: family
+props:
+- name: label
+  value: cisco-cloud-rtr-fake
+- name: component
+  value: Cisco-Cloud-Rtr-fake
+- name: source
+  value: https://github.com/GovReady/hyperGRC/tree/master/example/agencyapp
+groups:
+- id: au
+  title: Audit and Accountability
+  class: family
+  props:
+  - name: label
+    value: AU
+  controls:
+  - id: au-7
+    title: Audit Reduction And Report Generation
+    class: SP800-53
+    props:
+    - name: label
+      value: AU-7
+    - name: implementation-status
+      value: Planned
+    - name: security-control-type
+      value: Hybrid
+    parts:
+    - id: au-7_smt
+      name: statement
+      prose: Component organizational analysis information communicates assignment a. Default information
+        assessments system the. All flow incidents the. Information contingency the the the transfer.
+        Clearances insider mobile a enable. Frequency assignment to c reduce process. Top-Level a organization-defined
+        the attributes organization-defined of a. The sharing/collaboration and assessment personnel system.
+        Security and to with reported of or. System selection storage unsuccessful. Sc-4 verification
+        to. Prohibits updates to and. Implements 1 certificate assignment. Requirements e and. Assignment
+        certificates of develops individuals the system. Plan roles information includes updates system
+        a. Assignment control and b to explicitly. Tool system organization-defined the employs. Information
+        access guidance issues using assignment.
+- id: ma
+  title: Maintenance
+  class: family
+  props:
+  - name: label
+    value: MA
+  controls:
+  - id: ma-4
+    title: MA-4
+    class: SP800-53
+    props:
+    - name: label
+      value: MA-4
+    controls:
+    - id: ma-4.2
+      title: Document Nonlocal Maintenance
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: MA-4 (2)
+      - name: implementation-status
+        value: Inherited
+      - name: security-control-type
+        value: Hybrid
+      parts:
+      - id: ma-4.2_smt
+        name: statement
+        prose: Telecommunications the on-demand the of. The h credentials access updates facility. Disposal
+          information for on covert and for facilitate. Privileged the coupling 3)(c 1)(e 4. And frequency
+          4)(b)(2 privileges the 5)(a. The managed organization organization system. Capability employs
+          code the. And within organization and security the. Functions deficiencies makes information
+          the information. System the from unauthorized a information. Missions authorizations organization
+          the organization reviews the.
+- id: pl
+  title: Planning
+  class: family
+  props:
+  - name: label
+    value: PL
+  controls:
+  - id: pl-8
+    title: PL-8
+    class: SP800-53
+    props:
+    - name: label
+      value: PL-8
+    controls:
+    - id: pl-8.1
+      title: Defense-In-Depth
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: PL-8 (1)
+      - name: implementation-status
+        value: In Place
+      - name: security-control-type
+        value: Other
+      parts:
+      - id: pl-8.1_smt
+        name: statement
+        prose: Needs the cycle. Monitors inspects and. Internal and from system time filling access organization-defined.
+          Or physical to be. Flows flow in information are components policy system. Planning notification
+          to by. And service system failed. Acceptance the coordination provides and its. Implementation
+          the the access the. The allocates maintenance tasks the security assignment. Subjects software
+          to. And configurations sanitized a. Organization-Defined that control management implements.
+          Installed organization-defined addresses logs. Identifies system-wide ensures service roles.
+          Or exceptions or piv-i organization. D information system includes and date. And internet unusual
+          assignment. Reliability authorization organization a assets. Audit organization a the repositories
+          of environmental. The the procedures that facilities information are. Considerations the criteria
+          decisions hazards the.
+- id: sa
+  title: System and Services Acquisition
+  class: family
+  props:
+  - name: label
+    value: SA
+  controls:
+  - id: sa-15
+    title: SA-15
+    class: SP800-53
+    props:
+    - name: label
+      value: SA-15
+    controls:
+    - id: sa-15.4
+      title: Threat Modeling / Vulnerability Analysis
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: SA-15 (4)
+      - name: implementation-status
+        value: Partially In Place
+      - name: security-control-type
+        value: Hybrid
+      parts:
+      - id: sa-15.4_smt
+        name: statement
+        prose: The associated storage enforces security and the. The systems approved reviews personnel
+          security organization. B for using scheduled. Categories frequency the or 1)(a information information
+          information. The organization-defined of mail information enhance personnel maintenance. Or
+          information and. Organization policies tests assignment. In for have processing users. Information
+          common to assignment 4)(a requires organization-defined. The and system information the in off-loads
+          standards. And monitoring the by. Eliminate and organization-defined or. Controls controls assignment
+          be of remotely more. With service purging/wiping that. Organization the employs to mobile authorized.
+          Mechanisms entering an testing roles in. Systems firmware multifactor the accordance. Access
+          environments implements technology incidents system organization-defined. Read-Only organization-defined
+          information automated strategy interfaces. Takes system approved with have. Be in transfer the.
+          And the when the organization. Facility function security threats. And overlays mechanisms provides
+          integrity.
+- id: sc
+  title: System and Communications Protection
+  class: family
+  props:
+  - name: label
+    value: SC
+  controls:
+  - id: sc-5
+    title: SC-5
+    class: SP800-53
+    props:
+    - name: label
+      value: SC-5
+    controls:
+    - id: sc-5.1
+      title: Restrict Internal Users
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: SC-5 (1)
+      - name: implementation-status
+        value: Partially In Place
+      - name: security-control-type
+        value: Hybrid
+      parts:
+      - id: sc-5.1_smt
+        name: statement
+        prose: Of certificates authorization the changes implemented. Process reviews assignment receipt
+          policies the. Or implementation process the orders. Available of system the information.
+- id: si
+  title: System and Information Integrity
+  class: family
+  props:
+  - name: label
+    value: SI
+  controls:
+  - id: si-4
+    title: SI-4
+    class: SP800-53
+    props:
+    - name: label
+      value: SI-4
+    controls:
+    - id: si-4.9
+      title: Testing Of Monitoring Tools
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: SI-4 (9)
+      - name: implementation-status
+        value: Inherited
+      - name: security-control-type
+        value: Other
+      parts:
+      - id: si-4.9_smt
+        name: statement
+        prose: Power to multiple information have. Assignment integrity and are duration third-party.
+          Team authentication responds from organization security. Tests including information that among.
+          The records types. Installation accounts location organization detail a system. Read organization
+          organizational. Training operations to the software for the an. Security an of after reviews.
+          Security the organization-defined organization-wide random via the. Out-Of-Band initiates system
+          that monitoring the. Service up-to-date and the system a changes. Organization on organization-defined
+          mobile assessment without take storage. Functions/Mechanisms the of a. Sources f is information
+          recorded plan. Sanitization assurance planned by special detect that.

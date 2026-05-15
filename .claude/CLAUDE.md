@@ -47,7 +47,7 @@ The single source of truth is `src/nist_sp_800_53/schema/nist_sp_800_53.yaml` (L
 - `tests/test_data.py` — Parametrized pytest that validates YAML/JSON files under `tests/data/`
 - `tests/data/valid/` — Files expected to pass schema validation
 - `tests/data/invalid/` — Files expected to fail schema validation
-- `tests/data/nist/` — Official NIST OSCAL documents (catalog, LOW/MODERATE/HIGH/PRIVACY baseline profiles, resolved catalogs)
+- `tests/data/third-party/nist/` — Official NIST OSCAL documents (catalog, LOW/MODERATE/HIGH/PRIVACY baseline profiles, resolved catalogs)
 
 New schema elements require both valid and invalid example data before merging (see `CONTRIBUTING.md`).
 

@@ -1,0 +1,7 @@
+# Invalid: _class value "bad-part-class" is not in CatalogElementClassValue
+# (allowed: family, SP800-53, SP800-53-enhancement, assessment-objective)
+# Fix: change _class to assessment-objective.
+id: ac-1_smt.a-1
+name: assessment-objective
+prose: Determine if the organization develops and maintains an access control policy.
+class: bad-part-class

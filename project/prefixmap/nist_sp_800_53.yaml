@@ -1,6 +1,8 @@
 {
    "linkml": "https://w3id.org/linkml/",
    "nist_sp_800_53": "https://w3id.org/lmodel/nist-sp-800-53/",
+   "oscal_catalog": "https://w3id.org/lmodel/oscal_catalog/",
+   "oscal_profile": "https://w3id.org/lmodel/oscal_profile/",
    "Address": {
       "@id": "linkml:Any"
    },
@@ -11,6 +13,21 @@
       "@id": "linkml:Any"
    },
    "Citation": {
+      "@id": "linkml:Any"
+   },
+   "ControlPattern": {
+      "@id": "linkml:Any"
+   },
+   "CPRTDocument": {
+      "@id": "linkml:Any"
+   },
+   "CPRTResponse": {
+      "@id": "linkml:Any"
+   },
+   "ExcludeControlsSelection": {
+      "@id": "linkml:Any"
+   },
+   "FlatMerge": {
       "@id": "linkml:Any"
    },
    "ImportResource": {
@@ -25,10 +42,25 @@
    "Metadata": {
       "@id": "linkml:Any"
    },
+   "Parameter": {
+      "@id": "linkml:Any"
+   },
    "Party": {
       "@id": "linkml:Any"
    },
+   "ProfileAdd": {
+      "@id": "linkml:Any"
+   },
+   "ProfileAlter": {
+      "@id": "linkml:Any"
+   },
    "ProfileBody": {
+      "@id": "linkml:Any"
+   },
+   "ProfileModify": {
+      "@id": "linkml:Any"
+   },
+   "ProfileSetParameter": {
       "@id": "linkml:Any"
    },
    "Resource": {

@@ -1,0 +1,33 @@
+id: AC
+title: Access Control
+props:
+  - name: label
+    value: AC
+controls:
+  - id: AC-1
+    title: Policy and Procedures
+    params:
+      - id: ac-01_odp.01
+        label: frequency
+        guidelines:
+          - prose: Select a frequency appropriate to the organization's risk tolerance.
+        select:
+          how-many: one-or-more
+          choice:
+            - monthly
+            - quarterly
+            - annually
+    parts:
+      - id: ac-1_smt
+        name: statement
+        prose: Develop and maintain an access control policy.
+        parts:
+          - id: ac-1_smt.a
+            name: item
+            prose: "a. Address purpose, scope, roles, and responsibilities."
+  - id: AC-2
+    title: Account Management
+    parts:
+      - id: ac-2_smt
+        name: statement
+        prose: Manage information system accounts.

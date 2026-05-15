@@ -14,18 +14,37 @@ prefixes:
   nist_sp_800_53:
     prefix_prefix: nist_sp_800_53
     prefix_reference: https://w3id.org/lmodel/nist-sp-800-53/
+  oscal_catalog:
+    prefix_prefix: oscal_catalog
+    prefix_reference: https://w3id.org/lmodel/oscal_catalog/
+  oscal_profile:
+    prefix_prefix: oscal_profile
+    prefix_reference: https://w3id.org/lmodel/oscal_profile/
 default_prefix: nist_sp_800_53
 default_range: string
 subsets:
   nist_sp_800_53r5_catalog:
     name: nist_sp_800_53r5_catalog
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Catalog
-    description: NIST SP 800-53 Catalog subset for controls and assessment procedures
+    description: NIST SP 800-53 Rev 5 catalog subset for controls and assessment procedures
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
   nist_sp_800_53r5_profile:
     name: nist_sp_800_53r5_profile
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Profile
-    description: NIST SP 800-53 Profile subset for baselines and overlays
+    description: NIST SP 800-53 Rev 5 profile subset for baselines and overlays
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+  nist_sp_800_53r4_catalog:
+    name: nist_sp_800_53r4_catalog
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r4Catalog
+    description: NIST SP 800-53 Rev 4 backward-compatibility subset for catalog elements
+      present in OSCAL 1.2.x representations but removed in Rev 5 (e.g. depends-on
+      parameter dependency)
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+  nist_sp_800_53r5_cprt:
+    name: nist_sp_800_53r5_cprt
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Cprt
+    description: NIST CPRT (Cybersecurity and Privacy Reference Tool) export subset
+      covering SP 800-53, SP 800-53A, and SP 800-53B element and relationship data
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
 types:
   string:
@@ -34,8 +53,8 @@ types:
     description: A character string
     notes:
     - In RDF serializations, a slot with range of string is treated as a literal or
-      type xsd:string.   If you are authoring schemas in LinkML YAML, the type is
-      referenced with the lower case "string".
+      type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced
+      with the lower case "string".
     from_schema: https://w3id.org/linkml/types
     imported_from: linkml:types
     exact_mappings:
@@ -311,6 +330,8 @@ enums:
         text: SP800-53
       SP800-53-enhancement:
         text: SP800-53-enhancement
+      assessment-objective:
+        text: assessment-objective
   CatalogPropertyClassValue:
     name: CatalogPropertyClassValue
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/CatalogPropertyClassValue
@@ -325,6 +346,88 @@ enums:
         text: sp800-53a
       zero-padded:
         text: zero-padded
+  CPRTElementTypeValue:
+    name: CPRTElementTypeValue
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/CPRTElementTypeValue
+    description: Allowed element_type values in NIST CPRT export data
+    in_subset:
+    - nist_sp_800_53r5_cprt
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    permissible_values:
+      family:
+        text: family
+        description: SP 800-53 control family (e.g. AC, AU)
+      control:
+        text: control
+        description: Top-level security or privacy control (e.g. AC-1)
+      control_enhancement:
+        text: control_enhancement
+        description: Control enhancement (e.g. AC-1(1))
+      control_statement:
+        text: control_statement
+        description: Normative control statement text
+      discussion:
+        text: discussion
+        description: Non-normative discussion text for a control
+      odp:
+        text: odp
+        description: Organization-Defined Parameter
+      odp_type:
+        text: odp_type
+        description: ODP category (e.g. assignment, selection)
+      odp_statement:
+        text: odp_statement
+        description: Full ODP statement text
+      examine:
+        text: examine
+        description: SP 800-53A Examine assessment objective
+      interview:
+        text: interview
+        description: SP 800-53A Interview assessment objective
+      test:
+        text: test
+        description: SP 800-53A Test assessment objective
+      determination:
+        text: determination
+        description: Assessment determination criterion
+      withdraw_reason:
+        text: withdraw_reason
+        description: Reason a control was withdrawn from SP 800-53
+      reference:
+        text: reference
+        description: Informational reference to an external publication
+      security_baseline:
+        text: security_baseline
+        description: Security baseline designation (LOW / MODERATE / HIGH / NOT SELECTED)
+      privacy_baseline:
+        text: privacy_baseline
+        description: Privacy baseline designation (P-HIGH / NOT SELECTED)
+      sort:
+        text: sort
+        description: Sort-order key for display purposes
+      control_name_sort:
+        text: control_name_sort
+        description: Sort-order key for control name ordering
+  CPRTRelationshipTypeValue:
+    name: CPRTRelationshipTypeValue
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/CPRTRelationshipTypeValue
+    description: Relationship type identifiers used in NIST CPRT export data
+    in_subset:
+    - nist_sp_800_53r5_cprt
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    permissible_values:
+      projection:
+        text: projection
+        description: Represents a relationship between two elements
+      related:
+        text: related
+        description: Denotes where a control is related to another control
+      incorporated_into:
+        text: incorporated_into
+        description: Denotes where a withdrawn control was incorporated into another
+      moved_to:
+        text: moved_to
+        description: Denotes where a withdrawn control was moved to
 slots:
   catalog:
     name: catalog
@@ -333,6 +436,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:catalog
     slot_uri: nist_sp_800_53:catalog
     owner: Catalog
     domain_of:
@@ -348,6 +453,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_profile:profile
     slot_uri: nist_sp_800_53:profile
     owner: ProfileDocument
     domain_of:
@@ -364,6 +471,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:metadata
     slot_uri: nist_sp_800_53:metadata
     owner: ProfileBody
     domain_of:
@@ -379,6 +488,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:groups
     slot_uri: nist_sp_800_53:groups
     owner: ControlGroup
     domain_of:
@@ -395,6 +506,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:controls
     slot_uri: nist_sp_800_53:controls
     owner: ControlEnhancement
     domain_of:
@@ -412,6 +525,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:params
     slot_uri: nist_sp_800_53:params
     owner: ControlEnhancement
     domain_of:
@@ -428,11 +543,14 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:props
     slot_uri: nist_sp_800_53:props
-    owner: CatalogElement
+    owner: ProfileAdd
     domain_of:
     - Metadata
     - CatalogElement
+    - ProfileAdd
     range: Property
     multivalued: true
     inlined: true
@@ -444,6 +562,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:guidelines
     slot_uri: nist_sp_800_53:guidelines
     owner: Parameter
     domain_of:
@@ -459,6 +579,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:links
     slot_uri: nist_sp_800_53:links
     owner: CatalogElement
     domain_of:
@@ -476,10 +598,13 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:parts
     slot_uri: nist_sp_800_53:parts
-    owner: CatalogElement
+    owner: ProfileAdd
     domain_of:
     - CatalogElement
+    - ProfileAdd
     range: Part
     multivalued: true
     inlined: true
@@ -491,6 +616,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:select
     slot_uri: nist_sp_800_53:select
     owner: Parameter
     domain_of:
@@ -506,6 +633,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:id
     slot_uri: nist_sp_800_53:id
     owner: CatalogElement
     domain_of:
@@ -520,6 +649,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:uuid
     slot_uri: nist_sp_800_53:uuid
     owner: Resource
     domain_of:
@@ -536,6 +667,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:title
     slot_uri: nist_sp_800_53:title
     owner: IdentifiedElement
     domain_of:
@@ -553,6 +686,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:version
     slot_uri: nist_sp_800_53:version
     owner: Revision
     domain_of:
@@ -569,6 +704,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - last_modified
+    exact_mappings:
+    - oscal_catalog:last-modified
     slot_uri: nist_sp_800_53:last_modified
     owner: Revision
     domain_of:
@@ -585,6 +722,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - oscal_version
+    exact_mappings:
+    - oscal_catalog:oscal-version
     slot_uri: nist_sp_800_53:oscal_version
     owner: Revision
     domain_of:
@@ -598,6 +737,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:_class
     slot_uri: nist_sp_800_53:class
     alias: class
     owner: Property
@@ -612,10 +753,13 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:label
     slot_uri: nist_sp_800_53:label
-    owner: IdentifiedElement
+    owner: ProfileSetParameter
     domain_of:
     - IdentifiedElement
+    - ProfileSetParameter
     range: string
   name:
     name: name
@@ -625,6 +769,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:name
     slot_uri: nist_sp_800_53:name
     owner: Part
     domain_of:
@@ -639,6 +785,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:value
     slot_uri: nist_sp_800_53:value
     owner: Property
     domain_of:
@@ -651,6 +799,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:ns
     slot_uri: nist_sp_800_53:ns
     owner: Property
     domain_of:
@@ -663,6 +813,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:prose
     slot_uri: nist_sp_800_53:prose
     owner: Part
     domain_of:
@@ -676,6 +828,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:remarks
     slot_uri: nist_sp_800_53:remarks
     owner: Revision
     domain_of:
@@ -689,6 +843,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:revisions
     slot_uri: nist_sp_800_53:revisions
     owner: Metadata
     domain_of:
@@ -705,6 +861,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:roles
     slot_uri: nist_sp_800_53:roles
     owner: Metadata
     domain_of:
@@ -721,6 +879,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:parties
     slot_uri: nist_sp_800_53:parties
     owner: Metadata
     domain_of:
@@ -739,6 +899,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - responsible_parties
+    exact_mappings:
+    - oscal_catalog:responsible-parties
     slot_uri: nist_sp_800_53:responsible_parties
     owner: Metadata
     domain_of:
@@ -757,6 +919,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - role_id
+    exact_mappings:
+    - oscal_catalog:role-id
     slot_uri: nist_sp_800_53:role_id
     owner: ResponsibleParty
     domain_of:
@@ -772,6 +936,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - party_uuids
+    exact_mappings:
+    - oscal_catalog:party-uuids
     slot_uri: nist_sp_800_53:party_uuids
     owner: ResponsibleParty
     domain_of:
@@ -786,6 +952,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:type
     slot_uri: nist_sp_800_53:type
     owner: Party
     domain_of:
@@ -801,6 +969,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - short_name
+    exact_mappings:
+    - oscal_catalog:short-name
     slot_uri: nist_sp_800_53:short_name
     owner: Party
     domain_of:
@@ -816,6 +986,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - email_addresses
+    exact_mappings:
+    - oscal_catalog:email-addresses
     slot_uri: nist_sp_800_53:email_addresses
     owner: Party
     domain_of:
@@ -830,6 +1002,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:addresses
     slot_uri: nist_sp_800_53:addresses
     owner: Party
     domain_of:
@@ -848,6 +1022,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - addr_lines
+    exact_mappings:
+    - oscal_catalog:addr-lines
     slot_uri: nist_sp_800_53:addr_lines
     owner: Address
     domain_of:
@@ -862,6 +1038,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:city
     slot_uri: nist_sp_800_53:city
     owner: Address
     domain_of:
@@ -875,6 +1053,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:state
     slot_uri: nist_sp_800_53:state
     owner: Address
     domain_of:
@@ -890,6 +1070,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - postal_code
+    exact_mappings:
+    - oscal_catalog:postal-code
     slot_uri: nist_sp_800_53:postal_code
     owner: Address
     domain_of:
@@ -902,6 +1084,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_profile:imports
     slot_uri: nist_sp_800_53:imports
     owner: ProfileBody
     domain_of:
@@ -917,6 +1101,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_profile:merge
     slot_uri: nist_sp_800_53:merge
     owner: ProfileBody
     domain_of:
@@ -934,6 +1120,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - back_matter
+    exact_mappings:
+    - oscal_catalog:back-matter
     slot_uri: nist_sp_800_53:back_matter
     owner: ProfileBody
     domain_of:
@@ -950,6 +1138,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:resources
     slot_uri: nist_sp_800_53:resources
     owner: BackMatter
     domain_of:
@@ -965,6 +1155,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:citation
     slot_uri: nist_sp_800_53:citation
     owner: Resource
     domain_of:
@@ -979,6 +1171,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:text
     slot_uri: nist_sp_800_53:text
     owner: Citation
     domain_of:
@@ -991,6 +1185,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:description
     slot_uri: nist_sp_800_53:description
     owner: Resource
     domain_of:
@@ -1004,6 +1200,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:rlinks
     slot_uri: nist_sp_800_53:rlinks
     owner: Resource
     domain_of:
@@ -1022,6 +1220,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - media_type
+    exact_mappings:
+    - oscal_catalog:media-type
     slot_uri: nist_sp_800_53:media_type
     owner: ResourceLink
     domain_of:
@@ -1035,6 +1235,8 @@ slots:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:href
     slot_uri: nist_sp_800_53:href
     owner: ImportResource
     domain_of:
@@ -1049,6 +1251,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:rel
     slot_uri: nist_sp_800_53:rel
     owner: Link
     domain_of:
@@ -1063,6 +1267,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - include_controls
+    exact_mappings:
+    - oscal_catalog:include-controls
     slot_uri: nist_sp_800_53:include_controls
     owner: ImportResource
     domain_of:
@@ -1080,10 +1286,13 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - with_ids
+    exact_mappings:
+    - oscal_catalog:with-ids
     slot_uri: nist_sp_800_53:with_ids
-    owner: IncludeControlsSelection
+    owner: ExcludeControlsSelection
     domain_of:
     - IncludeControlsSelection
+    - ExcludeControlsSelection
     range: string
     multivalued: true
   as-is:
@@ -1095,6 +1304,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - as_is
+    exact_mappings:
+    - oscal_profile:as-is
     slot_uri: nist_sp_800_53:as_is
     owner: MergeRules
     domain_of:
@@ -1109,6 +1320,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
     aliases:
     - how_many
+    exact_mappings:
+    - oscal_catalog:how-many
     slot_uri: nist_sp_800_53:how_many
     owner: Selection
     domain_of:
@@ -1121,12 +1334,246 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:choice
     slot_uri: nist_sp_800_53:choice
     owner: Selection
     domain_of:
     - Selection
     range: string
     multivalued: true
+  depends-on:
+    name: depends-on
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/depends_on
+    description: Identifier of another parameter this one depends on (SP 800-53 Rev
+      4 only)
+    in_subset:
+    - nist_sp_800_53r4_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - depends_on
+    exact_mappings:
+    - oscal_catalog:depends-on
+    slot_uri: nist_sp_800_53:depends_on
+    owner: Parameter
+    domain_of:
+    - Parameter
+    range: string
+  flat:
+    name: flat
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/flat
+    description: "Flat merge strategy \u2014 de-duplicate and merge all controls without\
+      \ source hierarchy"
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_profile:flat
+    slot_uri: nist_sp_800_53:flat
+    owner: MergeRules
+    domain_of:
+    - MergeRules
+    range: FlatMerge
+    inlined: true
+    inlined_as_list: true
+  exclude-controls:
+    name: exclude-controls
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/exclude_controls
+    description: Controls to explicitly exclude from an import
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - exclude_controls
+    exact_mappings:
+    - oscal_catalog:exclude-controls
+    slot_uri: nist_sp_800_53:exclude_controls
+    owner: ImportResource
+    domain_of:
+    - ImportResource
+    range: ExcludeControlsSelection
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  matching:
+    name: matching
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/matching
+    description: Pattern-based control selectors using glob or regex patterns
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:matching
+    slot_uri: nist_sp_800_53:matching
+    owner: ExcludeControlsSelection
+    domain_of:
+    - IncludeControlsSelection
+    - ExcludeControlsSelection
+    range: ControlPattern
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  pattern:
+    name: pattern
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/pattern
+    description: Glob or regex pattern for matching control identifiers
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:pattern
+    slot_uri: nist_sp_800_53:pattern
+    owner: ControlPattern
+    domain_of:
+    - ControlPattern
+    range: string
+  modify:
+    name: modify
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/modify
+    description: "Profile modification directives \u2014 parameter overrides and control\
+      \ alterations"
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_profile:modify
+    slot_uri: nist_sp_800_53:modify
+    owner: ProfileBody
+    domain_of:
+    - ProfileBody
+    range: ProfileModify
+    inlined: true
+    inlined_as_list: true
+  set-parameters:
+    name: set-parameters
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/set_parameters
+    description: Parameter value overrides applied by the profile
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - set_parameters
+    exact_mappings:
+    - oscal_profile:set-parameters
+    slot_uri: nist_sp_800_53:set_parameters
+    owner: ProfileModify
+    domain_of:
+    - ProfileModify
+    range: ProfileSetParameter
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  alters:
+    name: alters
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/alters
+    description: "Control alterations \u2014 add or remove parts from referenced controls"
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_profile:alters
+    slot_uri: nist_sp_800_53:alters
+    owner: ProfileModify
+    domain_of:
+    - ProfileModify
+    range: ProfileAlter
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  adds:
+    name: adds
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/adds
+    description: Parts, parameters, or properties added to a control by an alteration
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_profile:adds
+    slot_uri: nist_sp_800_53:adds
+    owner: ProfileAlter
+    domain_of:
+    - ProfileAlter
+    range: ProfileAdd
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  param-id:
+    name: param-id
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/param_id
+    description: Identifier of the parameter to be set
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - param_id
+    exact_mappings:
+    - oscal_catalog:param-id
+    slot_uri: nist_sp_800_53:param_id
+    owner: ProfileSetParameter
+    domain_of:
+    - ProfileSetParameter
+    range: string
+  control-id:
+    name: control-id
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/control_id
+    description: Identifier of the control to alter
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - control_id
+    exact_mappings:
+    - oscal_catalog:control-id
+    slot_uri: nist_sp_800_53:control_id
+    owner: ProfileAlter
+    domain_of:
+    - ProfileAlter
+    range: string
+  position:
+    name: position
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/position
+    description: Position at which to add content relative to the by-id anchor
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_profile:position
+    slot_uri: nist_sp_800_53:position
+    owner: ProfileAdd
+    domain_of:
+    - ProfileAdd
+    range: string
+  by-id:
+    name: by-id
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/by_id
+    description: Identifier of the anchor part relative to which additions are positioned
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    aliases:
+    - by_id
+    exact_mappings:
+    - oscal_profile:by-id
+    slot_uri: nist_sp_800_53:by_id
+    owner: ProfileAdd
+    domain_of:
+    - ProfileAdd
+    range: string
+  response:
+    name: response
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/response
+    description: Top-level CPRT API response wrapper
+    in_subset:
+    - nist_sp_800_53r5_cprt
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    slot_uri: nist_sp_800_53:response
+    owner: CPRTDocument
+    domain_of:
+    - SP80053Document
+    - CPRTDocument
+    range: CPRTResponse
+    inlined: true
+    inlined_as_list: true
   IdentifiedElement__class:
     name: IdentifiedElement__class
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/_class
@@ -1134,6 +1581,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:_class
     is_a: _class
     domain: IdentifiedElement
     slot_uri: nist_sp_800_53:class
@@ -1151,6 +1600,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:controls
     is_a: controls
     domain: Control
     slot_uri: nist_sp_800_53:controls
@@ -1171,6 +1622,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:controls
     is_a: controls
     domain: ControlEnhancement
     slot_uri: nist_sp_800_53:controls
@@ -1191,6 +1644,8 @@ slots:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - oscal_catalog:_class
     is_a: _class
     domain: Property
     slot_uri: nist_sp_800_53:class
@@ -1205,16 +1660,18 @@ classes:
   SP80053Document:
     name: SP80053Document
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/SP80053Document
-    description: Unified root wrapper for catalog or profile content
+    description: Unified root wrapper for catalog, profile, or CPRT content
     in_subset:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_cprt
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
     slots:
     - catalog
     - profile
+    - response
     class_uri: linkml:Any
     tree_root: true
   Catalog:
@@ -1224,6 +1681,10 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:Catalog
+    close_mappings:
+    - oscal_catalog:CatalogDocument
     slots:
     - catalog
     class_uri: nist_sp_800_53:Catalog
@@ -1234,6 +1695,9 @@ classes:
     in_subset:
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:ProfileDocument
+    - oscal_profile:ProfileDocument
     slots:
     - profile
     class_uri: nist_sp_800_53:ProfileDocument
@@ -1244,8 +1708,9 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    - oscal_catalog:Catalog
     slots:
     - uuid
     - metadata
@@ -1259,13 +1724,15 @@ classes:
     in_subset:
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    - oscal_profile:Profile
     slots:
     - uuid
     - metadata
     - imports
     - merge
+    - modify
     - back-matter
     class_uri: linkml:Any
   Metadata:
@@ -1276,8 +1743,10 @@ classes:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    close_mappings:
+    - oscal_catalog:Metadata
     slots:
     - title
     - last-modified
@@ -1298,8 +1767,10 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    close_mappings:
+    - oscal_catalog:Revision
     slots:
     - title
     - last-modified
@@ -1316,6 +1787,10 @@ classes:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:Role
+    close_mappings:
+    - oscal_catalog:Role
     slots:
     - id
     - title
@@ -1328,8 +1803,10 @@ classes:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    close_mappings:
+    - oscal_catalog:Party
     slots:
     - uuid
     - type
@@ -1346,8 +1823,10 @@ classes:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    close_mappings:
+    - oscal_catalog:Address
     slots:
     - addr-lines
     - city
@@ -1362,8 +1841,9 @@ classes:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    - oscal_catalog:ResponsibleParty
     slots:
     - role-id
     - party-uuids
@@ -1376,8 +1856,9 @@ classes:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    - oscal_catalog:BackMatter
     slots:
     - resources
     class_uri: linkml:Any
@@ -1389,8 +1870,10 @@ classes:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    close_mappings:
+    - oscal_catalog:Resource
     slots:
     - uuid
     - title
@@ -1405,8 +1888,9 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    - oscal_catalog:Citation
     slots:
     - text
     class_uri: linkml:Any
@@ -1418,8 +1902,10 @@ classes:
     - nist_sp_800_53r5_catalog
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    close_mappings:
+    - oscal_catalog:ResourceLink
     slots:
     - href
     - media-type
@@ -1431,6 +1917,8 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:CatalogElement
     abstract: true
     slots:
     - id
@@ -1445,6 +1933,8 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:IdentifiedElement
     is_a: CatalogElement
     slots:
     - id
@@ -1466,6 +1956,9 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:ControlGroup
+    - oscal_catalog:Group
     is_a: IdentifiedElement
     slots:
     - id
@@ -1485,6 +1978,10 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:Control
+    close_mappings:
+    - oscal_catalog:Control
     is_a: IdentifiedElement
     slots:
     - id
@@ -1508,6 +2005,10 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:ControlEnhancement
+    close_mappings:
+    - oscal_catalog:Control
     is_a: IdentifiedElement
     slots:
     - id
@@ -1530,7 +2031,12 @@ classes:
     description: A configurable parameter used by a control
     in_subset:
     - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r4_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - linkml:Any
+    close_mappings:
+    - oscal_catalog:Parameter
     is_a: IdentifiedElement
     slots:
     - id
@@ -1542,7 +2048,8 @@ classes:
     - label
     - guidelines
     - select
-    class_uri: nist_sp_800_53:Parameter
+    - depends-on
+    class_uri: linkml:Any
   Guideline:
     name: Guideline
     definition_uri: https://w3id.org/lmodel/nist-sp-800-53/Guideline
@@ -1550,6 +2057,9 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:Guideline
+    - oscal_catalog:ParameterGuideline
     slots:
     - prose
     class_uri: nist_sp_800_53:Guideline
@@ -1560,6 +2070,10 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:Property
+    close_mappings:
+    - oscal_catalog:Property
     slots:
     - name
     - value
@@ -1577,8 +2091,9 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    - oscal_catalog:ParameterSelection
     slots:
     - how-many
     - choice
@@ -1590,6 +2105,10 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:Link
+    close_mappings:
+    - oscal_catalog:Link
     slots:
     - href
     - rel
@@ -1601,6 +2120,10 @@ classes:
     in_subset:
     - nist_sp_800_53r5_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - nist_sp_800_53:Part
+    close_mappings:
+    - oscal_catalog:Part
     is_a: IdentifiedElement
     slots:
     - id
@@ -1620,11 +2143,13 @@ classes:
     in_subset:
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    - oscal_profile:ProfileImport
     slots:
     - href
     - include-controls
+    - exclude-controls
     class_uri: linkml:Any
   IncludeControlsSelection:
     name: IncludeControlsSelection
@@ -1633,10 +2158,13 @@ classes:
     in_subset:
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    close_mappings:
+    - oscal_catalog:SelectControlById
     slots:
     - with-ids
+    - matching
     class_uri: linkml:Any
   MergeRules:
     name: MergeRules
@@ -1645,14 +2173,140 @@ classes:
     in_subset:
     - nist_sp_800_53r5_profile
     from_schema: https://w3id.org/lmodel/nist-sp-800-53
-    mappings:
+    exact_mappings:
     - linkml:Any
+    - oscal_profile:ProfileMerge
     slots:
     - as-is
+    - flat
     class_uri: linkml:Any
-metamodel_version: 1.7.0
+  FlatMerge:
+    name: FlatMerge
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/FlatMerge
+    description: Marker object indicating flat merge strategy for profile resolution
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - linkml:Any
+    - oscal_profile:MergeFlat
+    class_uri: linkml:Any
+  ControlPattern:
+    name: ControlPattern
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ControlPattern
+    description: Glob or regex pattern for selecting controls by identifier
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - linkml:Any
+    - oscal_catalog:ControlMatching
+    slots:
+    - pattern
+    class_uri: linkml:Any
+  ExcludeControlsSelection:
+    name: ExcludeControlsSelection
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ExcludeControlsSelection
+    description: Selection of controls to explicitly exclude from a profile import
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - linkml:Any
+    close_mappings:
+    - oscal_catalog:SelectControlById
+    slots:
+    - with-ids
+    - matching
+    class_uri: linkml:Any
+  ProfileModify:
+    name: ProfileModify
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ProfileModify
+    description: Profile modification section containing parameter overrides and control
+      alterations
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - linkml:Any
+    - oscal_profile:ProfileModify
+    slots:
+    - set-parameters
+    - alters
+    class_uri: linkml:Any
+  ProfileSetParameter:
+    name: ProfileSetParameter
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ProfileSetParameter
+    description: Override the value of a parameter in a referenced control
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - linkml:Any
+    - oscal_profile:ParameterSetting
+    slots:
+    - param-id
+    - label
+    class_uri: linkml:Any
+  ProfileAlter:
+    name: ProfileAlter
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ProfileAlter
+    description: "Alteration to a referenced control \u2014 adds or removes parts"
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - linkml:Any
+    - oscal_profile:Alteration
+    slots:
+    - control-id
+    - adds
+    class_uri: linkml:Any
+  ProfileAdd:
+    name: ProfileAdd
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/ProfileAdd
+    description: Content to be added to a control via profile alteration
+    in_subset:
+    - nist_sp_800_53r5_profile
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - linkml:Any
+    - oscal_profile:Addition
+    slots:
+    - position
+    - by-id
+    - parts
+    - props
+    class_uri: linkml:Any
+  CPRTDocument:
+    name: CPRTDocument
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/CPRTDocument
+    description: 'Semantic class for NIST CPRT (Cybersecurity and Privacy Reference
+      Tool) export documents covering SP 800-53, SP 800-53A, and SP 800-53B. Validate
+      with: linkml validate -C SP80053Document -s <schema> <file.json>'
+    in_subset:
+    - nist_sp_800_53r5_cprt
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - linkml:Any
+    slots:
+    - response
+    class_uri: linkml:Any
+  CPRTResponse:
+    name: CPRTResponse
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-53/CPRTResponse
+    description: CPRT API response container holding document metadata, typed elements
+      (controls, enhancements, ODPs, assessment objectives, baselines), relationship
+      types, and element relationships
+    in_subset:
+    - nist_sp_800_53r5_cprt
+    from_schema: https://w3id.org/lmodel/nist-sp-800-53
+    exact_mappings:
+    - linkml:Any
+    class_uri: linkml:Any
+metamodel_version: 1.11.0
 source_file: nist_sp_800_53.yaml
-source_file_date: '2026-03-21T00:04:48'
-source_file_size: 16106
-generation_date: '2026-04-12T02:13:25'
+source_file_date: '2026-05-15T08:54:43'
+source_file_size: 28118
+generation_date: '2026-05-15T10:26:08'
 

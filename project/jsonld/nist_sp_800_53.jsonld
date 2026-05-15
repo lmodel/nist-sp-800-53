@@ -16,6 +16,14 @@
     {
       "prefix_prefix": "nist_sp_800_53",
       "prefix_reference": "https://w3id.org/lmodel/nist-sp-800-53/"
+    },
+    {
+      "prefix_prefix": "oscal_catalog",
+      "prefix_reference": "https://w3id.org/lmodel/oscal_catalog/"
+    },
+    {
+      "prefix_prefix": "oscal_profile",
+      "prefix_reference": "https://w3id.org/lmodel/oscal_profile/"
     }
   ],
   "default_prefix": "nist_sp_800_53",
@@ -24,14 +32,28 @@
     {
       "name": "nist_sp_800_53r5_catalog",
       "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Catalog",
-      "description": "NIST SP 800-53 Catalog subset for controls and assessment procedures",
+      "description": "NIST SP 800-53 Rev 5 catalog subset for controls and assessment procedures",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "@type": "SubsetDefinition"
     },
     {
       "name": "nist_sp_800_53r5_profile",
       "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Profile",
-      "description": "NIST SP 800-53 Profile subset for baselines and overlays",
+      "description": "NIST SP 800-53 Rev 5 profile subset for baselines and overlays",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "@type": "SubsetDefinition"
+    },
+    {
+      "name": "nist_sp_800_53r4_catalog",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r4Catalog",
+      "description": "NIST SP 800-53 Rev 4 backward-compatibility subset for catalog elements present in OSCAL 1.2.x representations but removed in Rev 5 (e.g. depends-on parameter dependency)",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "@type": "SubsetDefinition"
+    },
+    {
+      "name": "nist_sp_800_53r5_cprt",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Cprt",
+      "description": "NIST CPRT (Cybersecurity and Privacy Reference Tool) export subset covering SP 800-53, SP 800-53A, and SP 800-53B element and relationship data",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "@type": "SubsetDefinition"
     }
@@ -42,7 +64,7 @@
       "definition_uri": "https://w3id.org/linkml/String",
       "description": "A character string",
       "notes": [
-        "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string.   If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"."
+        "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"."
       ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
@@ -364,6 +386,9 @@
         },
         {
           "text": "SP800-53-enhancement"
+        },
+        {
+          "text": "assessment-objective"
         }
       ]
     },
@@ -386,6 +411,116 @@
           "text": "zero-padded"
         }
       ]
+    },
+    {
+      "name": "CPRTElementTypeValue",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CPRTElementTypeValue",
+      "description": "Allowed element_type values in NIST CPRT export data",
+      "in_subset": [
+        "nist_sp_800_53r5_cprt"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "permissible_values": [
+        {
+          "text": "family",
+          "description": "SP 800-53 control family (e.g. AC, AU)"
+        },
+        {
+          "text": "control",
+          "description": "Top-level security or privacy control (e.g. AC-1)"
+        },
+        {
+          "text": "control_enhancement",
+          "description": "Control enhancement (e.g. AC-1(1))"
+        },
+        {
+          "text": "control_statement",
+          "description": "Normative control statement text"
+        },
+        {
+          "text": "discussion",
+          "description": "Non-normative discussion text for a control"
+        },
+        {
+          "text": "odp",
+          "description": "Organization-Defined Parameter"
+        },
+        {
+          "text": "odp_type",
+          "description": "ODP category (e.g. assignment, selection)"
+        },
+        {
+          "text": "odp_statement",
+          "description": "Full ODP statement text"
+        },
+        {
+          "text": "examine",
+          "description": "SP 800-53A Examine assessment objective"
+        },
+        {
+          "text": "interview",
+          "description": "SP 800-53A Interview assessment objective"
+        },
+        {
+          "text": "test",
+          "description": "SP 800-53A Test assessment objective"
+        },
+        {
+          "text": "determination",
+          "description": "Assessment determination criterion"
+        },
+        {
+          "text": "withdraw_reason",
+          "description": "Reason a control was withdrawn from SP 800-53"
+        },
+        {
+          "text": "reference",
+          "description": "Informational reference to an external publication"
+        },
+        {
+          "text": "security_baseline",
+          "description": "Security baseline designation (LOW / MODERATE / HIGH / NOT SELECTED)"
+        },
+        {
+          "text": "privacy_baseline",
+          "description": "Privacy baseline designation (P-HIGH / NOT SELECTED)"
+        },
+        {
+          "text": "sort",
+          "description": "Sort-order key for display purposes"
+        },
+        {
+          "text": "control_name_sort",
+          "description": "Sort-order key for control name ordering"
+        }
+      ]
+    },
+    {
+      "name": "CPRTRelationshipTypeValue",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CPRTRelationshipTypeValue",
+      "description": "Relationship type identifiers used in NIST CPRT export data",
+      "in_subset": [
+        "nist_sp_800_53r5_cprt"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "permissible_values": [
+        {
+          "text": "projection",
+          "description": "Represents a relationship between two elements"
+        },
+        {
+          "text": "related",
+          "description": "Denotes where a control is related to another control"
+        },
+        {
+          "text": "incorporated_into",
+          "description": "Denotes where a withdrawn control was incorporated into another"
+        },
+        {
+          "text": "moved_to",
+          "description": "Denotes where a withdrawn control was moved to"
+        }
+      ]
     }
   ],
   "slots": [
@@ -397,6 +532,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/catalog"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/catalog",
       "owner": "Catalog",
       "domain_of": [
@@ -416,6 +554,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_profile/profile"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/profile",
       "owner": "ProfileDocument",
       "domain_of": [
@@ -436,6 +577,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/metadata"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/metadata",
       "owner": "ProfileBody",
       "domain_of": [
@@ -455,6 +599,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/groups"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/groups",
       "owner": "ControlGroup",
       "domain_of": [
@@ -475,6 +622,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/controls"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/controls",
       "owner": "ControlEnhancement",
       "domain_of": [
@@ -496,6 +646,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/params"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/params",
       "owner": "ControlEnhancement",
       "domain_of": [
@@ -516,11 +669,15 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/props"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/props",
-      "owner": "CatalogElement",
+      "owner": "ProfileAdd",
       "domain_of": [
         "Metadata",
-        "CatalogElement"
+        "CatalogElement",
+        "ProfileAdd"
       ],
       "range": "Property",
       "multivalued": true,
@@ -536,6 +693,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/guidelines"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/guidelines",
       "owner": "Parameter",
       "domain_of": [
@@ -555,6 +715,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/links"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/links",
       "owner": "CatalogElement",
       "domain_of": [
@@ -576,10 +739,14 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/parts"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/parts",
-      "owner": "CatalogElement",
+      "owner": "ProfileAdd",
       "domain_of": [
-        "CatalogElement"
+        "CatalogElement",
+        "ProfileAdd"
       ],
       "range": "Part",
       "multivalued": true,
@@ -595,6 +762,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/select"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/select",
       "owner": "Parameter",
       "domain_of": [
@@ -614,6 +784,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/id"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/id",
       "owner": "CatalogElement",
       "domain_of": [
@@ -632,6 +805,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/uuid"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/uuid",
       "owner": "Resource",
       "domain_of": [
@@ -652,6 +828,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/title"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/title",
       "owner": "IdentifiedElement",
       "domain_of": [
@@ -673,6 +852,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/version"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/version",
       "owner": "Revision",
       "domain_of": [
@@ -693,6 +875,9 @@
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "aliases": [
         "last_modified"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/last-modified"
       ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/last_modified",
       "owner": "Revision",
@@ -715,6 +900,9 @@
       "aliases": [
         "oscal_version"
       ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/oscal-version"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/oscal_version",
       "owner": "Revision",
       "domain_of": [
@@ -732,6 +920,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/_class"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/class",
       "alias": "class",
       "owner": "Property",
@@ -750,10 +941,14 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/label"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/label",
-      "owner": "IdentifiedElement",
+      "owner": "ProfileSetParameter",
       "domain_of": [
-        "IdentifiedElement"
+        "IdentifiedElement",
+        "ProfileSetParameter"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -767,6 +962,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/name"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/name",
       "owner": "Part",
       "domain_of": [
@@ -785,6 +983,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/value"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/value",
       "owner": "Property",
       "domain_of": [
@@ -801,6 +1002,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/ns"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/ns",
       "owner": "Property",
       "domain_of": [
@@ -817,6 +1021,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/prose"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/prose",
       "owner": "Part",
       "domain_of": [
@@ -834,6 +1041,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/remarks"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/remarks",
       "owner": "Revision",
       "domain_of": [
@@ -851,6 +1061,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/revisions"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/revisions",
       "owner": "Metadata",
       "domain_of": [
@@ -871,6 +1084,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/roles"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/roles",
       "owner": "Metadata",
       "domain_of": [
@@ -891,6 +1107,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/parties"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/parties",
       "owner": "Metadata",
       "domain_of": [
@@ -913,6 +1132,9 @@
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "aliases": [
         "responsible_parties"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/responsible-parties"
       ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/responsible_parties",
       "owner": "Metadata",
@@ -937,6 +1159,9 @@
       "aliases": [
         "role_id"
       ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/role-id"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/role_id",
       "owner": "ResponsibleParty",
       "domain_of": [
@@ -957,6 +1182,9 @@
       "aliases": [
         "party_uuids"
       ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/party-uuids"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/party_uuids",
       "owner": "ResponsibleParty",
       "domain_of": [
@@ -975,6 +1203,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/type"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/type",
       "owner": "Party",
       "domain_of": [
@@ -994,6 +1225,9 @@
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "aliases": [
         "short_name"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/short-name"
       ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/short_name",
       "owner": "Party",
@@ -1015,6 +1249,9 @@
       "aliases": [
         "email_addresses"
       ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/email-addresses"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/email_addresses",
       "owner": "Party",
       "domain_of": [
@@ -1033,6 +1270,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/addresses"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/addresses",
       "owner": "Party",
       "domain_of": [
@@ -1056,6 +1296,9 @@
       "aliases": [
         "addr_lines"
       ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/addr-lines"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/addr_lines",
       "owner": "Address",
       "domain_of": [
@@ -1074,6 +1317,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/city"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/city",
       "owner": "Address",
       "domain_of": [
@@ -1091,6 +1337,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/state"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/state",
       "owner": "Address",
       "domain_of": [
@@ -1111,6 +1360,9 @@
       "aliases": [
         "postal_code"
       ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/postal-code"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/postal_code",
       "owner": "Address",
       "domain_of": [
@@ -1127,6 +1379,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_profile/imports"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/imports",
       "owner": "ProfileBody",
       "domain_of": [
@@ -1146,6 +1401,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_profile/merge"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/merge",
       "owner": "ProfileBody",
       "domain_of": [
@@ -1168,6 +1426,9 @@
       "aliases": [
         "back_matter"
       ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/back-matter"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/back_matter",
       "owner": "ProfileBody",
       "domain_of": [
@@ -1188,6 +1449,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/resources"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/resources",
       "owner": "BackMatter",
       "domain_of": [
@@ -1207,6 +1471,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/citation"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/citation",
       "owner": "Resource",
       "domain_of": [
@@ -1225,6 +1492,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/text"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/text",
       "owner": "Citation",
       "domain_of": [
@@ -1241,6 +1511,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/description"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/description",
       "owner": "Resource",
       "domain_of": [
@@ -1258,6 +1531,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/rlinks"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/rlinks",
       "owner": "Resource",
       "domain_of": [
@@ -1281,6 +1557,9 @@
       "aliases": [
         "media_type"
       ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/media-type"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/media_type",
       "owner": "ResourceLink",
       "domain_of": [
@@ -1298,6 +1577,9 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/href"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/href",
       "owner": "ImportResource",
       "domain_of": [
@@ -1316,6 +1598,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/rel"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/rel",
       "owner": "Link",
       "domain_of": [
@@ -1334,6 +1619,9 @@
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "aliases": [
         "include_controls"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/include-controls"
       ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/include_controls",
       "owner": "ImportResource",
@@ -1357,10 +1645,14 @@
       "aliases": [
         "with_ids"
       ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/with-ids"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/with_ids",
-      "owner": "IncludeControlsSelection",
+      "owner": "ExcludeControlsSelection",
       "domain_of": [
-        "IncludeControlsSelection"
+        "IncludeControlsSelection",
+        "ExcludeControlsSelection"
       ],
       "range": "string",
       "multivalued": true,
@@ -1376,6 +1668,9 @@
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "aliases": [
         "as_is"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_profile/as-is"
       ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/as_is",
       "owner": "MergeRules",
@@ -1396,6 +1691,9 @@
       "aliases": [
         "how_many"
       ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/how-many"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/how_many",
       "owner": "Selection",
       "domain_of": [
@@ -1412,6 +1710,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/choice"
+      ],
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/choice",
       "owner": "Selection",
       "domain_of": [
@@ -1422,6 +1723,310 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "depends_on",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/depends_on",
+      "description": "Identifier of another parameter this one depends on (SP 800-53 Rev 4 only)",
+      "in_subset": [
+        "nist_sp_800_53r4_catalog"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "aliases": [
+        "depends_on"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/depends-on"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/depends_on",
+      "owner": "Parameter",
+      "domain_of": [
+        "Parameter"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "flat",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/flat",
+      "description": "Flat merge strategy \u2014 de-duplicate and merge all controls without source hierarchy",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_profile/flat"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/flat",
+      "owner": "MergeRules",
+      "domain_of": [
+        "MergeRules"
+      ],
+      "range": "FlatMerge",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "exclude_controls",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/exclude_controls",
+      "description": "Controls to explicitly exclude from an import",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "aliases": [
+        "exclude_controls"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/exclude-controls"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/exclude_controls",
+      "owner": "ImportResource",
+      "domain_of": [
+        "ImportResource"
+      ],
+      "range": "ExcludeControlsSelection",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "matching",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/matching",
+      "description": "Pattern-based control selectors using glob or regex patterns",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/matching"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/matching",
+      "owner": "ExcludeControlsSelection",
+      "domain_of": [
+        "IncludeControlsSelection",
+        "ExcludeControlsSelection"
+      ],
+      "range": "ControlPattern",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "pattern",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/pattern",
+      "description": "Glob or regex pattern for matching control identifiers",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/pattern"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/pattern",
+      "owner": "ControlPattern",
+      "domain_of": [
+        "ControlPattern"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "modify",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/modify",
+      "description": "Profile modification directives \u2014 parameter overrides and control alterations",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_profile/modify"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/modify",
+      "owner": "ProfileBody",
+      "domain_of": [
+        "ProfileBody"
+      ],
+      "range": "ProfileModify",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "set_parameters",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/set_parameters",
+      "description": "Parameter value overrides applied by the profile",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "aliases": [
+        "set_parameters"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_profile/set-parameters"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/set_parameters",
+      "owner": "ProfileModify",
+      "domain_of": [
+        "ProfileModify"
+      ],
+      "range": "ProfileSetParameter",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "alters",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/alters",
+      "description": "Control alterations \u2014 add or remove parts from referenced controls",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_profile/alters"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/alters",
+      "owner": "ProfileModify",
+      "domain_of": [
+        "ProfileModify"
+      ],
+      "range": "ProfileAlter",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "adds",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/adds",
+      "description": "Parts, parameters, or properties added to a control by an alteration",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_profile/adds"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/adds",
+      "owner": "ProfileAlter",
+      "domain_of": [
+        "ProfileAlter"
+      ],
+      "range": "ProfileAdd",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "param_id",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/param_id",
+      "description": "Identifier of the parameter to be set",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "aliases": [
+        "param_id"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/param-id"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/param_id",
+      "owner": "ProfileSetParameter",
+      "domain_of": [
+        "ProfileSetParameter"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "control_id",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_id",
+      "description": "Identifier of the control to alter",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "aliases": [
+        "control_id"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/control-id"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_id",
+      "owner": "ProfileAlter",
+      "domain_of": [
+        "ProfileAlter"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "position",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/position",
+      "description": "Position at which to add content relative to the by-id anchor",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_profile/position"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/position",
+      "owner": "ProfileAdd",
+      "domain_of": [
+        "ProfileAdd"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "by_id",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/by_id",
+      "description": "Identifier of the anchor part relative to which additions are positioned",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "aliases": [
+        "by_id"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_profile/by-id"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/by_id",
+      "owner": "ProfileAdd",
+      "domain_of": [
+        "ProfileAdd"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "response",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/response",
+      "description": "Top-level CPRT API response wrapper",
+      "in_subset": [
+        "nist_sp_800_53r5_cprt"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/response",
+      "owner": "CPRTDocument",
+      "domain_of": [
+        "SP80053Document",
+        "CPRTDocument"
+      ],
+      "range": "CPRTResponse",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "IdentifiedElement__class",
       "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/_class",
       "description": "Classification of a catalog element or property",
@@ -1429,6 +2034,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/_class"
+      ],
       "is_a": "_class",
       "domain": "IdentifiedElement",
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/class",
@@ -1450,6 +2058,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/controls"
+      ],
       "is_a": "controls",
       "domain": "Control",
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/controls",
@@ -1474,6 +2085,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/controls"
+      ],
       "is_a": "controls",
       "domain": "ControlEnhancement",
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/controls",
@@ -1498,6 +2112,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "https://w3id.org/lmodel/oscal_catalog/_class"
+      ],
       "is_a": "_class",
       "domain": "Property",
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/class",
@@ -1516,21 +2133,22 @@
     {
       "name": "SP80053Document",
       "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/SP80053Document",
-      "description": "Unified root wrapper for catalog or profile content",
+      "description": "Unified root wrapper for catalog, profile, or CPRT content",
       "in_subset": [
         "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
+        "nist_sp_800_53r5_profile",
+        "nist_sp_800_53r5_cprt"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
+      "exact_mappings": [
         "linkml:Any"
       ],
       "slots": [
         "catalog",
-        "profile"
+        "profile",
+        "response"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "tree_root": true,
       "@type": "ClassDefinition"
     },
@@ -1542,11 +2160,16 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:Catalog"
+      ],
+      "close_mappings": [
+        "oscal_catalog:CatalogDocument"
+      ],
       "slots": [
         "catalog"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Catalog",
       "@type": "ClassDefinition"
     },
     {
@@ -1557,11 +2180,14 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:ProfileDocument",
+        "oscal_profile:ProfileDocument"
+      ],
       "slots": [
         "profile"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/ProfileDocument",
       "@type": "ClassDefinition"
     },
     {
@@ -1572,8 +2198,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
-        "linkml:Any"
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_catalog:Catalog"
       ],
       "slots": [
         "uuid",
@@ -1582,7 +2209,6 @@
         "back_matter"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1593,18 +2219,19 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
-        "linkml:Any"
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_profile:Profile"
       ],
       "slots": [
         "uuid",
         "metadata",
         "imports",
         "merge",
+        "modify",
         "back_matter"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1616,8 +2243,11 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
+      "exact_mappings": [
         "linkml:Any"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Metadata"
       ],
       "slots": [
         "title",
@@ -1633,7 +2263,6 @@
         "remarks"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1644,8 +2273,11 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
+      "exact_mappings": [
         "linkml:Any"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Revision"
       ],
       "slots": [
         "title",
@@ -1656,7 +2288,6 @@
         "remarks"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1668,12 +2299,17 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:Role"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Role"
+      ],
       "slots": [
         "id",
         "title"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Role",
       "@type": "ClassDefinition"
     },
     {
@@ -1685,8 +2321,11 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
+      "exact_mappings": [
         "linkml:Any"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Party"
       ],
       "slots": [
         "uuid",
@@ -1697,7 +2336,6 @@
         "addresses"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1709,8 +2347,11 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
+      "exact_mappings": [
         "linkml:Any"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Address"
       ],
       "slots": [
         "addr_lines",
@@ -1719,7 +2360,6 @@
         "postal_code"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1731,15 +2371,15 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
-        "linkml:Any"
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_catalog:ResponsibleParty"
       ],
       "slots": [
         "role_id",
         "party_uuids"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1751,14 +2391,14 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
-        "linkml:Any"
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_catalog:BackMatter"
       ],
       "slots": [
         "resources"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1770,8 +2410,11 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
+      "exact_mappings": [
         "linkml:Any"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Resource"
       ],
       "slots": [
         "uuid",
@@ -1781,7 +2424,6 @@
         "rlinks"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1792,14 +2434,14 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
-        "linkml:Any"
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_catalog:Citation"
       ],
       "slots": [
         "text"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1811,15 +2453,17 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
+      "exact_mappings": [
         "linkml:Any"
+      ],
+      "close_mappings": [
+        "oscal_catalog:ResourceLink"
       ],
       "slots": [
         "href",
         "media_type"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1830,6 +2474,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:CatalogElement"
+      ],
       "abstract": true,
       "slots": [
         "id",
@@ -1838,7 +2485,6 @@
         "parts"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/CatalogElement",
       "@type": "ClassDefinition"
     },
     {
@@ -1849,6 +2495,9 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:IdentifiedElement"
+      ],
       "is_a": "CatalogElement",
       "slots": [
         "id",
@@ -1860,7 +2509,6 @@
         "label"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/IdentifiedElement",
       "@type": "ClassDefinition"
     },
     {
@@ -1871,6 +2519,10 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:ControlGroup",
+        "oscal_catalog:Group"
+      ],
       "is_a": "IdentifiedElement",
       "slots": [
         "id",
@@ -1884,7 +2536,6 @@
         "controls"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/ControlGroup",
       "@type": "ClassDefinition"
     },
     {
@@ -1895,6 +2546,12 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:Control"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Control"
+      ],
       "is_a": "IdentifiedElement",
       "slots": [
         "id",
@@ -1908,7 +2565,6 @@
         "Control_controls"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Control",
       "@type": "ClassDefinition"
     },
     {
@@ -1919,6 +2575,12 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:ControlEnhancement"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Control"
+      ],
       "is_a": "IdentifiedElement",
       "slots": [
         "id",
@@ -1932,7 +2594,6 @@
         "ControlEnhancement_controls"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/ControlEnhancement",
       "@type": "ClassDefinition"
     },
     {
@@ -1940,9 +2601,16 @@
       "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Parameter",
       "description": "A configurable parameter used by a control",
       "in_subset": [
-        "nist_sp_800_53r5_catalog"
+        "nist_sp_800_53r5_catalog",
+        "nist_sp_800_53r4_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "linkml:Any"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Parameter"
+      ],
       "is_a": "IdentifiedElement",
       "slots": [
         "id",
@@ -1953,10 +2621,10 @@
         "IdentifiedElement__class",
         "label",
         "guidelines",
-        "select"
+        "select",
+        "depends_on"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Parameter",
       "@type": "ClassDefinition"
     },
     {
@@ -1967,11 +2635,14 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:Guideline",
+        "oscal_catalog:ParameterGuideline"
+      ],
       "slots": [
         "prose"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Guideline",
       "@type": "ClassDefinition"
     },
     {
@@ -1982,6 +2653,12 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:Property"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Property"
+      ],
       "slots": [
         "name",
         "value",
@@ -1989,7 +2666,6 @@
         "Property__class"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Property",
       "@type": "ClassDefinition"
     },
     {
@@ -2000,15 +2676,15 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
-        "linkml:Any"
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_catalog:ParameterSelection"
       ],
       "slots": [
         "how_many",
         "choice"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -2019,12 +2695,17 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:Link"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Link"
+      ],
       "slots": [
         "href",
         "rel"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Link",
       "@type": "ClassDefinition"
     },
     {
@@ -2035,6 +2716,12 @@
         "nist_sp_800_53r5_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "nist_sp_800_53:Part"
+      ],
+      "close_mappings": [
+        "oscal_catalog:Part"
+      ],
       "is_a": "IdentifiedElement",
       "slots": [
         "id",
@@ -2048,7 +2735,6 @@
         "prose"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Part",
       "@type": "ClassDefinition"
     },
     {
@@ -2059,15 +2745,16 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
-        "linkml:Any"
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_profile:ProfileImport"
       ],
       "slots": [
         "href",
-        "include_controls"
+        "include_controls",
+        "exclude_controls"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -2078,14 +2765,17 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
+      "exact_mappings": [
         "linkml:Any"
       ],
+      "close_mappings": [
+        "oscal_catalog:SelectControlById"
+      ],
       "slots": [
-        "with_ids"
+        "with_ids",
+        "matching"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -2096,22 +2786,186 @@
         "nist_sp_800_53r5_profile"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "mappings": [
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_profile:ProfileMerge"
+      ],
+      "slots": [
+        "as_is",
+        "flat"
+      ],
+      "slot_usage": {},
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "FlatMerge",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/FlatMerge",
+      "description": "Marker object indicating flat merge strategy for profile resolution",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_profile:MergeFlat"
+      ],
+      "slot_usage": {},
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ControlPattern",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ControlPattern",
+      "description": "Glob or regex pattern for selecting controls by identifier",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_catalog:ControlMatching"
+      ],
+      "slots": [
+        "pattern"
+      ],
+      "slot_usage": {},
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ExcludeControlsSelection",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ExcludeControlsSelection",
+      "description": "Selection of controls to explicitly exclude from a profile import",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "linkml:Any"
+      ],
+      "close_mappings": [
+        "oscal_catalog:SelectControlById"
+      ],
+      "slots": [
+        "with_ids",
+        "matching"
+      ],
+      "slot_usage": {},
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ProfileModify",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ProfileModify",
+      "description": "Profile modification section containing parameter overrides and control alterations",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_profile:ProfileModify"
+      ],
+      "slots": [
+        "set_parameters",
+        "alters"
+      ],
+      "slot_usage": {},
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ProfileSetParameter",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ProfileSetParameter",
+      "description": "Override the value of a parameter in a referenced control",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_profile:ParameterSetting"
+      ],
+      "slots": [
+        "param_id",
+        "label"
+      ],
+      "slot_usage": {},
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ProfileAlter",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ProfileAlter",
+      "description": "Alteration to a referenced control \u2014 adds or removes parts",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_profile:Alteration"
+      ],
+      "slots": [
+        "control_id",
+        "adds"
+      ],
+      "slot_usage": {},
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ProfileAdd",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ProfileAdd",
+      "description": "Content to be added to a control via profile alteration",
+      "in_subset": [
+        "nist_sp_800_53r5_profile"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "linkml:Any",
+        "oscal_profile:Addition"
+      ],
+      "slots": [
+        "position",
+        "by_id",
+        "parts",
+        "props"
+      ],
+      "slot_usage": {},
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "CPRTDocument",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CPRTDocument",
+      "description": "Semantic class for NIST CPRT (Cybersecurity and Privacy Reference Tool) export documents covering SP 800-53, SP 800-53A, and SP 800-53B. Validate with: linkml validate -C SP80053Document -s <schema> <file.json>",
+      "in_subset": [
+        "nist_sp_800_53r5_cprt"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
         "linkml:Any"
       ],
       "slots": [
-        "as_is"
+        "response"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml/Any",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "CPRTResponse",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CPRTResponse",
+      "description": "CPRT API response container holding document metadata, typed elements (controls, enhancements, ODPs, assessment objectives, baselines), relationship types, and element relationships",
+      "in_subset": [
+        "nist_sp_800_53r5_cprt"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "exact_mappings": [
+        "linkml:Any"
+      ],
+      "slot_usage": {},
       "@type": "ClassDefinition"
     }
   ],
-  "metamodel_version": "1.7.0",
+  "metamodel_version": "1.11.0",
   "source_file": "nist_sp_800_53.yaml",
-  "source_file_date": "2026-03-21T00:04:48",
-  "source_file_size": 16106,
-  "generation_date": "2026-04-12T02:13:15",
+  "source_file_date": "2026-05-15T08:54:43",
+  "source_file_size": 28118,
+  "generation_date": "2026-05-15T10:26:00",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_sp_800_53.context.jsonld",

@@ -1,5 +1,5 @@
 # Auto generated from nist_sp_800_53.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-04-12T02:13:49
+# Generation date: 2026-05-15T10:26:14
 # Schema: NIST-SP-800-53
 #
 # id: https://w3id.org/lmodel/nist-sp-800-53
@@ -59,12 +59,14 @@ from rdflib import (
 from linkml_runtime.linkml_model.types import Boolean, String
 from linkml_runtime.utils.metamodelcore import Bool
 
-metamodel_version = "1.7.0"
+metamodel_version = "1.11.0"
 version = "5.2.0"
 
 # Namespaces
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 NIST_SP_800_53 = CurieNamespace('nist_sp_800_53', 'https://w3id.org/lmodel/nist-sp-800-53/')
+OSCAL_CATALOG = CurieNamespace('oscal_catalog', 'https://w3id.org/lmodel/oscal_catalog/')
+OSCAL_PROFILE = CurieNamespace('oscal_profile', 'https://w3id.org/lmodel/oscal_profile/')
 DEFAULT_ = NIST_SP_800_53
 
 
@@ -259,10 +261,6 @@ class Control(IdentifiedElement):
     controls: Optional[Union[Union[dict, "ControlEnhancement"], list[Union[dict, "ControlEnhancement"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if not isinstance(self.params, list):
-            self.params = [self.params] if self.params is not None else []
-        self.params = [v if isinstance(v, Parameter) else Parameter(**as_dict(v)) for v in self.params]
-
         if not isinstance(self.controls, list):
             self.controls = [self.controls] if self.controls is not None else []
         self.controls = [v if isinstance(v, ControlEnhancement) else ControlEnhancement(**as_dict(v)) for v in self.controls]
@@ -286,10 +284,6 @@ class ControlEnhancement(IdentifiedElement):
     controls: Optional[Union[Union[dict, "ControlEnhancement"], list[Union[dict, "ControlEnhancement"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if not isinstance(self.params, list):
-            self.params = [self.params] if self.params is not None else []
-        self.params = [v if isinstance(v, Parameter) else Parameter(**as_dict(v)) for v in self.params]
-
         if not isinstance(self.controls, list):
             self.controls = [self.controls] if self.controls is not None else []
         self.controls = [v if isinstance(v, ControlEnhancement) else ControlEnhancement(**as_dict(v)) for v in self.controls]
@@ -297,28 +291,7 @@ class ControlEnhancement(IdentifiedElement):
         super().__post_init__(**kwargs)
 
 
-@dataclass(repr=False)
-class Parameter(IdentifiedElement):
-    """
-    A configurable parameter used by a control
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = NIST_SP_800_53["Parameter"]
-    class_class_curie: ClassVar[str] = "nist_sp_800_53:Parameter"
-    class_name: ClassVar[str] = "Parameter"
-    class_model_uri: ClassVar[URIRef] = NIST_SP_800_53.Parameter
-
-    guidelines: Optional[Union[Union[dict, "Guideline"], list[Union[dict, "Guideline"]]]] = empty_list()
-    select: Optional[Union[dict, "Selection"]] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if not isinstance(self.guidelines, list):
-            self.guidelines = [self.guidelines] if self.guidelines is not None else []
-        self.guidelines = [v if isinstance(v, Guideline) else Guideline(**as_dict(v)) for v in self.guidelines]
-
-        super().__post_init__(**kwargs)
-
+Parameter = Any
 
 @dataclass(repr=False)
 class Guideline(YAMLRoot):
@@ -432,6 +405,24 @@ IncludeControlsSelection = Any
 
 MergeRules = Any
 
+FlatMerge = Any
+
+ControlPattern = Any
+
+ExcludeControlsSelection = Any
+
+ProfileModify = Any
+
+ProfileSetParameter = Any
+
+ProfileAlter = Any
+
+ProfileAdd = Any
+
+CPRTDocument = Any
+
+CPRTResponse = Any
+
 # Enumerations
 class CatalogElementClassValue(EnumDefinitionImpl):
     """
@@ -450,6 +441,8 @@ class CatalogElementClassValue(EnumDefinitionImpl):
             PermissibleValue(text="SP800-53"))
         setattr(cls, "SP800-53-enhancement",
             PermissibleValue(text="SP800-53-enhancement"))
+        setattr(cls, "assessment-objective",
+            PermissibleValue(text="assessment-objective"))
 
 class CatalogPropertyClassValue(EnumDefinitionImpl):
     """
@@ -468,6 +461,92 @@ class CatalogPropertyClassValue(EnumDefinitionImpl):
             PermissibleValue(text="sp800-53a"))
         setattr(cls, "zero-padded",
             PermissibleValue(text="zero-padded"))
+
+class CPRTElementTypeValue(EnumDefinitionImpl):
+    """
+    Allowed element_type values in NIST CPRT export data
+    """
+    family = PermissibleValue(
+        text="family",
+        description="SP 800-53 control family (e.g. AC, AU)")
+    control = PermissibleValue(
+        text="control",
+        description="Top-level security or privacy control (e.g. AC-1)")
+    control_enhancement = PermissibleValue(
+        text="control_enhancement",
+        description="Control enhancement (e.g. AC-1(1))")
+    control_statement = PermissibleValue(
+        text="control_statement",
+        description="Normative control statement text")
+    discussion = PermissibleValue(
+        text="discussion",
+        description="Non-normative discussion text for a control")
+    odp = PermissibleValue(
+        text="odp",
+        description="Organization-Defined Parameter")
+    odp_type = PermissibleValue(
+        text="odp_type",
+        description="ODP category (e.g. assignment, selection)")
+    odp_statement = PermissibleValue(
+        text="odp_statement",
+        description="Full ODP statement text")
+    examine = PermissibleValue(
+        text="examine",
+        description="SP 800-53A Examine assessment objective")
+    interview = PermissibleValue(
+        text="interview",
+        description="SP 800-53A Interview assessment objective")
+    test = PermissibleValue(
+        text="test",
+        description="SP 800-53A Test assessment objective")
+    determination = PermissibleValue(
+        text="determination",
+        description="Assessment determination criterion")
+    withdraw_reason = PermissibleValue(
+        text="withdraw_reason",
+        description="Reason a control was withdrawn from SP 800-53")
+    reference = PermissibleValue(
+        text="reference",
+        description="Informational reference to an external publication")
+    security_baseline = PermissibleValue(
+        text="security_baseline",
+        description="Security baseline designation (LOW / MODERATE / HIGH / NOT SELECTED)")
+    privacy_baseline = PermissibleValue(
+        text="privacy_baseline",
+        description="Privacy baseline designation (P-HIGH / NOT SELECTED)")
+    sort = PermissibleValue(
+        text="sort",
+        description="Sort-order key for display purposes")
+    control_name_sort = PermissibleValue(
+        text="control_name_sort",
+        description="Sort-order key for control name ordering")
+
+    _defn = EnumDefinition(
+        name="CPRTElementTypeValue",
+        description="Allowed element_type values in NIST CPRT export data",
+    )
+
+class CPRTRelationshipTypeValue(EnumDefinitionImpl):
+    """
+    Relationship type identifiers used in NIST CPRT export data
+    """
+    projection = PermissibleValue(
+        text="projection",
+        description="Represents a relationship between two elements")
+    related = PermissibleValue(
+        text="related",
+        description="Denotes where a control is related to another control")
+    incorporated_into = PermissibleValue(
+        text="incorporated_into",
+        description="Denotes where a withdrawn control was incorporated into another")
+    moved_to = PermissibleValue(
+        text="moved_to",
+        description="Denotes where a withdrawn control was moved to")
+
+    _defn = EnumDefinition(
+        name="CPRTRelationshipTypeValue",
+        description="Relationship type identifiers used in NIST CPRT export data",
+    )
 
 # Slots
 class slots:
@@ -634,6 +713,48 @@ slots.how_many = Slot(uri=NIST_SP_800_53.how_many, name="how-many", curie=NIST_S
 
 slots.choice = Slot(uri=NIST_SP_800_53.choice, name="choice", curie=NIST_SP_800_53.curie('choice'),
                    model_uri=NIST_SP_800_53.choice, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.depends_on = Slot(uri=NIST_SP_800_53.depends_on, name="depends-on", curie=NIST_SP_800_53.curie('depends_on'),
+                   model_uri=NIST_SP_800_53.depends_on, domain=None, range=Optional[str])
+
+slots.flat = Slot(uri=NIST_SP_800_53.flat, name="flat", curie=NIST_SP_800_53.curie('flat'),
+                   model_uri=NIST_SP_800_53.flat, domain=None, range=Optional[Union[dict, FlatMerge]])
+
+slots.exclude_controls = Slot(uri=NIST_SP_800_53.exclude_controls, name="exclude-controls", curie=NIST_SP_800_53.curie('exclude_controls'),
+                   model_uri=NIST_SP_800_53.exclude_controls, domain=None, range=Optional[Union[Union[dict, ExcludeControlsSelection], list[Union[dict, ExcludeControlsSelection]]]])
+
+slots.matching = Slot(uri=NIST_SP_800_53.matching, name="matching", curie=NIST_SP_800_53.curie('matching'),
+                   model_uri=NIST_SP_800_53.matching, domain=None, range=Optional[Union[Union[dict, ControlPattern], list[Union[dict, ControlPattern]]]])
+
+slots.pattern = Slot(uri=NIST_SP_800_53.pattern, name="pattern", curie=NIST_SP_800_53.curie('pattern'),
+                   model_uri=NIST_SP_800_53.pattern, domain=None, range=Optional[str])
+
+slots.modify = Slot(uri=NIST_SP_800_53.modify, name="modify", curie=NIST_SP_800_53.curie('modify'),
+                   model_uri=NIST_SP_800_53.modify, domain=None, range=Optional[Union[dict, ProfileModify]])
+
+slots.set_parameters = Slot(uri=NIST_SP_800_53.set_parameters, name="set-parameters", curie=NIST_SP_800_53.curie('set_parameters'),
+                   model_uri=NIST_SP_800_53.set_parameters, domain=None, range=Optional[Union[Union[dict, ProfileSetParameter], list[Union[dict, ProfileSetParameter]]]])
+
+slots.alters = Slot(uri=NIST_SP_800_53.alters, name="alters", curie=NIST_SP_800_53.curie('alters'),
+                   model_uri=NIST_SP_800_53.alters, domain=None, range=Optional[Union[Union[dict, ProfileAlter], list[Union[dict, ProfileAlter]]]])
+
+slots.adds = Slot(uri=NIST_SP_800_53.adds, name="adds", curie=NIST_SP_800_53.curie('adds'),
+                   model_uri=NIST_SP_800_53.adds, domain=None, range=Optional[Union[Union[dict, ProfileAdd], list[Union[dict, ProfileAdd]]]])
+
+slots.param_id = Slot(uri=NIST_SP_800_53.param_id, name="param-id", curie=NIST_SP_800_53.curie('param_id'),
+                   model_uri=NIST_SP_800_53.param_id, domain=None, range=Optional[str])
+
+slots.control_id = Slot(uri=NIST_SP_800_53.control_id, name="control-id", curie=NIST_SP_800_53.curie('control_id'),
+                   model_uri=NIST_SP_800_53.control_id, domain=None, range=Optional[str])
+
+slots.position = Slot(uri=NIST_SP_800_53.position, name="position", curie=NIST_SP_800_53.curie('position'),
+                   model_uri=NIST_SP_800_53.position, domain=None, range=Optional[str])
+
+slots.by_id = Slot(uri=NIST_SP_800_53.by_id, name="by-id", curie=NIST_SP_800_53.curie('by_id'),
+                   model_uri=NIST_SP_800_53.by_id, domain=None, range=Optional[str])
+
+slots.response = Slot(uri=NIST_SP_800_53.response, name="response", curie=NIST_SP_800_53.curie('response'),
+                   model_uri=NIST_SP_800_53.response, domain=None, range=Optional[Union[dict, CPRTResponse]])
 
 slots.IdentifiedElement__class = Slot(uri=NIST_SP_800_53["class"], name="IdentifiedElement__class", curie=NIST_SP_800_53.curie('class'),
                    model_uri=NIST_SP_800_53.IdentifiedElement__class, domain=IdentifiedElement, range=Optional[Union[str, "CatalogElementClassValue"]])

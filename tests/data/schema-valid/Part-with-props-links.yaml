@@ -1,0 +1,9 @@
+id: ac-1_obj.a-1
+name: assessment-objective
+prose: Determine if the organization develops and maintains an access control policy.
+props:
+  - name: label
+    value: AC-1(a)[01]
+links:
+  - href: "#ac-1"
+    rel: required-by

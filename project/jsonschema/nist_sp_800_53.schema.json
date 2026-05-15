@@ -69,6 +69,79 @@
                 "string"
             ]
         },
+        "CPRTDocument": {
+            "additionalProperties": true,
+            "description": "Semantic class for NIST CPRT (Cybersecurity and Privacy Reference Tool) export documents covering SP 800-53, SP 800-53A, and SP 800-53B. Validate with: linkml validate -C SP80053Document -s <schema> <file.json>",
+            "properties": {
+                "response": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CPRTResponse"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Top-level CPRT API response wrapper"
+                }
+            },
+            "title": "CPRTDocument",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "CPRTElementTypeValue": {
+            "description": "Allowed element_type values in NIST CPRT export data",
+            "enum": [
+                "family",
+                "control",
+                "control_enhancement",
+                "control_statement",
+                "discussion",
+                "odp",
+                "odp_type",
+                "odp_statement",
+                "examine",
+                "interview",
+                "test",
+                "determination",
+                "withdraw_reason",
+                "reference",
+                "security_baseline",
+                "privacy_baseline",
+                "sort",
+                "control_name_sort"
+            ],
+            "title": "CPRTElementTypeValue",
+            "type": "string"
+        },
+        "CPRTRelationshipTypeValue": {
+            "description": "Relationship type identifiers used in NIST CPRT export data",
+            "enum": [
+                "projection",
+                "related",
+                "incorporated_into",
+                "moved_to"
+            ],
+            "title": "CPRTRelationshipTypeValue",
+            "type": "string"
+        },
+        "CPRTResponse": {
+            "additionalProperties": true,
+            "description": "CPRT API response container holding document metadata, typed elements (controls, enhancements, ODPs, assessment objectives, baselines), relationship types, and element relationships",
+            "title": "CPRTResponse",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
         "Catalog": {
             "additionalProperties": false,
             "description": "Top-level wrapper that mirrors OSCAL catalog shape",
@@ -141,12 +214,58 @@
                 "string"
             ]
         },
+        "CatalogElement": {
+            "additionalProperties": false,
+            "description": "Base class for catalog elements",
+            "properties": {
+                "id": {
+                    "description": "Unique identifier for an element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "links": {
+                    "description": "List of links and relationships",
+                    "items": {
+                        "$ref": "#/$defs/Link"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "parts": {
+                    "description": "Nested parts that provide prose and structure",
+                    "items": {
+                        "$ref": "#/$defs/Part"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/Property"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CatalogElement",
+            "type": "object"
+        },
         "CatalogElementClassValue": {
             "description": "Allowed values for element-level class values",
             "enum": [
                 "family",
                 "SP800-53",
-                "SP800-53-enhancement"
+                "SP800-53-enhancement",
+                "assessment-objective"
             ],
             "title": "CatalogElementClassValue",
             "type": "string"
@@ -431,6 +550,73 @@
             "title": "ControlGroup",
             "type": "object"
         },
+        "ControlPattern": {
+            "additionalProperties": true,
+            "description": "Glob or regex pattern for selecting controls by identifier",
+            "properties": {
+                "pattern": {
+                    "description": "Glob or regex pattern for matching control identifiers",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ControlPattern",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "ExcludeControlsSelection": {
+            "additionalProperties": true,
+            "description": "Selection of controls to explicitly exclude from a profile import",
+            "properties": {
+                "matching": {
+                    "description": "Pattern-based control selectors using glob or regex patterns",
+                    "items": {
+                        "$ref": "#/$defs/ControlPattern"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "with_ids": {
+                    "description": "Explicit control identifiers to include",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ExcludeControlsSelection",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "FlatMerge": {
+            "additionalProperties": true,
+            "description": "Marker object indicating flat merge strategy for profile resolution",
+            "title": "FlatMerge",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
         "Guideline": {
             "additionalProperties": false,
             "description": "Additional prose guidance associated with a parameter",
@@ -513,6 +699,16 @@
             "additionalProperties": true,
             "description": "Imported profile or catalog reference",
             "properties": {
+                "exclude_controls": {
+                    "description": "Controls to explicitly exclude from an import",
+                    "items": {
+                        "$ref": "#/$defs/ExcludeControlsSelection"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "href": {
                     "description": "Link or resource reference",
                     "type": [
@@ -544,6 +740,16 @@
             "additionalProperties": true,
             "description": "Control inclusion selector",
             "properties": {
+                "matching": {
+                    "description": "Pattern-based control selectors using glob or regex patterns",
+                    "items": {
+                        "$ref": "#/$defs/ControlPattern"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "with_ids": {
                     "description": "Explicit control identifiers to include",
                     "items": {
@@ -596,6 +802,17 @@
                         "boolean",
                         "null"
                     ]
+                },
+                "flat": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/FlatMerge"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Flat merge strategy \u2014 de-duplicate and merge all controls without source hierarchy"
                 }
             },
             "title": "MergeRules",
@@ -717,12 +934,19 @@
             ]
         },
         "Parameter": {
-            "additionalProperties": false,
+            "additionalProperties": true,
             "description": "A configurable parameter used by a control",
             "properties": {
                 "class": {
                     "$ref": "#/$defs/CatalogElementClassValue",
                     "description": "Classification of a catalog element or property"
+                },
+                "depends_on": {
+                    "description": "Identifier of another parameter this one depends on (SP 800-53 Rev 4 only)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
                 "guidelines": {
                     "description": "List of guidelines",
@@ -798,7 +1022,13 @@
                 }
             },
             "title": "Parameter",
-            "type": "object"
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
         },
         "Part": {
             "additionalProperties": false,
@@ -939,6 +1169,85 @@
                 "string"
             ]
         },
+        "ProfileAdd": {
+            "additionalProperties": true,
+            "description": "Content to be added to a control via profile alteration",
+            "properties": {
+                "by_id": {
+                    "description": "Identifier of the anchor part relative to which additions are positioned",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parts": {
+                    "description": "Nested parts that provide prose and structure",
+                    "items": {
+                        "$ref": "#/$defs/Part"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "position": {
+                    "description": "Position at which to add content relative to the by-id anchor",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/Property"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ProfileAdd",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "ProfileAlter": {
+            "additionalProperties": true,
+            "description": "Alteration to a referenced control \u2014 adds or removes parts",
+            "properties": {
+                "adds": {
+                    "description": "Parts, parameters, or properties added to a control by an alteration",
+                    "items": {
+                        "$ref": "#/$defs/ProfileAdd"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "control_id": {
+                    "description": "Identifier of the control to alter",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ProfileAlter",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
         "ProfileBody": {
             "additionalProperties": true,
             "description": "OSCAL profile body",
@@ -986,6 +1295,17 @@
                     ],
                     "description": "Profile and Catalog metadata"
                 },
+                "modify": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/ProfileModify"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Profile modification directives \u2014 parameter overrides and control alterations"
+                },
                 "uuid": {
                     "description": "UUID for profile, metadata, or resource element",
                     "type": [
@@ -1021,6 +1341,68 @@
             },
             "title": "ProfileDocument",
             "type": "object"
+        },
+        "ProfileModify": {
+            "additionalProperties": true,
+            "description": "Profile modification section containing parameter overrides and control alterations",
+            "properties": {
+                "alters": {
+                    "description": "Control alterations \u2014 add or remove parts from referenced controls",
+                    "items": {
+                        "$ref": "#/$defs/ProfileAlter"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "set_parameters": {
+                    "description": "Parameter value overrides applied by the profile",
+                    "items": {
+                        "$ref": "#/$defs/ProfileSetParameter"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ProfileModify",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "ProfileSetParameter": {
+            "additionalProperties": true,
+            "description": "Override the value of a parameter in a referenced control",
+            "properties": {
+                "label": {
+                    "description": "Human-readable label",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "param_id": {
+                    "description": "Identifier of the parameter to be set",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ProfileSetParameter",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
         },
         "Property": {
             "additionalProperties": false,
@@ -1253,7 +1635,7 @@
         },
         "SP80053Document": {
             "additionalProperties": true,
-            "description": "Unified root wrapper for catalog or profile content",
+            "description": "Unified root wrapper for catalog, profile, or CPRT content",
             "properties": {
                 "catalog": {
                     "anyOf": [
@@ -1276,6 +1658,17 @@
                         }
                     ],
                     "description": "Root profile payload"
+                },
+                "response": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CPRTResponse"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Top-level CPRT API response wrapper"
                 }
             },
             "title": "SP80053Document",
@@ -1322,8 +1715,8 @@
     "$id": "https://w3id.org/lmodel/nist-sp-800-53",
     "$schema": "https://json-schema.org/draft/2019-09/schema",
     "additionalProperties": true,
-    "description": "Unified root wrapper for catalog or profile content",
-    "metamodel_version": "1.7.0",
+    "description": "Unified root wrapper for catalog, profile, or CPRT content",
+    "metamodel_version": "1.11.0",
     "properties": {
         "catalog": {
             "anyOf": [
@@ -1346,6 +1739,17 @@
                 }
             ],
             "description": "Root profile payload"
+        },
+        "response": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/CPRTResponse"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "description": "Top-level CPRT API response wrapper"
         }
     },
     "title": "NIST-SP-800-53",

@@ -1,0 +1,8 @@
+id: AC-2(1)
+title: Automated System Account Management
+parts:
+  - id: ac-2.1_smt
+    name: statement
+    prose: >-
+      Support the management of system accounts using
+      organization-defined automated mechanisms.

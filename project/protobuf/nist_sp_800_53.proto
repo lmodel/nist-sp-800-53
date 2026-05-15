@@ -1,6 +1,6 @@
  syntax="proto3";
  package
-// metamodel_version: 1.7.0
+// metamodel_version: 1.11.0
 // version: 5.2.0
 // Postal address
 message Address
@@ -72,6 +72,22 @@ message ControlGroup
  repeated  controlGroup groups = 0
  repeated  control controls = 0
  }
+// Glob or regex pattern for selecting controls by identifier
+message ControlPattern
+ {
+  string pattern = 0
+ }
+// Semantic class for NIST CPRT (Cybersecurity and Privacy Reference Tool) export documents covering SP 800-53, SP 800-53A, and SP 800-53B. Validate with: linkml validate -C SP80053Document -s <schema> <file.json>
+message CPRTDocument
+ {
+  cPRTResponse response = 0
+ }
+// Selection of controls to explicitly exclude from a profile import
+message ExcludeControlsSelection
+ {
+ repeated  string with-ids = 0
+ repeated  controlPattern matching = 0
+ }
 // Additional prose guidance associated with a parameter
 message Guideline
  {
@@ -93,11 +109,13 @@ message ImportResource
  {
   string href = 0
  repeated  includeControlsSelection include-controls = 0
+ repeated  excludeControlsSelection exclude-controls = 0
  }
 // Control inclusion selector
 message IncludeControlsSelection
  {
  repeated  string with-ids = 0
+ repeated  controlPattern matching = 0
  }
 // Relationship link
 message Link
@@ -109,6 +127,7 @@ message Link
 message MergeRules
  {
   boolean as-is = 0
+  flatMerge flat = 0
  }
 // OSCAL metadata section used in catalogs and profiles
 message Metadata
@@ -137,6 +156,7 @@ message Parameter
   string label = 0
  repeated  guideline guidelines = 0
   selection select = 0
+  string depends-on = 0
  }
 // Structured narrative part that can contain nested parts
 message Part
@@ -161,6 +181,20 @@ message Party
  repeated  string email-addresses = 0
  repeated  address addresses = 0
  }
+// Content to be added to a control via profile alteration
+message ProfileAdd
+ {
+  string position = 0
+  string by-id = 0
+ repeated  part parts = 0
+ repeated  property props = 0
+ }
+// Alteration to a referenced control — adds or removes parts
+message ProfileAlter
+ {
+  string control-id = 0
+ repeated  profileAdd adds = 0
+ }
 // OSCAL profile body
 message ProfileBody
  {
@@ -168,12 +202,25 @@ message ProfileBody
   metadata metadata = 0
  repeated  importResource imports = 0
   mergeRules merge = 0
+  profileModify modify = 0
   backMatter back-matter = 0
  }
 // Top-level wrapper for OSCAL profile files
 message ProfileDocument
  {
   profileBody profile = 0
+ }
+// Profile modification section containing parameter overrides and control alterations
+message ProfileModify
+ {
+ repeated  profileSetParameter set-parameters = 0
+ repeated  profileAlter alters = 0
+ }
+// Override the value of a parameter in a referenced control
+message ProfileSetParameter
+ {
+  string param-id = 0
+  string label = 0
  }
 // A name-value property with optional namespace and class attributes
 message Property
@@ -226,9 +273,10 @@ message Selection
   string how-many = 0
  repeated  string choice = 0
  }
-// Unified root wrapper for catalog or profile content
+// Unified root wrapper for catalog, profile, or CPRT content
 message SP80053Document
  {
   catalogBody catalog = 0
   profileBody profile = 0
+  cPRTResponse response = 0
  }

@@ -1,0 +1,139 @@
+id: jenkins-fake
+title: Jenkins-fake
+class: family
+props:
+- name: label
+  value: jenkins-fake
+- name: component
+  value: Jenkins-fake
+- name: source
+  value: https://github.com/GovReady/hyperGRC/tree/master/example/agencyapp
+groups:
+- id: ia
+  title: Identification and Authentication
+  class: family
+  props:
+  - name: label
+    value: IA
+  controls:
+  - id: ia-3
+    title: Device Identification And Authentication
+    class: SP800-53
+    props:
+    - name: label
+      value: IA-3
+    - name: implementation-status
+      value: Inherited
+    - name: security-control-type
+      value: Hybrid
+    parts:
+    - id: ia-3_smt
+      name: statement
+      prose: The the identified fails organization. Roles where software and selected selection provides.
+        Service information to reviews damage. Receiving acceptable marks capability organization-defined.
+        The system or information includes. The of reviews that explicit system capability. 3 using assignment
+        time transfer. To information activities organization privileged disclosure across.
+- id: mp
+  title: Media Protection
+  class: family
+  props:
+  - name: label
+    value: MP
+  controls:
+  - id: mp-4
+    title: MP-4
+    class: SP800-53
+    props:
+    - name: label
+      value: MP-4
+    controls:
+    - id: mp-4.1
+      title: Cryptographic Protection
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: MP-4 (1)
+      - name: implementation-status
+        value: Planned
+      - name: security-control-type
+        value: Other
+      parts:
+      - id: mp-4.1_smt
+        name: statement
+        prose: And formal to. Jointly sanitized for identified for at suppression. System enforces information
+          organization. Revocations entry/exit by to websites. Information assignment and. Disseminates
+          to dynamic the information.
+- id: sa
+  title: System and Services Acquisition
+  class: family
+  props:
+  - name: label
+    value: SA
+  controls:
+  - id: sa-17
+    title: SA-17
+    class: SP800-53
+    props:
+    - name: label
+      value: SA-17
+    controls:
+    - id: sa-17.6
+      title: Structure For Testing
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: SA-17 (6)
+      - name: implementation-status
+        value: Partially In Place
+      - name: security-control-type
+        value: Hybrid
+      parts:
+      - id: sa-17.6_smt
+        name: statement
+        prose: In procedures authentication received elements of. About using system prohibit. The plan
+          as assignment. Mobile threats policy into and. Assignment selection to to collection product.
+          Information changes the organizational. Or and to access information. Information period located
+          to information intrusion-monitoring. Supplemental management disaster 1 users. By operational
+          the object. The implements and retains alternate. And additional components components flow
+          where. Privileged describe incorporated the organization scans system. Assessment receives the
+          system component. Organization-Defined information policies organization points activities.
+          The identifier read security control devices. Authorizations the includes information control
+          additional. Organization-Defined system d implement. Enforced of requires collect handling information
+          to. Organization-Defined and purpose system support. The when operational for authorized identifying
+          monitoring.
+- id: sc
+  title: System and Communications Protection
+  class: family
+  props:
+  - name: label
+    value: SC
+  controls:
+  - id: sc-42
+    title: SC-42
+    class: SP800-53
+    props:
+    - name: label
+      value: SC-42
+    controls:
+    - id: sc-42.3
+      title: Prohibit Use Of Devices
+      class: SP800-53-enhancement
+      props:
+      - name: label
+        value: SC-42 (3)
+      - name: implementation-status
+        value: Planned
+      - name: security-control-type
+        value: Other
+      parts:
+      - id: sc-42.3_smt
+        name: statement
+        prose: Organization selection exception information. Scanning maintain process the. Protection
+          organization of risk. Assignment officials information implemented information system only.
+          In functions logout notification. Telecommunications and time roles suppression. Be facilitate
+          access procedures. Malice end switches report roles. Are qualified susceptibility information
+          and assignment due by. Traffic personal the. The harmful system organization-defined received
+          security organizational. Sc-13 the the controls. System protect a assignment time by management.
+          Assignment separate assignment the as organization keys access. Of established to of establishment
+          organization 1. In the and. Assignment or for 2)(a of develops associated organization. Anomalies
+          and incident or.

@@ -11,17 +11,30 @@ default_range: string
 prefixes:
   linkml: https://w3id.org/linkml/
   nist_sp_800_53: https://w3id.org/lmodel/nist-sp-800-53/
+  oscal_catalog: https://w3id.org/lmodel/oscal_catalog/
+  oscal_profile: https://w3id.org/lmodel/oscal_profile/
 
 imports:
-  - linkml:types
+- linkml:types
 
 subsets:
   nist_sp_800_53r5_catalog:
     description: >-
-      NIST SP 800-53 Catalog subset for controls and assessment procedures
+      NIST SP 800-53 Rev 5 catalog subset for controls and assessment procedures
   nist_sp_800_53r5_profile:
     description: >-
-      NIST SP 800-53 Profile subset for baselines and overlays
+      NIST SP 800-53 Rev 5 profile subset for baselines and overlays
+
+  nist_sp_800_53r4_catalog:
+    description: >-
+      NIST SP 800-53 Rev 4 backward-compatibility subset for catalog elements
+      present in OSCAL 1.2.x representations but removed in Rev 5
+      (e.g. depends-on parameter dependency)
+
+  nist_sp_800_53r5_cprt:
+    description: >-
+      NIST CPRT (Cybersecurity and Privacy Reference Tool) export subset
+      covering SP 800-53, SP 800-53A, and SP 800-53B element and relationship data
 
 slots:
   catalog:
@@ -29,23 +42,26 @@ slots:
     range: CatalogBody
     inlined: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:catalog]
   profile:
     description: Root profile payload
     range: ProfileBody
     inlined: true
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_profile:profile]
   metadata:
     description: Profile and Catalog metadata
     range: Metadata
     inlined: true
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:metadata]
   groups:
     description: List of control groups in the catalog
     range: ControlGroup
@@ -53,8 +69,9 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:groups]
   controls:
     description: List of controls in a group
     range: Control
@@ -62,8 +79,9 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:controls]
   params:
     description: List of parameters for a control
     range: Parameter
@@ -71,8 +89,9 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:params]
   props:
     description: List of properties
     range: Property
@@ -80,8 +99,9 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:props]
   guidelines:
     description: List of guidelines
     range: Guideline
@@ -89,8 +109,9 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:guidelines]
   links:
     description: List of links and relationships
     range: Link
@@ -98,8 +119,9 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:links]
   parts:
     description: Nested parts that provide prose and structure
     range: Part
@@ -107,92 +129,107 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:parts]
   select:
     description: Selection parameters for a parameter definition
     range: Selection
     inlined: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:select]
   id:
     description: Unique identifier for an element
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:id]
   uuid:
     description: UUID for profile, metadata, or resource element
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:uuid]
   title:
     description: Human-readable title
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:title]
   version:
     description: Version identifier
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:version]
   "last-modified":
     description: Last modification timestamp
     aliases:
-      - last_modified
+    - last_modified
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:last-modified]
   "oscal-version":
     description: OSCAL version identifier
     aliases:
-      - oscal_version
+    - oscal_version
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:oscal-version]
   _class:
     description: Classification of a catalog element or property
     alias: class
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:_class]
   label:
     description: Human-readable label
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:label]
   name:
     description: Name of a property, part, or party
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:name]
   value:
     description: Property value
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:value]
   ns:
     description: Namespace URI for a property
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:ns]
   prose:
     description: Free-text prose content
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:prose]
   remarks:
     description: Supplemental remarks
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:remarks]
   revisions:
     description: Metadata revisions
     range: Revision
@@ -200,8 +237,9 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:revisions]
   roles:
     description: Roles used in metadata
     range: Role
@@ -209,9 +247,10 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:roles]
   parties:
     description: Parties used in metadata
     range: Party
@@ -219,61 +258,68 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:parties]
   "responsible-parties":
     description: Responsible party assignments
     aliases:
-      - responsible_parties
+    - responsible_parties
     range: ResponsibleParty
     multivalued: true
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:responsible-parties]
   "role-id":
     description: Assigned role identifier
     aliases:
-      - role_id
+    - role_id
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:role-id]
   "party-uuids":
     description: Referenced party UUIDs
     aliases:
-      - party_uuids
+    - party_uuids
     multivalued: true
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:party-uuids]
   type:
     description: Party type
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:type]
   "short-name":
     description: Short display name
     aliases:
-      - short_name
+    - short_name
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:short-name]
   "email-addresses":
     description: Party email addresses
     aliases:
-      - email_addresses
+    - email_addresses
     multivalued: true
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:email-addresses]
   addresses:
     description: Postal addresses
     range: Address
@@ -281,38 +327,43 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:addresses]
   "addr-lines":
     description: Address lines
     aliases:
-      - addr_lines
+    - addr_lines
     multivalued: true
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:addr-lines]
   city:
     description: City name
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:city]
   state:
     description: State or region
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:state]
   "postal-code":
     description: Postal code
     aliases:
-      - postal_code
+    - postal_code
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:postal-code]
   imports:
     description: Imported catalogs or profiles
     range: ImportResource
@@ -320,25 +371,28 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_profile:imports]
   merge:
     description: Merge behavior settings
     range: MergeRules
     inlined: true
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_profile:merge]
   "back-matter":
     description: Back-matter references and resources
     aliases:
-      - back_matter
+    - back_matter
     range: BackMatter
     inlined: true
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:back-matter]
   resources:
     description: Back-matter resources
     range: Resource
@@ -346,26 +400,30 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:resources]
   citation:
     description: Citation details for a resource
     range: Citation
     inlined: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:citation]
   text:
     description: Citation text
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:text]
   description:
     description: Resource description
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:description]
   rlinks:
     description: Resource links
     range: ResourceLink
@@ -373,67 +431,197 @@ slots:
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:rlinks]
   "media-type":
     description: Media type for a resource link
     aliases:
-      - media_type
+    - media_type
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:media-type]
   href:
     description: Link or resource reference
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:href]
   rel:
     description: Relationship type for a link
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:rel]
   "include-controls":
     description: Include-controls selectors
     aliases:
-      - include_controls
+    - include_controls
     range: IncludeControlsSelection
     multivalued: true
     inlined: true
     inlined_as_list: true
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:include-controls]
   "with-ids":
     description: Explicit control identifiers to include
     aliases:
-      - with_ids
+    - with_ids
     multivalued: true
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_catalog:with-ids]
   "as-is":
     description: Keep source order and content during merge
     aliases:
-      - as_is
+    - as_is
     range: boolean
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
 
+    exact_mappings: [oscal_profile:as-is]
   "how-many":
     description: How many selections are allowed
     aliases:
-      - how_many
+    - how_many
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
+    exact_mappings: [oscal_catalog:how-many]
   choice:
     description: List of selection options
     multivalued: true
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
+
+    exact_mappings: [oscal_catalog:choice]
+  "depends-on":
+    description: Identifier of another parameter this one depends on (SP 800-53 Rev 4 only)
+    aliases:
+    - depends_on
+    in_subset:
+    - nist_sp_800_53r4_catalog
+
+    exact_mappings: [oscal_catalog:depends-on]
+  flat:
+    description: Flat merge strategy — de-duplicate and merge all controls without source hierarchy
+    range: FlatMerge
+    inlined: true
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_profile:flat]
+  "exclude-controls":
+    description: Controls to explicitly exclude from an import
+    aliases:
+    - exclude_controls
+    range: ExcludeControlsSelection
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_catalog:exclude-controls]
+  matching:
+    description: Pattern-based control selectors using glob or regex patterns
+    range: ControlPattern
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_catalog:matching]
+  pattern:
+    description: Glob or regex pattern for matching control identifiers
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_catalog:pattern]
+  modify:
+    description: Profile modification directives — parameter overrides and control alterations
+    range: ProfileModify
+    inlined: true
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_profile:modify]
+  "set-parameters":
+    description: Parameter value overrides applied by the profile
+    aliases:
+    - set_parameters
+    range: ProfileSetParameter
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_profile:set-parameters]
+  alters:
+    description: Control alterations — add or remove parts from referenced controls
+    range: ProfileAlter
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_profile:alters]
+  adds:
+    description: Parts, parameters, or properties added to a control by an alteration
+    range: ProfileAdd
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_profile:adds]
+  "param-id":
+    description: Identifier of the parameter to be set
+    aliases:
+    - param_id
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_catalog:param-id]
+  "control-id":
+    description: Identifier of the control to alter
+    aliases:
+    - control_id
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_catalog:control-id]
+  position:
+    description: Position at which to add content relative to the by-id anchor
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_profile:position]
+  "by-id":
+    description: Identifier of the anchor part relative to which additions are positioned
+    aliases:
+    - by_id
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+    exact_mappings: [oscal_profile:by-id]
+  response:
+    description: Top-level CPRT API response wrapper
+    range: CPRTResponse
+    inlined: true
+    in_subset:
+    - nist_sp_800_53r5_cprt
 
 enums:
   CatalogElementClassValue:
@@ -442,8 +630,9 @@ enums:
       family:
       SP800-53:
       SP800-53-enhancement:
+      assessment-objective:
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   CatalogPropertyClassValue:
     description: Allowed values for property-level class values
@@ -452,307 +641,519 @@ enums:
       sp800-53a:
       zero-padded:
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
+
+  CPRTElementTypeValue:
+    description: Allowed element_type values in NIST CPRT export data
+    in_subset:
+    - nist_sp_800_53r5_cprt
+    permissible_values:
+      family:
+        description: SP 800-53 control family (e.g. AC, AU)
+      control:
+        description: Top-level security or privacy control (e.g. AC-1)
+      control_enhancement:
+        description: Control enhancement (e.g. AC-1(1))
+      control_statement:
+        description: Normative control statement text
+      discussion:
+        description: Non-normative discussion text for a control
+      odp:
+        description: Organization-Defined Parameter
+      odp_type:
+        description: ODP category (e.g. assignment, selection)
+      odp_statement:
+        description: Full ODP statement text
+      examine:
+        description: SP 800-53A Examine assessment objective
+      interview:
+        description: SP 800-53A Interview assessment objective
+      test:
+        description: SP 800-53A Test assessment objective
+      determination:
+        description: Assessment determination criterion
+      withdraw_reason:
+        description: Reason a control was withdrawn from SP 800-53
+      reference:
+        description: Informational reference to an external publication
+      security_baseline:
+        description: Security baseline designation (LOW / MODERATE / HIGH / NOT SELECTED)
+      privacy_baseline:
+        description: Privacy baseline designation (P-HIGH / NOT SELECTED)
+      sort:
+        description: Sort-order key for display purposes
+      control_name_sort:
+        description: Sort-order key for control name ordering
+
+  CPRTRelationshipTypeValue:
+    description: Relationship type identifiers used in NIST CPRT export data
+    in_subset:
+    - nist_sp_800_53r5_cprt
+    permissible_values:
+      projection:
+        description: Represents a relationship between two elements
+      related:
+        description: Denotes where a control is related to another control
+      incorporated_into:
+        description: Denotes where a withdrawn control was incorporated into another
+      moved_to:
+        description: Denotes where a withdrawn control was moved to
 
 classes:
   SP80053Document:
-    description: Unified root wrapper for catalog or profile content
+    description: Unified root wrapper for catalog, profile, or CPRT content
     tree_root: true
     class_uri: linkml:Any
     slots:
-      - catalog
-      - profile
+    - catalog
+    - profile
+    - response
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_cprt
 
   Catalog:
     description: Top-level wrapper that mirrors OSCAL catalog shape
+    close_mappings:
+    - oscal_catalog:CatalogDocument
     slots:
-      - catalog
+    - catalog
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   ProfileDocument:
     description: Top-level wrapper for OSCAL profile files
+    exact_mappings:
+    - oscal_profile:ProfileDocument
     slots:
-      - profile
+    - profile
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
 
   CatalogBody:
     description: Main catalog object
+    exact_mappings:
+    - oscal_catalog:Catalog
     class_uri: linkml:Any
     slots:
-      - uuid
-      - metadata
-      - groups
-      - "back-matter"
+    - uuid
+    - metadata
+    - groups
+    - "back-matter"
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   ProfileBody:
     description: OSCAL profile body
+    exact_mappings:
+    - oscal_profile:Profile
     class_uri: linkml:Any
     slots:
-      - uuid
-      - metadata
-      - imports
-      - merge
-      - "back-matter"
+    - uuid
+    - metadata
+    - imports
+    - merge
+    - modify
+    - "back-matter"
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
 
   Metadata:
     description: OSCAL metadata section used in catalogs and profiles
+    close_mappings:
+    - oscal_catalog:Metadata
     class_uri: linkml:Any
     slots:
-      - title
-      - "last-modified"
-      - version
-      - "oscal-version"
-      - revisions
-      - props
-      - links
-      - roles
-      - parties
-      - "responsible-parties"
-      - remarks
+    - title
+    - "last-modified"
+    - version
+    - "oscal-version"
+    - revisions
+    - props
+    - links
+    - roles
+    - parties
+    - "responsible-parties"
+    - remarks
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
   Revision:
     description: Metadata revision entry
+    close_mappings:
+    - oscal_catalog:Revision
     class_uri: linkml:Any
     slots:
-      - title
-      - "last-modified"
-      - version
-      - "oscal-version"
-      - links
-      - remarks
+    - title
+    - "last-modified"
+    - version
+    - "oscal-version"
+    - links
+    - remarks
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   Role:
     description: Role definition
+    close_mappings:
+    - oscal_catalog:Role
     slots:
-      - id
-      - title
+    - id
+    - title
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
   Party:
     description: Party definition
+    close_mappings:
+    - oscal_catalog:Party
     class_uri: linkml:Any
     slots:
-      - uuid
-      - type
-      - name
-      - "short-name"
-      - "email-addresses"
-      - addresses
+    - uuid
+    - type
+    - name
+    - "short-name"
+    - "email-addresses"
+    - addresses
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
   Address:
     description: Postal address
+    close_mappings:
+    - oscal_catalog:Address
     class_uri: linkml:Any
     slots:
-      - "addr-lines"
-      - city
-      - state
-      - "postal-code"
+    - "addr-lines"
+    - city
+    - state
+    - "postal-code"
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
   ResponsibleParty:
     description: Assignment of parties to a role
+    exact_mappings:
+    - oscal_catalog:ResponsibleParty
     class_uri: linkml:Any
     slots:
-      - "role-id"
-      - "party-uuids"
+    - "role-id"
+    - "party-uuids"
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
   BackMatter:
     description: OSCAL back-matter section
+    exact_mappings:
+    - oscal_catalog:BackMatter
     class_uri: linkml:Any
     slots:
-      - resources
+    - resources
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
   Resource:
     description: Referenced resource
+    close_mappings:
+    - oscal_catalog:Resource
     class_uri: linkml:Any
     slots:
-      - uuid
-      - title
-      - description
-      - citation
-      - rlinks
+    - uuid
+    - title
+    - description
+    - citation
+    - rlinks
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
   Citation:
     description: Citation wrapper
+    exact_mappings:
+    - oscal_catalog:Citation
     class_uri: linkml:Any
     slots:
-      - text
+    - text
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   ResourceLink:
     description: Reference link for a resource
+    close_mappings:
+    - oscal_catalog:ResourceLink
     class_uri: linkml:Any
     slots:
-      - href
-      - "media-type"
+    - href
+    - "media-type"
     in_subset:
-      - nist_sp_800_53r5_catalog
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_profile
 
   CatalogElement:
     description: Base class for catalog elements
     abstract: true
     slots:
-      - id
-      - props
-      - links
-      - parts
+    - id
+    - props
+    - links
+    - parts
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   IdentifiedElement:
     description: A catalog element with required id and optional title/class
     is_a: CatalogElement
     slots:
-      - title
-      - _class
-      - label
+    - title
+    - _class
+    - label
     slot_usage:
       _class:
         range: CatalogElementClassValue
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   ControlGroup:
     description: A group of controls (family)
     is_a: IdentifiedElement
+    exact_mappings:
+    - oscal_catalog:Group
     slots:
-      - groups
-      - controls
+    - groups
+    - controls
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   Control:
     description: A security control
     is_a: IdentifiedElement
+    close_mappings:
+    - oscal_catalog:Control
     slots:
-      - params
-      - controls
+    - params
+    - controls
     slot_usage:
       controls:
         range: ControlEnhancement
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   ControlEnhancement:
     description: An enhancement to a control
     is_a: IdentifiedElement
+    close_mappings:
+    - oscal_catalog:Control
     slots:
-      - params
-      - controls
+    - params
+    - controls
     slot_usage:
       controls:
         range: ControlEnhancement
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   Parameter:
     description: A configurable parameter used by a control
     is_a: IdentifiedElement
+    close_mappings:
+    - oscal_catalog:Parameter
+    class_uri: linkml:Any
     slots:
-      - guidelines
-      - select
+    - guidelines
+    - select
+    - "depends-on"
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r4_catalog
 
   Guideline:
     description: Additional prose guidance associated with a parameter
+    exact_mappings:
+    - oscal_catalog:ParameterGuideline
     slots:
-      - prose
+    - prose
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   Property:
     description: A name-value property with optional namespace and class attributes
+    close_mappings:
+    - oscal_catalog:Property
     slots:
-      - name
-      - value
-      - ns
-      - _class
+    - name
+    - value
+    - ns
+    - _class
     slot_usage:
       _class:
         range: CatalogPropertyClassValue
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   Selection:
     description: Selection criteria for a parameter
+    exact_mappings:
+    - oscal_catalog:ParameterSelection
     class_uri: linkml:Any
     slots:
-      - "how-many"
-      - choice
+    - "how-many"
+    - choice
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   Link:
     description: Relationship link
+    close_mappings:
+    - oscal_catalog:Link
     slots:
-      - href
-      - rel
+    - href
+    - rel
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   Part:
     description: Structured narrative part that can contain nested parts
     is_a: IdentifiedElement
+    close_mappings:
+    - oscal_catalog:Part
     slots:
-      - name
-      - prose
+    - name
+    - prose
     in_subset:
-      - nist_sp_800_53r5_catalog
+    - nist_sp_800_53r5_catalog
 
   ImportResource:
     description: Imported profile or catalog reference
+    exact_mappings:
+    - oscal_profile:ProfileImport
     class_uri: linkml:Any
     slots:
-      - href
-      - "include-controls"
+    - href
+    - "include-controls"
+    - "exclude-controls"
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
 
   IncludeControlsSelection:
     description: Control inclusion selector
+    close_mappings:
+    - oscal_catalog:SelectControlById
     class_uri: linkml:Any
     slots:
-      - "with-ids"
+    - "with-ids"
+    - matching
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
 
   MergeRules:
     description: Merge configuration
+    exact_mappings:
+    - oscal_profile:ProfileMerge
     class_uri: linkml:Any
     slots:
-      - "as-is"
+    - "as-is"
+    - flat
     in_subset:
-      - nist_sp_800_53r5_profile
+    - nist_sp_800_53r5_profile
+
+  FlatMerge:
+    description: Marker object indicating flat merge strategy for profile resolution
+    exact_mappings:
+    - oscal_profile:MergeFlat
+    class_uri: linkml:Any
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+  ControlPattern:
+    description: Glob or regex pattern for selecting controls by identifier
+    exact_mappings:
+    - oscal_catalog:ControlMatching
+    class_uri: linkml:Any
+    slots:
+    - pattern
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+  ExcludeControlsSelection:
+    description: Selection of controls to explicitly exclude from a profile import
+    close_mappings:
+    - oscal_catalog:SelectControlById
+    class_uri: linkml:Any
+    slots:
+    - "with-ids"
+    - matching
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+  ProfileModify:
+    description: Profile modification section containing parameter overrides and control alterations
+    exact_mappings:
+    - oscal_profile:ProfileModify
+    class_uri: linkml:Any
+    slots:
+    - "set-parameters"
+    - alters
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+  ProfileSetParameter:
+    description: Override the value of a parameter in a referenced control
+    exact_mappings:
+    - oscal_profile:ParameterSetting
+    class_uri: linkml:Any
+    slots:
+    - "param-id"
+    - label
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+  ProfileAlter:
+    description: Alteration to a referenced control — adds or removes parts
+    exact_mappings:
+    - oscal_profile:Alteration
+    class_uri: linkml:Any
+    slots:
+    - "control-id"
+    - adds
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+  ProfileAdd:
+    description: Content to be added to a control via profile alteration
+    exact_mappings:
+    - oscal_profile:Addition
+    class_uri: linkml:Any
+    slots:
+    - position
+    - "by-id"
+    - parts
+    - props
+    in_subset:
+    - nist_sp_800_53r5_profile
+
+  CPRTDocument:
+    description: >-
+      Semantic class for NIST CPRT (Cybersecurity and Privacy Reference Tool)
+      export documents covering SP 800-53, SP 800-53A, and SP 800-53B.
+      Validate with: linkml validate -C SP80053Document -s <schema> <file.json>
+    class_uri: linkml:Any
+    slots:
+    - response
+    in_subset:
+    - nist_sp_800_53r5_cprt
+
+  CPRTResponse:
+    description: >-
+      CPRT API response container holding document metadata, typed elements
+      (controls, enhancements, ODPs, assessment objectives, baselines),
+      relationship types, and element relationships
+    class_uri: linkml:Any
+    in_subset:
+    - nist_sp_800_53r5_cprt

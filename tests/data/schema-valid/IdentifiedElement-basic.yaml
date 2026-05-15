@@ -1,0 +1,6 @@
+id: test-element
+title: Test Identified Element
+label: "T-1."
+props:
+  - name: label
+    value: "T-1."
