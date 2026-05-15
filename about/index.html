@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -329,6 +329,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    About
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -345,6 +363,86 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#schema-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Design
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Coverage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upstream-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upstream Limitations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Upstream Limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hyphenated-slot-names-silently-convert-to-underscores-in-json-schema-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hyphenated slot names silently convert to underscores in JSON Schema output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oscal-schema-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OSCAL Schema Alignment
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -370,6 +468,75 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#schema-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Schema Design
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-coverage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Coverage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#upstream-limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upstream Limitations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Upstream Limitations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hyphenated-slot-names-silently-convert-to-underscores-in-json-schema-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hyphenated slot names silently convert to underscores in JSON Schema output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#oscal-schema-alignment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OSCAL Schema Alignment
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -391,6 +558,152 @@
 
 <h1 id="about-nist-sp-800-53">About nist-sp-800-53</h1>
 <p>Electronic (LinkML) Version of NIST SP 800-53 Rev 5 Controls and SP 800-53A Rev 5 Assessment Procedures</p>
+<h2 id="schema-design">Schema Design</h2>
+<p>The schema (<code>src/nist_sp_800_53/schema/nist_sp_800_53.yaml</code>) is the single source of truth. All other artifacts — Python dataclasses, Pydantic models, JSON Schema, TypeScript, OWL, GraphQL, Protobuf, SHACL, SHEx, SQL DDL, and Java — are generated from it via <code>just gen-project</code>.</p>
+<p><strong>Schema statistics (as of 2026-05-15, linkml 1.11.0):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Classes</td>
+<td>38</td>
+</tr>
+<tr>
+<td>Slots</td>
+<td>68</td>
+</tr>
+<tr>
+<td>Enums</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Subsets</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Subsets</strong> model the distinct document formats covered:</p>
+<table>
+<thead>
+<tr>
+<th>Subset</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nist_sp_800_53r5_catalog</code></td>
+<td>SP 800-53 Rev 5 OSCAL catalog and resolved-profile catalogs</td>
+</tr>
+<tr>
+<td><code>nist_sp_800_53r5_profile</code></td>
+<td>SP 800-53 Rev 5 OSCAL baseline profiles (LOW / MODERATE / HIGH / PRIVACY)</td>
+</tr>
+<tr>
+<td><code>nist_sp_800_53r4_catalog</code></td>
+<td>SP 800-53 Rev 4 backward-compatibility (catalogs and profiles)</td>
+</tr>
+<tr>
+<td><code>nist_sp_800_53r5_cprt</code></td>
+<td>NIST Cybersecurity and Privacy Reference Tool (CPRT) JSON export format</td>
+</tr>
+</tbody>
+</table>
+<p>Key design choices:</p>
+<ul>
+<li>Classes that wrap complex, open-ended OSCAL structures use <code>class_uri: linkml:Any</code> to allow permissive nested validation while keeping the top-level schema strict.</li>
+<li>Hyphenated OSCAL slot names (e.g., <code>back-matter</code>, <code>how-many</code>) are preserved as slot names and handled via the open-world <code>class_uri: linkml:Any</code> pattern on their parent classes.</li>
+<li><code>SP80053Document</code> is the sole <code>tree_root</code>, accepting a <code>catalog</code>, <code>profile</code>, or <code>response</code> (CPRT) key at the root — enabling a single schema to validate all three document families.</li>
+</ul>
+<h2 id="test-coverage">Test Coverage</h2>
+<p><code>linkml validate</code> is used to validate all official data files against the schema.</p>
+<p><strong>Validated data (<code>tests/data/third-party/</code>):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Directory</th>
+<th>Files</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nist/</code></td>
+<td>18 YAML</td>
+<td>Official NIST OSCAL documents: SP 800-53 Rev 5 catalog, LOW/MODERATE/HIGH/PRIVACY baseline profiles and resolved-profile catalogs; Rev 4 LOW/MODERATE/HIGH baseline profiles; OSCAL example catalog and profile files</td>
+</tr>
+<tr>
+<td><code>cprt/</code></td>
+<td>3 JSON</td>
+<td>NIST CPRT exports: SP 800-53 v5.2.0 (controls), SP 800-53A v5.2.0 (assessment procedures), SP 800-53B v5.2.0 (control baselines)</td>
+</tr>
+<tr>
+<td><code>hyperGRC/</code></td>
+<td>11 YAML</td>
+<td>hyperGRC agency app component OSCAL files (validated as <code>ControlGroup</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>All files pass <code>linkml validate</code> with zero errors.</p>
+<p>Pytest (<code>tests/test_data.py</code>) runs two parametrized test functions:</p>
+<ul>
+<li><code>test_valid_data_files</code> — loads every <code>tests/data/valid/*.yaml</code> file into its target class (class name taken from the filename stem prefix) and asserts the object is non-null.</li>
+<li><code>test_invalid_data_files</code> — loads every <code>tests/data/invalid/*.yaml</code> file and asserts that a <code>ValueError</code> or <code>TypeError</code> is raised (e.g. an out-of-range enum value).</li>
+</ul>
+<p><strong>Unit test data (<code>tests/data/</code>):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Directory</th>
+<th>Files</th>
+<th>What is covered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>valid/</code></td>
+<td>23 YAML</td>
+<td><code>Catalog</code>, <code>ProfileDocument</code>, <code>ControlGroup</code>, <code>Control</code>, <code>ControlEnhancement</code>, <code>CatalogElement</code>, <code>IdentifiedElement</code>, <code>Part</code>, <code>Property</code>, <code>Link</code>, <code>Guideline</code>, <code>Role</code> — minimal and feature-rich variants; catalog/profile with metadata, groups, params, selections, merge, modify</td>
+</tr>
+<tr>
+<td><code>invalid/</code></td>
+<td>6 YAML</td>
+<td>One fault per file: <code>_class</code> set to an out-of-range enum value on <code>Property</code> (<code>CatalogPropertyClassValue</code>), <code>ControlGroup</code>, <code>Control</code>, <code>ControlEnhancement</code>, <code>Part</code>, and <code>IdentifiedElement</code> (<code>CatalogElementClassValue</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>New schema elements should be accompanied by example data in those directories before merging (see <code>CONTRIBUTING.md</code>).</p>
+<h2 id="upstream-limitations">Upstream Limitations</h2>
+<h3 id="hyphenated-slot-names-silently-convert-to-underscores-in-json-schema-output">Hyphenated slot names silently convert to underscores in JSON Schema output</h3>
+<p><strong>Affects:</strong> <code>linkml</code> ≥ 1.10.0 (confirmed still present in 1.11.0) | <code>gen-json-schema</code>, <code>linkml validate</code></p>
+<p>When a slot is named with a hyphen (e.g., <code>depends-on</code>, <code>back-matter</code>), <code>gen-json-schema</code> emits the property as an underscore name (<code>depends_on</code>, <code>back_matter</code>). <code>linkml validate</code> therefore rejects data files that use the hyphenated key — even though the slot is declared by that name — reporting <em>"Additional properties are not allowed ('depends-on' was unexpected)"</em>. The <code>alias</code> slot annotation does not fix this. <code>linkml</code> 1.11.0 added <code>--preserve-names</code> to <code>gen-json-schema</code> but testing confirms it does not affect slot property name serialisation — hyphens are still converted to underscores.</p>
+<p><strong>Workaround used here:</strong> Classes that own hyphenated OSCAL slots carry <code>class_uri: linkml:Any</code>, which sets <code>additionalProperties: true</code> in their JSON Schema <code>$defs</code> entry and lets the hyphenated key through as an unconstrained additional property.  The trade-off is that those classes lose closed-world property validation — any undeclared key is silently accepted.</p>
+<p>See <code>ISSUE-sp80053.md</code> (project root) for a minimal reproducer and 1.11.0 status notes.</p>
+<h2 id="oscal-schema-alignment">OSCAL Schema Alignment</h2>
+<p>The schema is aligned to the <a href="https://w3id.org/lmodel/oscal">lmodel/oscal</a> LinkML schema (<code>oscal-schema/</code> directory) via SSSOM mappings and inline <code>*_mappings</code> annotations.</p>
+<p><strong>Should they be merged?</strong> No. The OSCAL schema has 202 classes / 281 slots covering the full OSCAL suite (SSP, assessment plans, POA&amp;M, component definitions, mapping). The NIST schema intentionally covers only the catalog + profile + CPRT subset (38 classes / 68 slots). Merging would force consumers to carry 164 unrelated classes.</p>
+<p><strong>Alignment approach:</strong></p>
+<ul>
+<li><code>oscal_catalog: https://w3id.org/lmodel/oscal_catalog/</code> and <code>oscal_profile: https://w3id.org/lmodel/oscal_profile/</code> are declared as schema prefixes.</li>
+<li>33 classes carry <code>exact_mappings</code> (17) or <code>close_mappings</code> (16) to their OSCAL counterparts. Key renames: <code>CatalogBody</code> → <code>oscal_catalog:Catalog</code>, <code>ControlGroup</code> → <code>oscal_catalog:Group</code>, <code>ProfileBody</code> → <code>oscal_profile:Profile</code>, <code>ImportResource</code> → <code>oscal_profile:ProfileImport</code>, <code>MergeRules</code> → <code>oscal_profile:ProfileMerge</code>, <code>Selection</code> → <code>oscal_catalog:ParameterSelection</code>, <code>Guideline</code> → <code>oscal_catalog:ParameterGuideline</code>, <code>ProfileAlter</code> → <code>oscal_profile:Alteration</code>, <code>ProfileAdd</code> → <code>oscal_profile:Addition</code>, <code>ProfileSetParameter</code> → <code>oscal_profile:ParameterSetting</code>.</li>
+<li><code>close_mappings</code> is used where the NIST class is a proper subset of the OSCAL class (e.g. <code>Metadata</code>, <code>Parameter</code>, <code>Part</code>, <code>Address</code>, <code>Party</code>).</li>
+<li>67 of 68 slots carry <code>exact_mappings</code> to their identically-named OSCAL counterparts. Only <code>response</code> (CPRT-specific) has no OSCAL counterpart.</li>
+</ul>
+<p><strong>SSSOM file:</strong> <code>src/nist_sp_800_53/mappings/nist-sp-800-53-to-oscal-mappings.sssom.tsv</code> — 99 mapping rows (35 class + 67 slot - 3 unmapped CPRT classes).</p>
+<p><strong>Tooling:</strong> <code>scripts/overlay_sssom.py</code> reapplies the SSSOM file to the schema idempotently (run via <code>just overlay-sssom</code>; preview with <code>just overlay-sssom-dry-run</code>).</p>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://csrc.nist.gov/Projects/risk-management/sp800-53-controls/downloads">NIST CSRC Controls</a></li>
+<li><a href="https://csrc.nist.gov/pubs/sp/800/53/a/r5/final">NIST SP 800-53A Rev 5 final</a></li>
+<li><a href="https://csrc.nist.gov/pubs/sp/800/53/b/1/final">NIST SP 800-53B Rev 5 final</a></li>
+<li><a href="https://github.com/usnistgov/oscal-content/tree/main/nist.gov/SP800-53">OSCAL Content (usnistgov)</a></li>
+<li><a href="https://csrc.nist.gov/projects/cprt">NIST CPRT</a></li>
+</ul>
 
 
 

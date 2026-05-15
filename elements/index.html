@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -608,6 +608,26 @@
 <td>Citation wrapper</td>
 </tr>
 <tr>
+<td><a href="ControlPattern/">ControlPattern</a></td>
+<td>Glob or regex pattern for selecting controls by identifier</td>
+</tr>
+<tr>
+<td><a href="CPRTDocument/">CPRTDocument</a></td>
+<td>Semantic class for NIST CPRT (Cybersecurity and Privacy Reference Tool) expor...</td>
+</tr>
+<tr>
+<td><a href="CPRTResponse/">CPRTResponse</a></td>
+<td>CPRT API response container holding document metadata, typed elements (contro...</td>
+</tr>
+<tr>
+<td><a href="ExcludeControlsSelection/">ExcludeControlsSelection</a></td>
+<td>Selection of controls to explicitly exclude from a profile import</td>
+</tr>
+<tr>
+<td><a href="FlatMerge/">FlatMerge</a></td>
+<td>Marker object indicating flat merge strategy for profile resolution</td>
+</tr>
+<tr>
 <td><a href="Guideline/">Guideline</a></td>
 <td>Additional prose guidance associated with a parameter</td>
 </tr>
@@ -636,12 +656,28 @@
 <td>Party definition</td>
 </tr>
 <tr>
+<td><a href="ProfileAdd/">ProfileAdd</a></td>
+<td>Content to be added to a control via profile alteration</td>
+</tr>
+<tr>
+<td><a href="ProfileAlter/">ProfileAlter</a></td>
+<td>Alteration to a referenced control — adds or removes parts</td>
+</tr>
+<tr>
 <td><a href="ProfileBody/">ProfileBody</a></td>
 <td>OSCAL profile body</td>
 </tr>
 <tr>
 <td><a href="ProfileDocument/">ProfileDocument</a></td>
 <td>Top-level wrapper for OSCAL profile files</td>
+</tr>
+<tr>
+<td><a href="ProfileModify/">ProfileModify</a></td>
+<td>Profile modification section containing parameter overrides and control alter...</td>
+</tr>
+<tr>
+<td><a href="ProfileSetParameter/">ProfileSetParameter</a></td>
+<td>Override the value of a parameter in a referenced control</td>
 </tr>
 <tr>
 <td><a href="Property/">Property</a></td>
@@ -673,7 +709,7 @@
 </tr>
 <tr>
 <td><a href="SP80053Document/">SP80053Document</a></td>
-<td>Unified root wrapper for catalog or profile content</td>
+<td>Unified root wrapper for catalog, profile, or CPRT content</td>
 </tr>
 </tbody>
 </table>
@@ -699,12 +735,24 @@
 <td>Postal addresses</td>
 </tr>
 <tr>
+<td><a href="adds/">adds</a></td>
+<td>Parts, parameters, or properties added to a control by an alteration</td>
+</tr>
+<tr>
+<td><a href="alters/">alters</a></td>
+<td>Control alterations — add or remove parts from referenced controls</td>
+</tr>
+<tr>
 <td><a href="as_is/">as_is</a></td>
 <td>Keep source order and content during merge</td>
 </tr>
 <tr>
 <td><a href="back_matter/">back_matter</a></td>
 <td>Back-matter references and resources</td>
+</tr>
+<tr>
+<td><a href="by_id/">by_id</a></td>
+<td>Identifier of the anchor part relative to which additions are positioned</td>
 </tr>
 <tr>
 <td><a href="catalog/">catalog</a></td>
@@ -723,8 +771,16 @@
 <td>City name</td>
 </tr>
 <tr>
+<td><a href="control_id/">control_id</a></td>
+<td>Identifier of the control to alter</td>
+</tr>
+<tr>
 <td><a href="controls/">controls</a></td>
 <td>List of controls in a group</td>
+</tr>
+<tr>
+<td><a href="depends_on/">depends_on</a></td>
+<td>Identifier of another parameter this one depends on (SP 800-53 Rev 4 only)</td>
 </tr>
 <tr>
 <td><a href="description/">description</a></td>
@@ -733,6 +789,14 @@
 <tr>
 <td><a href="email_addresses/">email_addresses</a></td>
 <td>Party email addresses</td>
+</tr>
+<tr>
+<td><a href="exclude_controls/">exclude_controls</a></td>
+<td>Controls to explicitly exclude from an import</td>
+</tr>
+<tr>
+<td><a href="flat/">flat</a></td>
+<td>Flat merge strategy — de-duplicate and merge all controls without source hier...</td>
 </tr>
 <tr>
 <td><a href="groups/">groups</a></td>
@@ -775,6 +839,10 @@
 <td>List of links and relationships</td>
 </tr>
 <tr>
+<td><a href="matching/">matching</a></td>
+<td>Pattern-based control selectors using glob or regex patterns</td>
+</tr>
+<tr>
 <td><a href="media_type/">media_type</a></td>
 <td>Media type for a resource link</td>
 </tr>
@@ -787,6 +855,10 @@
 <td>Profile and Catalog metadata</td>
 </tr>
 <tr>
+<td><a href="modify/">modify</a></td>
+<td>Profile modification directives — parameter overrides and control alterations</td>
+</tr>
+<tr>
 <td><a href="name/">name</a></td>
 <td>Name of a property, part, or party</td>
 </tr>
@@ -797,6 +869,10 @@
 <tr>
 <td><a href="oscal_version/">oscal_version</a></td>
 <td>OSCAL version identifier</td>
+</tr>
+<tr>
+<td><a href="param_id/">param_id</a></td>
+<td>Identifier of the parameter to be set</td>
 </tr>
 <tr>
 <td><a href="params/">params</a></td>
@@ -813,6 +889,14 @@
 <tr>
 <td><a href="party_uuids/">party_uuids</a></td>
 <td>Referenced party UUIDs</td>
+</tr>
+<tr>
+<td><a href="pattern/">pattern</a></td>
+<td>Glob or regex pattern for matching control identifiers</td>
+</tr>
+<tr>
+<td><a href="position/">position</a></td>
+<td>Position at which to add content relative to the by-id anchor</td>
 </tr>
 <tr>
 <td><a href="postal_code/">postal_code</a></td>
@@ -843,6 +927,10 @@
 <td>Back-matter resources</td>
 </tr>
 <tr>
+<td><a href="response/">response</a></td>
+<td>Top-level CPRT API response wrapper</td>
+</tr>
+<tr>
 <td><a href="responsible_parties/">responsible_parties</a></td>
 <td>Responsible party assignments</td>
 </tr>
@@ -865,6 +953,10 @@
 <tr>
 <td><a href="select/">select</a></td>
 <td>Selection parameters for a parameter definition</td>
+</tr>
+<tr>
+<td><a href="set_parameters/">set_parameters</a></td>
+<td>Parameter value overrides applied by the profile</td>
 </tr>
 <tr>
 <td><a href="short_name/">short_name</a></td>
@@ -920,6 +1012,14 @@
 <tr>
 <td><a href="CatalogPropertyClassValue/">CatalogPropertyClassValue</a></td>
 <td>Allowed values for property-level class values</td>
+</tr>
+<tr>
+<td><a href="CPRTElementTypeValue/">CPRTElementTypeValue</a></td>
+<td>Allowed element_type values in NIST CPRT export data</td>
+</tr>
+<tr>
+<td><a href="CPRTRelationshipTypeValue/">CPRTRelationshipTypeValue</a></td>
+<td>Relationship type identifiers used in NIST CPRT export data</td>
 </tr>
 </tbody>
 </table>
@@ -1020,12 +1120,20 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="NistSp80053r4Catalog/">NistSp80053r4Catalog</a></td>
+<td>NIST SP 800-53 Rev 4 backward-compatibility subset for catalog elements prese...</td>
+</tr>
+<tr>
 <td><a href="NistSp80053r5Catalog/">NistSp80053r5Catalog</a></td>
-<td>NIST SP 800-53 Catalog subset for controls and assessment procedures</td>
+<td>NIST SP 800-53 Rev 5 catalog subset for controls and assessment procedures</td>
+</tr>
+<tr>
+<td><a href="NistSp80053r5Cprt/">NistSp80053r5Cprt</a></td>
+<td>NIST CPRT (Cybersecurity and Privacy Reference Tool) export subset covering S...</td>
 </tr>
 <tr>
 <td><a href="NistSp80053r5Profile/">NistSp80053r5Profile</a></td>
-<td>NIST SP 800-53 Profile subset for baselines and overlays</td>
+<td>NIST SP 800-53 Rev 5 profile subset for baselines and overlays</td>
 </tr>
 </tbody>
 </table>
