@@ -1,0 +1,73 @@
+NIST SP 800-53 LinkML Schema (nist-sp-800-53)
+Copyright 2026 Noel McLoughlin
+
+The code in this repository is licensed under the Apache License,
+Version 2.0 (see LICENSE). Some of the content it carries is third-party
+work under its own terms, listed below.
+
+src/nist_sp_800_53/schema/*.yaml, src/nist_sp_800_53/datamodel/ and
+project/ model the security and privacy controls that the National
+Institute of Standards and Technology (NIST) defines in Special
+Publication (SP) 800-53, Revision 5, https://doi.org/10.6028/NIST.SP.800-53r5
+(September 2020, updated December 2020; Release 5.2.0 of August 2025),
+with the assessment procedures of SP 800-53A, Revision 5,
+https://doi.org/10.6028/NIST.SP.800-53Ar5, and the control baselines of
+SP 800-53B, https://doi.org/10.6028/NIST.SP.800-53B. They are this
+project's rendering, written in its own words with NIST as the source of
+the definitions; they are not NIST's, and their use does not imply
+endorsement by NIST.
+
+The three publications are works of the United States Government and
+are not subject to copyright in the United States. NIST's statement on
+its works, read on 2026-10-29 at
+https://www.nist.gov/open/copyright-fair-use-and-licensing-statements-srd-data-software-and-technical-series-publications,
+adds that such a work may be subject to copyright in other countries.
+
+Third-party test data
+---------------------
+
+tests/data/third-party/nist/ holds copies of NIST's catalog of SP 800-53
+Revision 5, its baseline profiles and resolved catalogs, the Revision 4
+baseline profiles and OSCAL's example documents, in the Open Security
+Controls Assessment Language (OSCAL), retrieved from
+https://github.com/usnistgov/oscal-content, beside NIST's LICENSE.md from
+that repository. NIST's work is in the public domain within the United
+States, and NIST dedicates it to the worldwide public domain under CC0
+1.0. tests/data/third-party/cprt/ holds three exports of the same release
+from NIST's Cybersecurity and Privacy Reference Tool, on the same terms.
+
+tests/data/third-party/hyperGRC/ holds OSCAL-shaped fixtures derived from
+the agencyapp example of GovReady's hyperGRC,
+https://github.com/GovReady/hyperGRC/tree/master/example/agencyapp, which
+is licensed under the GNU General Public License, version 3, as the
+LICENSE.md beside them records. The tests read them; nothing in this
+repository redistributes hyperGRC's code.
+
+linkml-project-copier
+---------------------
+
+This project was generated from linkml-project-copier
+(https://github.com/linkml/linkml-project-copier), and its justfile,
+configuration and documentation scaffolding derive from that template:
+
+  The MIT License (MIT)
+  Copyright (c) 2025 David Linke
+
+  Permission is hereby granted, free of charge, to any person obtaining a
+  copy of this software and associated documentation files (the
+  "Software"), to deal in the Software without restriction, including
+  without limitation the rights to use, copy, modify, merge, publish,
+  distribute, sublicense, and/or sell copies of the Software, and to permit
+  persons to whom the Software is furnished to do so, subject to the
+  following conditions:
+
+  The above copyright notice and this permission notice shall be included
+  in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+  OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+  NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+  USE OR OTHER DEALINGS IN THE SOFTWARE.
