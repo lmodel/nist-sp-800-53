@@ -113,7 +113,7 @@ deploy: site
 
 # Run all tests
 [group('model development')]
-test: _test-schema _test-python _test-examples validate-oscal-all
+test: _test-schema _test-python _test-examples
 
 # Run linting, errors only (CI runs the same command)
 [group('model development')]

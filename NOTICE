@@ -23,25 +23,22 @@ its works, read on 2026-10-29 at
 https://www.nist.gov/open/copyright-fair-use-and-licensing-statements-srd-data-software-and-technical-series-publications,
 adds that such a work may be subject to copyright in other countries.
 
-Third-party test data
----------------------
+NIST's SP 800-53 catalog and baselines in OSCAL
+-----------------------------------------------
 
-tests/data/third-party/nist/ holds copies of NIST's catalog of SP 800-53
-Revision 5, its baseline profiles and resolved catalogs, the Revision 4
-baseline profiles and OSCAL's example documents, in the Open Security
-Controls Assessment Language (OSCAL), retrieved from
-https://github.com/usnistgov/oscal-content, beside NIST's LICENSE.md from
-that repository. NIST's work is in the public domain within the United
-States, and NIST dedicates it to the worldwide public domain under CC0
-1.0. tests/data/third-party/cprt/ holds three exports of the same release
-from NIST's Cybersecurity and Privacy Reference Tool, on the same terms.
-
-tests/data/third-party/hyperGRC/ holds OSCAL-shaped fixtures derived from
-the agencyapp example of GovReady's hyperGRC,
-https://github.com/GovReady/hyperGRC/tree/master/example/agencyapp, which
-is licensed under the GNU General Public License, version 3, as the
-LICENSE.md beside them records. The tests read them; nothing in this
-repository redistributes hyperGRC's code.
+src/nist_sp_800_53/schema/oscal-content/ holds copies of the catalog of
+SP 800-53 Revision 5, Release 5.2.0, with the assessment procedures of
+SP 800-53A, and of the four baseline profiles of SP 800-53B, that NIST
+publishes in the Open Security Controls Assessment Language (OSCAL),
+retrieved from
+https://github.com/usnistgov/oscal-content/tree/f0de6d8d8c059d374f15e0ae07508d82e370fc1d/nist.gov/SP800-53/rev5/json
+(the v1.6.0 release), beside NIST's LICENSE.md from the root of the same
+commit. Every file is identical to its counterpart there, and
+scripts/check_upstream_release.py checks that they stay so. NIST's work
+is in the public domain within the United States, and NIST dedicates it
+to the worldwide public domain under CC0 1.0. The tests read the copies
+to check the schema against them; nothing in this repository changes
+them.
 
 linkml-project-copier
 ---------------------

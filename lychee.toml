@@ -47,9 +47,9 @@ exclude_path = [
   "(^|/)docs/templates-linkml/",
   "(^|/)project/",
   "(^|/)docs/elements/",
-  # NIST's and hyperGRC's fixtures are copied as published; their links are
-  # upstream's to keep.
-  "(^|/)tests/data/third-party/",
+  # NIST's catalog, baselines and licence are copied as published; their
+  # links are upstream's to keep.
+  "(^|/)src/nist_sp_800_53/schema/oscal-content/",
   # The site's build writes these from the repository's own Markdown, with
   # links that only resolve once the site is served. website/'s own link check
   # covers them, and the files they come from are checked where they are.

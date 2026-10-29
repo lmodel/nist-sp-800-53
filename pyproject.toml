@@ -18,7 +18,6 @@ dynamic = ["version"]
 
 dependencies = [
   "linkml-runtime >=1.9.4",
-  "ruamel-yaml>=0.19.1",
 ]
 
 [dependency-groups]
@@ -67,9 +66,9 @@ skip = [
   "project/*",
   "src/nist_sp_800_53/datamodel/nist_sp_800_53_pydantic.py",
   "src/nist_sp_800_53/datamodel/nist_sp_800_53.py",
-  # NIST's and hyperGRC's fixtures, copied as published, and files copied in
+  # NIST's catalog and baselines, copied as published, and files copied in
   # by the KTL sidecar sync or written by npm, not by hand.
-  "tests/data/third-party/*",
+  "src/nist_sp_800_53/schema/oscal-content/*",
   ".lokf/scripts/*",
   "website/package-lock.json",
 ]
@@ -90,7 +89,7 @@ extend-exclude = [
   "project/*",
   "src/nist_sp_800_53/datamodel/nist_sp_800_53_pydantic.py",
   "src/nist_sp_800_53/datamodel/nist_sp_800_53.py",
-  "tests/data/third-party/*",
+  "src/nist_sp_800_53/schema/oscal-content/*",
   ".lokf/scripts/*",
   "website/package-lock.json",
 ]
