@@ -17,7 +17,9 @@ hash, so nothing is downloaded but listings. It asks doi.org whether NIST
 has registered the identifier of the next final edition, because NIST
 registers one for every publication. It prints a Markdown report and exits
 1 when a newer edition is out, a copied file changed upstream or a copy
-differs.
+differs, when the pinned tag no longer names the pinned commit, when a newer
+release no longer holds the pinned folder, or when a check could not finish.
+A file NIST adds to the pinned folder is reported for information.
 
 Set ``GITHUB_TOKEN`` to raise the API rate limit. Usage::
 
@@ -81,6 +83,25 @@ PINNED_BLOBS = {
     "LICENSE.md": ("LICENSE.md", "109af23dd24c2c465143aeab12ffebfffe2a4cd5"),
 }
 
+# The files of the pinned folder that the copy leaves out on purpose: the
+# minified duplicates of the copied files, and the four resolved baseline
+# catalogs, which repeat the catalog's controls. Any other file there that
+# PINNED_BLOBS does not list is reported for information.
+LEFT_OUT = frozenset(
+    {
+        "NIST_SP-800-53_rev5_catalog-min.json",
+        *(
+            f"NIST_SP-800-53_rev5_{level}-baseline{kind}"
+            for level in ("LOW", "MODERATE", "HIGH", "PRIVACY")
+            for kind in (
+                "_profile-min.json",
+                "-resolved-profile_catalog.json",
+                "-resolved-profile_catalog-min.json",
+            )
+        ),
+    }
+)
+
 # The edition the schema renders, as its digital object identifier (DOI), and
 # the identifier NIST would give the next final edition. Drafts of that
 # edition are reported, not acted on: the schema follows final editions. A
@@ -121,11 +142,56 @@ def _blob_sha(path: Path) -> str:
 
 
 def _listing(path: str, ref: str) -> dict[str, dict]:
-    """The entries of one folder at a ref, by name."""
-    entries = json.loads(_get(f"{API}/contents/{path}?ref={ref}"))
+    """The entries of one folder at a ref, by name, or of one file when the
+    path is a file. A path the ref does not hold gives no entries."""
+    try:
+        entries = json.loads(_get(f"{API}/contents/{path}?ref={ref}"))
+    except urllib.error.HTTPError as err:
+        if err.code == 404:
+            return {}
+        raise
     if isinstance(entries, dict):
         entries = [entries]
     return {e["name"]: e for e in entries}
+
+
+def _blobs(ref: str) -> tuple[dict[str, str | None], dict[str, dict[str, dict]]]:
+    """Each copied file's git object hash at a ref, None where the ref does
+    not hold it, and the listing of each folder the copies come from."""
+    listings: dict[str, dict[str, dict]] = {}
+    blobs: dict[str, str | None] = {}
+    for name, (source, _sha) in PINNED_BLOBS.items():
+        folder, _, base = source.rpartition("/")
+        if folder not in listings:
+            listings[folder] = _listing(folder or base, ref)
+        blobs[name] = listings[folder].get(base, {}).get("sha")
+    return blobs, listings
+
+
+def _unlisted(listing: dict[str, dict]) -> list[str]:
+    """The files of the pinned folder that are neither copied nor left out on
+    purpose: a file NIST added."""
+    return sorted(
+        name
+        for name, entry in listing.items()
+        if entry.get("type") == "file"
+        and name not in PINNED_BLOBS
+        and name not in LEFT_OUT
+    )
+
+
+def _tag_commit(tag: str) -> str | None:
+    """The commit a tag names, through the tag object when the tag is
+    annotated, or None when the tag is gone."""
+    try:
+        target = json.loads(_get(f"{API}/git/ref/tags/{tag}"))["object"]
+        if target["type"] == "tag":
+            target = json.loads(_get(f"{API}/git/tags/{target['sha']}"))["object"]
+    except urllib.error.HTTPError as err:
+        if err.code == 404:
+            return None
+        raise
+    return target["sha"]
 
 
 def _doi_registered(doi: str) -> bool:
@@ -177,15 +243,31 @@ def check_catalog() -> tuple[list[str], bool]:
     ]
     attention = False
 
+    tagged = _tag_commit(PINNED_TAG)
+    if tagged != PINNED_COMMIT:
+        attention = True
+        now = f"names `{tagged[:12]}`" if tagged else "is gone"
+        report.append(
+            f"- **The tag {PINNED_TAG} no longer names the pinned commit "
+            f"`{PINNED_COMMIT[:12]}`: it {now}.** Find out why before trusting the pins."
+        )
+
     latest = json.loads(_get(f"{API}/releases/latest"))["tag_name"]
     if _version_key(latest) > _version_key(PINNED_TAG):
-        theirs = _listing(PINNED_PATH, latest)
-        changed = sorted(
+        theirs, listings = _blobs(latest)
+        folder = listings.get(PINNED_PATH, {})
+        changed = [
             name
-            for name, (source, pinned_sha) in PINNED_BLOBS.items()
-            if source.startswith(PINNED_PATH + "/")
-            and theirs.get(name, {}).get("sha") != pinned_sha
-        )
+            for name, (source, pinned_sha) in sorted(PINNED_BLOBS.items())
+            if theirs[name] != pinned_sha
+            and (folder or not source.startswith(PINNED_PATH + "/"))
+        ]
+        if not folder:
+            attention = True
+            report.append(
+                f"- **usnistgov/oscal-content {latest} no longer holds `{PINNED_PATH}/`.** "
+                "Find where NIST moved the catalog and baselines before moving the pins."
+            )
         if changed:
             attention = True
             report.append(
@@ -195,13 +277,25 @@ def check_catalog() -> tuple[list[str], bool]:
                 f"files at that tag (https://github.com/usnistgov/oscal-content/tree/{latest}/"
                 f"{PINNED_PATH}), move the pins here and in the schema header, and run `just test`."
             )
-        else:
+        elif folder:
             report.append(
                 f"- Latest release: {latest}, which holds the pinned catalog and baselines unchanged."
             )
-        editions = {
-            n for n, e in _listing(EDITIONS_PATH, latest).items() if e["type"] == "dir"
-        }
+        added = _unlisted(folder)
+        if added:
+            report.append(
+                f"- For information, usnistgov/oscal-content {latest} holds files in "
+                f"`{PINNED_PATH}/` that the copy neither holds nor leaves out on purpose: "
+                + ", ".join(f"`{name}`" for name in added)
+                + "."
+            )
+        editions_listing = _listing(EDITIONS_PATH, latest)
+        if not editions_listing:
+            attention = True
+            report.append(
+                f"- **usnistgov/oscal-content {latest} no longer holds `{EDITIONS_PATH}/`.**"
+            )
+        editions = {n for n, e in editions_listing.items() if e["type"] == "dir"}
         if editions - PINNED_EDITIONS:
             attention = True
             report.append(
@@ -216,16 +310,12 @@ def check_catalog() -> tuple[list[str], bool]:
         report.append(f"- Latest release: {latest}, the pinned one.")
 
     matching, differing = 0, []
-    listings: dict[str, dict[str, dict]] = {}
+    upstream, listings = _blobs(PINNED_COMMIT)
     for name, (source, pinned_sha) in sorted(PINNED_BLOBS.items()):
         path = COPY / name
-        folder, _, base = source.rpartition("/")
-        if folder not in listings:
-            listings[folder] = _listing(folder or base, PINNED_COMMIT)
-        upstream = listings[folder].get(base, {}).get("sha")
         if not path.is_file():
             differing.append(f"`{name}` is missing from the copy")
-        elif upstream != pinned_sha:
+        elif upstream[name] != pinned_sha:
             differing.append(f"`{source}` at {PINNED_TAG} is not the pinned blob")
         elif _blob_sha(path) != pinned_sha:
             differing.append(f"`{name}` differs from `{source}` at {PINNED_TAG}")
@@ -236,6 +326,14 @@ def check_catalog() -> tuple[list[str], bool]:
     report.append(
         f"- {matching} of {len(PINNED_BLOBS)} copied files match the pinned commit byte for byte."
     )
+    added = _unlisted(listings.get(PINNED_PATH, {}))
+    if added:
+        report.append(
+            f"- For information, `{PINNED_PATH}/` at {PINNED_TAG} holds files the copy "
+            "neither holds nor leaves out on purpose: "
+            + ", ".join(f"`{name}`" for name in added)
+            + "."
+        )
     if differing:
         attention = True
         report.append(f"- **{len(differing)} problem(s) with the copy:**")
@@ -250,8 +348,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
     lines, attention = [], False
-    for part in (check_editions, check_catalog):
-        found, needs = part()
+    for name, part in (("editions", check_editions), ("catalog", check_catalog)):
+        # A network failure in one check is reported, and the other still runs,
+        # so a report is always written.
+        try:
+            found, needs = part()
+        except (urllib.error.URLError, TimeoutError, OSError) as err:
+            found, needs = [f"- **The {name} check could not finish: {err}.**"], True
         lines += found
         attention = attention or needs
     text = "\n".join(lines) + "\n"
