@@ -17,11 +17,11 @@ NIST SP 800-53 Security and Privacy Controls Release 5.2.0 with SP 800-53A and S
 The security and privacy controls that the National Institute of Standards and Technology (NIST) defines in [Special Publication (SP) 800-53, Revision 5](https://doi.org/10.6028/NIST.SP.800-53r5), at Release 5.2.0 of August 2025, with the assessment procedures of [SP 800-53A](https://doi.org/10.6028/NIST.SP.800-53Ar5) and the control baselines of [SP 800-53B](https://doi.org/10.6028/NIST.SP.800-53B):
 
 * **Families** (`Sp80053Family`): the twenty families the controls are sorted into, Access Control (AC) to Supply Chain Risk Management (SR).
-* **Controls** (`Sp80053Control`): the 324 controls, each with an identifier such as `AC-2`, its statement and the statement's items, its discussion, its organization-defined parameters, its related controls and the publications it cites. Revision 5 withdrew 24 of them; each keeps its identifier and says where it was incorporated or moved.
+* **Controls** (`Sp80053Control`): the 324 controls, each with an identifier such as `AC-2`, its statement and the statement's items, its discussion, its organization-defined parameters, its related controls and the publications it cites. Revision 5 withdrew 24 of them; each keeps its identifier and says where it was incorporated or moved, or, for SC-19, why it was withdrawn.
 * **Control enhancements** (`Sp80053ControlEnhancement`): the 872 enhancements, each with an identifier such as `AC-2(1)`, what a control carries, and the control it requires. 158 are withdrawn.
 * **Organization-defined parameters** (`Sp80053Parameter`): the 1,600 assignments and selections the statements leave to the organization, with the labels and guidelines SP 800-53A gives them.
-* **Assessment objectives and methods** (`Sp80053AssessmentObjective`, `Sp80053AssessmentMethod`): the 3,720 determination statements and the 2,931 examine, interview and test methods of SP 800-53A, one set for each active control and enhancement.
-* **References** (`Sp80053Reference`): the 192 publications the controls cite, by the labels the catalog gives them, such as `SP 800-12`.
+* **Assessment objectives and methods** (`Sp80053AssessmentObjective`, `Sp80053AssessmentMethod`): the 3,720 assessment objectives (2,792 determination statements and 928 headings) and the 2,931 examine, interview and test methods of SP 800-53A, one set for each active control and enhancement.
+* **References** (`Sp80053Reference`): the 192 publications the catalog lists, 160 of them cited by a control, by the labels the catalog gives them, such as `SP 800-12`.
 * **Baselines** (`Sp80053Baseline`): the Low (149 selections), Moderate (287), High (370) and Privacy (96) baselines of SP 800-53B, each a list of control and enhancement identifiers.
 * **The catalog** (`Sp80053Catalog`): one release as a single document that holds all of these.
 

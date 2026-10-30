@@ -32,7 +32,9 @@ No check covers these rules:
 
 - that a control's identifier starts with its family's letters, an
   enhancement's with its control's identifier, and a parameter's with its
-  control's zero-padded identifier;
+  control's zero-padded identifier, or, for a `_prm_` parameter that
+  aggregates others, with the control's identifier as the catalog writes it,
+  unpadded (`ac-1_prm_1`);
 - that a list never repeats an identifier;
 - that a related or required control, a moved-to target, a baseline's
   selection, an aggregated parameter and a `{{ insert: param, ... }}`
@@ -42,6 +44,7 @@ No check covers these rules:
   statement, discussion, assessment objective and methods;
 - that a parameter is an assignment with a label or a selection with
   choices, never both;
+- that a statement has text, items or both;
 - that a control's reference names a publication the catalog lists;
 - that an SP 800-53A label belongs to the element it labels.
 
