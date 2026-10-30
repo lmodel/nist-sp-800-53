@@ -1,0 +1,4 @@
+# Explanations
+
+* [Scope, influences and mappings](scope-and-influences.md) - What the schema renders and what it leaves out: SP 800-53 Revision 5 at Release 5.2.0 with SP 800-53A and SP 800-53B, as NIST's catalog and baseline profiles carry them, with lmodel/nist-sp-800-218 and lmodel/slsa as its influences on layout. It maps its classes to lmodel/oscal's, and models neither the resolved baseline catalogs, the catalog's own metadata, the CPRT exports nor Revision 4.
+* [Element names and the shared namespace](element-names.md) - How the schema names its elements so that its adapt copy can sit beside LOKF's schema and the slsa, github-actions, oscal, spdx and nist-sp-800-218 copies: classes with the `Sp80053` prefix, generic nouns qualified with the publication's own, NIST's identifiers kept as printed, upper-case enum values, `title` and `description` carrying LOKF's IRIs, and no other key shared, which `tests/test_schema_rules.py` checks.

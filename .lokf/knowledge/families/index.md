@@ -1,0 +1,22 @@
+# Families
+
+* [Access Control](access-control.md) - The SP 800-53 family AC, Access Control: 25 controls and 122 control enhancements in Release 5.2.0, of which 2 controls and 14 enhancements are withdrawn.
+* [Awareness and Training](awareness-and-training.md) - The SP 800-53 family AT, Awareness and Training: 6 controls and 11 control enhancements in Release 5.2.0, of which 1 control and 1 enhancement are withdrawn.
+* [Audit and Accountability](audit-and-accountability.md) - The SP 800-53 family AU, Audit and Accountability: 16 controls and 53 control enhancements in Release 5.2.0, of which 1 control and 12 enhancements are withdrawn.
+* [Assessment, Authorization, and Monitoring](assessment-authorization-and-monitoring.md) - The SP 800-53 family CA, Assessment, Authorization, and Monitoring: 9 controls and 23 control enhancements in Release 5.2.0, of which 1 control and 6 enhancements are withdrawn.
+* [Configuration Management](configuration-management.md) - The SP 800-53 family CM, Configuration Management: 14 controls and 52 control enhancements in Release 5.2.0, of which 0 controls and 10 enhancements are withdrawn.
+* [Contingency Planning](contingency-planning.md) - The SP 800-53 family CP, Contingency Planning: 13 controls and 43 control enhancements in Release 5.2.0, of which 1 control and 6 enhancements are withdrawn.
+* [Identification and Authentication](identification-and-authentication.md) - The SP 800-53 family IA, Identification and Authentication: 13 controls and 61 control enhancements in Release 5.2.0, of which 0 controls and 15 enhancements are withdrawn.
+* [Incident Response](incident-response.md) - The SP 800-53 family IR, Incident Response: 10 controls and 32 control enhancements in Release 5.2.0, of which 1 control and 1 enhancement are withdrawn.
+* [Maintenance](maintenance.md) - The SP 800-53 family MA, Maintenance: 7 controls and 23 control enhancements in Release 5.2.0, of which 0 controls and 2 enhancements are withdrawn.
+* [Media Protection](media-protection.md) - The SP 800-53 family MP, Media Protection: 8 controls and 22 control enhancements in Release 5.2.0, of which 0 controls and 10 enhancements are withdrawn.
+* [Physical and Environmental Protection](physical-and-environmental-protection.md) - The SP 800-53 family PE, Physical and Environmental Protection: 23 controls and 36 control enhancements in Release 5.2.0, of which 1 control and 7 enhancements are withdrawn.
+* [Planning](planning.md) - The SP 800-53 family PL, Planning: 11 controls and 6 control enhancements in Release 5.2.0, of which 3 controls and 3 enhancements are withdrawn.
+* [Program Management](program-management.md) - The SP 800-53 family PM, Program Management: 32 controls and 5 control enhancements in Release 5.2.0, none withdrawn.
+* [Personnel Security](personnel-security.md) - The SP 800-53 family PS, Personnel Security: 9 controls and 9 control enhancements in Release 5.2.0, of which 0 controls and 1 enhancement are withdrawn.
+* [Personally Identifiable Information Processing and Transparency](personally-identifiable-information-processing-and-transparency.md) - The SP 800-53 family PT, Personally Identifiable Information Processing and Transparency: 8 controls and 13 control enhancements in Release 5.2.0, none withdrawn.
+* [Risk Assessment](risk-assessment.md) - The SP 800-53 family RA, Risk Assessment: 10 controls and 16 control enhancements in Release 5.2.0, of which 1 control and 3 enhancements are withdrawn.
+* [System and Services Acquisition](system-and-services-acquisition.md) - The SP 800-53 family SA, System and Services Acquisition: 24 controls and 123 control enhancements in Release 5.2.0, of which 7 controls and 32 enhancements are withdrawn.
+* [System and Communications Protection](system-and-communications-protection.md) - The SP 800-53 family SC, System and Communications Protection: 51 controls and 111 control enhancements in Release 5.2.0, of which 4 controls and 19 enhancements are withdrawn.
+* [System and Information Integrity](system-and-information-integrity.md) - The SP 800-53 family SI, System and Information Integrity: 23 controls and 96 control enhancements in Release 5.2.0, of which 1 control and 16 enhancements are withdrawn.
+* [Supply Chain Risk Management](supply-chain-risk-management.md) - The SP 800-53 family SR, Supply Chain Risk Management: 12 controls and 15 control enhancements in Release 5.2.0, none withdrawn.
