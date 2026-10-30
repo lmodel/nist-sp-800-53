@@ -11,12 +11,12 @@ sources:
     title: the header comment, the on key and the four jobs
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T01:28:23Z"
+  at: "2026-10-30T08:34:38Z"
 status: draft
 ---
 
 # Lint & docs (lint-and-docs.yaml)
 
-`.github/workflows/lint-and-docs.yaml` is the workflow named "Lint & docs". It runs on a push to `main`, on every pull request, every Monday at 06:00 UTC to catch link rot, and by hand. Its four read-only jobs run ShellCheck over the tree, actionlint over the workflows, a word count that fails CONTRIBUTING.md over 1000 words or SECURITY.md over 900, and markdownlint under `.markdownlint-cli2.jsonc`, lychee under `lychee.toml` with this repository's own links on `main` remapped to the checkout, and codespell over every tracked Markdown file.[^lint-and-docs.yaml]
+`.github/workflows/lint-and-docs.yaml` is the workflow named "Lint & docs". It runs on a push to `main`, on every pull request, every Monday at 06:00 UTC to catch link rot, and by hand. Its four read-only jobs, each stopped after 15 minutes, run ShellCheck over the tree, actionlint over the workflows, a word count that fails CONTRIBUTING.md over 1000 words or SECURITY.md over 900, and markdownlint under `.markdownlint-cli2.jsonc`, lychee under `lychee.toml` with this repository's own links on `main` remapped to the checkout, and codespell over every tracked Markdown file.[^lint-and-docs.yaml]
 
 [^lint-and-docs.yaml]: .github/workflows/lint-and-docs.yaml, the header comment, the on key and the four jobs

@@ -2,6 +2,20 @@
 
 ## 2026-10-30
 
+* **Changed**: the generators' settings moved from `config.yaml` to `.linkml/generators.yaml`.
+* **Changed**: nist-sp-800-53 LinkML schema: the four concept classes require a title, the parameter maps to `oscal:Parameter`, and the README says how many references a control cites.
+* **Changed**: NIST's SP 800-53 catalog and baseline copies: two withdrawn elements give a reason rather than a link, and the watch checks that the tag still names the pinned commit.
+* **Changed**: Test data and tests: forty-one counter-examples, each naming where it fails, the tests that hold examples to the catalog, parameter prefixes and lists without repeats, and the stubbed watch tests.
+* **Changed**: Update the upstream pins: the watch's new findings, and a step that regenerates the artefacts and the adapt copy after the header moves.
+* **Changed**: the four workflows the repository owns now stop each job after a set time, `main.yaml` installs just 1.47.0, and the release title check names rebase and merge.
+* **Changed**: Security policy: Dependabot also watches the website's npm packages.
+* **Changed**: Documentation site: the retired schema's class pages redirect to their successors.
+* **Changed**: Validate data against the schema: the rules `docs/index.md` lists name the `_prm_` parameters' prefix and a statement's text or items.
+* **Changed**: Regenerate and test after a schema change: a counter-example opens with the line that says where it fails.
+* **Changed**: Scope, influences and mappings: the 192 references are those the catalog lists, not all cited by a control.
+* **Changed**: NIST SP 800-53A Revision 5: the aggregating parameters carry no SP 800-53A label, and not every parameter has a guideline.
+* **Changed**: Control enhancement: SC-42(2) requires its own control as well as SC-42(1).
+* **Changed**: Organization-defined parameter: the placeholder reads `{{ insert: param, <identifier> }}`, with two braces each side, as the catalog writes it.
 * **Changed**: Security policy now says that a ruleset on `main` blocks deletion and force-pushes, as `SECURITY.md` does since the repository's settings were read; two settings remain not in force.
 * **Added**: Documentation site, from `website/site.config.mjs` and `website/README.md`.
 * **Added**: nist-sp-800-53 LinkML schema, from `src/nist_sp_800_53/schema/nist_sp_800_53.yaml`, its adapt copy and the lokf-adapt recipes.

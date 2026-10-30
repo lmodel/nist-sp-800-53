@@ -37,7 +37,7 @@ sources:
     title: the import's with-ids
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T01:28:23Z"
+  at: "2026-10-30T08:34:38Z"
 status: draft
 ---
 
@@ -47,7 +47,7 @@ status: draft
 
 ## What the catalog holds
 
-The catalog's metadata gives its version as `5.2.0`, its OSCAL version as `1.2.3` and its last modification as `2026-10-22`.[^nist_sp-800-53_rev5_catalog.json] Its 20 groups of class `family` are the control families. Each group's controls of class `SP800-53` are the controls, 324 of them, and each control's nested controls of class `SP800-53-enhancement` are the enhancements, 872; 24 controls and 158 enhancements carry the property `status: withdrawn`, with a link `incorporated-into` or `moved-to` saying where each went. An active control's parts are its `statement` with nested `item` parts, its `guidance`, its `assessment-objective` with nested objectives, and its `assessment-method` parts, each with a `method` property and an `assessment-objects` part. Its `params` are the organization-defined parameters, and its links are `related`, `reference` and, on an enhancement, `required`. The back matter lists 202 resources, of which 192 carry a citation.
+The catalog's metadata gives its version as `5.2.0`, its OSCAL version as `1.2.3` and its last modification as `2026-10-22`.[^nist_sp-800-53_rev5_catalog.json] Its 20 groups of class `family` are the control families. Each group's controls of class `SP800-53` are the controls, 324 of them, and each control's nested controls of class `SP800-53-enhancement` are the enhancements, 872; 24 controls and 158 enhancements carry the property `status: withdrawn`, with a link `incorporated-into` or `moved-to` saying where each went, except SC-19 and CP-10(3), whose statement gives the reason instead. An active control's parts are its `statement` with nested `item` parts, its `guidance`, its `assessment-objective` with nested objectives, and its `assessment-method` parts, each with a `method` property and an `assessment-objects` part. Its `params` are the organization-defined parameters, and its links are `related`, `reference` and, on an enhancement, `required`. The back matter lists 202 resources, of which 192 carry a citation.
 
 Each baseline profile imports the catalog and selects controls and enhancements under `include-controls` as a list of `with-ids`: LOW selects 149, MODERATE selects 287, HIGH selects 370, PRIVACY selects 96.[^nist_sp-800-53_rev5_low-baseline_profile.json]
 
@@ -55,7 +55,7 @@ Each baseline profile imports the catalog and selects controls and enhancements 
 
 ## The pins
 
-`scripts/check_upstream_release.py` pins the tag `v1.6.0`, the commit, and each file's git object hash: `55eb9f2506cab43e051eeac6b48496246afcfd2c` for the catalog, `84edda2906a0edcb5e180034119e0501fc57691e`, `f0d1a6ecffa9b033480563a1f46bbac3f4ec7c41`, `9e275cbcc1e97e0ad52cb3dbd3cf668d653b409f` and `63c6ee354dbb2ddf17da03a3d186de26b9fabc2a` for the Low, Moderate, High and Privacy profiles, and `109af23dd24c2c465143aeab12ffebfffe2a4cd5` for the licence.[^check_upstream_release.py] The test checks the hashes offline, and the upstream watch checks them against the pinned commit every week. [Update the upstream pins](../playbooks/update-upstream-pins.md) says how to replace the copies.
+`scripts/check_upstream_release.py` pins the tag `v1.6.0`, the commit, and each file's git object hash: `55eb9f2506cab43e051eeac6b48496246afcfd2c` for the catalog, `84edda2906a0edcb5e180034119e0501fc57691e`, `f0d1a6ecffa9b033480563a1f46bbac3f4ec7c41`, `9e275cbcc1e97e0ad52cb3dbd3cf668d653b409f` and `63c6ee354dbb2ddf17da03a3d186de26b9fabc2a` for the Low, Moderate, High and Privacy profiles, and `109af23dd24c2c465143aeab12ffebfffe2a4cd5` for the licence.[^check_upstream_release.py] The test checks the hashes offline, and the upstream watch checks them against the pinned commit every week, and that the tag still names that commit. [Update the upstream pins](../playbooks/update-upstream-pins.md) says how to replace the copies.
 
 [^notice]: NOTICE, the section NIST's SP 800-53 catalog and baselines in OSCAL
 [^oscal-content-license.md]: src/nist_sp_800_53/schema/oscal-content/LICENSE.md, the public domain and CC0 statements

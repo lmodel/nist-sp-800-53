@@ -31,7 +31,7 @@ sources:
     title: the tool.lokf table
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T01:28:23Z"
+  at: "2026-10-30T08:34:38Z"
 status: draft
 ---
 
@@ -41,9 +41,9 @@ status: draft
 
 ## Elements
 
-The schema has eleven classes, each with the `Sp80053` prefix: `Sp80053Catalog`, the tree root, `Sp80053Family`, `Sp80053Control`, `Sp80053ControlEnhancement`, `Sp80053Statement`, `Sp80053StatementItem`, `Sp80053Parameter`, `Sp80053AssessmentObjective`, `Sp80053AssessmentMethod`, `Sp80053Reference` and `Sp80053Baseline`. Five enums hold the withdrawn status, the implementation levels, the selection cardinalities, the three assessment methods and the four baseline levels, with upper-case values. Six types pattern the identifiers: a family's two letters, a control's `AC-2`, an enhancement's `AC-2(1)`, either of the two, a withdrawal target such as `AC-2k` or `SR`, and a parameter's `ac-02_odp.01`. The two slots `title` and `description` carry `schema:name` and `schema:description`, so `lokf adapt` folds them into LOKF's, and every other key is the schema's own, such as `control_identifier`, `control_discussion` and `assessment_objective`. Each class names its lmodel/oscal counterpart in `broad_mappings`.[^nist_sp_800_53.yaml]
+The schema has eleven classes, each with the `Sp80053` prefix: `Sp80053Catalog`, the tree root, `Sp80053Family`, `Sp80053Control`, `Sp80053ControlEnhancement`, `Sp80053Statement`, `Sp80053StatementItem`, `Sp80053Parameter`, `Sp80053AssessmentObjective`, `Sp80053AssessmentMethod`, `Sp80053Reference` and `Sp80053Baseline`. Five enums hold the withdrawn status, the implementation levels, the selection cardinalities, the three assessment methods and the four baseline levels, with upper-case values. Six types pattern the identifiers: a family's two letters, a control's `AC-2`, an enhancement's `AC-2(1)`, either of the two, a withdrawal target such as `AC-2k` or `SR`, and a parameter's `ac-02_odp.01`. The two slots `title` and `description` carry `schema:name` and `schema:description`, so `lokf adapt` folds them into LOKF's, and every other key is the schema's own, such as `control_identifier`, `control_discussion` and `assessment_objective`. The family, the control, the enhancement and the baseline require a `title`. Each class names its lmodel/oscal counterpart in `broad_mappings`, the parameter `oscal:Parameter`.[^nist_sp_800_53.yaml]
 
-The README lists what the schema models and the counts the tests hold: twenty families, 324 controls, 872 enhancements, 1,600 parameters, 3,720 assessment objectives, 2,931 assessment methods, 192 references and the four baselines.[^readme.md]
+The README lists what the schema models and the counts the tests hold: twenty families, 324 controls, 872 enhancements, 1,600 parameters, 3,720 assessment objectives, 2,931 assessment methods, 192 references, 160 of them cited by a control, and the four baselines.[^readme.md]
 
 ## The domain schema
 

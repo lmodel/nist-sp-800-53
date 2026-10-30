@@ -19,13 +19,13 @@ sources:
     title: the What is left out section
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T01:28:23Z"
+  at: "2026-10-30T08:34:38Z"
 status: draft
 ---
 
 # Scope, influences and mappings
 
-The README says the schema models the security and privacy controls of SP 800-53, Revision 5, at Release 5.2.0 of August 2025, with the assessment procedures of SP 800-53A and the control baselines of SP 800-53B: the twenty families, the controls and enhancements with their statements, discussions, parameters, related controls and references, the assessment objectives and methods, the 192 cited publications and the four baselines, held under one catalog. Its influences are none beyond the three publications; its layout follows lmodel/nist-sp-800-218 and its release asset and governance files follow lmodel/slsa.[^readme.md]
+The README says the schema models the security and privacy controls of SP 800-53, Revision 5, at Release 5.2.0 of August 2025, with the assessment procedures of SP 800-53A and the control baselines of SP 800-53B: the twenty families, the controls and enhancements with their statements, discussions, parameters, related controls and references, the assessment objectives and methods, the 192 publications the catalog lists and the four baselines, held under one catalog. Its influences are none beyond the three publications; its layout follows lmodel/nist-sp-800-218 and its release asset and governance files follow lmodel/slsa.[^readme.md]
 
 The schema crosses to the Open Security Controls Assessment Language (OSCAL) and borrows nothing from it: each class names its lmodel/oscal counterpart in `broad_mappings`, a family an OSCAL group, a control and an enhancement controls, a statement, discussion, objective and method parts, a parameter a parameter, a reference a back-matter resource and a baseline a profile. The changelog says that the schema replaced classes that copied the OSCAL and CPRT shapes, shared names with LOKF's and lmodel/oscal's, and let a document with any keys validate.[^changelog.md]
 
