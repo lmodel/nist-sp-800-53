@@ -4,6 +4,10 @@
 
 Electronic (LinkML) Version of NIST SP 800-53 Rev 5 Controls and SP 800-53A Rev 5 Assessment Procedures
 
+> **Only want to ask?** Install `ktl-docent` into any agent you use, by a route from [the install page](https://w3id.org/ktl/docs/install/), and ask it about this project, for example which controls the privacy baseline selects. It answers from the bundle and says how far each answer has been checked.
+>
+> **Agents:** if `.lokf/knowledge/index.md` exists, read it first. `llms.txt` says how to weigh it.
+
 ## Documentation Website
 
 [https://lmodel.github.io/nist-sp-800-53](https://lmodel.github.io/nist-sp-800-53)
