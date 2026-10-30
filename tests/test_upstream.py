@@ -124,7 +124,11 @@ def _parts(element, name):
 
 
 def _links(element, rel):
-    return [link["href"].lstrip("#") for link in element.get("links", []) if link["rel"] == rel]
+    return [
+        link["href"].lstrip("#")
+        for link in element.get("links", [])
+        if link["rel"] == rel
+    ]
 
 
 class Derivation:
@@ -157,7 +161,11 @@ class Derivation:
         control_identifier, sep, path = oscal_id.partition("_smt.")
         if sep and control_identifier in self.elements:
             (statement,) = _parts(self.elements[control_identifier], "statement")
-            printed, holder, prefix = self.label(control_identifier), statement, control_identifier + "_smt"
+            printed, holder, prefix = (
+                self.label(control_identifier),
+                statement,
+                control_identifier + "_smt",
+            )
             for segment in path.split("."):
                 prefix += "." + segment
                 (holder,) = [p for p in holder.get("parts", []) if p["id"] == prefix]
@@ -201,7 +209,10 @@ class Derivation:
 
     def item(self, part):
         assert part["name"] == "item", part["id"]
-        entry = {"item_label": _prop(part, "label"), "item_text": self.prose(part["prose"])}
+        entry = {
+            "item_label": _prop(part, "label"),
+            "item_text": self.prose(part["prose"]),
+        }
         items = [self.item(p) for p in part.get("parts", [])]
         if items:
             entry["statement_items"] = items
@@ -218,7 +229,9 @@ class Derivation:
         if guidelines:
             entry["parameter_guidelines"] = guidelines
         if "select" in param:
-            entry["selection_choices"] = [self.prose(c) for c in param["select"]["choice"]]
+            entry["selection_choices"] = [
+                self.prose(c) for c in param["select"]["choice"]
+            ]
             how_many = param["select"].get("how-many")
             if how_many is not None:
                 entry["selection_cardinality"] = how_many.upper().replace("-", "_")
@@ -248,7 +261,9 @@ class Derivation:
         return {
             "assessment_method": _prop(part, "method", ns=RMF),
             "assessment_objects": [
-                self.prose(line) for line in objects["prose"].split("\n\n") if line.strip()
+                self.prose(line)
+                for line in objects["prose"].split("\n\n")
+                if line.strip()
             ],
         }
 
@@ -284,7 +299,9 @@ class Derivation:
             entry["control_references"] = references
         (objective,) = _parts(control, "assessment-objective")
         entry["assessment_objective"] = self.objective(objective)
-        entry["assessment_methods"] = [self.method(p) for p in _parts(control, "assessment-method")]
+        entry["assessment_methods"] = [
+            self.method(p) for p in _parts(control, "assessment-method")
+        ]
         entry["implementation_level"] = [
             v.upper() for v in _props(control, "implementation-level", ns=RMF)
         ]
@@ -331,7 +348,10 @@ class Derivation:
         }
 
     def reference(self, resource):
-        entry = {"reference_label": resource["title"], "reference_citation": resource["citation"]["text"]}
+        entry = {
+            "reference_label": resource["title"],
+            "reference_citation": resource["citation"]["text"],
+        }
         (rlink,) = resource["rlinks"]
         entry["reference_url"] = rlink["href"]
         return entry
@@ -341,7 +361,8 @@ class Derivation:
             "catalog_release": self.catalog["metadata"]["version"],
             "control_families": [self.family(g) for g in self.catalog["groups"]],
             "control_baselines": [
-                self.baseline(level, profile) for level, profile in self.profiles.items()
+                self.baseline(level, profile)
+                for level, profile in self.profiles.items()
             ],
             "catalog_references": [
                 self.reference(r) for r in self.resources.values() if "citation" in r
@@ -440,7 +461,9 @@ def test_counts_match_the_release():
     """The derived catalog holds what the release holds."""
     active = _active()
     withdrawn = _withdrawn()
-    objectives = [o for e in active for o in _walk_objectives(e["assessment_objective"])]
+    objectives = [
+        o for e in active for o in _walk_objectives(e["assessment_objective"])
+    ]
     methods = [m for e in active for m in e["assessment_methods"]]
     references = [r for e in active for r in e.get("control_references", [])]
     counted = {
@@ -448,28 +471,45 @@ def test_counts_match_the_release():
         "controls": len(_controls()),
         "withdrawn controls": sum(1 for c in _controls() if "control_status" in c),
         "enhancements": len(_enhancements()),
-        "withdrawn enhancements": sum(1 for e in _enhancements() if "control_status" in e),
-        "incorporated into": sum(len(e.get("incorporated_into", [])) for e in withdrawn),
+        "withdrawn enhancements": sum(
+            1 for e in _enhancements() if "control_status" in e
+        ),
+        "incorporated into": sum(
+            len(e.get("incorporated_into", [])) for e in withdrawn
+        ),
         "moved to": sum(len(e.get("moved_to", [])) for e in withdrawn),
-        "withdrawn with a reason only": sum(1 for e in withdrawn if "withdrawal_reason" in e),
+        "withdrawn with a reason only": sum(
+            1 for e in withdrawn if "withdrawal_reason" in e
+        ),
         "parameters": len(_parameters()),
-        "aggregating parameters": sum(1 for p in _parameters() if "aggregated_parameters" in p),
+        "aggregating parameters": sum(
+            1 for p in _parameters() if "aggregated_parameters" in p
+        ),
         "statements": len(active),
-        "statement items": sum(1 for e in active for _ in _walk_items(e["control_statement"])),
+        "statement items": sum(
+            1 for e in active for _ in _walk_items(e["control_statement"])
+        ),
         "discussions": len(active),
         "assessment objectives": len(objectives),
         "assessment methods": len(methods),
-        "related control links": sum(len(e.get("related_control_ids", [])) for e in active),
-        "required control links": sum(len(e.get("required_controls", [])) for e in _enhancements()),
+        "related control links": sum(
+            len(e.get("related_control_ids", [])) for e in active
+        ),
+        "required control links": sum(
+            len(e.get("required_controls", [])) for e in _enhancements()
+        ),
         "control references": len(references),
         "reference documents": len(_derived()["catalog_references"]),
         "reference documents cited by controls": len(set(references)),
         "baselines": len(_derived()["control_baselines"]),
     }
     assert counted == COUNTS
-    assert {k: sum(1 for m in methods if m["assessment_method"] == k) for k in METHODS} == METHODS
     assert {
-        b["baseline_level"]: len(b["baseline_controls"]) for b in _derived()["control_baselines"]
+        k: sum(1 for m in methods if m["assessment_method"] == k) for k in METHODS
+    } == METHODS
+    assert {
+        b["baseline_level"]: len(b["baseline_controls"])
+        for b in _derived()["control_baselines"]
     } == BASELINE_SIZES
 
 
@@ -483,7 +523,9 @@ def test_identifiers_nest_and_are_unique():
             assert control["control_identifier"].startswith(family["family_id"] + "-")
             seen.append(control["control_identifier"])
             for enhancement in control.get("control_enhancements", []):
-                assert enhancement["enhancement_id"].startswith(control["control_identifier"] + "(")
+                assert enhancement["enhancement_id"].startswith(
+                    control["control_identifier"] + "("
+                )
                 seen.append(enhancement["enhancement_id"])
     assert len(seen) == len(set(seen))
     assert [f["family_id"] for f in _derived()["control_families"]] == FAMILY_IDS
@@ -498,15 +540,23 @@ def test_every_cited_identifier_names_an_element():
     identifiers = {_identifier(e) for e in _elements()}
     parameters = {p["parameter_id"] for p in _parameters()}
     for element in _active():
-        assert set(element.get("related_control_ids", [])) <= identifiers, _identifier(element)
-        assert set(element.get("required_controls", [])) <= identifiers, _identifier(element)
+        assert set(element.get("related_control_ids", [])) <= identifiers, _identifier(
+            element
+        )
+        assert set(element.get("required_controls", [])) <= identifiers, _identifier(
+            element
+        )
         for parameter in element.get("control_parameters", []):
             assert set(parameter.get("aggregated_parameters", [])) <= parameters
     for element in _withdrawn():
         assert set(element.get("moved_to", [])) <= identifiers, _identifier(element)
     for baseline in _derived()["control_baselines"]:
-        assert set(baseline["baseline_controls"]) <= identifiers, baseline["baseline_level"]
-        assert len(baseline["baseline_controls"]) == len(set(baseline["baseline_controls"]))
+        assert set(baseline["baseline_controls"]) <= identifiers, baseline[
+            "baseline_level"
+        ]
+        assert len(baseline["baseline_controls"]) == len(
+            set(baseline["baseline_controls"])
+        )
 
 
 def test_withdrawn_elements_say_where_they_went():
@@ -516,16 +566,32 @@ def test_withdrawn_elements_say_where_they_went():
     methods and no withdrawal slot."""
     for element in _withdrawn():
         assert element["control_status"] == "WITHDRAWN"
-        went = [k for k in ("incorporated_into", "moved_to", "withdrawal_reason") if k in element]
+        went = [
+            k
+            for k in ("incorporated_into", "moved_to", "withdrawal_reason")
+            if k in element
+        ]
         assert went, _identifier(element)
-        assert not {"control_statement", "control_discussion", "assessment_objective"} & set(element)
+        assert not {
+            "control_statement",
+            "control_discussion",
+            "assessment_objective",
+        } & set(element)
     for element in _active():
         assert not {"incorporated_into", "moved_to", "withdrawal_reason"} & set(element)
         assert element["assessment_methods"], _identifier(element)
-    reasons = {_identifier(e): e["withdrawal_reason"] for e in _withdrawn() if "withdrawal_reason" in e}
+    reasons = {
+        _identifier(e): e["withdrawal_reason"]
+        for e in _withdrawn()
+        if "withdrawal_reason" in e
+    }
     assert set(reasons) == {"CP-10(3)", "SC-19"}
-    assert [e["incorporated_into"] for e in _withdrawn() if _identifier(e) == "AC-2(10)"] == [["AC-2k"]]
-    assert [e["incorporated_into"] for e in _withdrawn() if _identifier(e) == "SA-12"] == [["SR"]]
+    assert [
+        e["incorporated_into"] for e in _withdrawn() if _identifier(e) == "AC-2(10)"
+    ] == [["AC-2k"]]
+    assert [
+        e["incorporated_into"] for e in _withdrawn() if _identifier(e) == "SA-12"
+    ] == [["SR"]]
 
 
 def test_parameters_are_assignments_or_selections():
@@ -534,7 +600,9 @@ def test_parameters_are_assignments_or_selections():
     catalog."""
     parameters = {p["parameter_id"] for p in _parameters()}
     for parameter in _parameters():
-        assert ("parameter_label" in parameter) != ("selection_choices" in parameter), parameter
+        assert ("parameter_label" in parameter) != ("selection_choices" in parameter), (
+            parameter
+        )
     placeholders = re.compile(r"\{\{\s*insert:\s*param,\s*([^\s}]+)\s*\}\}")
     text = json.dumps(_derived())
     cited = set(placeholders.findall(text))
@@ -547,4 +615,6 @@ def test_control_references_name_listed_documents():
     labels = {r["reference_label"] for r in _derived()["catalog_references"]}
     assert len(labels) == len(_derived()["catalog_references"])
     for element in _active():
-        assert set(element.get("control_references", [])) <= labels, _identifier(element)
+        assert set(element.get("control_references", [])) <= labels, _identifier(
+            element
+        )

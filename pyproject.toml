@@ -70,8 +70,9 @@ skip = [
   "website/package-lock.json",
 ]
 
-# Reminder: words have to be lowercased for the ignore-words-list
-ignore-words-list = "linke"
+# Reminder: words have to be lowercased for the ignore-words-list. covert is
+# the word in NIST's control title Covert Channel Analysis.
+ignore-words-list = "linke,covert"
 quiet-level = 3
 
 # Ref.: https://github.com/crate-ci/typos (spell checker)

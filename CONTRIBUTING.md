@@ -4,7 +4,7 @@
 
 ## What this project is
 
-A LinkML schema of the security and privacy controls that the National Institute of Standards and Technology (NIST) defines in Special Publication (SP) 800-53, with the assessment procedures of SP 800-53A and the baselines of SP 800-53B, at Release 5.2.0. A knowledge bundle can type its concepts with the catalog's families, controls, control enhancements and baselines.
+A LinkML schema of the security and privacy controls that the National Institute of Standards and Technology (NIST) defines in Special Publication (SP) 800-53, with the assessment procedures of SP 800-53A and the baselines of SP 800-53B, at Release 5.2.0. A knowledge bundle can type its concepts with its families, controls, enhancements and baselines.
 
 | Path | Holds |
 | --- | --- |
@@ -28,7 +28,7 @@ just --list
 
 ### Agent skills (optional, only for this repo's `.lokf/` bundle)
 
-The bundle is maintained with the Knowledge Trust Ladder (KTL) skills, **installed, never committed**; continuous integration (CI) installs the librarian skill at run time, pinned to a release. Nothing in the schema depends on them. [The install page](https://w3id.org/ktl/docs/install/) lists every route; with npm:
+The bundle is maintained with the Knowledge Trust Ladder (KTL) skills, **installed, never committed**; continuous integration (CI) installs the librarian skill at run time, pinned to a release. [The install page](https://w3id.org/ktl/docs/install/) lists every route; with npm:
 
 ```bash
 npx skills add noelmcloughlin/knowledge-trust-ladder --skill ktl-librarian --yes   # derive concepts
@@ -41,7 +41,7 @@ npx skills add noelmcloughlin/knowledge-trust-ladder --skill ktl-curator --yes  
 - **Render what the three publications define**, in your own words, and name the section or table in the pull request; [AI_COVENANT.md](AI_COVENANT.md) says why. `tests/test_upstream.py` holds the schema to NIST's catalog and baselines.
 - **Leave `src/nist_sp_800_53/schema/oscal-content/` as NIST published it.** Replace it whole from one release of usnistgov/oscal-content instead, and move the pins in `scripts/check_upstream_release.py` and the schema header; `upstream-watch.yaml` checks the copy.
 - **Keep names apart.** A host imports this adapt copy beside the Linked Open Knowledge Format (LOKF) schema and the released lmodel copies, so a shared name carries one Internationalized Resource Identifier (IRI). `tests/test_schema_rules.py` checks.
-- **Run the tests**: `just test` (schema generation, `pytest` and the examples under `tests/data/`). Example data goes in `tests/data/valid/` and `tests/data/invalid/`, named `ClassName-suffix.yaml`, with an invalid example per constraint.
+- **Run the tests**: `just test` (schema generation, `pytest` and the examples under `tests/data/`). Example data goes in `tests/data/valid/` and `tests/data/invalid/`, named `ClassName-suffix.yaml`, one invalid example per constraint.
 - **Follow the schema's conventions**: UpperCamelCase classes with the `Sp80053` prefix, snake_case slots, attributes unless two classes share a field, a short description on every element. `just lint` checks, under `.linkmllint.yaml`.
 - **Run the pre-commit hooks** on what you staged (`uvx pre-commit run`): ruff, yamllint, codespell, typos and the `uv.lock` check.
 - **Lock files are part of the change.** CI installs with `uv sync --locked`; a dependency edit that does not update `uv.lock` (or `.lokf/uv.lock`) fails the run.
@@ -50,11 +50,11 @@ npx skills add noelmcloughlin/knowledge-trust-ladder --skill ktl-curator --yes  
 - **Actions are pinned to commit hashes**, the version in a trailing comment, and bumped by Dependabot, never by hand to a tag.
 - **The skills pin moves with the sidecar copies.** When moving `TRUST_LADDER_SKILLS_REF` in `.github/workflows/knowledge-librarian.yaml`, copy the other `knowledge-*.yaml` workflows and `.lokf/scripts/` and `.lokf/m365/` from that release's `skills/ktl-sidecar/templates/` in the same pull request.
 - **If your change alters behaviour** (not just wording), add an entry under `## [Unreleased]` in [CHANGELOG.md](CHANGELOG.md).
-- Keep changes focused, and fill in the pull request template.
+- Keep changes focused; fill in the pull request template.
 
 ## Code of conduct
 
-Participation here is covered by the [Contributor Covenant](CODE_OF_CONDUCT.md).
+Participation is covered by the [Contributor Covenant](CODE_OF_CONDUCT.md).
 
 ## Using AI tools
 

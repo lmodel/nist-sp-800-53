@@ -37,7 +37,12 @@ SHARED_WITH_NEIGHBOURS = {name: set() for name in NEIGHBOURS}
 
 # The classes `just lokf-adapt` re-roots on Concept, which the README lists
 # for the plugins' Known LOKF types setting.
-ROOTS = {"Sp80053Family", "Sp80053Control", "Sp80053ControlEnhancement", "Sp80053Baseline"}
+ROOTS = {
+    "Sp80053Family",
+    "Sp80053Control",
+    "Sp80053ControlEnhancement",
+    "Sp80053Baseline",
+}
 
 MAPPING_KEYS = (
     "mappings",
