@@ -1,1129 +1,226 @@
 {
     "$defs": {
-        "Address": {
-            "additionalProperties": true,
-            "description": "Postal address",
+        "Sp80053AssessmentMethod": {
+            "additionalProperties": false,
+            "description": "One assessment method SP 800-53A gives a control or enhancement, with the objects an assessor selects from: documents and records to examine, people to interview, or mechanisms and activities to test.",
             "properties": {
-                "addr_lines": {
-                    "description": "Address lines",
+                "assessment_method": {
+                    "$ref": "#/$defs/Sp80053AssessmentMethodKind",
+                    "description": "Which of the three methods this is."
+                },
+                "assessment_objects": {
+                    "description": "The objects the method is applied to, in the order the publication lists them.",
                     "items": {
+                        "pattern": "\\S",
                         "type": "string"
                     },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "city": {
-                    "description": "City name",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "postal_code": {
-                    "description": "Postal code",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "state": {
-                    "description": "State or region",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                    "type": "array"
                 }
             },
-            "title": "Address",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "BackMatter": {
-            "additionalProperties": true,
-            "description": "OSCAL back-matter section",
-            "properties": {
-                "resources": {
-                    "description": "Back-matter resources",
-                    "items": {
-                        "$ref": "#/$defs/Resource"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                }
-            },
-            "title": "BackMatter",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "CPRTDocument": {
-            "additionalProperties": true,
-            "description": "Semantic class for NIST CPRT (Cybersecurity and Privacy Reference Tool) export documents covering SP 800-53, SP 800-53A, and SP 800-53B. Validate with: linkml validate -C SP80053Document -s <schema> <file.json>",
-            "properties": {
-                "response": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/CPRTResponse"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Top-level CPRT API response wrapper"
-                }
-            },
-            "title": "CPRTDocument",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "CPRTElementTypeValue": {
-            "description": "Allowed element_type values in NIST CPRT export data",
-            "enum": [
-                "family",
-                "control",
-                "control_enhancement",
-                "control_statement",
-                "discussion",
-                "odp",
-                "odp_type",
-                "odp_statement",
-                "examine",
-                "interview",
-                "test",
-                "determination",
-                "withdraw_reason",
-                "reference",
-                "security_baseline",
-                "privacy_baseline",
-                "sort",
-                "control_name_sort"
+            "required": [
+                "assessment_method",
+                "assessment_objects"
             ],
-            "title": "CPRTElementTypeValue",
+            "title": "Sp80053AssessmentMethod",
+            "type": "object"
+        },
+        "Sp80053AssessmentMethodKind": {
+            "description": "The three assessment methods of SP 800-53A, as its catalog writes them.",
+            "enum": [
+                "EXAMINE",
+                "INTERVIEW",
+                "TEST"
+            ],
+            "title": "Sp80053AssessmentMethodKind",
             "type": "string"
         },
-        "CPRTRelationshipTypeValue": {
-            "description": "Relationship type identifiers used in NIST CPRT export data",
-            "enum": [
-                "projection",
-                "related",
-                "incorporated_into",
-                "moved_to"
+        "Sp80053AssessmentObjective": {
+            "additionalProperties": false,
+            "description": "An assessment objective of SP 800-53A: a determination statement an assessor checks, or a heading that groups the determination statements of one item of the control statement.",
+            "properties": {
+                "objective_label": {
+                    "description": "The label SP 800-53A gives the objective, such as AC-02a.[01].",
+                    "pattern": "^[A-Z]{2}-[0-9]{2}",
+                    "type": "string"
+                },
+                "objective_text": {
+                    "description": "The determination statement, with the same placeholders for parameters as the control statement. A heading has none.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "sub_objectives": {
+                    "description": "The objectives grouped under this one, in order.",
+                    "items": {
+                        "$ref": "#/$defs/Sp80053AssessmentObjective"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "objective_label"
             ],
-            "title": "CPRTRelationshipTypeValue",
-            "type": "string"
-        },
-        "CPRTResponse": {
-            "additionalProperties": true,
-            "description": "CPRT API response container holding document metadata, typed elements (controls, enhancements, ODPs, assessment objectives, baselines), relationship types, and element relationships",
-            "title": "CPRTResponse",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Catalog": {
-            "additionalProperties": false,
-            "description": "Top-level wrapper that mirrors OSCAL catalog shape",
-            "properties": {
-                "catalog": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/CatalogBody"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Root catalog payload"
-                }
-            },
-            "title": "Catalog",
+            "title": "Sp80053AssessmentObjective",
             "type": "object"
         },
-        "CatalogBody": {
-            "additionalProperties": true,
-            "description": "Main catalog object",
-            "properties": {
-                "back_matter": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/BackMatter"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Back-matter references and resources"
-                },
-                "groups": {
-                    "description": "List of control groups in the catalog",
-                    "items": {
-                        "$ref": "#/$defs/ControlGroup"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "metadata": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/Metadata"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Profile and Catalog metadata"
-                },
-                "uuid": {
-                    "description": "UUID for profile, metadata, or resource element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "CatalogBody",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "CatalogElement": {
+        "Sp80053Baseline": {
             "additionalProperties": false,
-            "description": "Base class for catalog elements",
+            "description": "One of the four control baselines SP 800-53B defines: the controls and enhancements selected for systems at the low, moderate or high impact level, or for privacy.",
             "properties": {
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
+                "baseline_controls": {
+                    "description": "The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them.",
                     "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts that provide prose and structure",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                }
-            },
-            "title": "CatalogElement",
-            "type": "object"
-        },
-        "CatalogElementClassValue": {
-            "description": "Allowed values for element-level class values",
-            "enum": [
-                "family",
-                "SP800-53",
-                "SP800-53-enhancement",
-                "assessment-objective"
-            ],
-            "title": "CatalogElementClassValue",
-            "type": "string"
-        },
-        "CatalogPropertyClassValue": {
-            "description": "Allowed values for property-level class values",
-            "enum": [
-                "sp800-53",
-                "sp800-53a",
-                "zero-padded"
-            ],
-            "title": "CatalogPropertyClassValue",
-            "type": "string"
-        },
-        "Citation": {
-            "additionalProperties": true,
-            "description": "Citation wrapper",
-            "properties": {
-                "text": {
-                    "description": "Citation text",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Citation",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Control": {
-            "additionalProperties": false,
-            "description": "A security control",
-            "properties": {
-                "class": {
-                    "$ref": "#/$defs/CatalogElementClassValue",
-                    "description": "Classification of a catalog element or property"
-                },
-                "controls": {
-                    "description": "List of controls in a group",
-                    "items": {
-                        "$ref": "#/$defs/ControlEnhancement"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "label": {
-                    "description": "Human-readable label",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "params": {
-                    "description": "List of parameters for a control",
-                    "items": {
-                        "$ref": "#/$defs/Parameter"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts that provide prose and structure",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Control",
-            "type": "object"
-        },
-        "ControlEnhancement": {
-            "additionalProperties": false,
-            "description": "An enhancement to a control",
-            "properties": {
-                "class": {
-                    "$ref": "#/$defs/CatalogElementClassValue",
-                    "description": "Classification of a catalog element or property"
-                },
-                "controls": {
-                    "description": "List of controls in a group",
-                    "items": {
-                        "$ref": "#/$defs/ControlEnhancement"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "label": {
-                    "description": "Human-readable label",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "params": {
-                    "description": "List of parameters for a control",
-                    "items": {
-                        "$ref": "#/$defs/Parameter"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts that provide prose and structure",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ControlEnhancement",
-            "type": "object"
-        },
-        "ControlGroup": {
-            "additionalProperties": false,
-            "description": "A group of controls (family)",
-            "properties": {
-                "class": {
-                    "$ref": "#/$defs/CatalogElementClassValue",
-                    "description": "Classification of a catalog element or property"
-                },
-                "controls": {
-                    "description": "List of controls in a group",
-                    "items": {
-                        "$ref": "#/$defs/Control"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "groups": {
-                    "description": "List of control groups in the catalog",
-                    "items": {
-                        "$ref": "#/$defs/ControlGroup"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "label": {
-                    "description": "Human-readable label",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts that provide prose and structure",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ControlGroup",
-            "type": "object"
-        },
-        "ControlPattern": {
-            "additionalProperties": true,
-            "description": "Glob or regex pattern for selecting controls by identifier",
-            "properties": {
-                "pattern": {
-                    "description": "Glob or regex pattern for matching control identifiers",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ControlPattern",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ExcludeControlsSelection": {
-            "additionalProperties": true,
-            "description": "Selection of controls to explicitly exclude from a profile import",
-            "properties": {
-                "matching": {
-                    "description": "Pattern-based control selectors using glob or regex patterns",
-                    "items": {
-                        "$ref": "#/$defs/ControlPattern"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "with_ids": {
-                    "description": "Explicit control identifiers to include",
-                    "items": {
+                        "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$",
                         "type": "string"
                     },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ExcludeControlsSelection",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "FlatMerge": {
-            "additionalProperties": true,
-            "description": "Marker object indicating flat merge strategy for profile resolution",
-            "title": "FlatMerge",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Guideline": {
-            "additionalProperties": false,
-            "description": "Additional prose guidance associated with a parameter",
-            "properties": {
-                "prose": {
-                    "description": "Free-text prose content",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Guideline",
-            "type": "object"
-        },
-        "IdentifiedElement": {
-            "additionalProperties": false,
-            "description": "A catalog element with required id and optional title/class",
-            "properties": {
-                "class": {
-                    "$ref": "#/$defs/CatalogElementClassValue",
-                    "description": "Classification of a catalog element or property"
+                    "type": "array"
                 },
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "label": {
-                    "description": "Human-readable label",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts that provide prose and structure",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
+                "baseline_level": {
+                    "$ref": "#/$defs/Sp80053BaselineLevel",
+                    "description": "Which of the four baselines this is."
                 },
                 "title": {
-                    "description": "Human-readable title",
+                    "description": "The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline.",
                     "type": [
                         "string",
                         "null"
                     ]
                 }
             },
-            "title": "IdentifiedElement",
+            "required": [
+                "baseline_level",
+                "baseline_controls"
+            ],
+            "title": "Sp80053Baseline",
             "type": "object"
         },
-        "ImportResource": {
-            "additionalProperties": true,
-            "description": "Imported profile or catalog reference",
-            "properties": {
-                "exclude_controls": {
-                    "description": "Controls to explicitly exclude from an import",
-                    "items": {
-                        "$ref": "#/$defs/ExcludeControlsSelection"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "href": {
-                    "description": "Link or resource reference",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "include_controls": {
-                    "description": "Include-controls selectors",
-                    "items": {
-                        "$ref": "#/$defs/IncludeControlsSelection"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ImportResource",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
+        "Sp80053BaselineLevel": {
+            "description": "The four control baselines SP 800-53B defines.",
+            "enum": [
+                "LOW",
+                "MODERATE",
+                "HIGH",
+                "PRIVACY"
+            ],
+            "title": "Sp80053BaselineLevel",
+            "type": "string"
         },
-        "IncludeControlsSelection": {
-            "additionalProperties": true,
-            "description": "Control inclusion selector",
-            "properties": {
-                "matching": {
-                    "description": "Pattern-based control selectors using glob or regex patterns",
-                    "items": {
-                        "$ref": "#/$defs/ControlPattern"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "with_ids": {
-                    "description": "Explicit control identifiers to include",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                }
-            },
-            "title": "IncludeControlsSelection",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Link": {
+        "Sp80053Catalog": {
             "additionalProperties": false,
-            "description": "Relationship link",
+            "description": "One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the controls cite.",
             "properties": {
-                "href": {
-                    "description": "Link or resource reference",
+                "catalog_references": {
+                    "description": "The publications the controls cite, as the catalog's references list them.",
+                    "items": {
+                        "$ref": "#/$defs/Sp80053Reference"
+                    },
                     "type": [
-                        "string",
+                        "array",
                         "null"
                     ]
                 },
-                "rel": {
-                    "description": "Relationship type for a link",
+                "catalog_release": {
+                    "description": "The release of Revision 5 the catalog carries, as NIST numbers it, such as 5.2.0.",
+                    "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+                    "type": "string"
+                },
+                "control_baselines": {
+                    "description": "The control baselines of SP 800-53B that select from the catalog.",
+                    "items": {
+                        "$ref": "#/$defs/Sp80053Baseline"
+                    },
                     "type": [
-                        "string",
+                        "array",
                         "null"
                     ]
+                },
+                "control_families": {
+                    "description": "The twenty control families, in the order SP 800-53 gives them.",
+                    "items": {
+                        "$ref": "#/$defs/Sp80053Family"
+                    },
+                    "type": "array"
                 }
             },
-            "title": "Link",
+            "required": [
+                "catalog_release",
+                "control_families"
+            ],
+            "title": "Sp80053Catalog",
             "type": "object"
         },
-        "MergeRules": {
-            "additionalProperties": true,
-            "description": "Merge configuration",
+        "Sp80053Control": {
+            "additionalProperties": false,
+            "description": "A security or privacy control: a safeguard with an identifier, a statement of what it requires, a discussion, parameters the organization defines, related controls, references, the assessment objective and methods SP 800-53A gives it, and its enhancements. A control Revision 5 withdrew keeps its identifier and says where it went.",
             "properties": {
-                "as_is": {
-                    "description": "Keep source order and content during merge",
+                "assessment_methods": {
+                    "description": "The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to.",
+                    "items": {
+                        "$ref": "#/$defs/Sp80053AssessmentMethod"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "assessment_objective": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Sp80053AssessmentObjective"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are."
+                },
+                "contributes_to_assurance": {
+                    "description": "True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.",
                     "type": [
                         "boolean",
                         "null"
                     ]
                 },
-                "flat": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/FlatMerge"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Flat merge strategy \u2014 de-duplicate and merge all controls without source hierarchy"
-                }
-            },
-            "title": "MergeRules",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Metadata": {
-            "additionalProperties": true,
-            "description": "OSCAL metadata section used in catalogs and profiles",
-            "properties": {
-                "last_modified": {
-                    "description": "Last modification timestamp",
+                "control_discussion": {
+                    "description": "The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require.",
                     "type": [
                         "string",
                         "null"
                     ]
                 },
-                "links": {
-                    "description": "List of links and relationships",
+                "control_enhancements": {
+                    "description": "The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead.",
                     "items": {
-                        "$ref": "#/$defs/Link"
+                        "$ref": "#/$defs/Sp80053ControlEnhancement"
                     },
                     "type": [
                         "array",
                         "null"
                     ]
                 },
-                "oscal_version": {
-                    "description": "OSCAL version identifier",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                "control_identifier": {
+                    "description": "The control's identifier, such as AC-2.",
+                    "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*$",
+                    "type": "string"
                 },
-                "parties": {
-                    "description": "Parties used in metadata",
+                "control_parameters": {
+                    "description": "The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them.",
                     "items": {
-                        "$ref": "#/$defs/Party"
+                        "$ref": "#/$defs/Sp80053Parameter"
                     },
                     "type": [
                         "array",
                         "null"
                     ]
                 },
-                "props": {
-                    "description": "List of properties",
+                "control_references": {
+                    "description": "The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130.",
                     "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "remarks": {
-                    "description": "Supplemental remarks",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "responsible_parties": {
-                    "description": "Responsible party assignments",
-                    "items": {
-                        "$ref": "#/$defs/ResponsibleParty"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "revisions": {
-                    "description": "Metadata revisions",
-                    "items": {
-                        "$ref": "#/$defs/Revision"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "roles": {
-                    "description": "Roles used in metadata",
-                    "items": {
-                        "$ref": "#/$defs/Role"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "version": {
-                    "description": "Version identifier",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Metadata",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Parameter": {
-            "additionalProperties": true,
-            "description": "A configurable parameter used by a control",
-            "properties": {
-                "class": {
-                    "$ref": "#/$defs/CatalogElementClassValue",
-                    "description": "Classification of a catalog element or property"
-                },
-                "depends_on": {
-                    "description": "Identifier of another parameter this one depends on (SP 800-53 Rev 4 only)",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "guidelines": {
-                    "description": "List of guidelines",
-                    "items": {
-                        "$ref": "#/$defs/Guideline"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "label": {
-                    "description": "Human-readable label",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts that provide prose and structure",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "select": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/Selection"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Selection parameters for a parameter definition"
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Parameter",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Part": {
-            "additionalProperties": false,
-            "description": "Structured narrative part that can contain nested parts",
-            "properties": {
-                "class": {
-                    "$ref": "#/$defs/CatalogElementClassValue",
-                    "description": "Classification of a catalog element or property"
-                },
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "label": {
-                    "description": "Human-readable label",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Name of a property, part, or party",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts that provide prose and structure",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "prose": {
-                    "description": "Free-text prose content",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Part",
-            "type": "object"
-        },
-        "Party": {
-            "additionalProperties": true,
-            "description": "Party definition",
-            "properties": {
-                "addresses": {
-                    "description": "Postal addresses",
-                    "items": {
-                        "$ref": "#/$defs/Address"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "email_addresses": {
-                    "description": "Party email addresses",
-                    "items": {
+                        "pattern": "\\S",
                         "type": "string"
                     },
                     "type": [
@@ -1131,561 +228,354 @@
                         "null"
                     ]
                 },
-                "name": {
-                    "description": "Name of a property, part, or party",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                "control_statement": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Sp80053Statement"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both."
                 },
-                "short_name": {
-                    "description": "Short display name",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                "control_status": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Sp80053ControlStatus"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none."
                 },
-                "type": {
-                    "description": "Party type",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "uuid": {
-                    "description": "UUID for profile, metadata, or resource element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Party",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ProfileAdd": {
-            "additionalProperties": true,
-            "description": "Content to be added to a control via profile alteration",
-            "properties": {
-                "by_id": {
-                    "description": "Identifier of the anchor part relative to which additions are positioned",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts that provide prose and structure",
+                "implementation_level": {
+                    "description": "Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.",
                     "items": {
-                        "$ref": "#/$defs/Part"
+                        "$ref": "#/$defs/Sp80053ImplementationLevel"
                     },
                     "type": [
                         "array",
                         "null"
                     ]
                 },
-                "position": {
-                    "description": "Position at which to add content relative to the by-id anchor",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
+                "incorporated_into": {
+                    "description": "For a withdrawn control or enhancement, what it was incorporated into, as the publication states it.",
                     "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ProfileAdd",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ProfileAlter": {
-            "additionalProperties": true,
-            "description": "Alteration to a referenced control \u2014 adds or removes parts",
-            "properties": {
-                "adds": {
-                    "description": "Parts, parameters, or properties added to a control by an alteration",
-                    "items": {
-                        "$ref": "#/$defs/ProfileAdd"
+                        "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)(-[1-9][0-9]*(\\([1-9][0-9]*\\))?([a-z](\\.[1-9][0-9]*)*|\\([a-z]\\)(\\([1-9][0-9]*\\))*)?)?$",
+                        "type": "string"
                     },
                     "type": [
                         "array",
                         "null"
                     ]
                 },
-                "control_id": {
-                    "description": "Identifier of the control to alter",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ProfileAlter",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ProfileBody": {
-            "additionalProperties": true,
-            "description": "OSCAL profile body",
-            "properties": {
-                "back_matter": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/BackMatter"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Back-matter references and resources"
-                },
-                "imports": {
-                    "description": "Imported catalogs or profiles",
+                "moved_to": {
+                    "description": "For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it.",
                     "items": {
-                        "$ref": "#/$defs/ImportResource"
+                        "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$",
+                        "type": "string"
                     },
                     "type": [
                         "array",
                         "null"
                     ]
                 },
-                "merge": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/MergeRules"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Merge behavior settings"
+                "related_control_ids": {
+                    "description": "The controls and enhancements the publication lists as related, by identifier.",
+                    "items": {
+                        "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
                 },
-                "metadata": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/Metadata"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Profile and Catalog metadata"
+                "title": {
+                    "description": "The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 },
-                "modify": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/ProfileModify"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Profile modification directives \u2014 parameter overrides and control alterations"
-                },
-                "uuid": {
-                    "description": "UUID for profile, metadata, or resource element",
+                "withdrawal_reason": {
+                    "description": "For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.",
                     "type": [
                         "string",
                         "null"
                     ]
                 }
             },
-            "title": "ProfileBody",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ProfileDocument": {
-            "additionalProperties": false,
-            "description": "Top-level wrapper for OSCAL profile files",
-            "properties": {
-                "profile": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/ProfileBody"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Root profile payload"
-                }
-            },
-            "title": "ProfileDocument",
+            "required": [
+                "control_identifier"
+            ],
+            "title": "Sp80053Control",
             "type": "object"
         },
-        "ProfileModify": {
-            "additionalProperties": true,
-            "description": "Profile modification section containing parameter overrides and control alterations",
-            "properties": {
-                "alters": {
-                    "description": "Control alterations \u2014 add or remove parts from referenced controls",
-                    "items": {
-                        "$ref": "#/$defs/ProfileAlter"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "set_parameters": {
-                    "description": "Parameter value overrides applied by the profile",
-                    "items": {
-                        "$ref": "#/$defs/ProfileSetParameter"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ProfileModify",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ProfileSetParameter": {
-            "additionalProperties": true,
-            "description": "Override the value of a parameter in a referenced control",
-            "properties": {
-                "label": {
-                    "description": "Human-readable label",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "param_id": {
-                    "description": "Identifier of the parameter to be set",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ProfileSetParameter",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Property": {
+        "Sp80053ControlEnhancement": {
             "additionalProperties": false,
-            "description": "A name-value property with optional namespace and class attributes",
+            "description": "A control enhancement: added functionality or strength for a control, with an identifier of its own, which the publication and other documents cite apart from the control. It carries what a control carries, and names the control or enhancement it requires.",
             "properties": {
-                "class": {
-                    "$ref": "#/$defs/CatalogPropertyClassValue",
-                    "description": "Classification of a catalog element or property"
-                },
-                "name": {
-                    "description": "Name of a property, part, or party",
+                "assessment_methods": {
+                    "description": "The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to.",
+                    "items": {
+                        "$ref": "#/$defs/Sp80053AssessmentMethod"
+                    },
                     "type": [
-                        "string",
+                        "array",
                         "null"
                     ]
                 },
-                "ns": {
-                    "description": "Namespace URI for a property",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "value": {
-                    "description": "Property value",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Property",
-            "type": "object"
-        },
-        "Resource": {
-            "additionalProperties": true,
-            "description": "Referenced resource",
-            "properties": {
-                "citation": {
+                "assessment_objective": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Citation"
+                            "$ref": "#/$defs/Sp80053AssessmentObjective"
                         },
                         {
                             "type": "null"
                         }
                     ],
-                    "description": "Citation details for a resource"
+                    "description": "The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are."
                 },
+                "contributes_to_assurance": {
+                    "description": "True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "control_discussion": {
+                    "description": "The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "control_parameters": {
+                    "description": "The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them.",
+                    "items": {
+                        "$ref": "#/$defs/Sp80053Parameter"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "control_references": {
+                    "description": "The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130.",
+                    "items": {
+                        "pattern": "\\S",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "control_statement": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Sp80053Statement"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both."
+                },
+                "control_status": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Sp80053ControlStatus"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none."
+                },
+                "enhancement_id": {
+                    "description": "The enhancement's identifier, such as AC-2(1).",
+                    "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*\\([1-9][0-9]*\\)$",
+                    "type": "string"
+                },
+                "implementation_level": {
+                    "description": "Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.",
+                    "items": {
+                        "$ref": "#/$defs/Sp80053ImplementationLevel"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "incorporated_into": {
+                    "description": "For a withdrawn control or enhancement, what it was incorporated into, as the publication states it.",
+                    "items": {
+                        "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)(-[1-9][0-9]*(\\([1-9][0-9]*\\))?([a-z](\\.[1-9][0-9]*)*|\\([a-z]\\)(\\([1-9][0-9]*\\))*)?)?$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "moved_to": {
+                    "description": "For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it.",
+                    "items": {
+                        "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "related_control_ids": {
+                    "description": "The controls and enhancements the publication lists as related, by identifier.",
+                    "items": {
+                        "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "required_controls": {
+                    "description": "The control, or in one case the enhancement, that must be implemented for the enhancement to apply, as NIST's catalog links it; its own control for every enhancement but SC-42(2), which requires SC-42(1).",
+                    "items": {
+                        "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "withdrawal_reason": {
+                    "description": "For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "enhancement_id"
+            ],
+            "title": "Sp80053ControlEnhancement",
+            "type": "object"
+        },
+        "Sp80053ControlStatus": {
+            "description": "The one status the catalog marks: withdrawn. A control or enhancement that Revision 5 keeps carries no status.",
+            "enum": [
+                "WITHDRAWN"
+            ],
+            "title": "Sp80053ControlStatus",
+            "type": "string"
+        },
+        "Sp80053Family": {
+            "additionalProperties": false,
+            "description": "One of the twenty families SP 800-53 sorts its controls into, such as Access Control or Supply Chain Risk Management.",
+            "properties": {
                 "description": {
-                    "description": "Resource description",
+                    "description": "What the family is about, in the words of whoever records it. SP 800-53 gives the Program Management family an overview of its own, and the other families none.",
                     "type": [
                         "string",
                         "null"
                     ]
                 },
-                "rlinks": {
-                    "description": "Resource links",
+                "family_controls": {
+                    "description": "The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead.",
                     "items": {
-                        "$ref": "#/$defs/ResourceLink"
+                        "$ref": "#/$defs/Sp80053Control"
                     },
                     "type": [
                         "array",
                         "null"
                     ]
                 },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "uuid": {
-                    "description": "UUID for profile, metadata, or resource element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Resource",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ResourceLink": {
-            "additionalProperties": true,
-            "description": "Reference link for a resource",
-            "properties": {
-                "href": {
-                    "description": "Link or resource reference",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "media_type": {
-                    "description": "Media type for a resource link",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ResourceLink",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ResponsibleParty": {
-            "additionalProperties": true,
-            "description": "Assignment of parties to a role",
-            "properties": {
-                "party_uuids": {
-                    "description": "Referenced party UUIDs",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "role_id": {
-                    "description": "Assigned role identifier",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ResponsibleParty",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Revision": {
-            "additionalProperties": true,
-            "description": "Metadata revision entry",
-            "properties": {
-                "last_modified": {
-                    "description": "Last modification timestamp",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "oscal_version": {
-                    "description": "OSCAL version identifier",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "remarks": {
-                    "description": "Supplemental remarks",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                "family_id": {
+                    "description": "The family's two letters, such as AC for Access Control.",
+                    "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)$",
+                    "type": "string"
                 },
                 "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "version": {
-                    "description": "Version identifier",
+                    "description": "The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline.",
                     "type": [
                         "string",
                         "null"
                     ]
                 }
             },
-            "title": "Revision",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Role": {
-            "additionalProperties": false,
-            "description": "Role definition",
-            "properties": {
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Role",
+            "required": [
+                "family_id"
+            ],
+            "title": "Sp80053Family",
             "type": "object"
         },
-        "SP80053Document": {
-            "additionalProperties": true,
-            "description": "Unified root wrapper for catalog, profile, or CPRT content",
-            "properties": {
-                "catalog": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/CatalogBody"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Root catalog payload"
-                },
-                "profile": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/ProfileBody"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Root profile payload"
-                },
-                "response": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/CPRTResponse"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Top-level CPRT API response wrapper"
-                }
-            },
-            "title": "SP80053Document",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
+        "Sp80053ImplementationLevel": {
+            "description": "Who implements a control or enhancement, as NIST's reference data marks it.",
+            "enum": [
+                "ORGANIZATION",
+                "SYSTEM"
+            ],
+            "title": "Sp80053ImplementationLevel",
+            "type": "string"
         },
-        "Selection": {
-            "additionalProperties": true,
-            "description": "Selection criteria for a parameter",
+        "Sp80053Parameter": {
+            "additionalProperties": false,
+            "description": "An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A gives each a label and a guideline of its own.",
             "properties": {
-                "choice": {
-                    "description": "List of selection options",
+                "aggregated_parameters": {
+                    "description": "For a parameter that stands for several, the parameters it aggregates, by identifier.",
+                    "items": {
+                        "pattern": "^[a-z]{2}-[0-9]{2}(\\.[0-9]{2})?_odp(\\.[0-9]{2})?$|^[a-z]{2}-[1-9][0-9]*(\\.[1-9][0-9]*)?_prm_[1-9][0-9]*$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "alternative_identifiers": {
+                    "description": "The identifiers an earlier release of the catalog gave the parameter, such as ac-1_prm_2 for ac-01_odp.03.",
+                    "items": {
+                        "pattern": "^[a-z]{2}-[0-9]{2}(\\.[0-9]{2})?_odp(\\.[0-9]{2})?$|^[a-z]{2}-[1-9][0-9]*(\\.[1-9][0-9]*)?_prm_[1-9][0-9]*$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "alternative_label": {
+                    "description": "The label SP 800-53 prints where it differs from the one SP 800-53A gives.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "assessment_label": {
+                    "description": "The label SP 800-53A gives the parameter, such as AC-02_ODP[01]. A parameter that aggregates several has none.",
+                    "pattern": "^[A-Z]{2}-[0-9]{2}\\S*_ODP(\\[[0-9]{2}\\])?$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parameter_guidelines": {
+                    "description": "The guidelines that say what a value must settle, such as that the frequency of a review is defined.",
                     "items": {
                         "type": "string"
                     },
@@ -1694,65 +584,187 @@
                         "null"
                     ]
                 },
-                "how_many": {
-                    "description": "How many selections are allowed",
+                "parameter_id": {
+                    "description": "The parameter's identifier in NIST's catalog, such as ac-02_odp.01.",
+                    "pattern": "^[a-z]{2}-[0-9]{2}(\\.[0-9]{2})?_odp(\\.[0-9]{2})?$|^[a-z]{2}-[1-9][0-9]*(\\.[1-9][0-9]*)?_prm_[1-9][0-9]*$",
+                    "type": "string"
+                },
+                "parameter_label": {
+                    "description": "For an assignment, what the organization defines, such as personnel or roles.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "selection_cardinality": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Sp80053SelectionCardinality"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "For a selection, how many choices the organization picks. The catalog marks one or more and leaves exactly one unwritten."
+                },
+                "selection_choices": {
+                    "description": "For a selection, the choices the publication lists, in order.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "parameter_id"
+            ],
+            "title": "Sp80053Parameter",
+            "type": "object"
+        },
+        "Sp80053Reference": {
+            "additionalProperties": false,
+            "description": "A publication the controls cite, as the catalog's references list it: its label, its citation and its address.",
+            "properties": {
+                "reference_citation": {
+                    "description": "The citation, as the catalog prints it.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "reference_label": {
+                    "description": "The label the controls cite the publication by, such as SP 800-12.",
+                    "pattern": "\\S",
+                    "type": "string"
+                },
+                "reference_url": {
+                    "description": "The address the catalog gives for the publication.",
+                    "format": "uri",
                     "type": [
                         "string",
                         "null"
                     ]
                 }
             },
-            "title": "Selection",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
+            "required": [
+                "reference_label"
+            ],
+            "title": "Sp80053Reference",
+            "type": "object"
+        },
+        "Sp80053SelectionCardinality": {
+            "description": "How many of a selection's choices the organization picks.",
+            "enum": [
+                "ONE",
+                "ONE_OR_MORE"
+            ],
+            "title": "Sp80053SelectionCardinality",
+            "type": "string"
+        },
+        "Sp80053Statement": {
+            "additionalProperties": false,
+            "description": "A control statement: the text of what a control or enhancement requires, and the items it is divided into.",
+            "properties": {
+                "statement_items": {
+                    "description": "The lettered or numbered items of the statement, in order, each of which may hold items of its own.",
+                    "items": {
+                        "$ref": "#/$defs/Sp80053StatementItem"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "statement_text": {
+                    "description": "The statement's own text, before any items. A placeholder of the form {{ insert: param, <identifier> }} marks where an organization-defined parameter is inserted.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Sp80053Statement",
+            "type": "object"
+        },
+        "Sp80053StatementItem": {
+            "additionalProperties": false,
+            "description": "One lettered or numbered item of a control statement, which may hold items of its own.",
+            "properties": {
+                "item_label": {
+                    "description": "The item's label as the publication prints it, such as a., 1. or (a).",
+                    "pattern": "^(([a-z]|[1-9][0-9]*)\\.|\\(([a-z]|[1-9][0-9]*)\\))$",
+                    "type": "string"
+                },
+                "item_text": {
+                    "description": "The item's text, with the same placeholders for parameters as the statement's text.",
+                    "type": "string"
+                },
+                "statement_items": {
+                    "description": "The lettered or numbered items of the statement, in order, each of which may hold items of its own.",
+                    "items": {
+                        "$ref": "#/$defs/Sp80053StatementItem"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "item_label",
+                "item_text"
+            ],
+            "title": "Sp80053StatementItem",
+            "type": "object"
         }
     },
     "$id": "https://w3id.org/lmodel/nist-sp-800-53",
     "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "additionalProperties": true,
-    "description": "Unified root wrapper for catalog, profile, or CPRT content",
-    "metamodel_version": "1.11.0",
+    "additionalProperties": false,
+    "description": "One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the controls cite.",
+    "metamodel_version": "1.12.0",
     "properties": {
-        "catalog": {
-            "anyOf": [
-                {
-                    "$ref": "#/$defs/CatalogBody"
-                },
-                {
-                    "type": "null"
-                }
-            ],
-            "description": "Root catalog payload"
+        "catalog_references": {
+            "description": "The publications the controls cite, as the catalog's references list them.",
+            "items": {
+                "$ref": "#/$defs/Sp80053Reference"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
         },
-        "profile": {
-            "anyOf": [
-                {
-                    "$ref": "#/$defs/ProfileBody"
-                },
-                {
-                    "type": "null"
-                }
-            ],
-            "description": "Root profile payload"
+        "catalog_release": {
+            "description": "The release of Revision 5 the catalog carries, as NIST numbers it, such as 5.2.0.",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+            "type": "string"
         },
-        "response": {
-            "anyOf": [
-                {
-                    "$ref": "#/$defs/CPRTResponse"
-                },
-                {
-                    "type": "null"
-                }
-            ],
-            "description": "Top-level CPRT API response wrapper"
+        "control_baselines": {
+            "description": "The control baselines of SP 800-53B that select from the catalog.",
+            "items": {
+                "$ref": "#/$defs/Sp80053Baseline"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "control_families": {
+            "description": "The twenty control families, in the order SP 800-53 gives them.",
+            "items": {
+                "$ref": "#/$defs/Sp80053Family"
+            },
+            "type": "array"
         }
     },
-    "title": "NIST-SP-800-53",
+    "required": [
+        "catalog_release",
+        "control_families"
+    ],
+    "title": "nist_sp_800_53",
     "type": "object",
     "version": "5.2.0"
 }

@@ -1,13 +1,45 @@
 {
-  "name": "NIST-SP-800-53",
-  "description": "Electronic (LinkML) Version of NIST SP 800-53 Rev 5 Controls and SP 800-53A Rev 5 Assessment Procedures ",
+  "name": "nist_sp_800_53",
+  "annotations": [
+    {
+      "tag": "cprt_framework_version",
+      "value": "SP_800_53_5_2_0"
+    },
+    {
+      "tag": "publication_date",
+      "value": "2025-08"
+    },
+    {
+      "tag": "oscal_content_tag",
+      "value": "v1.6.0"
+    },
+    {
+      "tag": "oscal_content_commit",
+      "value": "f0de6d8d8c059d374f15e0ae07508d82e370fc1d"
+    }
+  ],
+  "description": "A LinkML model of the security and privacy controls that NIST Special Publication 800-53, Revision 5, defines at Release 5.2.0: its twenty control families, their controls and control enhancements, each with its statement, discussion, organization-defined parameters, related controls and references; the assessment objectives and methods that SP 800-53A gives each control; and the four control baselines of SP 800-53B.",
+  "title": "NIST SP 800-53 Security and Privacy Controls, Release 5.2.0",
+  "comments": [
+    "The version is the release of Revision 5 that the catalog carries, 5.2.0 of August 2025, and publication_date is that release's date; Revision 5 itself was published in September 2020 and updated in December 2020. source is the publication's digital object identifier. NIST's Cybersecurity and Privacy Reference Tool names the same release SP_800_53_5_2_0, and the catalog and the four baseline profiles NIST publishes for it in usnistgov/oscal-content are copied to src/nist_sp_800_53/schema/oscal-content/ at the tag and commit in the annotations. scripts/check_upstream_release.py reads the same pins and reports when NIST publishes a newer edition or changes a copied file. The release tags are the schema's own versions.",
+    "SP 800-53, SP 800-53A and SP 800-53B are works of the United States Government and are not subject to copyright in the United States. The descriptions here are this project's own words; NIST's text of each control, parameter, objective and method stays in the catalog copy.",
+    "NIST's catalog renders each family as an OSCAL group, each control and control enhancement as an OSCAL control, each statement, discussion, assessment objective and assessment method as a part, each organization-defined parameter as a parameter, each reference as a back-matter resource, and each baseline as a profile. The broad_mappings name those lmodel/oscal classes."
+  ],
   "source": "https://doi.org/10.6028/NIST.SP.800-53r5",
+  "see_also": [
+    "https://lmodel.github.io/nist-sp-800-53",
+    "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final",
+    "https://csrc.nist.gov/News/2025/nist-releases-revision-to-sp-800-53-controls",
+    "https://doi.org/10.6028/NIST.SP.800-53Ar5",
+    "https://doi.org/10.6028/NIST.SP.800-53B",
+    "https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/SP800-53/rev5"
+  ],
   "id": "https://w3id.org/lmodel/nist-sp-800-53",
   "version": "5.2.0",
   "imports": [
     "linkml:types"
   ],
-  "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "license": "Apache-2.0",
   "prefixes": [
     {
       "prefix_prefix": "linkml",
@@ -18,47 +50,87 @@
       "prefix_reference": "https://w3id.org/lmodel/nist-sp-800-53/"
     },
     {
-      "prefix_prefix": "oscal_catalog",
-      "prefix_reference": "https://w3id.org/lmodel/oscal_catalog/"
+      "prefix_prefix": "oscal",
+      "prefix_reference": "https://w3id.org/lmodel/oscal/"
     },
     {
-      "prefix_prefix": "oscal_profile",
-      "prefix_reference": "https://w3id.org/lmodel/oscal_profile/"
+      "prefix_prefix": "schema",
+      "prefix_reference": "http://schema.org/"
+    },
+    {
+      "prefix_prefix": "xsd",
+      "prefix_reference": "http://www.w3.org/2001/XMLSchema#"
     }
   ],
   "default_prefix": "nist_sp_800_53",
   "default_range": "string",
-  "subsets": [
-    {
-      "name": "nist_sp_800_53r5_catalog",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Catalog",
-      "description": "NIST SP 800-53 Rev 5 catalog subset for controls and assessment procedures",
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "@type": "SubsetDefinition"
-    },
-    {
-      "name": "nist_sp_800_53r5_profile",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Profile",
-      "description": "NIST SP 800-53 Rev 5 profile subset for baselines and overlays",
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "@type": "SubsetDefinition"
-    },
-    {
-      "name": "nist_sp_800_53r4_catalog",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r4Catalog",
-      "description": "NIST SP 800-53 Rev 4 backward-compatibility subset for catalog elements present in OSCAL 1.2.x representations but removed in Rev 5 (e.g. depends-on parameter dependency)",
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "@type": "SubsetDefinition"
-    },
-    {
-      "name": "nist_sp_800_53r5_cprt",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/NistSp80053r5Cprt",
-      "description": "NIST CPRT (Cybersecurity and Privacy Reference Tool) export subset covering SP 800-53, SP 800-53A, and SP 800-53B element and relationship data",
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "@type": "SubsetDefinition"
-    }
-  ],
   "types": [
+    {
+      "name": "sp80053_family_identifier",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053FamilyIdentifier",
+      "description": "The two letters that name one of the twenty control families, such as AC for Access Control.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "typeof": "string",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)$",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "sp80053_control_identifier",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlIdentifier",
+      "description": "A control's identifier: its family's letters, a hyphen and the control's number within the family, such as AC-2.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "typeof": "string",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*$",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "sp80053_enhancement_identifier",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053EnhancementIdentifier",
+      "description": "A control enhancement's identifier: its control's identifier and the enhancement's number in parentheses, such as AC-2(1).",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "typeof": "string",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*\\([1-9][0-9]*\\)$",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "sp80053_control_or_enhancement_identifier",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlOrEnhancementIdentifier",
+      "description": "The identifier of a control or of a control enhancement, such as AC-2 or AC-2(1), where the publication cites either.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "typeof": "string",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "sp80053_withdrawal_target",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053WithdrawalTarget",
+      "description": "Where a withdrawn control or enhancement was incorporated, as the publication names it: a control or enhancement, such as AC-2 or AC-2(1), one item of a control's statement, such as AC-2k, or a whole family, such as SR.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "typeof": "string",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "pattern": "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)(-[1-9][0-9]*(\\([1-9][0-9]*\\))?([a-z](\\.[1-9][0-9]*)*|\\([a-z]\\)(\\([1-9][0-9]*\\))*)?)?$",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "sp80053_parameter_identifier",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ParameterIdentifier",
+      "description": "The identifier NIST's catalog gives an organization-defined parameter, in lower case: the zero-padded control identifier, _odp and the parameter's number, such as ac-02_odp.01, or, for a parameter that aggregates several, the control identifier, _prm_ and a number, such as ac-1_prm_1.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "typeof": "string",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "pattern": "^[a-z]{2}-[0-9]{2}(\\.[0-9]{2})?_odp(\\.[0-9]{2})?$|^[a-z]{2}-[1-9][0-9]*(\\.[1-9][0-9]*)?_prm_[1-9][0-9]*$",
+      "@type": "TypeDefinition"
+    },
     {
       "name": "string",
       "definition_uri": "https://w3id.org/linkml/String",
@@ -370,1135 +442,113 @@
   ],
   "enums": [
     {
-      "name": "CatalogElementClassValue",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CatalogElementClassValue",
-      "description": "Allowed values for element-level class values",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
+      "name": "Sp80053ControlStatus",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlStatus",
+      "description": "The one status the catalog marks: withdrawn. A control or enhancement that Revision 5 keeps carries no status.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "permissible_values": [
         {
-          "text": "family"
-        },
-        {
-          "text": "SP800-53"
-        },
-        {
-          "text": "SP800-53-enhancement"
-        },
-        {
-          "text": "assessment-objective"
+          "text": "WITHDRAWN",
+          "description": "Revision 5 withdrew the control or enhancement; incorporated_into, moved_to or withdrawal_reason says where it went."
         }
       ]
     },
     {
-      "name": "CatalogPropertyClassValue",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CatalogPropertyClassValue",
-      "description": "Allowed values for property-level class values",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
+      "name": "Sp80053ImplementationLevel",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel",
+      "description": "Who implements a control or enhancement, as NIST's reference data marks it.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "permissible_values": [
         {
-          "text": "sp800-53"
+          "text": "ORGANIZATION",
+          "description": "The organization implements it, through its processes and people."
         },
         {
-          "text": "sp800-53a"
-        },
-        {
-          "text": "zero-padded"
+          "text": "SYSTEM",
+          "description": "The system implements it, through its mechanisms."
         }
       ]
     },
     {
-      "name": "CPRTElementTypeValue",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CPRTElementTypeValue",
-      "description": "Allowed element_type values in NIST CPRT export data",
-      "in_subset": [
-        "nist_sp_800_53r5_cprt"
-      ],
+      "name": "Sp80053SelectionCardinality",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053SelectionCardinality",
+      "description": "How many of a selection's choices the organization picks.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "permissible_values": [
         {
-          "text": "family",
-          "description": "SP 800-53 control family (e.g. AC, AU)"
+          "text": "ONE",
+          "description": "Exactly one choice, which the catalog leaves unwritten."
         },
         {
-          "text": "control",
-          "description": "Top-level security or privacy control (e.g. AC-1)"
-        },
-        {
-          "text": "control_enhancement",
-          "description": "Control enhancement (e.g. AC-1(1))"
-        },
-        {
-          "text": "control_statement",
-          "description": "Normative control statement text"
-        },
-        {
-          "text": "discussion",
-          "description": "Non-normative discussion text for a control"
-        },
-        {
-          "text": "odp",
-          "description": "Organization-Defined Parameter"
-        },
-        {
-          "text": "odp_type",
-          "description": "ODP category (e.g. assignment, selection)"
-        },
-        {
-          "text": "odp_statement",
-          "description": "Full ODP statement text"
-        },
-        {
-          "text": "examine",
-          "description": "SP 800-53A Examine assessment objective"
-        },
-        {
-          "text": "interview",
-          "description": "SP 800-53A Interview assessment objective"
-        },
-        {
-          "text": "test",
-          "description": "SP 800-53A Test assessment objective"
-        },
-        {
-          "text": "determination",
-          "description": "Assessment determination criterion"
-        },
-        {
-          "text": "withdraw_reason",
-          "description": "Reason a control was withdrawn from SP 800-53"
-        },
-        {
-          "text": "reference",
-          "description": "Informational reference to an external publication"
-        },
-        {
-          "text": "security_baseline",
-          "description": "Security baseline designation (LOW / MODERATE / HIGH / NOT SELECTED)"
-        },
-        {
-          "text": "privacy_baseline",
-          "description": "Privacy baseline designation (P-HIGH / NOT SELECTED)"
-        },
-        {
-          "text": "sort",
-          "description": "Sort-order key for display purposes"
-        },
-        {
-          "text": "control_name_sort",
-          "description": "Sort-order key for control name ordering"
+          "text": "ONE_OR_MORE",
+          "description": "One or more choices, which the publication writes as Selection (one or more)."
         }
       ]
     },
     {
-      "name": "CPRTRelationshipTypeValue",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CPRTRelationshipTypeValue",
-      "description": "Relationship type identifiers used in NIST CPRT export data",
-      "in_subset": [
-        "nist_sp_800_53r5_cprt"
-      ],
+      "name": "Sp80053AssessmentMethodKind",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethodKind",
+      "description": "The three assessment methods of SP 800-53A, as its catalog writes them.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "permissible_values": [
         {
-          "text": "projection",
-          "description": "Represents a relationship between two elements"
+          "text": "EXAMINE",
+          "description": "Review, inspect, observe, study or analyze specifications, mechanisms or activities."
         },
         {
-          "text": "related",
-          "description": "Denotes where a control is related to another control"
+          "text": "INTERVIEW",
+          "description": "Hold discussions with individuals or groups."
         },
         {
-          "text": "incorporated_into",
-          "description": "Denotes where a withdrawn control was incorporated into another"
+          "text": "TEST",
+          "description": "Exercise mechanisms or activities under specified conditions."
+        }
+      ]
+    },
+    {
+      "name": "Sp80053BaselineLevel",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel",
+      "description": "The four control baselines SP 800-53B defines.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "permissible_values": [
+        {
+          "text": "LOW",
+          "description": "The baseline for a low-impact system."
         },
         {
-          "text": "moved_to",
-          "description": "Denotes where a withdrawn control was moved to"
+          "text": "MODERATE",
+          "description": "The baseline for a moderate-impact system."
+        },
+        {
+          "text": "HIGH",
+          "description": "The baseline for a high-impact system."
+        },
+        {
+          "text": "PRIVACY",
+          "description": "The privacy baseline, which applies regardless of impact level."
         }
       ]
     }
   ],
   "slots": [
     {
-      "name": "catalog",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/catalog",
-      "description": "Root catalog payload",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/catalog"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/catalog",
-      "owner": "Catalog",
-      "domain_of": [
-        "SP80053Document",
-        "Catalog"
-      ],
-      "range": "CatalogBody",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "profile",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/profile",
-      "description": "Root profile payload",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_profile/profile"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/profile",
-      "owner": "ProfileDocument",
-      "domain_of": [
-        "SP80053Document",
-        "ProfileDocument"
-      ],
-      "range": "ProfileBody",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "metadata",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/metadata",
-      "description": "Profile and Catalog metadata",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/metadata"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/metadata",
-      "owner": "ProfileBody",
-      "domain_of": [
-        "CatalogBody",
-        "ProfileBody"
-      ],
-      "range": "Metadata",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "groups",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/groups",
-      "description": "List of control groups in the catalog",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/groups"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/groups",
-      "owner": "ControlGroup",
-      "domain_of": [
-        "CatalogBody",
-        "ControlGroup"
-      ],
-      "range": "ControlGroup",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "controls",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/controls",
-      "description": "List of controls in a group",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/controls"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/controls",
-      "owner": "ControlEnhancement",
-      "domain_of": [
-        "ControlGroup",
-        "Control",
-        "ControlEnhancement"
-      ],
-      "range": "Control",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "params",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/params",
-      "description": "List of parameters for a control",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/params"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/params",
-      "owner": "ControlEnhancement",
-      "domain_of": [
-        "Control",
-        "ControlEnhancement"
-      ],
-      "range": "Parameter",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "props",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/props",
-      "description": "List of properties",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/props"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/props",
-      "owner": "ProfileAdd",
-      "domain_of": [
-        "Metadata",
-        "CatalogElement",
-        "ProfileAdd"
-      ],
-      "range": "Property",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "guidelines",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/guidelines",
-      "description": "List of guidelines",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/guidelines"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/guidelines",
-      "owner": "Parameter",
-      "domain_of": [
-        "Parameter"
-      ],
-      "range": "Guideline",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "links",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/links",
-      "description": "List of links and relationships",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/links"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/links",
-      "owner": "CatalogElement",
-      "domain_of": [
-        "Metadata",
-        "Revision",
-        "CatalogElement"
-      ],
-      "range": "Link",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "parts",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/parts",
-      "description": "Nested parts that provide prose and structure",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/parts"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/parts",
-      "owner": "ProfileAdd",
-      "domain_of": [
-        "CatalogElement",
-        "ProfileAdd"
-      ],
-      "range": "Part",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "select",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/select",
-      "description": "Selection parameters for a parameter definition",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/select"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/select",
-      "owner": "Parameter",
-      "domain_of": [
-        "Parameter"
-      ],
-      "range": "Selection",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "id",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/id",
-      "description": "Unique identifier for an element",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/id"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/id",
-      "owner": "CatalogElement",
-      "domain_of": [
-        "Role",
-        "CatalogElement"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "uuid",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/uuid",
-      "description": "UUID for profile, metadata, or resource element",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/uuid"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/uuid",
-      "owner": "Resource",
-      "domain_of": [
-        "CatalogBody",
-        "ProfileBody",
-        "Party",
-        "Resource"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "title",
       "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/title",
-      "description": "Human-readable title",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
+      "description": "The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline.",
+      "comments": [
+        "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key."
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/title"
+      "mappings": [
+        "http://schema.org/name"
       ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/title",
-      "owner": "IdentifiedElement",
+      "slot_uri": "http://schema.org/name",
+      "owner": "Sp80053Baseline",
       "domain_of": [
-        "Metadata",
-        "Revision",
-        "Role",
-        "Resource",
-        "IdentifiedElement"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "version",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/version",
-      "description": "Version identifier",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/version"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/version",
-      "owner": "Revision",
-      "domain_of": [
-        "Metadata",
-        "Revision"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "last_modified",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/last_modified",
-      "description": "Last modification timestamp",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "last_modified"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/last-modified"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/last_modified",
-      "owner": "Revision",
-      "domain_of": [
-        "Metadata",
-        "Revision"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "oscal_version",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/oscal_version",
-      "description": "OSCAL version identifier",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "oscal_version"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/oscal-version"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/oscal_version",
-      "owner": "Revision",
-      "domain_of": [
-        "Metadata",
-        "Revision"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "_class",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/_class",
-      "description": "Classification of a catalog element or property",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/_class"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/class",
-      "alias": "class",
-      "owner": "Property",
-      "domain_of": [
-        "IdentifiedElement",
-        "Property"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "label",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/label",
-      "description": "Human-readable label",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/label"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/label",
-      "owner": "ProfileSetParameter",
-      "domain_of": [
-        "IdentifiedElement",
-        "ProfileSetParameter"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "name",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/name",
-      "description": "Name of a property, part, or party",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/name"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/name",
-      "owner": "Part",
-      "domain_of": [
-        "Party",
-        "Property",
-        "Part"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "value",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/value",
-      "description": "Property value",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/value"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/value",
-      "owner": "Property",
-      "domain_of": [
-        "Property"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "ns",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ns",
-      "description": "Namespace URI for a property",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/ns"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/ns",
-      "owner": "Property",
-      "domain_of": [
-        "Property"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "prose",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/prose",
-      "description": "Free-text prose content",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/prose"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/prose",
-      "owner": "Part",
-      "domain_of": [
-        "Guideline",
-        "Part"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "remarks",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/remarks",
-      "description": "Supplemental remarks",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/remarks"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/remarks",
-      "owner": "Revision",
-      "domain_of": [
-        "Metadata",
-        "Revision"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "revisions",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/revisions",
-      "description": "Metadata revisions",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/revisions"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/revisions",
-      "owner": "Metadata",
-      "domain_of": [
-        "Metadata"
-      ],
-      "range": "Revision",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "roles",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/roles",
-      "description": "Roles used in metadata",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/roles"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/roles",
-      "owner": "Metadata",
-      "domain_of": [
-        "Metadata"
-      ],
-      "range": "Role",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "parties",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/parties",
-      "description": "Parties used in metadata",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/parties"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/parties",
-      "owner": "Metadata",
-      "domain_of": [
-        "Metadata"
-      ],
-      "range": "Party",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "responsible_parties",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/responsible_parties",
-      "description": "Responsible party assignments",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "responsible_parties"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/responsible-parties"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/responsible_parties",
-      "owner": "Metadata",
-      "domain_of": [
-        "Metadata"
-      ],
-      "range": "ResponsibleParty",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "role_id",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/role_id",
-      "description": "Assigned role identifier",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "role_id"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/role-id"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/role_id",
-      "owner": "ResponsibleParty",
-      "domain_of": [
-        "ResponsibleParty"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "party_uuids",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/party_uuids",
-      "description": "Referenced party UUIDs",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "party_uuids"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/party-uuids"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/party_uuids",
-      "owner": "ResponsibleParty",
-      "domain_of": [
-        "ResponsibleParty"
-      ],
-      "range": "string",
-      "multivalued": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "type",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/type",
-      "description": "Party type",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/type"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/type",
-      "owner": "Party",
-      "domain_of": [
-        "Party"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "short_name",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/short_name",
-      "description": "Short display name",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "short_name"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/short-name"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/short_name",
-      "owner": "Party",
-      "domain_of": [
-        "Party"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "email_addresses",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/email_addresses",
-      "description": "Party email addresses",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "email_addresses"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/email-addresses"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/email_addresses",
-      "owner": "Party",
-      "domain_of": [
-        "Party"
-      ],
-      "range": "string",
-      "multivalued": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "addresses",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/addresses",
-      "description": "Postal addresses",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/addresses"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/addresses",
-      "owner": "Party",
-      "domain_of": [
-        "Party"
-      ],
-      "range": "Address",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "addr_lines",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/addr_lines",
-      "description": "Address lines",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "addr_lines"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/addr-lines"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/addr_lines",
-      "owner": "Address",
-      "domain_of": [
-        "Address"
-      ],
-      "range": "string",
-      "multivalued": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "city",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/city",
-      "description": "City name",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/city"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/city",
-      "owner": "Address",
-      "domain_of": [
-        "Address"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "state",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/state",
-      "description": "State or region",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/state"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/state",
-      "owner": "Address",
-      "domain_of": [
-        "Address"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "postal_code",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/postal_code",
-      "description": "Postal code",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "postal_code"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/postal-code"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/postal_code",
-      "owner": "Address",
-      "domain_of": [
-        "Address"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "imports",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/imports",
-      "description": "Imported catalogs or profiles",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_profile/imports"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/imports",
-      "owner": "ProfileBody",
-      "domain_of": [
-        "ProfileBody"
-      ],
-      "range": "ImportResource",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "merge",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/merge",
-      "description": "Merge behavior settings",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_profile/merge"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/merge",
-      "owner": "ProfileBody",
-      "domain_of": [
-        "ProfileBody"
-      ],
-      "range": "MergeRules",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "back_matter",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/back_matter",
-      "description": "Back-matter references and resources",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "back_matter"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/back-matter"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/back_matter",
-      "owner": "ProfileBody",
-      "domain_of": [
-        "CatalogBody",
-        "ProfileBody"
-      ],
-      "range": "BackMatter",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "resources",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/resources",
-      "description": "Back-matter resources",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/resources"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/resources",
-      "owner": "BackMatter",
-      "domain_of": [
-        "BackMatter"
-      ],
-      "range": "Resource",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "citation",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/citation",
-      "description": "Citation details for a resource",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/citation"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/citation",
-      "owner": "Resource",
-      "domain_of": [
-        "Resource"
-      ],
-      "range": "Citation",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "text",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/text",
-      "description": "Citation text",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/text"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/text",
-      "owner": "Citation",
-      "domain_of": [
-        "Citation"
+        "Sp80053Family",
+        "Sp80053Control",
+        "Sp80053ControlEnhancement",
+        "Sp80053Baseline"
       ],
       "range": "string",
       "@type": "SlotDefinition"
@@ -1506,1466 +556,1239 @@
     {
       "name": "description",
       "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/description",
-      "description": "Resource description",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
+      "description": "What the family is about, in the words of whoever records it. SP 800-53 gives the Program Management family an overview of its own, and the other families none.",
+      "comments": [
+        "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key."
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/description"
+      "mappings": [
+        "http://schema.org/description"
       ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/description",
-      "owner": "Resource",
+      "slot_uri": "http://schema.org/description",
+      "owner": "Sp80053Family",
       "domain_of": [
-        "Resource"
+        "Sp80053Family"
       ],
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "rlinks",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/rlinks",
-      "description": "Resource links",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
+      "name": "control_statement",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_statement",
+      "description": "The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_statement",
+      "owner": "Sp80053ControlEnhancement",
+      "domain_of": [
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
+      ],
+      "range": "Sp80053Statement",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "control_discussion",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_discussion",
+      "description": "The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require.",
+      "comments": [
+        "Where the catalog links a control or a statement item inside the text, a derivation keeps the link's text, which is the identifier as the publication prints it, and where it links a reference, the reference's label in brackets."
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/rlinks"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/rlinks",
-      "owner": "Resource",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_discussion",
+      "owner": "Sp80053ControlEnhancement",
       "domain_of": [
-        "Resource"
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
       ],
-      "range": "ResourceLink",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "control_parameters",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_parameters",
+      "description": "The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_parameters",
+      "owner": "Sp80053ControlEnhancement",
+      "domain_of": [
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
+      ],
+      "range": "Sp80053Parameter",
       "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "media_type",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/media_type",
-      "description": "Media type for a resource link",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "related_control_ids",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/related_control_ids",
+      "description": "The controls and enhancements the publication lists as related, by identifier.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "media_type"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/media-type"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/media_type",
-      "owner": "ResourceLink",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/related_control_ids",
+      "owner": "Sp80053ControlEnhancement",
       "domain_of": [
-        "ResourceLink"
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
       ],
-      "range": "string",
+      "range": "sp80053_control_or_enhancement_identifier",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "href",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/href",
-      "description": "Link or resource reference",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "control_references",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_references",
+      "description": "The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/href"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/href",
-      "owner": "ImportResource",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_references",
+      "owner": "Sp80053ControlEnhancement",
       "domain_of": [
-        "ResourceLink",
-        "Link",
-        "ImportResource"
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
       ],
       "range": "string",
+      "multivalued": true,
+      "pattern": "\\S",
       "@type": "SlotDefinition"
     },
     {
-      "name": "rel",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/rel",
-      "description": "Relationship type for a link",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
+      "name": "assessment_objective",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/assessment_objective",
+      "description": "The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/rel"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/rel",
-      "owner": "Link",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/assessment_objective",
+      "owner": "Sp80053ControlEnhancement",
       "domain_of": [
-        "Link"
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
       ],
-      "range": "string",
+      "range": "Sp80053AssessmentObjective",
+      "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "include_controls",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/include_controls",
-      "description": "Include-controls selectors",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "assessment_methods",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/assessment_methods",
+      "description": "The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "include_controls"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/include-controls"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/include_controls",
-      "owner": "ImportResource",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/assessment_methods",
+      "owner": "Sp80053ControlEnhancement",
       "domain_of": [
-        "ImportResource"
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
       ],
-      "range": "IncludeControlsSelection",
+      "range": "Sp80053AssessmentMethod",
       "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "with_ids",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/with_ids",
-      "description": "Explicit control identifiers to include",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "control_status",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_status",
+      "description": "The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "with_ids"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/with-ids"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/with_ids",
-      "owner": "ExcludeControlsSelection",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_status",
+      "owner": "Sp80053ControlEnhancement",
       "domain_of": [
-        "IncludeControlsSelection",
-        "ExcludeControlsSelection"
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
       ],
-      "range": "string",
+      "range": "Sp80053ControlStatus",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "incorporated_into",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/incorporated_into",
+      "description": "For a withdrawn control or enhancement, what it was incorporated into, as the publication states it.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/incorporated_into",
+      "owner": "Sp80053ControlEnhancement",
+      "domain_of": [
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
+      ],
+      "range": "sp80053_withdrawal_target",
       "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "as_is",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/as_is",
-      "description": "Keep source order and content during merge",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "moved_to",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/moved_to",
+      "description": "For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "as_is"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_profile/as-is"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/as_is",
-      "owner": "MergeRules",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/moved_to",
+      "owner": "Sp80053ControlEnhancement",
       "domain_of": [
-        "MergeRules"
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
+      ],
+      "range": "sp80053_control_or_enhancement_identifier",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "withdrawal_reason",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/withdrawal_reason",
+      "description": "For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/withdrawal_reason",
+      "owner": "Sp80053ControlEnhancement",
+      "domain_of": [
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "implementation_level",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/implementation_level",
+      "description": "Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/implementation_level",
+      "owner": "Sp80053ControlEnhancement",
+      "domain_of": [
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
+      ],
+      "range": "Sp80053ImplementationLevel",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "contributes_to_assurance",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/contributes_to_assurance",
+      "description": "True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/contributes_to_assurance",
+      "owner": "Sp80053ControlEnhancement",
+      "domain_of": [
+        "Sp80053Control",
+        "Sp80053ControlEnhancement"
       ],
       "range": "boolean",
       "@type": "SlotDefinition"
     },
     {
-      "name": "how_many",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/how_many",
-      "description": "How many selections are allowed",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
+      "name": "statement_items",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/statement_items",
+      "description": "The lettered or numbered items of the statement, in order, each of which may hold items of its own.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "how_many"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/how-many"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/how_many",
-      "owner": "Selection",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/statement_items",
+      "owner": "Sp80053StatementItem",
       "domain_of": [
-        "Selection"
+        "Sp80053Statement",
+        "Sp80053StatementItem"
       ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "choice",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/choice",
-      "description": "List of selection options",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/choice"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/choice",
-      "owner": "Selection",
-      "domain_of": [
-        "Selection"
-      ],
-      "range": "string",
-      "multivalued": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "depends_on",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/depends_on",
-      "description": "Identifier of another parameter this one depends on (SP 800-53 Rev 4 only)",
-      "in_subset": [
-        "nist_sp_800_53r4_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "depends_on"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/depends-on"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/depends_on",
-      "owner": "Parameter",
-      "domain_of": [
-        "Parameter"
-      ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "flat",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/flat",
-      "description": "Flat merge strategy \u2014 de-duplicate and merge all controls without source hierarchy",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_profile/flat"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/flat",
-      "owner": "MergeRules",
-      "domain_of": [
-        "MergeRules"
-      ],
-      "range": "FlatMerge",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "exclude_controls",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/exclude_controls",
-      "description": "Controls to explicitly exclude from an import",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "exclude_controls"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/exclude-controls"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/exclude_controls",
-      "owner": "ImportResource",
-      "domain_of": [
-        "ImportResource"
-      ],
-      "range": "ExcludeControlsSelection",
+      "range": "Sp80053StatementItem",
       "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "matching",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/matching",
-      "description": "Pattern-based control selectors using glob or regex patterns",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "sp80053Catalog__catalog_release",
+      "description": "The release of Revision 5 the catalog carries, as NIST numbers it, such as 5.2.0.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/matching"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/matching",
-      "owner": "ExcludeControlsSelection",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/catalog_release",
+      "alias": "catalog_release",
+      "owner": "Sp80053Catalog",
       "domain_of": [
-        "IncludeControlsSelection",
-        "ExcludeControlsSelection"
+        "Sp80053Catalog"
       ],
-      "range": "ControlPattern",
+      "range": "string",
+      "required": true,
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Catalog__control_families",
+      "description": "The twenty control families, in the order SP 800-53 gives them.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_families",
+      "alias": "control_families",
+      "owner": "Sp80053Catalog",
+      "domain_of": [
+        "Sp80053Catalog"
+      ],
+      "range": "Sp80053Family",
+      "required": true,
       "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "pattern",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/pattern",
-      "description": "Glob or regex pattern for matching control identifiers",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "sp80053Catalog__control_baselines",
+      "description": "The control baselines of SP 800-53B that select from the catalog.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/pattern"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/pattern",
-      "owner": "ControlPattern",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_baselines",
+      "alias": "control_baselines",
+      "owner": "Sp80053Catalog",
       "domain_of": [
-        "ControlPattern"
+        "Sp80053Catalog"
+      ],
+      "range": "Sp80053Baseline",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Catalog__catalog_references",
+      "description": "The publications the controls cite, as the catalog's references list them.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/catalog_references",
+      "alias": "catalog_references",
+      "owner": "Sp80053Catalog",
+      "domain_of": [
+        "Sp80053Catalog"
+      ],
+      "range": "Sp80053Reference",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Family__family_id",
+      "description": "The family's two letters, such as AC for Access Control.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/family_id",
+      "alias": "family_id",
+      "owner": "Sp80053Family",
+      "domain_of": [
+        "Sp80053Family"
+      ],
+      "range": "sp80053_family_identifier",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Family__family_controls",
+      "description": "The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/family_controls",
+      "alias": "family_controls",
+      "owner": "Sp80053Family",
+      "domain_of": [
+        "Sp80053Family"
+      ],
+      "range": "Sp80053Control",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Control__control_identifier",
+      "description": "The control's identifier, such as AC-2.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_identifier",
+      "alias": "control_identifier",
+      "owner": "Sp80053Control",
+      "domain_of": [
+        "Sp80053Control"
+      ],
+      "range": "sp80053_control_identifier",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Control__control_enhancements",
+      "description": "The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_enhancements",
+      "alias": "control_enhancements",
+      "owner": "Sp80053Control",
+      "domain_of": [
+        "Sp80053Control"
+      ],
+      "range": "Sp80053ControlEnhancement",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053ControlEnhancement__enhancement_id",
+      "description": "The enhancement's identifier, such as AC-2(1).",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/enhancement_id",
+      "alias": "enhancement_id",
+      "owner": "Sp80053ControlEnhancement",
+      "domain_of": [
+        "Sp80053ControlEnhancement"
+      ],
+      "range": "sp80053_enhancement_identifier",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053ControlEnhancement__required_controls",
+      "description": "The control, or in one case the enhancement, that must be implemented for the enhancement to apply, as NIST's catalog links it; its own control for every enhancement but SC-42(2), which requires SC-42(1).",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/required_controls",
+      "alias": "required_controls",
+      "owner": "Sp80053ControlEnhancement",
+      "domain_of": [
+        "Sp80053ControlEnhancement"
+      ],
+      "range": "sp80053_control_or_enhancement_identifier",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Statement__statement_text",
+      "description": "The statement's own text, before any items. A placeholder of the form {{ insert: param, <identifier> }} marks where an organization-defined parameter is inserted.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/statement_text",
+      "alias": "statement_text",
+      "owner": "Sp80053Statement",
+      "domain_of": [
+        "Sp80053Statement"
       ],
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "modify",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/modify",
-      "description": "Profile modification directives \u2014 parameter overrides and control alterations",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "sp80053StatementItem__item_label",
+      "description": "The item's label as the publication prints it, such as a., 1. or (a).",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_profile/modify"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/modify",
-      "owner": "ProfileBody",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/item_label",
+      "alias": "item_label",
+      "owner": "Sp80053StatementItem",
       "domain_of": [
-        "ProfileBody"
+        "Sp80053StatementItem"
       ],
-      "range": "ProfileModify",
-      "inlined": true,
-      "inlined_as_list": true,
+      "range": "string",
+      "required": true,
+      "pattern": "^(([a-z]|[1-9][0-9]*)\\.|\\(([a-z]|[1-9][0-9]*)\\))$",
       "@type": "SlotDefinition"
     },
     {
-      "name": "set_parameters",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/set_parameters",
-      "description": "Parameter value overrides applied by the profile",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "sp80053StatementItem__item_text",
+      "description": "The item's text, with the same placeholders for parameters as the statement's text.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "set_parameters"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_profile/set-parameters"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/set_parameters",
-      "owner": "ProfileModify",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/item_text",
+      "alias": "item_text",
+      "owner": "Sp80053StatementItem",
       "domain_of": [
-        "ProfileModify"
+        "Sp80053StatementItem"
       ],
-      "range": "ProfileSetParameter",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
+      "range": "string",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "alters",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/alters",
-      "description": "Control alterations \u2014 add or remove parts from referenced controls",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "sp80053Parameter__parameter_id",
+      "description": "The parameter's identifier in NIST's catalog, such as ac-02_odp.01.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_profile/alters"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/alters",
-      "owner": "ProfileModify",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/parameter_id",
+      "alias": "parameter_id",
+      "owner": "Sp80053Parameter",
       "domain_of": [
-        "ProfileModify"
+        "Sp80053Parameter"
       ],
-      "range": "ProfileAlter",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
+      "range": "sp80053_parameter_identifier",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "adds",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/adds",
-      "description": "Parts, parameters, or properties added to a control by an alteration",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "sp80053Parameter__assessment_label",
+      "description": "The label SP 800-53A gives the parameter, such as AC-02_ODP[01]. A parameter that aggregates several has none.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_profile/adds"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/adds",
-      "owner": "ProfileAlter",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/assessment_label",
+      "alias": "assessment_label",
+      "owner": "Sp80053Parameter",
       "domain_of": [
-        "ProfileAlter"
+        "Sp80053Parameter"
       ],
-      "range": "ProfileAdd",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
+      "range": "string",
+      "pattern": "^[A-Z]{2}-[0-9]{2}\\S*_ODP(\\[[0-9]{2}\\])?$",
       "@type": "SlotDefinition"
     },
     {
-      "name": "param_id",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/param_id",
-      "description": "Identifier of the parameter to be set",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "sp80053Parameter__parameter_label",
+      "description": "For an assignment, what the organization defines, such as personnel or roles.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "param_id"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/param-id"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/param_id",
-      "owner": "ProfileSetParameter",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/parameter_label",
+      "alias": "parameter_label",
+      "owner": "Sp80053Parameter",
       "domain_of": [
-        "ProfileSetParameter"
+        "Sp80053Parameter"
       ],
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "control_id",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_id",
-      "description": "Identifier of the control to alter",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "sp80053Parameter__parameter_guidelines",
+      "description": "The guidelines that say what a value must settle, such as that the frequency of a review is defined.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "control_id"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/control-id"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_id",
-      "owner": "ProfileAlter",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/parameter_guidelines",
+      "alias": "parameter_guidelines",
+      "owner": "Sp80053Parameter",
       "domain_of": [
-        "ProfileAlter"
+        "Sp80053Parameter"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Parameter__selection_choices",
+      "description": "For a selection, the choices the publication lists, in order.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/selection_choices",
+      "alias": "selection_choices",
+      "owner": "Sp80053Parameter",
+      "domain_of": [
+        "Sp80053Parameter"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Parameter__selection_cardinality",
+      "description": "For a selection, how many choices the organization picks. The catalog marks one or more and leaves exactly one unwritten.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/selection_cardinality",
+      "alias": "selection_cardinality",
+      "owner": "Sp80053Parameter",
+      "domain_of": [
+        "Sp80053Parameter"
+      ],
+      "range": "Sp80053SelectionCardinality",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Parameter__aggregated_parameters",
+      "description": "For a parameter that stands for several, the parameters it aggregates, by identifier.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/aggregated_parameters",
+      "alias": "aggregated_parameters",
+      "owner": "Sp80053Parameter",
+      "domain_of": [
+        "Sp80053Parameter"
+      ],
+      "range": "sp80053_parameter_identifier",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Parameter__alternative_identifiers",
+      "description": "The identifiers an earlier release of the catalog gave the parameter, such as ac-1_prm_2 for ac-01_odp.03.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/alternative_identifiers",
+      "alias": "alternative_identifiers",
+      "owner": "Sp80053Parameter",
+      "domain_of": [
+        "Sp80053Parameter"
+      ],
+      "range": "sp80053_parameter_identifier",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Parameter__alternative_label",
+      "description": "The label SP 800-53 prints where it differs from the one SP 800-53A gives.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/alternative_label",
+      "alias": "alternative_label",
+      "owner": "Sp80053Parameter",
+      "domain_of": [
+        "Sp80053Parameter"
       ],
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "position",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/position",
-      "description": "Position at which to add content relative to the by-id anchor",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "sp80053AssessmentObjective__objective_label",
+      "description": "The label SP 800-53A gives the objective, such as AC-02a.[01].",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_profile/position"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/position",
-      "owner": "ProfileAdd",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/objective_label",
+      "alias": "objective_label",
+      "owner": "Sp80053AssessmentObjective",
       "domain_of": [
-        "ProfileAdd"
+        "Sp80053AssessmentObjective"
+      ],
+      "range": "string",
+      "required": true,
+      "pattern": "^[A-Z]{2}-[0-9]{2}",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053AssessmentObjective__objective_text",
+      "description": "The determination statement, with the same placeholders for parameters as the control statement. A heading has none.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/objective_text",
+      "alias": "objective_text",
+      "owner": "Sp80053AssessmentObjective",
+      "domain_of": [
+        "Sp80053AssessmentObjective"
       ],
       "range": "string",
       "@type": "SlotDefinition"
     },
     {
-      "name": "by_id",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/by_id",
-      "description": "Identifier of the anchor part relative to which additions are positioned",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
+      "name": "sp80053AssessmentObjective__sub_objectives",
+      "description": "The objectives grouped under this one, in order.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "aliases": [
-        "by_id"
-      ],
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_profile/by-id"
-      ],
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/by_id",
-      "owner": "ProfileAdd",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/sub_objectives",
+      "alias": "sub_objectives",
+      "owner": "Sp80053AssessmentObjective",
       "domain_of": [
-        "ProfileAdd"
+        "Sp80053AssessmentObjective"
       ],
-      "range": "string",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "response",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/response",
-      "description": "Top-level CPRT API response wrapper",
-      "in_subset": [
-        "nist_sp_800_53r5_cprt"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/response",
-      "owner": "CPRTDocument",
-      "domain_of": [
-        "SP80053Document",
-        "CPRTDocument"
-      ],
-      "range": "CPRTResponse",
-      "inlined": true,
-      "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "IdentifiedElement__class",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/_class",
-      "description": "Classification of a catalog element or property",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/_class"
-      ],
-      "is_a": "_class",
-      "domain": "IdentifiedElement",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/class",
-      "alias": "class",
-      "owner": "IdentifiedElement",
-      "domain_of": [
-        "IdentifiedElement"
-      ],
-      "is_usage_slot": true,
-      "usage_slot_name": "_class",
-      "range": "CatalogElementClassValue",
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "Control_controls",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/controls",
-      "description": "List of controls in a group",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/controls"
-      ],
-      "is_a": "controls",
-      "domain": "Control",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/controls",
-      "alias": "controls",
-      "owner": "Control",
-      "domain_of": [
-        "Control"
-      ],
-      "is_usage_slot": true,
-      "usage_slot_name": "controls",
-      "range": "ControlEnhancement",
+      "range": "Sp80053AssessmentObjective",
       "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "ControlEnhancement_controls",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/controls",
-      "description": "List of controls in a group",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
+      "name": "sp80053AssessmentMethod__assessment_method",
+      "description": "Which of the three methods this is.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/controls"
-      ],
-      "is_a": "controls",
-      "domain": "ControlEnhancement",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/controls",
-      "alias": "controls",
-      "owner": "ControlEnhancement",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/assessment_method",
+      "alias": "assessment_method",
+      "owner": "Sp80053AssessmentMethod",
       "domain_of": [
-        "ControlEnhancement"
+        "Sp80053AssessmentMethod"
       ],
-      "is_usage_slot": true,
-      "usage_slot_name": "controls",
-      "range": "ControlEnhancement",
-      "multivalued": true,
-      "inlined": true,
-      "inlined_as_list": true,
+      "range": "Sp80053AssessmentMethodKind",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "Property__class",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/_class",
-      "description": "Classification of a catalog element or property",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
+      "name": "sp80053AssessmentMethod__assessment_objects",
+      "description": "The objects the method is applied to, in the order the publication lists them.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "https://w3id.org/lmodel/oscal_catalog/_class"
-      ],
-      "is_a": "_class",
-      "domain": "Property",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/class",
-      "alias": "class",
-      "owner": "Property",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/assessment_objects",
+      "alias": "assessment_objects",
+      "owner": "Sp80053AssessmentMethod",
       "domain_of": [
-        "Property"
+        "Sp80053AssessmentMethod"
       ],
-      "is_usage_slot": true,
-      "usage_slot_name": "_class",
-      "range": "CatalogPropertyClassValue",
+      "range": "string",
+      "required": true,
+      "multivalued": true,
+      "pattern": "\\S",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Reference__reference_label",
+      "description": "The label the controls cite the publication by, such as SP 800-12.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/reference_label",
+      "alias": "reference_label",
+      "owner": "Sp80053Reference",
+      "domain_of": [
+        "Sp80053Reference"
+      ],
+      "range": "string",
+      "required": true,
+      "pattern": "\\S",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Reference__reference_citation",
+      "description": "The citation, as the catalog prints it.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/reference_citation",
+      "alias": "reference_citation",
+      "owner": "Sp80053Reference",
+      "domain_of": [
+        "Sp80053Reference"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Reference__reference_url",
+      "description": "The address the catalog gives for the publication.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/reference_url",
+      "alias": "reference_url",
+      "owner": "Sp80053Reference",
+      "domain_of": [
+        "Sp80053Reference"
+      ],
+      "range": "uri",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Baseline__baseline_level",
+      "description": "Which of the four baselines this is.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/baseline_level",
+      "alias": "baseline_level",
+      "owner": "Sp80053Baseline",
+      "domain_of": [
+        "Sp80053Baseline"
+      ],
+      "range": "Sp80053BaselineLevel",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "sp80053Baseline__baseline_controls",
+      "description": "The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/baseline_controls",
+      "alias": "baseline_controls",
+      "owner": "Sp80053Baseline",
+      "domain_of": [
+        "Sp80053Baseline"
+      ],
+      "range": "sp80053_control_or_enhancement_identifier",
+      "required": true,
+      "multivalued": true,
       "@type": "SlotDefinition"
     }
   ],
   "classes": [
     {
-      "name": "SP80053Document",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/SP80053Document",
-      "description": "Unified root wrapper for catalog, profile, or CPRT content",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile",
-        "nist_sp_800_53r5_cprt"
-      ],
+      "name": "Sp80053Catalog",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog",
+      "description": "One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the controls cite.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "see_also": [
+        "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
+      ],
       "exact_mappings": [
-        "linkml:Any"
+        "nist_sp_800_53:Catalog"
+      ],
+      "broad_mappings": [
+        "oscal:Catalog"
       ],
       "slots": [
-        "catalog",
-        "profile",
-        "response"
+        "sp80053Catalog__catalog_release",
+        "sp80053Catalog__control_families",
+        "sp80053Catalog__control_baselines",
+        "sp80053Catalog__catalog_references"
       ],
       "slot_usage": {},
+      "attributes": [
+        {
+          "name": "catalog_release",
+          "description": "The release of Revision 5 the catalog carries, as NIST numbers it, such as 5.2.0.",
+          "required": true,
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "control_families",
+          "description": "The twenty control families, in the order SP 800-53 gives them.",
+          "range": "Sp80053Family",
+          "required": true,
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "control_baselines",
+          "description": "The control baselines of SP 800-53B that select from the catalog.",
+          "range": "Sp80053Baseline",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "catalog_references",
+          "description": "The publications the controls cite, as the catalog's references list them.",
+          "range": "Sp80053Reference",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Catalog",
       "tree_root": true,
       "@type": "ClassDefinition"
     },
     {
-      "name": "Catalog",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Catalog",
-      "description": "Top-level wrapper that mirrors OSCAL catalog shape",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
+      "name": "Sp80053Family",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family",
+      "description": "One of the twenty families SP 800-53 sorts its controls into, such as Access Control or Supply Chain Risk Management.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "nist_sp_800_53:Catalog"
+      "see_also": [
+        "https://csrc.nist.gov/projects/risk-management/sp800-53-controls"
       ],
-      "close_mappings": [
-        "oscal_catalog:CatalogDocument"
+      "exact_mappings": [
+        "nist_sp_800_53:Family"
+      ],
+      "broad_mappings": [
+        "oscal:Group"
       ],
       "slots": [
-        "catalog"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ProfileDocument",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ProfileDocument",
-      "description": "Top-level wrapper for OSCAL profile files",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "nist_sp_800_53:ProfileDocument",
-        "oscal_profile:ProfileDocument"
-      ],
-      "slots": [
-        "profile"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "CatalogBody",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CatalogBody",
-      "description": "Main catalog object",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_catalog:Catalog"
-      ],
-      "slots": [
-        "uuid",
-        "metadata",
-        "groups",
-        "back_matter"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ProfileBody",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ProfileBody",
-      "description": "OSCAL profile body",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_profile:Profile"
-      ],
-      "slots": [
-        "uuid",
-        "metadata",
-        "imports",
-        "merge",
-        "modify",
-        "back_matter"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Metadata",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Metadata",
-      "description": "OSCAL metadata section used in catalogs and profiles",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any"
-      ],
-      "close_mappings": [
-        "oscal_catalog:Metadata"
-      ],
-      "slots": [
-        "title",
-        "last_modified",
-        "version",
-        "oscal_version",
-        "revisions",
-        "props",
-        "links",
-        "roles",
-        "parties",
-        "responsible_parties",
-        "remarks"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Revision",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Revision",
-      "description": "Metadata revision entry",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any"
-      ],
-      "close_mappings": [
-        "oscal_catalog:Revision"
-      ],
-      "slots": [
-        "title",
-        "last_modified",
-        "version",
-        "oscal_version",
-        "links",
-        "remarks"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Role",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Role",
-      "description": "Role definition",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "nist_sp_800_53:Role"
-      ],
-      "close_mappings": [
-        "oscal_catalog:Role"
-      ],
-      "slots": [
-        "id",
-        "title"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Party",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Party",
-      "description": "Party definition",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any"
-      ],
-      "close_mappings": [
-        "oscal_catalog:Party"
-      ],
-      "slots": [
-        "uuid",
-        "type",
-        "name",
-        "short_name",
-        "email_addresses",
-        "addresses"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Address",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Address",
-      "description": "Postal address",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any"
-      ],
-      "close_mappings": [
-        "oscal_catalog:Address"
-      ],
-      "slots": [
-        "addr_lines",
-        "city",
-        "state",
-        "postal_code"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ResponsibleParty",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ResponsibleParty",
-      "description": "Assignment of parties to a role",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_catalog:ResponsibleParty"
-      ],
-      "slots": [
-        "role_id",
-        "party_uuids"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "BackMatter",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/BackMatter",
-      "description": "OSCAL back-matter section",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_catalog:BackMatter"
-      ],
-      "slots": [
-        "resources"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Resource",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Resource",
-      "description": "Referenced resource",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any"
-      ],
-      "close_mappings": [
-        "oscal_catalog:Resource"
-      ],
-      "slots": [
-        "uuid",
         "title",
         "description",
-        "citation",
-        "rlinks"
+        "sp80053Family__family_id",
+        "sp80053Family__family_controls"
       ],
       "slot_usage": {},
+      "attributes": [
+        {
+          "name": "family_id",
+          "description": "The family's two letters, such as AC for Access Control.",
+          "range": "sp80053_family_identifier",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "family_controls",
+          "description": "The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead.",
+          "range": "Sp80053Control",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Family",
       "@type": "ClassDefinition"
     },
     {
-      "name": "Citation",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Citation",
-      "description": "Citation wrapper",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
+      "name": "Sp80053Control",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control",
+      "description": "A security or privacy control: a safeguard with an identifier, a statement of what it requires, a discussion, parameters the organization defines, related controls, references, the assessment objective and methods SP 800-53A gives it, and its enhancements. A control Revision 5 withdrew keeps its identifier and says where it went.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_catalog:Citation"
+      "see_also": [
+        "https://csrc.nist.gov/projects/risk-management/sp800-53-controls"
       ],
-      "slots": [
-        "text"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ResourceLink",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ResourceLink",
-      "description": "Reference link for a resource",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any"
-      ],
-      "close_mappings": [
-        "oscal_catalog:ResourceLink"
-      ],
-      "slots": [
-        "href",
-        "media_type"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "CatalogElement",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CatalogElement",
-      "description": "Base class for catalog elements",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "nist_sp_800_53:CatalogElement"
-      ],
-      "abstract": true,
-      "slots": [
-        "id",
-        "props",
-        "links",
-        "parts"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "IdentifiedElement",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/IdentifiedElement",
-      "description": "A catalog element with required id and optional title/class",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "nist_sp_800_53:IdentifiedElement"
-      ],
-      "is_a": "CatalogElement",
-      "slots": [
-        "id",
-        "props",
-        "links",
-        "parts",
-        "title",
-        "IdentifiedElement__class",
-        "label"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ControlGroup",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ControlGroup",
-      "description": "A group of controls (family)",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "nist_sp_800_53:ControlGroup",
-        "oscal_catalog:Group"
-      ],
-      "is_a": "IdentifiedElement",
-      "slots": [
-        "id",
-        "props",
-        "links",
-        "parts",
-        "title",
-        "IdentifiedElement__class",
-        "label",
-        "groups",
-        "controls"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Control",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Control",
-      "description": "A security control",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
       "exact_mappings": [
         "nist_sp_800_53:Control"
       ],
-      "close_mappings": [
-        "oscal_catalog:Control"
+      "broad_mappings": [
+        "oscal:Control"
       ],
-      "is_a": "IdentifiedElement",
       "slots": [
-        "id",
-        "props",
-        "links",
-        "parts",
         "title",
-        "IdentifiedElement__class",
-        "label",
-        "params",
-        "Control_controls"
+        "control_statement",
+        "control_discussion",
+        "control_parameters",
+        "related_control_ids",
+        "control_references",
+        "assessment_objective",
+        "assessment_methods",
+        "control_status",
+        "incorporated_into",
+        "moved_to",
+        "withdrawal_reason",
+        "implementation_level",
+        "contributes_to_assurance",
+        "sp80053Control__control_identifier",
+        "sp80053Control__control_enhancements"
       ],
       "slot_usage": {},
+      "attributes": [
+        {
+          "name": "control_identifier",
+          "description": "The control's identifier, such as AC-2.",
+          "range": "sp80053_control_identifier",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "control_enhancements",
+          "description": "The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead.",
+          "range": "Sp80053ControlEnhancement",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Control",
       "@type": "ClassDefinition"
     },
     {
-      "name": "ControlEnhancement",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ControlEnhancement",
-      "description": "An enhancement to a control",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
+      "name": "Sp80053ControlEnhancement",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement",
+      "description": "A control enhancement: added functionality or strength for a control, with an identifier of its own, which the publication and other documents cite apart from the control. It carries what a control carries, and names the control or enhancement it requires.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "see_also": [
+        "https://csrc.nist.gov/projects/risk-management/sp800-53-controls"
+      ],
       "exact_mappings": [
         "nist_sp_800_53:ControlEnhancement"
       ],
-      "close_mappings": [
-        "oscal_catalog:Control"
+      "broad_mappings": [
+        "oscal:Control"
       ],
-      "is_a": "IdentifiedElement",
       "slots": [
-        "id",
-        "props",
-        "links",
-        "parts",
         "title",
-        "IdentifiedElement__class",
-        "label",
-        "params",
-        "ControlEnhancement_controls"
+        "control_statement",
+        "control_discussion",
+        "control_parameters",
+        "related_control_ids",
+        "control_references",
+        "assessment_objective",
+        "assessment_methods",
+        "control_status",
+        "incorporated_into",
+        "moved_to",
+        "withdrawal_reason",
+        "implementation_level",
+        "contributes_to_assurance",
+        "sp80053ControlEnhancement__enhancement_id",
+        "sp80053ControlEnhancement__required_controls"
       ],
       "slot_usage": {},
+      "attributes": [
+        {
+          "name": "enhancement_id",
+          "description": "The enhancement's identifier, such as AC-2(1).",
+          "range": "sp80053_enhancement_identifier",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "required_controls",
+          "description": "The control, or in one case the enhancement, that must be implemented for the enhancement to apply, as NIST's catalog links it; its own control for every enhancement but SC-42(2), which requires SC-42(1).",
+          "range": "sp80053_control_or_enhancement_identifier",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/ControlEnhancement",
       "@type": "ClassDefinition"
     },
     {
-      "name": "Parameter",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Parameter",
-      "description": "A configurable parameter used by a control",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog",
-        "nist_sp_800_53r4_catalog"
-      ],
+      "name": "Sp80053Statement",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Statement",
+      "description": "A control statement: the text of what a control or enhancement requires, and the items it is divided into.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "see_also": [
+        "https://csrc.nist.gov/projects/risk-management/sp800-53-controls"
+      ],
       "exact_mappings": [
-        "linkml:Any"
+        "nist_sp_800_53:Statement"
       ],
-      "close_mappings": [
-        "oscal_catalog:Parameter"
+      "broad_mappings": [
+        "oscal:Part"
       ],
-      "is_a": "IdentifiedElement",
       "slots": [
-        "id",
-        "props",
-        "links",
-        "parts",
+        "statement_items",
+        "sp80053Statement__statement_text"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "statement_text",
+          "description": "The statement's own text, before any items. A placeholder of the form {{ insert: param, <identifier> }} marks where an organization-defined parameter is inserted.",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Statement",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Sp80053StatementItem",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053StatementItem",
+      "description": "One lettered or numbered item of a control statement, which may hold items of its own.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "see_also": [
+        "https://csrc.nist.gov/projects/risk-management/sp800-53-controls"
+      ],
+      "exact_mappings": [
+        "nist_sp_800_53:StatementItem"
+      ],
+      "broad_mappings": [
+        "oscal:Part"
+      ],
+      "slots": [
+        "statement_items",
+        "sp80053StatementItem__item_label",
+        "sp80053StatementItem__item_text"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "item_label",
+          "description": "The item's label as the publication prints it, such as a., 1. or (a).",
+          "required": true,
+          "pattern": "^(([a-z]|[1-9][0-9]*)\\.|\\(([a-z]|[1-9][0-9]*)\\))$",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "item_text",
+          "description": "The item's text, with the same placeholders for parameters as the statement's text.",
+          "required": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/StatementItem",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Sp80053Parameter",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter",
+      "description": "An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A gives each a label and a guideline of its own.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "see_also": [
+        "https://doi.org/10.6028/NIST.SP.800-53Ar5"
+      ],
+      "exact_mappings": [
+        "nist_sp_800_53:Parameter"
+      ],
+      "broad_mappings": [
+        "oscal:OscalParameter"
+      ],
+      "slots": [
+        "sp80053Parameter__parameter_id",
+        "sp80053Parameter__assessment_label",
+        "sp80053Parameter__parameter_label",
+        "sp80053Parameter__parameter_guidelines",
+        "sp80053Parameter__selection_choices",
+        "sp80053Parameter__selection_cardinality",
+        "sp80053Parameter__aggregated_parameters",
+        "sp80053Parameter__alternative_identifiers",
+        "sp80053Parameter__alternative_label"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "parameter_id",
+          "description": "The parameter's identifier in NIST's catalog, such as ac-02_odp.01.",
+          "range": "sp80053_parameter_identifier",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "assessment_label",
+          "description": "The label SP 800-53A gives the parameter, such as AC-02_ODP[01]. A parameter that aggregates several has none.",
+          "pattern": "^[A-Z]{2}-[0-9]{2}\\S*_ODP(\\[[0-9]{2}\\])?$",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "parameter_label",
+          "description": "For an assignment, what the organization defines, such as personnel or roles.",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "parameter_guidelines",
+          "description": "The guidelines that say what a value must settle, such as that the frequency of a review is defined.",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "selection_choices",
+          "description": "For a selection, the choices the publication lists, in order.",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "selection_cardinality",
+          "description": "For a selection, how many choices the organization picks. The catalog marks one or more and leaves exactly one unwritten.",
+          "range": "Sp80053SelectionCardinality",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "aggregated_parameters",
+          "description": "For a parameter that stands for several, the parameters it aggregates, by identifier.",
+          "range": "sp80053_parameter_identifier",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "alternative_identifiers",
+          "description": "The identifiers an earlier release of the catalog gave the parameter, such as ac-1_prm_2 for ac-01_odp.03.",
+          "range": "sp80053_parameter_identifier",
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "alternative_label",
+          "description": "The label SP 800-53 prints where it differs from the one SP 800-53A gives.",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Parameter",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Sp80053AssessmentObjective",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective",
+      "description": "An assessment objective of SP 800-53A: a determination statement an assessor checks, or a heading that groups the determination statements of one item of the control statement.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "see_also": [
+        "https://doi.org/10.6028/NIST.SP.800-53Ar5"
+      ],
+      "exact_mappings": [
+        "nist_sp_800_53:AssessmentObjective"
+      ],
+      "broad_mappings": [
+        "oscal:Part"
+      ],
+      "slots": [
+        "sp80053AssessmentObjective__objective_label",
+        "sp80053AssessmentObjective__objective_text",
+        "sp80053AssessmentObjective__sub_objectives"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "objective_label",
+          "description": "The label SP 800-53A gives the objective, such as AC-02a.[01].",
+          "required": true,
+          "pattern": "^[A-Z]{2}-[0-9]{2}",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "objective_text",
+          "description": "The determination statement, with the same placeholders for parameters as the control statement. A heading has none.",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "sub_objectives",
+          "description": "The objectives grouped under this one, in order.",
+          "range": "Sp80053AssessmentObjective",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/AssessmentObjective",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Sp80053AssessmentMethod",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethod",
+      "description": "One assessment method SP 800-53A gives a control or enhancement, with the objects an assessor selects from: documents and records to examine, people to interview, or mechanisms and activities to test.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "see_also": [
+        "https://doi.org/10.6028/NIST.SP.800-53Ar5"
+      ],
+      "exact_mappings": [
+        "nist_sp_800_53:AssessmentMethod"
+      ],
+      "broad_mappings": [
+        "oscal:Part"
+      ],
+      "slots": [
+        "sp80053AssessmentMethod__assessment_method",
+        "sp80053AssessmentMethod__assessment_objects"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "assessment_method",
+          "description": "Which of the three methods this is.",
+          "range": "Sp80053AssessmentMethodKind",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "assessment_objects",
+          "description": "The objects the method is applied to, in the order the publication lists them.",
+          "required": true,
+          "multivalued": true,
+          "pattern": "\\S",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/AssessmentMethod",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Sp80053Reference",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference",
+      "description": "A publication the controls cite, as the catalog's references list it: its label, its citation and its address.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "see_also": [
+        "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
+      ],
+      "exact_mappings": [
+        "nist_sp_800_53:Reference"
+      ],
+      "broad_mappings": [
+        "oscal:Resource"
+      ],
+      "slots": [
+        "sp80053Reference__reference_label",
+        "sp80053Reference__reference_citation",
+        "sp80053Reference__reference_url"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "reference_label",
+          "description": "The label the controls cite the publication by, such as SP 800-12.",
+          "required": true,
+          "pattern": "\\S",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "reference_citation",
+          "description": "The citation, as the catalog prints it.",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "reference_url",
+          "description": "The address the catalog gives for the publication.",
+          "range": "uri",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Reference",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Sp80053Baseline",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline",
+      "description": "One of the four control baselines SP 800-53B defines: the controls and enhancements selected for systems at the low, moderate or high impact level, or for privacy.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "see_also": [
+        "https://doi.org/10.6028/NIST.SP.800-53B"
+      ],
+      "exact_mappings": [
+        "nist_sp_800_53:Baseline"
+      ],
+      "broad_mappings": [
+        "oscal:Profile"
+      ],
+      "slots": [
         "title",
-        "IdentifiedElement__class",
-        "label",
-        "guidelines",
-        "select",
-        "depends_on"
+        "sp80053Baseline__baseline_level",
+        "sp80053Baseline__baseline_controls"
       ],
       "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Guideline",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Guideline",
-      "description": "Additional prose guidance associated with a parameter",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
+      "attributes": [
+        {
+          "name": "baseline_level",
+          "description": "Which of the four baselines this is.",
+          "range": "Sp80053BaselineLevel",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "baseline_controls",
+          "description": "The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them.",
+          "range": "sp80053_control_or_enhancement_identifier",
+          "required": true,
+          "multivalued": true,
+          "@type": "SlotDefinition"
+        }
       ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "nist_sp_800_53:Guideline",
-        "oscal_catalog:ParameterGuideline"
-      ],
-      "slots": [
-        "prose"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Property",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Property",
-      "description": "A name-value property with optional namespace and class attributes",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "nist_sp_800_53:Property"
-      ],
-      "close_mappings": [
-        "oscal_catalog:Property"
-      ],
-      "slots": [
-        "name",
-        "value",
-        "ns",
-        "Property__class"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Selection",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Selection",
-      "description": "Selection criteria for a parameter",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_catalog:ParameterSelection"
-      ],
-      "slots": [
-        "how_many",
-        "choice"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Link",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Link",
-      "description": "Relationship link",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "nist_sp_800_53:Link"
-      ],
-      "close_mappings": [
-        "oscal_catalog:Link"
-      ],
-      "slots": [
-        "href",
-        "rel"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Part",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/Part",
-      "description": "Structured narrative part that can contain nested parts",
-      "in_subset": [
-        "nist_sp_800_53r5_catalog"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "nist_sp_800_53:Part"
-      ],
-      "close_mappings": [
-        "oscal_catalog:Part"
-      ],
-      "is_a": "IdentifiedElement",
-      "slots": [
-        "id",
-        "props",
-        "links",
-        "parts",
-        "title",
-        "IdentifiedElement__class",
-        "label",
-        "name",
-        "prose"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ImportResource",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ImportResource",
-      "description": "Imported profile or catalog reference",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_profile:ProfileImport"
-      ],
-      "slots": [
-        "href",
-        "include_controls",
-        "exclude_controls"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "IncludeControlsSelection",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/IncludeControlsSelection",
-      "description": "Control inclusion selector",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any"
-      ],
-      "close_mappings": [
-        "oscal_catalog:SelectControlById"
-      ],
-      "slots": [
-        "with_ids",
-        "matching"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "MergeRules",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/MergeRules",
-      "description": "Merge configuration",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_profile:ProfileMerge"
-      ],
-      "slots": [
-        "as_is",
-        "flat"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "FlatMerge",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/FlatMerge",
-      "description": "Marker object indicating flat merge strategy for profile resolution",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_profile:MergeFlat"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ControlPattern",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ControlPattern",
-      "description": "Glob or regex pattern for selecting controls by identifier",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_catalog:ControlMatching"
-      ],
-      "slots": [
-        "pattern"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ExcludeControlsSelection",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ExcludeControlsSelection",
-      "description": "Selection of controls to explicitly exclude from a profile import",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any"
-      ],
-      "close_mappings": [
-        "oscal_catalog:SelectControlById"
-      ],
-      "slots": [
-        "with_ids",
-        "matching"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ProfileModify",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ProfileModify",
-      "description": "Profile modification section containing parameter overrides and control alterations",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_profile:ProfileModify"
-      ],
-      "slots": [
-        "set_parameters",
-        "alters"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ProfileSetParameter",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ProfileSetParameter",
-      "description": "Override the value of a parameter in a referenced control",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_profile:ParameterSetting"
-      ],
-      "slots": [
-        "param_id",
-        "label"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ProfileAlter",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ProfileAlter",
-      "description": "Alteration to a referenced control \u2014 adds or removes parts",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_profile:Alteration"
-      ],
-      "slots": [
-        "control_id",
-        "adds"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "ProfileAdd",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/ProfileAdd",
-      "description": "Content to be added to a control via profile alteration",
-      "in_subset": [
-        "nist_sp_800_53r5_profile"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any",
-        "oscal_profile:Addition"
-      ],
-      "slots": [
-        "position",
-        "by_id",
-        "parts",
-        "props"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "CPRTDocument",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CPRTDocument",
-      "description": "Semantic class for NIST CPRT (Cybersecurity and Privacy Reference Tool) export documents covering SP 800-53, SP 800-53A, and SP 800-53B. Validate with: linkml validate -C SP80053Document -s <schema> <file.json>",
-      "in_subset": [
-        "nist_sp_800_53r5_cprt"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any"
-      ],
-      "slots": [
-        "response"
-      ],
-      "slot_usage": {},
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "CPRTResponse",
-      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/CPRTResponse",
-      "description": "CPRT API response container holding document metadata, typed elements (controls, enhancements, ODPs, assessment objectives, baselines), relationship types, and element relationships",
-      "in_subset": [
-        "nist_sp_800_53r5_cprt"
-      ],
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "exact_mappings": [
-        "linkml:Any"
-      ],
-      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/nist-sp-800-53/Baseline",
       "@type": "ClassDefinition"
     }
   ],
-  "metamodel_version": "1.11.0",
+  "metamodel_version": "1.12.0",
   "source_file": "nist_sp_800_53.yaml",
-  "source_file_date": "2026-05-15T08:54:43",
-  "source_file_size": 28118,
-  "generation_date": "2026-05-15T10:26:00",
+  "source_file_date": "2026-10-30T01:10:08",
+  "source_file_size": 23660,
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_sp_800_53.context.jsonld",

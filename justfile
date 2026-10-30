@@ -132,7 +132,6 @@ testdoc: gen-doc _serve
 # Generate the Python data models (dataclasses & pydantic)
 gen-python:
   uv run gen-project -d  {{pymodel}} -I python {{source_schema_path}}
-  just fix-python-keywords
   uv run gen-pydantic {{gen_pydantic_args}} {{source_schema_path}} > {{pymodel}}/{{schema_name}}_pydantic.py
 
 # Generate project files including Python data model
@@ -141,7 +140,6 @@ gen-project:
   uv run gen-project {{config_yaml}} -d {{dest}} {{source_schema_path}}
   mkdir -p {{pymodel}}
   mv {{dest}}/*.py {{pymodel}}/
-  just fix-python-keywords
   uv run gen-pydantic {{gen_pydantic_args}} {{source_schema_path}} > {{pymodel}}/{{schema_name}}_pydantic.py
 
   @# Some generators ignore config_yaml or cannot create directories, so we run them separately.

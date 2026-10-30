@@ -1,10 +1,23 @@
-# metamodel_version: 1.11.0
+# metamodel_version: 1.12.0
 # version: 5.2.0
 BASE <https://w3id.org/lmodel/nist-sp-800-53/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX schema1: <http://schema.org/>
 
+
+<Sp80053FamilyIdentifier> xsd:string
+
+<Sp80053ControlIdentifier> xsd:string
+
+<Sp80053EnhancementIdentifier> xsd:string
+
+<Sp80053ControlOrEnhancementIdentifier> xsd:string
+
+<Sp80053WithdrawalTarget> xsd:string
+
+<Sp80053ParameterIdentifier> xsd:string
 
 linkml:String xsd:string
 
@@ -44,347 +57,142 @@ linkml:Jsonpath xsd:string
 
 linkml:Sparqlpath xsd:string
 
-<Address> CLOSED {
-    (  $<Address_tes> (  <addr_lines> @linkml:String * ;
-          <city> @linkml:String ? ;
-          <state> @linkml:String ? ;
-          <postal_code> @linkml:String ?
+<Sp80053AssessmentMethod> CLOSED {
+    (  $<Sp80053AssessmentMethod_tes> (  <assessment_method> [
+             <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethodKind#EXAMINE>
+             <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethodKind#INTERVIEW>
+             <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethodKind#TEST> ] ;
+          <assessment_objects> @linkml:String +
        ) ;
-       rdf:type [ linkml:Any ] ?
+       rdf:type [ <AssessmentMethod> ] ?
     )
 }
 
-<BackMatter> CLOSED {
-    (  $<BackMatter_tes> <resources> @<Resource> * ;
-       rdf:type [ linkml:Any ] ?
+<Sp80053AssessmentObjective> CLOSED {
+    (  $<Sp80053AssessmentObjective_tes> (  <objective_label> @linkml:String ;
+          <objective_text> @linkml:String ? ;
+          <sub_objectives> @<Sp80053AssessmentObjective> *
+       ) ;
+       rdf:type [ <AssessmentObjective> ] ?
     )
 }
 
-<Catalog> CLOSED {
-    (  $<Catalog_tes> <catalog> @<CatalogBody> ? ;
+<Sp80053Baseline> CLOSED {
+    (  $<Sp80053Baseline_tes> (  schema1:name @linkml:String ? ;
+          <baseline_level> [ <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#LOW>
+             <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#MODERATE>
+             <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#HIGH>
+             <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#PRIVACY> ] ;
+          <baseline_controls> @<Sp80053ControlOrEnhancementIdentifier> +
+       ) ;
+       rdf:type [ <Baseline> ] ?
+    )
+}
+
+<Sp80053Catalog> CLOSED {
+    (  $<Sp80053Catalog_tes> (  <catalog_release> @linkml:String ;
+          <control_families> @<Sp80053Family> + ;
+          <control_baselines> @<Sp80053Baseline> * ;
+          <catalog_references> @<Sp80053Reference> *
+       ) ;
        rdf:type [ <Catalog> ] ?
     )
 }
 
-<CatalogBody> CLOSED {
-    (  $<CatalogBody_tes> (  <uuid> @linkml:String ? ;
-          <metadata> @<Metadata> ? ;
-          <groups> @<ControlGroup> * ;
-          <back_matter> @<BackMatter> ?
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<CatalogElement>  (
-    {
-       (  $<CatalogElement_tes> (  <id> @linkml:String ? ;
-             <props> @<Property> * ;
-             <links> @<Link> * ;
-             <parts> @<Part> *
-          ) ;
-          rdf:type [ <CatalogElement> ] ?
-       )
-    } OR @<IdentifiedElement>
-)
-
-<Citation> CLOSED {
-    (  $<Citation_tes> <text> @linkml:String ? ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<Control> CLOSED {
-    (  $<Control_tes> (  &<IdentifiedElement_tes> ;
-          rdf:type [ <IdentifiedElement> ] ? ;
-          <params> @<Parameter> * ;
-          <controls> @<ControlEnhancement> *
+<Sp80053Control> CLOSED {
+    (  $<Sp80053Control_tes> (  schema1:name @linkml:String ? ;
+          <control_statement> @<Sp80053Statement> ? ;
+          <control_discussion> @linkml:String ? ;
+          <control_parameters> @<Sp80053Parameter> * ;
+          <related_control_ids> @<Sp80053ControlOrEnhancementIdentifier> * ;
+          <control_references> @linkml:String * ;
+          <assessment_objective> @<Sp80053AssessmentObjective> ? ;
+          <assessment_methods> @<Sp80053AssessmentMethod> * ;
+          <control_status> [ <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlStatus#WITHDRAWN> ] ? ;
+          <incorporated_into> @<Sp80053WithdrawalTarget> * ;
+          <moved_to> @<Sp80053ControlOrEnhancementIdentifier> * ;
+          <withdrawal_reason> @linkml:String ? ;
+          <implementation_level> [ <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel#ORGANIZATION>
+             <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel#SYSTEM> ] * ;
+          <contributes_to_assurance> @linkml:Boolean ? ;
+          <control_identifier> @<Sp80053ControlIdentifier> ;
+          <control_enhancements> @<Sp80053ControlEnhancement> *
        ) ;
        rdf:type [ <Control> ] ?
     )
 }
 
-<ControlEnhancement> CLOSED {
-    (  $<ControlEnhancement_tes> (  &<IdentifiedElement_tes> ;
-          rdf:type [ <IdentifiedElement> ] ? ;
-          <params> @<Parameter> * ;
-          <controls> @<ControlEnhancement> *
+<Sp80053ControlEnhancement> CLOSED {
+    (  $<Sp80053ControlEnhancement_tes> (  schema1:name @linkml:String ? ;
+          <control_statement> @<Sp80053Statement> ? ;
+          <control_discussion> @linkml:String ? ;
+          <control_parameters> @<Sp80053Parameter> * ;
+          <related_control_ids> @<Sp80053ControlOrEnhancementIdentifier> * ;
+          <control_references> @linkml:String * ;
+          <assessment_objective> @<Sp80053AssessmentObjective> ? ;
+          <assessment_methods> @<Sp80053AssessmentMethod> * ;
+          <control_status> [ <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlStatus#WITHDRAWN> ] ? ;
+          <incorporated_into> @<Sp80053WithdrawalTarget> * ;
+          <moved_to> @<Sp80053ControlOrEnhancementIdentifier> * ;
+          <withdrawal_reason> @linkml:String ? ;
+          <implementation_level> [ <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel#ORGANIZATION>
+             <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel#SYSTEM> ] * ;
+          <contributes_to_assurance> @linkml:Boolean ? ;
+          <enhancement_id> @<Sp80053EnhancementIdentifier> ;
+          <required_controls> @<Sp80053ControlOrEnhancementIdentifier> *
        ) ;
        rdf:type [ <ControlEnhancement> ] ?
     )
 }
 
-<ControlGroup> CLOSED {
-    (  $<ControlGroup_tes> (  &<IdentifiedElement_tes> ;
-          rdf:type [ <IdentifiedElement> ] ? ;
-          <groups> @<ControlGroup> * ;
-          <controls> @<Control> *
+<Sp80053Family> CLOSED {
+    (  $<Sp80053Family_tes> (  schema1:name @linkml:String ? ;
+          schema1:description @linkml:String ? ;
+          <family_id> @<Sp80053FamilyIdentifier> ;
+          <family_controls> @<Sp80053Control> *
        ) ;
-       rdf:type [ <ControlGroup> ] ?
+       rdf:type [ <Family> ] ?
     )
 }
 
-<ControlPattern> CLOSED {
-    (  $<ControlPattern_tes> <pattern> @linkml:String ? ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<CPRTDocument> CLOSED {
-    (  $<CPRTDocument_tes> <response> @<CPRTResponse> ? ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<CPRTResponse> CLOSED {
-    (  $<CPRTResponse_tes> rdf:type . * ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<ExcludeControlsSelection> CLOSED {
-    (  $<ExcludeControlsSelection_tes> (  <with_ids> @linkml:String * ;
-          <matching> @<ControlPattern> *
+<Sp80053Parameter> CLOSED {
+    (  $<Sp80053Parameter_tes> (  <parameter_id> @<Sp80053ParameterIdentifier> ;
+          <assessment_label> @linkml:String ? ;
+          <parameter_label> @linkml:String ? ;
+          <parameter_guidelines> @linkml:String * ;
+          <selection_choices> @linkml:String * ;
+          <selection_cardinality> [ <https://w3id.org/lmodel/nist-sp-800-53/Sp80053SelectionCardinality#ONE>
+             <https://w3id.org/lmodel/nist-sp-800-53/Sp80053SelectionCardinality#ONE_OR_MORE> ] ? ;
+          <aggregated_parameters> @<Sp80053ParameterIdentifier> * ;
+          <alternative_identifiers> @<Sp80053ParameterIdentifier> * ;
+          <alternative_label> @linkml:String ?
        ) ;
-       rdf:type [ linkml:Any ] ?
+       rdf:type [ <Parameter> ] ?
     )
 }
 
-<FlatMerge> CLOSED {
-    (  $<FlatMerge_tes> rdf:type . * ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<Guideline> CLOSED {
-    (  $<Guideline_tes> <prose> @linkml:String ? ;
-       rdf:type [ <Guideline> ] ?
-    )
-}
-
-<IdentifiedElement>  (
-    CLOSED {
-       (  $<IdentifiedElement_tes> (  &<CatalogElement_tes> ;
-             rdf:type [ <CatalogElement> ] ? ;
-             <title> @linkml:String ? ;
-             <class> [ <https://w3id.org/lmodel/nist-sp-800-53/CatalogElementClassValue#family>
-                <https://w3id.org/lmodel/nist-sp-800-53/CatalogElementClassValue#SP800-53>
-                <https://w3id.org/lmodel/nist-sp-800-53/CatalogElementClassValue#SP800-53-enhancement>
-                <https://w3id.org/lmodel/nist-sp-800-53/CatalogElementClassValue#assessment-objective> ] ? ;
-             <label> @linkml:String ?
-          ) ;
-          rdf:type [ <IdentifiedElement> ] ?
-       )
-    } OR @<Control> OR @<ControlEnhancement> OR @<ControlGroup> OR @<Parameter> OR @<Part>
-)
-
-<ImportResource> CLOSED {
-    (  $<ImportResource_tes> (  <href> @linkml:String ? ;
-          <include_controls> @<IncludeControlsSelection> * ;
-          <exclude_controls> @<ExcludeControlsSelection> *
+<Sp80053Reference> CLOSED {
+    (  $<Sp80053Reference_tes> (  <reference_label> @linkml:String ;
+          <reference_citation> @linkml:String ? ;
+          <reference_url> @linkml:Uri ?
        ) ;
-       rdf:type [ linkml:Any ] ?
+       rdf:type [ <Reference> ] ?
     )
 }
 
-<IncludeControlsSelection> CLOSED {
-    (  $<IncludeControlsSelection_tes> (  <with_ids> @linkml:String * ;
-          <matching> @<ControlPattern> *
+<Sp80053Statement> CLOSED {
+    (  $<Sp80053Statement_tes> (  <statement_items> @<Sp80053StatementItem> * ;
+          <statement_text> @linkml:String ?
        ) ;
-       rdf:type [ linkml:Any ] ?
+       rdf:type [ <Statement> ] ?
     )
 }
 
-<Link> CLOSED {
-    (  $<Link_tes> (  <href> @linkml:String ? ;
-          <rel> @linkml:String ?
+<Sp80053StatementItem> CLOSED {
+    (  $<Sp80053StatementItem_tes> (  <statement_items> @<Sp80053StatementItem> * ;
+          <item_label> @linkml:String ;
+          <item_text> @linkml:String
        ) ;
-       rdf:type [ <Link> ] ?
-    )
-}
-
-<MergeRules> CLOSED {
-    (  $<MergeRules_tes> (  <as_is> @linkml:Boolean ? ;
-          <flat> @<FlatMerge> ?
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<Metadata> CLOSED {
-    (  $<Metadata_tes> (  <title> @linkml:String ? ;
-          <last_modified> @linkml:String ? ;
-          <version> @linkml:String ? ;
-          <oscal_version> @linkml:String ? ;
-          <revisions> @<Revision> * ;
-          <props> @<Property> * ;
-          <links> @<Link> * ;
-          <roles> @<Role> * ;
-          <parties> @<Party> * ;
-          <responsible_parties> @<ResponsibleParty> * ;
-          <remarks> @linkml:String ?
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<Parameter> CLOSED {
-    (  $<Parameter_tes> (  &<IdentifiedElement_tes> ;
-          rdf:type [ <IdentifiedElement> ] ? ;
-          <guidelines> @<Guideline> * ;
-          <select> @<Selection> ? ;
-          <depends_on> @linkml:String ?
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<Part> CLOSED {
-    (  $<Part_tes> (  &<IdentifiedElement_tes> ;
-          rdf:type [ <IdentifiedElement> ] ? ;
-          <name> @linkml:String ? ;
-          <prose> @linkml:String ?
-       ) ;
-       rdf:type [ <Part> ] ?
-    )
-}
-
-<Party> CLOSED {
-    (  $<Party_tes> (  <uuid> @linkml:String ? ;
-          <type> @linkml:String ? ;
-          <name> @linkml:String ? ;
-          <short_name> @linkml:String ? ;
-          <email_addresses> @linkml:String * ;
-          <addresses> @<Address> *
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<ProfileAdd> CLOSED {
-    (  $<ProfileAdd_tes> (  <position> @linkml:String ? ;
-          <by_id> @linkml:String ? ;
-          <parts> @<Part> * ;
-          <props> @<Property> *
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<ProfileAlter> CLOSED {
-    (  $<ProfileAlter_tes> (  <control_id> @linkml:String ? ;
-          <adds> @<ProfileAdd> *
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<ProfileBody> CLOSED {
-    (  $<ProfileBody_tes> (  <uuid> @linkml:String ? ;
-          <metadata> @<Metadata> ? ;
-          <imports> @<ImportResource> * ;
-          <merge> @<MergeRules> ? ;
-          <modify> @<ProfileModify> ? ;
-          <back_matter> @<BackMatter> ?
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<ProfileDocument> CLOSED {
-    (  $<ProfileDocument_tes> <profile> @<ProfileBody> ? ;
-       rdf:type [ <ProfileDocument> ] ?
-    )
-}
-
-<ProfileModify> CLOSED {
-    (  $<ProfileModify_tes> (  <set_parameters> @<ProfileSetParameter> * ;
-          <alters> @<ProfileAlter> *
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<ProfileSetParameter> CLOSED {
-    (  $<ProfileSetParameter_tes> (  <param_id> @linkml:String ? ;
-          <label> @linkml:String ?
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<Property> CLOSED {
-    (  $<Property_tes> (  <name> @linkml:String ? ;
-          <value> @linkml:String ? ;
-          <ns> @linkml:String ? ;
-          <class> [ <https://w3id.org/lmodel/nist-sp-800-53/CatalogPropertyClassValue#sp800-53>
-             <https://w3id.org/lmodel/nist-sp-800-53/CatalogPropertyClassValue#sp800-53a>
-             <https://w3id.org/lmodel/nist-sp-800-53/CatalogPropertyClassValue#zero-padded> ] ?
-       ) ;
-       rdf:type [ <Property> ] ?
-    )
-}
-
-<Resource> CLOSED {
-    (  $<Resource_tes> (  <uuid> @linkml:String ? ;
-          <title> @linkml:String ? ;
-          <description> @linkml:String ? ;
-          <citation> @<Citation> ? ;
-          <rlinks> @<ResourceLink> *
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<ResourceLink> CLOSED {
-    (  $<ResourceLink_tes> (  <href> @linkml:String ? ;
-          <media_type> @linkml:String ?
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<ResponsibleParty> CLOSED {
-    (  $<ResponsibleParty_tes> (  <role_id> @linkml:String ? ;
-          <party_uuids> @linkml:String *
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<Revision> CLOSED {
-    (  $<Revision_tes> (  <title> @linkml:String ? ;
-          <last_modified> @linkml:String ? ;
-          <version> @linkml:String ? ;
-          <oscal_version> @linkml:String ? ;
-          <links> @<Link> * ;
-          <remarks> @linkml:String ?
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<Role> CLOSED {
-    (  $<Role_tes> (  <id> @linkml:String ? ;
-          <title> @linkml:String ?
-       ) ;
-       rdf:type [ <Role> ] ?
-    )
-}
-
-<Selection> CLOSED {
-    (  $<Selection_tes> (  <how_many> @linkml:String ? ;
-          <choice> @linkml:String *
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<SP80053Document> CLOSED {
-    (  $<SP80053Document_tes> (  <catalog> @<CatalogBody> ? ;
-          <profile> @<ProfileBody> ? ;
-          <response> @<CPRTResponse> ?
-       ) ;
-       rdf:type [ linkml:Any ] ?
+       rdf:type [ <StatementItem> ] ?
     )
 }
