@@ -1,4 +1,6 @@
+# Fails at: /catalog_release
 # Invalid: a release has three numbers, such as 5.2.0.
 catalog_release: "5.2"
 control_families:
   - family_id: AC
+    title: Access Control

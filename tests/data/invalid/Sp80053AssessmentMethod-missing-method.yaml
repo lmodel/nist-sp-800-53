@@ -1,0 +1,4 @@
+# Fails at: /
+# Invalid: an assessment method says which of the three methods it is.
+assessment_objects:
+  - access control policy

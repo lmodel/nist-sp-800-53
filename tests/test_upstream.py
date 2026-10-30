@@ -10,11 +10,10 @@ describes, and hold that catalog to the validator and to the release's
 counts.
 """
 
-import hashlib
 import importlib.util
 import json
 import re
-from functools import lru_cache
+from functools import cache, lru_cache
 from pathlib import Path
 
 import yaml
@@ -42,7 +41,8 @@ UUID = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12
 # twenty families; the controls and enhancements, with those Revision 5
 # withdrew apart; where the withdrawn ones went; and the parameters,
 # statements, discussions, objectives, methods, links and references of the
-# controls and enhancements that remain.
+# controls and enhancements that remain. The statements and discussions are
+# counted from the catalog's own parts, the rest from the derived catalog.
 COUNTS = {
     "families": 20,
     "controls": 324,
@@ -74,18 +74,15 @@ FAMILY_IDS = [
 ]  # fmt: skip
 
 
+@cache
 def _watch():
+    """The upstream watch script, loaded once, for its pins and its hash."""
     spec = importlib.util.spec_from_file_location(
         "watch", ROOT / "scripts" / "check_upstream_release.py"
     )
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
-
-
-def _blob_sha(path):
-    data = path.read_bytes()
-    return hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest()
 
 
 @lru_cache(maxsize=1)
@@ -371,8 +368,13 @@ class Derivation:
 
 
 @lru_cache(maxsize=1)
+def _derivation():
+    return Derivation(_catalog(), _profiles())
+
+
+@lru_cache(maxsize=1)
 def _derived():
-    return Derivation(_catalog(), _profiles()).derive()
+    return _derivation().derive()
 
 
 def _controls():
@@ -422,7 +424,7 @@ def test_copy_matches_the_pinned_blobs():
     pinned = _watch().PINNED_BLOBS
     assert {p.name for p in COPY.iterdir()} == set(pinned)
     for name, (_source, sha) in pinned.items():
-        assert _blob_sha(COPY / name) == sha, name
+        assert _watch()._blob_sha(COPY / name) == sha, name
 
 
 def test_header_pins_match_the_watch():
@@ -466,6 +468,7 @@ def test_counts_match_the_release():
     ]
     methods = [m for e in active for m in e["assessment_methods"]]
     references = [r for e in active for r in e.get("control_references", [])]
+    raw_active = [e for e in _derivation().elements.values() if not _props(e, "status")]
     counted = {
         "families": len(_derived()["control_families"]),
         "controls": len(_controls()),
@@ -485,11 +488,11 @@ def test_counts_match_the_release():
         "aggregating parameters": sum(
             1 for p in _parameters() if "aggregated_parameters" in p
         ),
-        "statements": len(active),
+        "statements": sum(len(_parts(e, "statement")) for e in raw_active),
         "statement items": sum(
             1 for e in active for _ in _walk_items(e["control_statement"])
         ),
-        "discussions": len(active),
+        "discussions": sum(len(_parts(e, "guidance")) for e in raw_active),
         "assessment objectives": len(objectives),
         "assessment methods": len(methods),
         "related control links": sum(
@@ -533,6 +536,57 @@ def test_identifiers_nest_and_are_unique():
     assert len(parameters) == len(set(parameters))
 
 
+def _parameter_prefixes(identifier):
+    """The two prefixes NIST's catalog gives the parameters of a control or
+    enhancement, in lower case: the zero-padded identifier and _odp, as in
+    ac-02.01_odp, for a parameter SP 800-53A labels, and the catalog's own
+    unpadded identifier and _prm_, as in ac-2.1_prm_, for one that
+    aggregates others."""
+    family, number, enhancement = re.fullmatch(
+        r"([A-Z]{2})-([0-9]+)(?:\(([0-9]+)\))?", identifier
+    ).groups()
+    padded = f"{family.lower()}-{int(number):02d}"
+    plain = f"{family.lower()}-{int(number)}"
+    if enhancement:
+        padded += f".{int(enhancement):02d}"
+        plain += f".{int(enhancement)}"
+    return padded + "_odp", plain + "_prm_"
+
+
+def test_parameter_identifiers_start_with_their_element():
+    """A parameter's identifier starts with the identifier of the control or
+    enhancement that holds it: zero-padded before _odp, and as the catalog
+    writes it, unpadded, before _prm_."""
+    for element in _active():
+        odp, prm = _parameter_prefixes(_identifier(element))
+        for parameter in element.get("control_parameters", []):
+            identifier = parameter["parameter_id"]
+            prefix = odp if "_odp" in identifier else prm
+            assert identifier.startswith(prefix), (_identifier(element), identifier)
+
+
+# The list slots no pattern can keep free of repeats.
+LIST_SLOTS = (
+    "related_control_ids",
+    "required_controls",
+    "moved_to",
+    "incorporated_into",
+    "control_references",
+)
+
+
+def test_lists_never_repeat_an_identifier():
+    """No list of identifiers a control, an enhancement or a parameter holds
+    names the same element twice."""
+    for element in _elements():
+        for slot in LIST_SLOTS:
+            values = element.get(slot, [])
+            assert len(values) == len(set(values)), (_identifier(element), slot)
+    for parameter in _parameters():
+        values = parameter.get("aggregated_parameters", [])
+        assert len(values) == len(set(values)), parameter["parameter_id"]
+
+
 def test_every_cited_identifier_names_an_element():
     """A related or required control, a baseline's selection, a moved-to
     target and an aggregated parameter each name something the catalog
@@ -559,11 +613,29 @@ def test_every_cited_identifier_names_an_element():
         )
 
 
+def test_withdrawn_elements_hold_nothing_else_in_the_catalog():
+    """In NIST's catalog itself, a withdrawn control or enhancement holds no
+    parameters, no links but incorporated-into and moved-to, and no part but
+    one statement, which it holds only when it links nowhere. The derivation
+    keeps only those, so it loses nothing the catalog says."""
+    withdrawn = [e for e in _derivation().elements.values() if _props(e, "status")]
+    assert len(withdrawn) == (
+        COUNTS["withdrawn controls"] + COUNTS["withdrawn enhancements"]
+    )
+    for element in withdrawn:
+        rels = {link["rel"] for link in element.get("links", [])}
+        parts = [part["name"] for part in element.get("parts", [])]
+        assert rels <= {"incorporated-into", "moved-to"}, element["id"]
+        assert "params" not in element, element["id"]
+        assert parts in ([], ["statement"]), element["id"]
+        assert not (parts and rels), element["id"]
+
+
 def test_withdrawn_elements_say_where_they_went():
     """A withdrawn control or enhancement carries where it was incorporated,
-    where it moved, or the catalog's reason, and nothing an active one
-    carries; an active one carries its statement, discussion, objective and
-    methods and no withdrawal slot."""
+    where it moved, or the catalog's reason; an active one carries its
+    statement, with text, items or both, its discussion, objective and
+    methods, and no withdrawal slot."""
     for element in _withdrawn():
         assert element["control_status"] == "WITHDRAWN"
         went = [
@@ -572,14 +644,13 @@ def test_withdrawn_elements_say_where_they_went():
             if k in element
         ]
         assert went, _identifier(element)
-        assert not {
-            "control_statement",
-            "control_discussion",
-            "assessment_objective",
-        } & set(element)
     for element in _active():
         assert not {"incorporated_into", "moved_to", "withdrawal_reason"} & set(element)
         assert element["assessment_methods"], _identifier(element)
+        statement = element["control_statement"]
+        assert "statement_text" in statement or statement.get("statement_items"), (
+            _identifier(element)
+        )
     reasons = {
         _identifier(e): e["withdrawal_reason"]
         for e in _withdrawn()
@@ -618,3 +689,187 @@ def test_control_references_name_listed_documents():
         assert set(element.get("control_references", [])) <= labels, _identifier(
             element
         )
+
+
+VALID = ROOT / "tests" / "data" / "valid"
+
+
+def _objective_pairs(objective, parent=None):
+    """Each objective's label, with the label of the objective it sits under,
+    or None for the top one."""
+    yield parent, objective["objective_label"]
+    for sub in objective.get("sub_objectives", []):
+        yield from _objective_pairs(sub, objective["objective_label"])
+
+
+def _item_paths(holder, path=()):
+    """The labels from the statement down to each item, such as ("d.", "1.")."""
+    for item in holder.get("statement_items", []):
+        here = path + (item["item_label"],)
+        yield here
+        yield from _item_paths(item, here)
+
+
+class Facts:
+    """What the derived catalog says about each element an example names, so
+    an example states no fact the catalog contradicts. An example may leave
+    things out, so a list it gives need only be part of the catalog's, but a
+    title, a withdrawn status and where a withdrawn element went must be the
+    catalog's own."""
+
+    def __init__(self):
+        derived = _derived()
+        self.release = derived["catalog_release"]
+        self.families = {f["family_id"]: f for f in derived["control_families"]}
+        self.elements = {_identifier(e): e for e in _elements()}
+        self.parameters = {p["parameter_id"]: p for p in _parameters()}
+        self.baselines = {b["baseline_level"]: b for b in derived["control_baselines"]}
+        self.references = {
+            r["reference_label"]: r for r in derived["catalog_references"]
+        }
+        self.objective_pairs = {
+            pair
+            for e in _active()
+            for pair in _objective_pairs(e["assessment_objective"])
+        }
+        self.checked = 0
+
+    def hold(self, cls, example, where):
+        getattr(self, "_" + cls.removeprefix("Sp80053").lower(), lambda *_: None)(
+            example, where
+        )
+
+    def _catalog(self, example, where):
+        assert example["catalog_release"] == self.release, where
+        for family in example.get("control_families", []):
+            self._family(family, where)
+        for baseline in example.get("control_baselines", []):
+            self._baseline(baseline, where)
+        for reference in example.get("catalog_references", []):
+            self._reference(reference, where)
+
+    def _family(self, example, where):
+        family = self.families.get(example["family_id"])
+        if family is None:
+            return
+        self.checked += 1
+        assert example["title"] == family["title"], where
+        theirs = {c["control_identifier"] for c in family["family_controls"]}
+        for control in example.get("family_controls", []):
+            assert control["control_identifier"] in theirs, where
+            self._control(control, where)
+
+    def _control(self, example, where):
+        identifier = example.get("control_identifier") or example["enhancement_id"]
+        element = self.elements.get(identifier)
+        if element is None:
+            return
+        self.checked += 1
+        where = f"{where}, {identifier}"
+        assert example["title"] == element["title"], where
+        assert ("control_status" in example) == ("control_status" in element), where
+        for slot in ("incorporated_into", "moved_to", "withdrawal_reason"):
+            if slot in example or slot in element:
+                assert example.get(slot) == element.get(slot), (where, slot)
+        for slot in ("related_control_ids", "control_references", "required_controls"):
+            assert set(example.get(slot, [])) <= set(element.get(slot, [])), (
+                where,
+                slot,
+            )
+        if "implementation_level" in example:
+            assert set(example["implementation_level"]) == set(
+                element["implementation_level"]
+            ), where
+        if "contributes_to_assurance" in example:
+            assert example["contributes_to_assurance"] == element.get(
+                "contributes_to_assurance", False
+            ), where
+        theirs = {p["parameter_id"] for p in element.get("control_parameters", [])}
+        for parameter in example.get("control_parameters", []):
+            assert parameter["parameter_id"] in theirs, where
+            self._parameter(parameter, where)
+        if "assessment_objective" in example:
+            ((_, top),) = [
+                pair
+                for pair in _objective_pairs(element["assessment_objective"])
+                if pair[0] is None
+            ]
+            for parent, label in _objective_pairs(example["assessment_objective"]):
+                if parent is None:
+                    assert label == top, where
+                else:
+                    assert (parent, label) in self.objective_pairs, (where, label)
+        methods = {
+            m["assessment_method"] for m in element.get("assessment_methods", [])
+        }
+        for method in example.get("assessment_methods", []):
+            assert method["assessment_method"] in methods, where
+        if "control_statement" in example:
+            paths = set(_item_paths(element["control_statement"]))
+            assert set(_item_paths(example["control_statement"])) <= paths, where
+        theirs = {e["enhancement_id"] for e in element.get("control_enhancements", [])}
+        for enhancement in example.get("control_enhancements", []):
+            assert enhancement["enhancement_id"] in theirs, where
+            self._control(enhancement, where)
+
+    _controlenhancement = _control
+
+    def _parameter(self, example, where):
+        parameter = self.parameters.get(example["parameter_id"])
+        if parameter is None:
+            return
+        self.checked += 1
+        where = f"{where}, {example['parameter_id']}"
+        for slot in (
+            "assessment_label",
+            "aggregated_parameters",
+            "alternative_identifiers",
+        ):
+            if slot in example:
+                assert example[slot] == parameter.get(slot), (where, slot)
+        assert ("selection_choices" in example) == ("selection_choices" in parameter), (
+            where
+        )
+        if "selection_cardinality" in example:
+            assert example["selection_cardinality"] == parameter.get(
+                "selection_cardinality", "ONE"
+            ), where
+
+    def _baseline(self, example, where):
+        baseline = self.baselines.get(example["baseline_level"])
+        if baseline is None:
+            return
+        self.checked += 1
+        assert example["title"] == baseline["title"], where
+        assert set(example["baseline_controls"]) <= set(
+            baseline["baseline_controls"]
+        ), where
+
+    def _reference(self, example, where):
+        reference = self.references.get(example["reference_label"])
+        if reference is None:
+            return
+        self.checked += 1
+        if "reference_url" in example:
+            assert example["reference_url"] == reference["reference_url"], where
+
+    def _assessmentobjective(self, example, where):
+        pairs = list(_objective_pairs(example))
+        labels = {label for _, label in self.objective_pairs}
+        if pairs[0][1] not in labels:
+            return
+        self.checked += 1
+        for parent, label in pairs[1:]:
+            assert (parent, label) in self.objective_pairs, (where, label)
+
+
+def test_valid_examples_state_the_catalog_facts():
+    """Each valid example that names an element of the catalog, by an
+    identifier, a parameter identifier, a baseline level, a reference label
+    or an objective label, states only what the catalog says of it: its
+    title, whether it is withdrawn and where it went, and lists the catalog
+    holds. The texts are the project's own words and are not compared."""
+    facts = Facts()
+    for path in sorted(VALID.glob("*.yaml")):
+        facts.hold(path.stem.split("-")[0], yaml.safe_load(path.read_text()), path.name)
+    assert facts.checked

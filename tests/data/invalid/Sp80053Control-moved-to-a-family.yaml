@@ -1,5 +1,7 @@
+# Fails at: /moved_to/0
 # Invalid: a control moves to a control or an enhancement, never to a family.
 control_identifier: SA-12
+title: Supply Chain Protection
 control_status: WITHDRAWN
 moved_to:
   - SR

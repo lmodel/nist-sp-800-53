@@ -1,3 +1,5 @@
+# Fails at: /control_status
 # Invalid: the catalog marks only WITHDRAWN.
 control_identifier: SA-12
+title: Supply Chain Protection
 control_status: RETIRED

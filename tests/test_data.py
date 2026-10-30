@@ -54,13 +54,22 @@ def test_valid_data_files_validate(filepath):
 
 @pytest.mark.parametrize("filepath", INVALID_EXAMPLE_FILES)
 def test_invalid_data_files_fail(filepath):
-    """Every counter-example fails the validator."""
+    """Every counter-example fails the validator, and fails where its first
+    line, `# Fails at: <JSON pointer>`, says, so a counter-example that fails
+    for another reason fails this test."""
+    text = Path(filepath).read_text()
+    first, _, _ = text.partition("\n")
+    prefix = "# Fails at: "
+    assert first.startswith(prefix), f"{filepath} has no '{prefix}' first line"
+    pointer = first[len(prefix) :].strip()
     report = validate(
-        yaml.safe_load(Path(filepath).read_text()),
+        yaml.safe_load(text),
         str(SCHEMA),
         Path(filepath).stem.split("-")[0],
     )
-    assert report.results
+    messages = [r.message for r in report.results]
+    assert messages
+    assert any(m.endswith(f" in {pointer}") for m in messages), messages
 
 
 def test_every_concept_class_has_an_example():

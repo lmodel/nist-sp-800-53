@@ -61,10 +61,10 @@ control_families:
                 assessment_objects:
                   - the mechanisms that manage accounts
             implementation_level:
-              - SYSTEM
+              - ORGANIZATION
 control_baselines:
   - baseline_level: LOW
-    title: The low-impact baseline, cut down
+    title: Electronic (OSCAL) Version of NIST Special Publication 800-53 Revision 5.2.0 LOW IMPACT BASELINE
     baseline_controls:
       - AC-1
       - AC-2

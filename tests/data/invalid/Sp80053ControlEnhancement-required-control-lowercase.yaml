@@ -1,4 +1,6 @@
+# Fails at: /required_controls/0
 # Invalid: a required control is named as the publication prints it, in capitals.
 enhancement_id: AC-2(1)
+title: Automated System Account Management
 required_controls:
   - ac-2

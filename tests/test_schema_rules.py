@@ -144,3 +144,20 @@ def test_mappings_use_a_bound_prefix():
     for mapping in mappings:
         prefix, sep, _ = mapping.partition(":")
         assert sep and prefix in prefixes, mapping
+
+
+def test_oscal_mappings_name_an_oscal_class():
+    """Every oscal: mapping in the copy is the IRI of a class in lmodel/oscal's
+    released copy: the class's class_uri, or oscal:<Name> for a class without
+    one. The adapt copy renames a class that collides with LOKF, such as
+    OscalParameter, and keeps its IRI, oscal:Parameter, in class_uri."""
+    doc = yaml.safe_load(COPY.read_text())
+    oscal = yaml.safe_load((NEIGHBOUR_DIR / "oscal.yaml").read_text())
+    iris = {
+        (cls or {}).get("class_uri") or f"oscal:{name}"
+        for name, cls in oscal["classes"].items()
+    }
+    mappings = [m for m in _mappings(doc) if m.startswith("oscal:")]
+    assert mappings
+    for mapping in mappings:
+        assert mapping in iris, mapping

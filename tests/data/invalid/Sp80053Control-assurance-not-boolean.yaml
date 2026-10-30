@@ -1,0 +1,5 @@
+# Fails at: /contributes_to_assurance
+# Invalid: whether a control contributes to assurance is true or false.
+control_identifier: AC-2
+title: Account Management
+contributes_to_assurance: "yes"

@@ -1,3 +1,4 @@
+# Fails at: /objective_label
 # Invalid: an objective's label starts with its control's zero-padded identifier.
 objective_label: a.[01]
 objective_text: account managers are named;

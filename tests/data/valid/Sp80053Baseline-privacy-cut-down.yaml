@@ -1,6 +1,6 @@
 # The privacy baseline cut down to four of its selections.
 baseline_level: PRIVACY
-title: The privacy baseline
+title: Electronic (OSCAL) Version of NIST Special Publication 800-53 Revision 5.2.0 PRIVACY BASELINE
 baseline_controls:
   - AC-1
   - AC-3(14)
