@@ -21,7 +21,7 @@ generated:
 status: draft
 verified:
   - by: process:ktl-librarian
-    at: "2026-10-30T08:54:10Z"
+    at: "2026-10-30T09:09:14Z"
 ---
 
 # Regenerate and test after a schema change

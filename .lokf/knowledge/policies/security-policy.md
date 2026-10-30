@@ -14,7 +14,7 @@ sources:
     title: the four updates entries
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T08:34:38Z"
+  at: "2026-10-30T09:09:14Z"
 status: draft
 ---
 
@@ -31,7 +31,7 @@ Its table says what holds each surface:
 - the librarian's agent job with no write token, and a publish job that confines its patch to the bundle;
 - the knowledge release's attach job.
 
-A ruleset on `main` blocks deletion and force-pushes and keeps the history linear. Two settings are not yet in force: required reviewers on the `release` Environment, and secret scanning with push protection. A problem in the publications or NIST's copies belongs with NIST, and one in LinkML with LinkML.[^security.md] Dependabot keeps the pinned actions, the Python tree, the sidecar's tree and the website's npm packages current, monthly.[^dependabot.yml]
+A ruleset on `main` blocks deletion and force-pushes and keeps the history linear. Two settings are not yet in force: required reviewers on the `release` Environment, and secret scanning with push protection. A problem in the publications or NIST's copies belongs with NIST, and one in LinkML with LinkML.[^security.md] Dependabot keeps the pinned actions, the Python tree, the sidecar's tree, the website's npm packages and the release tools' npm lock current, monthly.[^dependabot.yml]
 
 [^security.md]: SECURITY.md, Reporting a vulnerability, Supported versions, What this repository releases, What executes here and Not covered
 [^dependabot.yml]: .github/dependabot.yml, the four updates entries

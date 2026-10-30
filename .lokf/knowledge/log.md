@@ -2,6 +2,10 @@
 
 ## 2026-10-30
 
+* **Changed**: Semantic release says that both jobs install the release tools from `.github/release/package-lock.json`.
+* **Changed**: Security policy counts the release tools' npm lock among what Dependabot keeps current.
+* **Changed**: License and attribution names the knowledge bundle's CC BY 4.0 licence, as the README now does.
+* **Changed**: Knowledge sources maps `.github/release/` to the Semantic release concept.
 * **Changed**: nist-sp-800-53 LinkML schema: the four identifiers are slots listed first in their classes, so the generated dataclasses key each inlined list by its identifier.
 * **Changed**: Scope, influences and mappings says that SC-19 and CP-10(3) give a reason for their withdrawal in place of a destination, as `docs/about.md` now does.
 * **Prose**: reworded 33 concept bodies in plain English. No fact, link, number or frontmatter changed.
