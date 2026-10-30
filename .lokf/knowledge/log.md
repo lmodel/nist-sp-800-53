@@ -2,6 +2,7 @@
 
 ## 2026-10-30
 
+* **Changed**: Security policy now says that a ruleset on `main` blocks deletion and force-pushes, as `SECURITY.md` does since the repository's settings were read; two settings remain not in force.
 * **Added**: Documentation site, from `website/site.config.mjs` and `website/README.md`.
 * **Added**: nist-sp-800-53 LinkML schema, from `src/nist_sp_800_53/schema/nist_sp_800_53.yaml`, its adapt copy and the lokf-adapt recipes.
 * **Added**: NIST's SP 800-53 catalog and baseline copies, from `src/nist_sp_800_53/schema/oscal-content/`, NOTICE and the watch's pins.
