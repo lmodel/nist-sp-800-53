@@ -33,6 +33,9 @@ generated:
   by: process:ktl-librarian
   at: "2026-10-30T08:34:38Z"
 status: draft
+verified:
+  - by: process:ktl-librarian
+    at: "2026-10-30T08:54:10Z"
 ---
 
 # nist-sp-800-53 LinkML schema
