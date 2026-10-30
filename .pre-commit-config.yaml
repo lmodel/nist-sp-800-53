@@ -1,10 +1,11 @@
 ---
 # https://pre-commit.com/
 # No hook may rewrite a file this repository does not write by hand: NIST's
-# catalog and baselines, kept byte for byte so scripts/check_upstream_release.py
-# can match them by git object hash; what the LinkML generators and `lokf
-# adapt` write, which the next run would rewrite back; the neighbours'
-# released copies; and the KTL sidecar's scripts, which the weekly sync
+# catalog and baselines, kept byte for byte so
+# scripts/check_upstream_release.py can match them by git object hash; what
+# the LinkML generators and `lokf adapt` write, which the next run would
+# rewrite back; the neighbours' released copies; npm's lockfile for the
+# release tools; and the KTL sidecar's scripts, which the weekly sync
 # replaces.
 exclude: >-
   (?x)^(
@@ -14,6 +15,7 @@ exclude: >-
     docs/schema/|
     \.lokf/(scripts|m365)/|
     \.lokf/(lokf|nist-sp-800-53)\.yaml$|
+    \.github/release/package-lock\.json$|
     tests/neighbours/
   )
 repos:
