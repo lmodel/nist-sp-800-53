@@ -43,7 +43,7 @@ Release 5.2.0. It leaves out:
   profiles.
 
 A withdrawn control or enhancement stays, with
-where it went.
+where it went or, for SC-19 and CP-10(3), why it was withdrawn.
 
 ## Reference
 
