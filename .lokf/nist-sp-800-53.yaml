@@ -94,6 +94,22 @@ types:
       for a parameter that aggregates several, the control identifier, _prm_ and a number, such as ac-1_prm_1.'
     pattern: ^[a-z]{2}-[0-9]{2}(\.[0-9]{2})?_odp(\.[0-9]{2})?$|^[a-z]{2}-[1-9][0-9]*(\.[1-9][0-9]*)?_prm_[1-9][0-9]*$
 slots:
+  family_id:
+    description: The family's two letters, such as AC for Access Control.
+    range: sp80053_family_identifier
+    required: true
+  control_identifier:
+    description: The control's identifier, such as AC-2.
+    range: sp80053_control_identifier
+    required: true
+  enhancement_id:
+    description: The enhancement's identifier, such as AC-2(1).
+    range: sp80053_enhancement_identifier
+    required: true
+  baseline_level:
+    description: Which of the four baselines this is.
+    range: Sp80053BaselineLevel
+    required: true
   control_statement:
     description: 'The control statement: what the control or enhancement requires, as one text, a lettered
       or numbered list of items, or both.'
@@ -209,6 +225,7 @@ classes:
     broad_mappings:
     - oscal:Group
     slots:
+    - family_id
     - title
     - description
     slot_usage:
@@ -218,10 +235,6 @@ classes:
       description:
         range: string
     attributes:
-      family_id:
-        description: The family's two letters, such as AC for Access Control.
-        range: sp80053_family_identifier
-        required: true
       family_controls:
         description: The controls of the family. A knowledge bundle relates a control to its family with
           isPartOf instead.
@@ -241,6 +254,7 @@ classes:
     broad_mappings:
     - oscal:Control
     slots:
+    - control_identifier
     - title
     - control_statement
     - control_discussion
@@ -260,10 +274,6 @@ classes:
         required: true
         range: string
     attributes:
-      control_identifier:
-        description: The control's identifier, such as AC-2.
-        range: sp80053_control_identifier
-        required: true
       control_enhancements:
         description: The control's enhancements. A knowledge bundle relates an enhancement to its control
           with isPartOf instead.
@@ -282,6 +292,7 @@ classes:
     broad_mappings:
     - oscal:Control
     slots:
+    - enhancement_id
     - title
     - control_statement
     - control_discussion
@@ -301,10 +312,6 @@ classes:
         required: true
         range: string
     attributes:
-      enhancement_id:
-        description: The enhancement's identifier, such as AC-2(1).
-        range: sp80053_enhancement_identifier
-        required: true
       required_controls:
         description: 'The controls and enhancements that must be implemented for the enhancement to apply,
           as NIST''s catalog links them: its own control, and for SC-42(2) also SC-42(1).'
@@ -453,16 +460,13 @@ classes:
     broad_mappings:
     - oscal:Profile
     slots:
+    - baseline_level
     - title
     slot_usage:
       title:
         required: true
         range: string
     attributes:
-      baseline_level:
-        description: Which of the four baselines this is.
-        range: Sp80053BaselineLevel
-        required: true
       baseline_controls:
         description: The controls and enhancements the baseline selects, by identifier, in the order the
           catalog gives them.

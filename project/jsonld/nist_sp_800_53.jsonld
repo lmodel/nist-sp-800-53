@@ -573,6 +573,62 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "family_id",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/family_id",
+      "description": "The family's two letters, such as AC for Access Control.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/family_id",
+      "owner": "Sp80053Family",
+      "domain_of": [
+        "Sp80053Family"
+      ],
+      "range": "sp80053_family_identifier",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "control_identifier",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_identifier",
+      "description": "The control's identifier, such as AC-2.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_identifier",
+      "owner": "Sp80053Control",
+      "domain_of": [
+        "Sp80053Control"
+      ],
+      "range": "sp80053_control_identifier",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "enhancement_id",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/enhancement_id",
+      "description": "The enhancement's identifier, such as AC-2(1).",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/enhancement_id",
+      "owner": "Sp80053ControlEnhancement",
+      "domain_of": [
+        "Sp80053ControlEnhancement"
+      ],
+      "range": "sp80053_enhancement_identifier",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "baseline_level",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/baseline_level",
+      "description": "Which of the four baselines this is.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/baseline_level",
+      "owner": "Sp80053Baseline",
+      "domain_of": [
+        "Sp80053Baseline"
+      ],
+      "range": "Sp80053BaselineLevel",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "control_statement",
       "definition_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_statement",
       "description": "The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both.",
@@ -855,20 +911,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "sp80053Family__family_id",
-      "description": "The family's two letters, such as AC for Access Control.",
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/family_id",
-      "alias": "family_id",
-      "owner": "Sp80053Family",
-      "domain_of": [
-        "Sp80053Family"
-      ],
-      "range": "sp80053_family_identifier",
-      "required": true,
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "sp80053Family__family_controls",
       "description": "The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
@@ -885,20 +927,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "sp80053Control__control_identifier",
-      "description": "The control's identifier, such as AC-2.",
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/control_identifier",
-      "alias": "control_identifier",
-      "owner": "Sp80053Control",
-      "domain_of": [
-        "Sp80053Control"
-      ],
-      "range": "sp80053_control_identifier",
-      "required": true,
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "sp80053Control__control_enhancements",
       "description": "The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
@@ -912,20 +940,6 @@
       "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "sp80053ControlEnhancement__enhancement_id",
-      "description": "The enhancement's identifier, such as AC-2(1).",
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/enhancement_id",
-      "alias": "enhancement_id",
-      "owner": "Sp80053ControlEnhancement",
-      "domain_of": [
-        "Sp80053ControlEnhancement"
-      ],
-      "range": "sp80053_enhancement_identifier",
-      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1223,20 +1237,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "sp80053Baseline__baseline_level",
-      "description": "Which of the four baselines this is.",
-      "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-53/baseline_level",
-      "alias": "baseline_level",
-      "owner": "Sp80053Baseline",
-      "domain_of": [
-        "Sp80053Baseline"
-      ],
-      "range": "Sp80053BaselineLevel",
-      "required": true,
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "sp80053Baseline__baseline_controls",
       "description": "The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-53",
@@ -1430,20 +1430,13 @@
         "oscal:Group"
       ],
       "slots": [
+        "family_id",
         "Sp80053Family_title",
         "description",
-        "sp80053Family__family_id",
         "sp80053Family__family_controls"
       ],
       "slot_usage": {},
       "attributes": [
-        {
-          "name": "family_id",
-          "description": "The family's two letters, such as AC for Access Control.",
-          "range": "sp80053_family_identifier",
-          "required": true,
-          "@type": "SlotDefinition"
-        },
         {
           "name": "family_controls",
           "description": "The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead.",
@@ -1472,6 +1465,7 @@
         "oscal:Control"
       ],
       "slots": [
+        "control_identifier",
         "Sp80053Control_title",
         "control_statement",
         "control_discussion",
@@ -1486,18 +1480,10 @@
         "withdrawal_reason",
         "implementation_level",
         "contributes_to_assurance",
-        "sp80053Control__control_identifier",
         "sp80053Control__control_enhancements"
       ],
       "slot_usage": {},
       "attributes": [
-        {
-          "name": "control_identifier",
-          "description": "The control's identifier, such as AC-2.",
-          "range": "sp80053_control_identifier",
-          "required": true,
-          "@type": "SlotDefinition"
-        },
         {
           "name": "control_enhancements",
           "description": "The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead.",
@@ -1526,6 +1512,7 @@
         "oscal:Control"
       ],
       "slots": [
+        "enhancement_id",
         "Sp80053ControlEnhancement_title",
         "control_statement",
         "control_discussion",
@@ -1540,18 +1527,10 @@
         "withdrawal_reason",
         "implementation_level",
         "contributes_to_assurance",
-        "sp80053ControlEnhancement__enhancement_id",
         "sp80053ControlEnhancement__required_controls"
       ],
       "slot_usage": {},
       "attributes": [
-        {
-          "name": "enhancement_id",
-          "description": "The enhancement's identifier, such as AC-2(1).",
-          "range": "sp80053_enhancement_identifier",
-          "required": true,
-          "@type": "SlotDefinition"
-        },
         {
           "name": "required_controls",
           "description": "The controls and enhancements that must be implemented for the enhancement to apply, as NIST's catalog links them: its own control, and for SC-42(2) also SC-42(1).",
@@ -1859,19 +1838,12 @@
         "oscal:Profile"
       ],
       "slots": [
+        "baseline_level",
         "Sp80053Baseline_title",
-        "sp80053Baseline__baseline_level",
         "sp80053Baseline__baseline_controls"
       ],
       "slot_usage": {},
       "attributes": [
-        {
-          "name": "baseline_level",
-          "description": "Which of the four baselines this is.",
-          "range": "Sp80053BaselineLevel",
-          "required": true,
-          "@type": "SlotDefinition"
-        },
         {
           "name": "baseline_controls",
           "description": "The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them.",
@@ -1887,8 +1859,8 @@
   ],
   "metamodel_version": "1.12.0",
   "source_file": "nist_sp_800_53.yaml",
-  "source_file_date": "2026-10-30T08:16:04",
-  "source_file_size": 24175,
+  "source_file_date": "2026-10-30T09:02:28",
+  "source_file_size": 24707,
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_sp_800_53.context.jsonld",

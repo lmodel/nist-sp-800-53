@@ -73,12 +73,12 @@ export interface Sp80053Catalog {
  * One of the twenty families SP 800-53 sorts its controls into, such as Access Control or Supply Chain Risk Management.
  */
 export interface Sp80053Family {
+    /** The family's two letters, such as AC for Access Control. */
+    family_id: string,
     /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
     title: string,
     /** What the family is about, in the words of whoever records it. SP 800-53 gives the Program Management family an overview of its own, and the other families none. */
     description?: string,
-    /** The family's two letters, such as AC for Access Control. */
-    family_id: string,
     /** The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead. */
     family_controls?: Sp80053Control[],
 }
@@ -88,6 +88,8 @@ export interface Sp80053Family {
  * A security or privacy control: a safeguard with an identifier, a statement of what it requires, a discussion, parameters the organization defines, related controls, references, the assessment objective and methods SP 800-53A gives it, and its enhancements. A control Revision 5 withdrew keeps its identifier and says where it went.
  */
 export interface Sp80053Control {
+    /** The control's identifier, such as AC-2. */
+    control_identifier: string,
     /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
     title: string,
     /** The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both. */
@@ -116,8 +118,6 @@ export interface Sp80053Control {
     implementation_level?: string,
     /** True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise. */
     contributes_to_assurance?: boolean,
-    /** The control's identifier, such as AC-2. */
-    control_identifier: string,
     /** The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead. */
     control_enhancements?: Sp80053ControlEnhancement[],
 }
@@ -127,6 +127,8 @@ export interface Sp80053Control {
  * A control enhancement: added functionality or strength for a control, with an identifier of its own, which the publication and other documents cite apart from the control. It carries what a control carries, and names the control or enhancement it requires.
  */
 export interface Sp80053ControlEnhancement {
+    /** The enhancement's identifier, such as AC-2(1). */
+    enhancement_id: string,
     /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
     title: string,
     /** The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both. */
@@ -155,8 +157,6 @@ export interface Sp80053ControlEnhancement {
     implementation_level?: string,
     /** True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise. */
     contributes_to_assurance?: boolean,
-    /** The enhancement's identifier, such as AC-2(1). */
-    enhancement_id: string,
     /** The controls and enhancements that must be implemented for the enhancement to apply, as NIST's catalog links them: its own control, and for SC-42(2) also SC-42(1). */
     required_controls?: string[],
 }
@@ -252,10 +252,10 @@ export interface Sp80053Reference {
  * One of the four control baselines SP 800-53B defines: the controls and enhancements selected for systems at the low, moderate or high impact level, or for privacy.
  */
 export interface Sp80053Baseline {
-    /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
-    title: string,
     /** Which of the four baselines this is. */
     baseline_level: string,
+    /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
+    title: string,
     /** The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them. */
     baseline_controls: string[],
 }

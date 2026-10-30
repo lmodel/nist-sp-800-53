@@ -3,29 +3,29 @@
 --     * Slot: catalog_release Description: The release of Revision 5 the catalog carries, as NIST numbers it, such as 5.2.0.
 -- # Class: Sp80053Family Description: One of the twenty families SP 800-53 sorts its controls into, such as Access Control or Supply Chain Risk Management.
 --     * Slot: id
+--     * Slot: family_id Description: The family's two letters, such as AC for Access Control.
 --     * Slot: title Description: The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
 --     * Slot: description Description: What the family is about, in the words of whoever records it. SP 800-53 gives the Program Management family an overview of its own, and the other families none.
---     * Slot: family_id Description: The family's two letters, such as AC for Access Control.
 --     * Slot: Sp80053Catalog_id Description: Autocreated FK slot
 -- # Class: Sp80053Control Description: A security or privacy control: a safeguard with an identifier, a statement of what it requires, a discussion, parameters the organization defines, related controls, references, the assessment objective and methods SP 800-53A gives it, and its enhancements. A control Revision 5 withdrew keeps its identifier and says where it went.
 --     * Slot: id
+--     * Slot: control_identifier Description: The control's identifier, such as AC-2.
 --     * Slot: title Description: The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
 --     * Slot: control_discussion Description: The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require.
 --     * Slot: control_status Description: The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none.
 --     * Slot: withdrawal_reason Description: For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.
 --     * Slot: contributes_to_assurance Description: True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.
---     * Slot: control_identifier Description: The control's identifier, such as AC-2.
 --     * Slot: Sp80053Family_id Description: Autocreated FK slot
 --     * Slot: control_statement_id Description: The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both.
 --     * Slot: assessment_objective_id Description: The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are.
 -- # Class: Sp80053ControlEnhancement Description: A control enhancement: added functionality or strength for a control, with an identifier of its own, which the publication and other documents cite apart from the control. It carries what a control carries, and names the control or enhancement it requires.
 --     * Slot: id
+--     * Slot: enhancement_id Description: The enhancement's identifier, such as AC-2(1).
 --     * Slot: title Description: The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
 --     * Slot: control_discussion Description: The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require.
 --     * Slot: control_status Description: The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none.
 --     * Slot: withdrawal_reason Description: For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.
 --     * Slot: contributes_to_assurance Description: True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.
---     * Slot: enhancement_id Description: The enhancement's identifier, such as AC-2(1).
 --     * Slot: Sp80053Control_id Description: Autocreated FK slot
 --     * Slot: control_statement_id Description: The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both.
 --     * Slot: assessment_objective_id Description: The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are.
@@ -65,8 +65,8 @@
 --     * Slot: Sp80053Catalog_id Description: Autocreated FK slot
 -- # Class: Sp80053Baseline Description: One of the four control baselines SP 800-53B defines: the controls and enhancements selected for systems at the low, moderate or high impact level, or for privacy.
 --     * Slot: id
---     * Slot: title Description: The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
 --     * Slot: baseline_level Description: Which of the four baselines this is.
+--     * Slot: title Description: The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
 --     * Slot: Sp80053Catalog_id Description: Autocreated FK slot
 -- # Class: Sp80053Control_related_control_ids
 --     * Slot: Sp80053Control_id Description: Autocreated FK slot
@@ -146,9 +146,9 @@ CREATE INDEX "ix_Sp80053AssessmentObjective_id" ON "Sp80053AssessmentObjective" 
 
 CREATE TABLE "Sp80053Family" (
 	id INTEGER NOT NULL,
+	family_id TEXT NOT NULL,
 	title TEXT NOT NULL,
 	description TEXT,
-	family_id TEXT NOT NULL,
 	"Sp80053Catalog_id" INTEGER,
 	PRIMARY KEY (id),
 	FOREIGN KEY("Sp80053Catalog_id") REFERENCES "Sp80053Catalog" (id)
@@ -180,8 +180,8 @@ CREATE INDEX "ix_Sp80053Reference_id" ON "Sp80053Reference" (id);
 
 CREATE TABLE "Sp80053Baseline" (
 	id INTEGER NOT NULL,
-	title TEXT NOT NULL,
 	baseline_level VARCHAR(8) NOT NULL,
+	title TEXT NOT NULL,
 	"Sp80053Catalog_id" INTEGER,
 	PRIMARY KEY (id),
 	FOREIGN KEY("Sp80053Catalog_id") REFERENCES "Sp80053Catalog" (id)
@@ -190,12 +190,12 @@ CREATE INDEX "ix_Sp80053Baseline_id" ON "Sp80053Baseline" (id);
 
 CREATE TABLE "Sp80053Control" (
 	id INTEGER NOT NULL,
+	control_identifier TEXT NOT NULL,
 	title TEXT NOT NULL,
 	control_discussion TEXT,
 	control_status VARCHAR(9),
 	withdrawal_reason TEXT,
 	contributes_to_assurance BOOLEAN,
-	control_identifier TEXT NOT NULL,
 	"Sp80053Family_id" INTEGER,
 	control_statement_id INTEGER,
 	assessment_objective_id INTEGER,
@@ -217,12 +217,12 @@ CREATE INDEX "ix_Sp80053Baseline_baseline_controls_baseline_controls" ON "Sp8005
 
 CREATE TABLE "Sp80053ControlEnhancement" (
 	id INTEGER NOT NULL,
+	enhancement_id TEXT NOT NULL,
 	title TEXT NOT NULL,
 	control_discussion TEXT,
 	control_status VARCHAR(9),
 	withdrawal_reason TEXT,
 	contributes_to_assurance BOOLEAN,
-	enhancement_id TEXT NOT NULL,
 	"Sp80053Control_id" INTEGER,
 	control_statement_id INTEGER,
 	assessment_objective_id INTEGER,
@@ -248,8 +248,8 @@ CREATE TABLE "Sp80053Control_control_references" (
 	PRIMARY KEY ("Sp80053Control_id", control_references),
 	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id)
 );
-CREATE INDEX "ix_Sp80053Control_control_references_control_references" ON "Sp80053Control_control_references" (control_references);
 CREATE INDEX "ix_Sp80053Control_control_references_Sp80053Control_id" ON "Sp80053Control_control_references" ("Sp80053Control_id");
+CREATE INDEX "ix_Sp80053Control_control_references_control_references" ON "Sp80053Control_control_references" (control_references);
 
 CREATE TABLE "Sp80053Control_incorporated_into" (
 	"Sp80053Control_id" INTEGER,
@@ -257,8 +257,8 @@ CREATE TABLE "Sp80053Control_incorporated_into" (
 	PRIMARY KEY ("Sp80053Control_id", incorporated_into),
 	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id)
 );
-CREATE INDEX "ix_Sp80053Control_incorporated_into_incorporated_into" ON "Sp80053Control_incorporated_into" (incorporated_into);
 CREATE INDEX "ix_Sp80053Control_incorporated_into_Sp80053Control_id" ON "Sp80053Control_incorporated_into" ("Sp80053Control_id");
+CREATE INDEX "ix_Sp80053Control_incorporated_into_incorporated_into" ON "Sp80053Control_incorporated_into" (incorporated_into);
 
 CREATE TABLE "Sp80053Control_moved_to" (
 	"Sp80053Control_id" INTEGER,
@@ -266,8 +266,8 @@ CREATE TABLE "Sp80053Control_moved_to" (
 	PRIMARY KEY ("Sp80053Control_id", moved_to),
 	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id)
 );
-CREATE INDEX "ix_Sp80053Control_moved_to_moved_to" ON "Sp80053Control_moved_to" (moved_to);
 CREATE INDEX "ix_Sp80053Control_moved_to_Sp80053Control_id" ON "Sp80053Control_moved_to" ("Sp80053Control_id");
+CREATE INDEX "ix_Sp80053Control_moved_to_moved_to" ON "Sp80053Control_moved_to" (moved_to);
 
 CREATE TABLE "Sp80053Control_implementation_level" (
 	"Sp80053Control_id" INTEGER,
@@ -275,8 +275,8 @@ CREATE TABLE "Sp80053Control_implementation_level" (
 	PRIMARY KEY ("Sp80053Control_id", implementation_level),
 	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id)
 );
-CREATE INDEX "ix_Sp80053Control_implementation_level_Sp80053Control_id" ON "Sp80053Control_implementation_level" ("Sp80053Control_id");
 CREATE INDEX "ix_Sp80053Control_implementation_level_implementation_level" ON "Sp80053Control_implementation_level" (implementation_level);
+CREATE INDEX "ix_Sp80053Control_implementation_level_Sp80053Control_id" ON "Sp80053Control_implementation_level" ("Sp80053Control_id");
 
 CREATE TABLE "Sp80053Parameter" (
 	id INTEGER NOT NULL,
@@ -328,8 +328,8 @@ CREATE TABLE "Sp80053ControlEnhancement_incorporated_into" (
 	PRIMARY KEY ("Sp80053ControlEnhancement_id", incorporated_into),
 	FOREIGN KEY("Sp80053ControlEnhancement_id") REFERENCES "Sp80053ControlEnhancement" (id)
 );
-CREATE INDEX "ix_Sp80053ControlEnhancement_incorporated_into_Sp80053ControlEnhancement_id" ON "Sp80053ControlEnhancement_incorporated_into" ("Sp80053ControlEnhancement_id");
 CREATE INDEX "ix_Sp80053ControlEnhancement_incorporated_into_incorporated_into" ON "Sp80053ControlEnhancement_incorporated_into" (incorporated_into);
+CREATE INDEX "ix_Sp80053ControlEnhancement_incorporated_into_Sp80053ControlEnhancement_id" ON "Sp80053ControlEnhancement_incorporated_into" ("Sp80053ControlEnhancement_id");
 
 CREATE TABLE "Sp80053ControlEnhancement_moved_to" (
 	"Sp80053ControlEnhancement_id" INTEGER,
@@ -337,8 +337,8 @@ CREATE TABLE "Sp80053ControlEnhancement_moved_to" (
 	PRIMARY KEY ("Sp80053ControlEnhancement_id", moved_to),
 	FOREIGN KEY("Sp80053ControlEnhancement_id") REFERENCES "Sp80053ControlEnhancement" (id)
 );
-CREATE INDEX "ix_Sp80053ControlEnhancement_moved_to_Sp80053ControlEnhancement_id" ON "Sp80053ControlEnhancement_moved_to" ("Sp80053ControlEnhancement_id");
 CREATE INDEX "ix_Sp80053ControlEnhancement_moved_to_moved_to" ON "Sp80053ControlEnhancement_moved_to" (moved_to);
+CREATE INDEX "ix_Sp80053ControlEnhancement_moved_to_Sp80053ControlEnhancement_id" ON "Sp80053ControlEnhancement_moved_to" ("Sp80053ControlEnhancement_id");
 
 CREATE TABLE "Sp80053ControlEnhancement_implementation_level" (
 	"Sp80053ControlEnhancement_id" INTEGER,
@@ -382,8 +382,8 @@ CREATE TABLE "Sp80053Parameter_aggregated_parameters" (
 	PRIMARY KEY ("Sp80053Parameter_id", aggregated_parameters),
 	FOREIGN KEY("Sp80053Parameter_id") REFERENCES "Sp80053Parameter" (id)
 );
-CREATE INDEX "ix_Sp80053Parameter_aggregated_parameters_Sp80053Parameter_id" ON "Sp80053Parameter_aggregated_parameters" ("Sp80053Parameter_id");
 CREATE INDEX "ix_Sp80053Parameter_aggregated_parameters_aggregated_parameters" ON "Sp80053Parameter_aggregated_parameters" (aggregated_parameters);
+CREATE INDEX "ix_Sp80053Parameter_aggregated_parameters_Sp80053Parameter_id" ON "Sp80053Parameter_aggregated_parameters" ("Sp80053Parameter_id");
 
 CREATE TABLE "Sp80053Parameter_alternative_identifiers" (
 	"Sp80053Parameter_id" INTEGER,
@@ -391,8 +391,8 @@ CREATE TABLE "Sp80053Parameter_alternative_identifiers" (
 	PRIMARY KEY ("Sp80053Parameter_id", alternative_identifiers),
 	FOREIGN KEY("Sp80053Parameter_id") REFERENCES "Sp80053Parameter" (id)
 );
-CREATE INDEX "ix_Sp80053Parameter_alternative_identifiers_alternative_identifiers" ON "Sp80053Parameter_alternative_identifiers" (alternative_identifiers);
 CREATE INDEX "ix_Sp80053Parameter_alternative_identifiers_Sp80053Parameter_id" ON "Sp80053Parameter_alternative_identifiers" ("Sp80053Parameter_id");
+CREATE INDEX "ix_Sp80053Parameter_alternative_identifiers_alternative_identifiers" ON "Sp80053Parameter_alternative_identifiers" (alternative_identifiers);
 
 CREATE TABLE "Sp80053AssessmentMethod_assessment_objects" (
 	"Sp80053AssessmentMethod_id" INTEGER,

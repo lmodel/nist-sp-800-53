@@ -78,11 +78,11 @@ linkml:Sparqlpath xsd:string
 }
 
 <Sp80053Baseline> CLOSED {
-    (  $<Sp80053Baseline_tes> (  schema1:name @linkml:String ;
-          <baseline_level> [ <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#LOW>
+    (  $<Sp80053Baseline_tes> (  <baseline_level> [ <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#LOW>
              <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#MODERATE>
              <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#HIGH>
              <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#PRIVACY> ] ;
+          schema1:name @linkml:String ;
           <baseline_controls> @<Sp80053ControlOrEnhancementIdentifier> +
        ) ;
        rdf:type [ <Baseline> ] ?
@@ -100,7 +100,8 @@ linkml:Sparqlpath xsd:string
 }
 
 <Sp80053Control> CLOSED {
-    (  $<Sp80053Control_tes> (  schema1:name @linkml:String ;
+    (  $<Sp80053Control_tes> (  <control_identifier> @<Sp80053ControlIdentifier> ;
+          schema1:name @linkml:String ;
           <control_statement> @<Sp80053Statement> ? ;
           <control_discussion> @linkml:String ? ;
           <control_parameters> @<Sp80053Parameter> * ;
@@ -115,7 +116,6 @@ linkml:Sparqlpath xsd:string
           <implementation_level> [ <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel#ORGANIZATION>
              <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel#SYSTEM> ] * ;
           <contributes_to_assurance> @linkml:Boolean ? ;
-          <control_identifier> @<Sp80053ControlIdentifier> ;
           <control_enhancements> @<Sp80053ControlEnhancement> *
        ) ;
        rdf:type [ <Control> ] ?
@@ -123,7 +123,8 @@ linkml:Sparqlpath xsd:string
 }
 
 <Sp80053ControlEnhancement> CLOSED {
-    (  $<Sp80053ControlEnhancement_tes> (  schema1:name @linkml:String ;
+    (  $<Sp80053ControlEnhancement_tes> (  <enhancement_id> @<Sp80053EnhancementIdentifier> ;
+          schema1:name @linkml:String ;
           <control_statement> @<Sp80053Statement> ? ;
           <control_discussion> @linkml:String ? ;
           <control_parameters> @<Sp80053Parameter> * ;
@@ -138,7 +139,6 @@ linkml:Sparqlpath xsd:string
           <implementation_level> [ <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel#ORGANIZATION>
              <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel#SYSTEM> ] * ;
           <contributes_to_assurance> @linkml:Boolean ? ;
-          <enhancement_id> @<Sp80053EnhancementIdentifier> ;
           <required_controls> @<Sp80053ControlOrEnhancementIdentifier> *
        ) ;
        rdf:type [ <ControlEnhancement> ] ?
@@ -146,9 +146,9 @@ linkml:Sparqlpath xsd:string
 }
 
 <Sp80053Family> CLOSED {
-    (  $<Sp80053Family_tes> (  schema1:name @linkml:String ;
+    (  $<Sp80053Family_tes> (  <family_id> @<Sp80053FamilyIdentifier> ;
+          schema1:name @linkml:String ;
           schema1:description @linkml:String ? ;
-          <family_id> @<Sp80053FamilyIdentifier> ;
           <family_controls> @<Sp80053Control> *
        ) ;
        rdf:type [ <Family> ] ?

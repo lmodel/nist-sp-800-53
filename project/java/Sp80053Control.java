@@ -16,6 +16,7 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class Sp80053Control  {
 
+  private String controlIdentifier;
   private String title;
   private Sp80053Statement controlStatement;
   private String controlDiscussion;
@@ -30,7 +31,6 @@ public class Sp80053Control  {
   private String withdrawalReason;
   private List<String> implementationLevel;
   private Boolean contributesToAssurance;
-  private String controlIdentifier;
   private List<Sp80053ControlEnhancement> controlEnhancements;
 
 

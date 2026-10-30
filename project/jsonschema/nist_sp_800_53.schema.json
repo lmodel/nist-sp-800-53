@@ -89,8 +89,8 @@
                 }
             },
             "required": [
-                "title",
                 "baseline_level",
+                "title",
                 "baseline_controls"
             ],
             "title": "Sp80053Baseline",
@@ -304,8 +304,8 @@
                 }
             },
             "required": [
-                "title",
-                "control_identifier"
+                "control_identifier",
+                "title"
             ],
             "title": "Sp80053Control",
             "type": "object"
@@ -464,8 +464,8 @@
                 }
             },
             "required": [
-                "title",
-                "enhancement_id"
+                "enhancement_id",
+                "title"
             ],
             "title": "Sp80053ControlEnhancement",
             "type": "object"
@@ -510,8 +510,8 @@
                 }
             },
             "required": [
-                "title",
-                "family_id"
+                "family_id",
+                "title"
             ],
             "title": "Sp80053Family",
             "type": "object"

@@ -16,8 +16,8 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class Sp80053Baseline  {
 
-  private String title;
   private String baselineLevel;
+  private String title;
   private List<String> baselineControls;
 
 

@@ -20,10 +20,10 @@ message Sp80053AssessmentObjective {
 }
 // One of the four control baselines SP 800-53B defines: the controls and enhancements selected for systems at the low, moderate or high impact level, or for privacy.
 message Sp80053Baseline {
-  // The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
-  string title = 1;
   // Which of the four baselines this is.
-  Sp80053BaselineLevel baseline_level = 2;
+  Sp80053BaselineLevel baseline_level = 1;
+  // The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
+  string title = 2;
   // The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them.
   repeated string baseline_controls = 3;
 }
@@ -40,82 +40,82 @@ message Sp80053Catalog {
 }
 // A security or privacy control: a safeguard with an identifier, a statement of what it requires, a discussion, parameters the organization defines, related controls, references, the assessment objective and methods SP 800-53A gives it, and its enhancements. A control Revision 5 withdrew keeps its identifier and says where it went.
 message Sp80053Control {
-  // The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
-  string title = 1;
-  // The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both.
-  Sp80053Statement control_statement = 2;
-  // The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require.
-  string control_discussion = 3;
-  // The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them.
-  repeated Sp80053Parameter control_parameters = 4;
-  // The controls and enhancements the publication lists as related, by identifier.
-  repeated string related_control_ids = 5;
-  // The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130.
-  repeated string control_references = 6;
-  // The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are.
-  Sp80053AssessmentObjective assessment_objective = 7;
-  // The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to.
-  repeated Sp80053AssessmentMethod assessment_methods = 8;
-  // The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none.
-  Sp80053ControlStatus control_status = 9;
-  // For a withdrawn control or enhancement, what it was incorporated into, as the publication states it.
-  repeated string incorporated_into = 10;
-  // For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it.
-  repeated string moved_to = 11;
-  // For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.
-  string withdrawal_reason = 12;
-  // Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.
-  repeated Sp80053ImplementationLevel implementation_level = 13;
-  // True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.
-  bool contributes_to_assurance = 14;
   // The control's identifier, such as AC-2.
-  string control_identifier = 15;
+  string control_identifier = 1;
+  // The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
+  string title = 2;
+  // The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both.
+  Sp80053Statement control_statement = 3;
+  // The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require.
+  string control_discussion = 4;
+  // The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them.
+  repeated Sp80053Parameter control_parameters = 5;
+  // The controls and enhancements the publication lists as related, by identifier.
+  repeated string related_control_ids = 6;
+  // The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130.
+  repeated string control_references = 7;
+  // The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are.
+  Sp80053AssessmentObjective assessment_objective = 8;
+  // The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to.
+  repeated Sp80053AssessmentMethod assessment_methods = 9;
+  // The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none.
+  Sp80053ControlStatus control_status = 10;
+  // For a withdrawn control or enhancement, what it was incorporated into, as the publication states it.
+  repeated string incorporated_into = 11;
+  // For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it.
+  repeated string moved_to = 12;
+  // For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.
+  string withdrawal_reason = 13;
+  // Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.
+  repeated Sp80053ImplementationLevel implementation_level = 14;
+  // True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.
+  bool contributes_to_assurance = 15;
   // The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead.
   repeated Sp80053ControlEnhancement control_enhancements = 16;
 }
 // A control enhancement: added functionality or strength for a control, with an identifier of its own, which the publication and other documents cite apart from the control. It carries what a control carries, and names the control or enhancement it requires.
 message Sp80053ControlEnhancement {
-  // The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
-  string title = 1;
-  // The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both.
-  Sp80053Statement control_statement = 2;
-  // The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require.
-  string control_discussion = 3;
-  // The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them.
-  repeated Sp80053Parameter control_parameters = 4;
-  // The controls and enhancements the publication lists as related, by identifier.
-  repeated string related_control_ids = 5;
-  // The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130.
-  repeated string control_references = 6;
-  // The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are.
-  Sp80053AssessmentObjective assessment_objective = 7;
-  // The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to.
-  repeated Sp80053AssessmentMethod assessment_methods = 8;
-  // The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none.
-  Sp80053ControlStatus control_status = 9;
-  // For a withdrawn control or enhancement, what it was incorporated into, as the publication states it.
-  repeated string incorporated_into = 10;
-  // For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it.
-  repeated string moved_to = 11;
-  // For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.
-  string withdrawal_reason = 12;
-  // Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.
-  repeated Sp80053ImplementationLevel implementation_level = 13;
-  // True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.
-  bool contributes_to_assurance = 14;
   // The enhancement's identifier, such as AC-2(1).
-  string enhancement_id = 15;
+  string enhancement_id = 1;
+  // The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
+  string title = 2;
+  // The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both.
+  Sp80053Statement control_statement = 3;
+  // The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require.
+  string control_discussion = 4;
+  // The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them.
+  repeated Sp80053Parameter control_parameters = 5;
+  // The controls and enhancements the publication lists as related, by identifier.
+  repeated string related_control_ids = 6;
+  // The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130.
+  repeated string control_references = 7;
+  // The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are.
+  Sp80053AssessmentObjective assessment_objective = 8;
+  // The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to.
+  repeated Sp80053AssessmentMethod assessment_methods = 9;
+  // The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none.
+  Sp80053ControlStatus control_status = 10;
+  // For a withdrawn control or enhancement, what it was incorporated into, as the publication states it.
+  repeated string incorporated_into = 11;
+  // For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it.
+  repeated string moved_to = 12;
+  // For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.
+  string withdrawal_reason = 13;
+  // Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.
+  repeated Sp80053ImplementationLevel implementation_level = 14;
+  // True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.
+  bool contributes_to_assurance = 15;
   // The controls and enhancements that must be implemented for the enhancement to apply, as NIST's catalog links them: its own control, and for SC-42(2) also SC-42(1).
   repeated string required_controls = 16;
 }
 // One of the twenty families SP 800-53 sorts its controls into, such as Access Control or Supply Chain Risk Management.
 message Sp80053Family {
-  // The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
-  string title = 1;
-  // What the family is about, in the words of whoever records it. SP 800-53 gives the Program Management family an overview of its own, and the other families none.
-  string description = 2;
   // The family's two letters, such as AC for Access Control.
-  string family_id = 3;
+  string family_id = 1;
+  // The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
+  string title = 2;
+  // What the family is about, in the words of whoever records it. SP 800-53 gives the Program Management family an overview of its own, and the other families none.
+  string description = 3;
   // The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead.
   repeated Sp80053Control family_controls = 4;
 }

@@ -359,6 +359,7 @@ class Sp80053Family(ConfiguredBaseModel):
          'see_also': ['https://csrc.nist.gov/projects/risk-management/sp800-53-controls'],
          'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
+    family_id: str = Field(default=..., description="""The family's two letters, such as AC for Access Control.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Family']} })
     title: str = Field(default=..., description="""The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
@@ -372,7 +373,6 @@ class Sp80053Family(ConfiguredBaseModel):
                       'bundle reads one description key.'],
          'domain_of': ['Sp80053Family'],
          'slot_uri': 'schema:description'} })
-    family_id: str = Field(default=..., description="""The family's two letters, such as AC for Access Control.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Family']} })
     family_controls: Optional[list[Sp80053Control]] = Field(default=None, description="""The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Family']} })
 
 
@@ -386,6 +386,7 @@ class Sp80053Control(ConfiguredBaseModel):
          'see_also': ['https://csrc.nist.gov/projects/risk-management/sp800-53-controls'],
          'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
+    control_identifier: str = Field(default=..., description="""The control's identifier, such as AC-2.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Control']} })
     title: str = Field(default=..., description="""The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
@@ -411,7 +412,6 @@ class Sp80053Control(ConfiguredBaseModel):
     withdrawal_reason: Optional[str] = Field(default=None, description="""For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Control', 'Sp80053ControlEnhancement']} })
     implementation_level: Optional[list[Sp80053ImplementationLevel]] = Field(default=None, description="""Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Control', 'Sp80053ControlEnhancement']} })
     contributes_to_assurance: Optional[bool] = Field(default=None, description="""True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Control', 'Sp80053ControlEnhancement']} })
-    control_identifier: str = Field(default=..., description="""The control's identifier, such as AC-2.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Control']} })
     control_enhancements: Optional[list[Sp80053ControlEnhancement]] = Field(default=None, description="""The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Control']} })
 
     @field_validator('control_references')
@@ -438,6 +438,7 @@ class Sp80053ControlEnhancement(ConfiguredBaseModel):
          'see_also': ['https://csrc.nist.gov/projects/risk-management/sp800-53-controls'],
          'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
+    enhancement_id: str = Field(default=..., description="""The enhancement's identifier, such as AC-2(1).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053ControlEnhancement']} })
     title: str = Field(default=..., description="""The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
@@ -463,7 +464,6 @@ class Sp80053ControlEnhancement(ConfiguredBaseModel):
     withdrawal_reason: Optional[str] = Field(default=None, description="""For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Control', 'Sp80053ControlEnhancement']} })
     implementation_level: Optional[list[Sp80053ImplementationLevel]] = Field(default=None, description="""Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Control', 'Sp80053ControlEnhancement']} })
     contributes_to_assurance: Optional[bool] = Field(default=None, description="""True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Control', 'Sp80053ControlEnhancement']} })
-    enhancement_id: str = Field(default=..., description="""The enhancement's identifier, such as AC-2(1).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053ControlEnhancement']} })
     required_controls: Optional[list[str]] = Field(default=None, description="""The controls and enhancements that must be implemented for the enhancement to apply, as NIST's catalog links them: its own control, and for SC-42(2) also SC-42(1).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053ControlEnhancement']} })
 
     @field_validator('control_references')
@@ -643,6 +643,7 @@ class Sp80053Baseline(ConfiguredBaseModel):
          'see_also': ['https://doi.org/10.6028/NIST.SP.800-53B'],
          'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
+    baseline_level: Sp80053BaselineLevel = Field(default=..., description="""Which of the four baselines this is.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Baseline']} })
     title: str = Field(default=..., description="""The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
@@ -651,7 +652,6 @@ class Sp80053Baseline(ConfiguredBaseModel):
                        'Sp80053ControlEnhancement',
                        'Sp80053Baseline'],
          'slot_uri': 'schema:name'} })
-    baseline_level: Sp80053BaselineLevel = Field(default=..., description="""Which of the four baselines this is.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Baseline']} })
     baseline_controls: list[str] = Field(default=..., description="""The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Baseline']} })
 
 

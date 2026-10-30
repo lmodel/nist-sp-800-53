@@ -147,6 +147,33 @@ slots:
         lokf adapt folds it into LOKF's slot and a knowledge bundle reads one
         description key.
 
+  # The four identifiers below are slots, not attributes, and each comes
+  # first in its class's slots list. LinkML's Python generator keys an
+  # inlined list of a class without an identifier by the first required
+  # slot it finds there, attributes after slots, so the dataclasses key a
+  # list of families, controls, enhancements or baselines by its identifier
+  # rather than by its required title. An attribute's IRI and a slot's are
+  # both nist_sp_800_53:<name>, so the move changes no IRI.
+  family_id:
+    description: The family's two letters, such as AC for Access Control.
+    range: sp80053_family_identifier
+    required: true
+
+  control_identifier:
+    description: The control's identifier, such as AC-2.
+    range: sp80053_control_identifier
+    required: true
+
+  enhancement_id:
+    description: The enhancement's identifier, such as AC-2(1).
+    range: sp80053_enhancement_identifier
+    required: true
+
+  baseline_level:
+    description: Which of the four baselines this is.
+    range: Sp80053BaselineLevel
+    required: true
+
   control_statement:
     description: >-
       The control statement: what the control or enhancement requires, as
@@ -304,16 +331,13 @@ classes:
     broad_mappings:
       - oscal:Group
     slots:
+      - family_id
       - title
       - description
     slot_usage:
       title:
         required: true
     attributes:
-      family_id:
-        description: The family's two letters, such as AC for Access Control.
-        range: sp80053_family_identifier
-        required: true
       family_controls:
         description: >-
           The controls of the family. A knowledge bundle relates a control to
@@ -337,6 +361,7 @@ classes:
     broad_mappings:
       - oscal:Control
     slots:
+      - control_identifier
       - title
       - control_statement
       - control_discussion
@@ -355,10 +380,6 @@ classes:
       title:
         required: true
     attributes:
-      control_identifier:
-        description: The control's identifier, such as AC-2.
-        range: sp80053_control_identifier
-        required: true
       control_enhancements:
         description: >-
           The control's enhancements. A knowledge bundle relates an
@@ -380,6 +401,7 @@ classes:
     broad_mappings:
       - oscal:Control
     slots:
+      - enhancement_id
       - title
       - control_statement
       - control_discussion
@@ -398,10 +420,6 @@ classes:
       title:
         required: true
     attributes:
-      enhancement_id:
-        description: The enhancement's identifier, such as AC-2(1).
-        range: sp80053_enhancement_identifier
-        required: true
       required_controls:
         description: >-
           The controls and enhancements that must be implemented for the
@@ -592,15 +610,12 @@ classes:
     broad_mappings:
       - oscal:Profile
     slots:
+      - baseline_level
       - title
     slot_usage:
       title:
         required: true
     attributes:
-      baseline_level:
-        description: Which of the four baselines this is.
-        range: Sp80053BaselineLevel
-        required: true
       baseline_controls:
         description: >-
           The controls and enhancements the baseline selects, by identifier,

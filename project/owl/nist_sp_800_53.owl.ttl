@@ -229,6 +229,7 @@ nist_sp_800_53:baseline_controls a owl:DatatypeProperty ;
 nist_sp_800_53:baseline_level a owl:ObjectProperty ;
 	rdfs:comment "Which of the four baselines this is." ;
 	rdfs:label "baseline_level" ;
+	rdfs:range nist_sp_800_53:Sp80053BaselineLevel ;
 	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-53> .
 nist_sp_800_53:catalog_references a owl:ObjectProperty ;
 	rdfs:comment "The publications the catalog's references list, most of which a control cites." ;
@@ -263,6 +264,7 @@ nist_sp_800_53:control_families a owl:ObjectProperty ;
 nist_sp_800_53:control_identifier a owl:DatatypeProperty ;
 	rdfs:comment "The control's identifier, such as AC-2." ;
 	rdfs:label "control_identifier" ;
+	rdfs:range xsd:string ;
 	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-53> .
 nist_sp_800_53:control_parameters a owl:ObjectProperty ;
 	rdfs:comment "The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them." ;
@@ -292,6 +294,7 @@ nist_sp_800_53:description a owl:DatatypeProperty ;
 nist_sp_800_53:enhancement_id a owl:DatatypeProperty ;
 	rdfs:comment "The enhancement's identifier, such as AC-2(1)." ;
 	rdfs:label "enhancement_id" ;
+	rdfs:range xsd:string ;
 	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-53> .
 nist_sp_800_53:family_controls a owl:ObjectProperty ;
 	rdfs:comment "The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead." ;
@@ -300,6 +303,7 @@ nist_sp_800_53:family_controls a owl:ObjectProperty ;
 nist_sp_800_53:family_id a owl:DatatypeProperty ;
 	rdfs:comment "The family's two letters, such as AC for Access Control." ;
 	rdfs:label "family_id" ;
+	rdfs:range xsd:string ;
 	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-53> .
 nist_sp_800_53:implementation_level a owl:ObjectProperty ;
 	rdfs:comment "Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both." ;

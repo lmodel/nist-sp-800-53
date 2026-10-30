@@ -15,12 +15,23 @@
          "@type": "@id",
          "@id": "assessment_objective"
       },
+      "baseline_level": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "baseline_level"
+      },
       "contributes_to_assurance": {
          "@type": "xsd:boolean",
          "@id": "contributes_to_assurance"
       },
       "control_discussion": {
          "@id": "control_discussion"
+      },
+      "control_identifier": {
+         "@id": "control_identifier"
       },
       "control_parameters": {
          "@type": "@id",
@@ -43,6 +54,12 @@
       },
       "description": {
          "@id": "schema:description"
+      },
+      "enhancement_id": {
+         "@id": "enhancement_id"
+      },
+      "family_id": {
+         "@id": "family_id"
       },
       "implementation_level": {
          "@context": {
@@ -85,14 +102,6 @@
       "baseline_controls": {
          "@id": "baseline_controls"
       },
-      "baseline_level": {
-         "@context": {
-            "text": "skos:notation",
-            "description": "skos:prefLabel",
-            "meaning": "@id"
-         },
-         "@id": "baseline_level"
-      },
       "catalog_references": {
          "@type": "@id",
          "@id": "catalog_references"
@@ -112,21 +121,12 @@
          "@type": "@id",
          "@id": "control_enhancements"
       },
-      "control_identifier": {
-         "@id": "control_identifier"
-      },
-      "enhancement_id": {
-         "@id": "enhancement_id"
-      },
       "required_controls": {
          "@id": "required_controls"
       },
       "family_controls": {
          "@type": "@id",
          "@id": "family_controls"
-      },
-      "family_id": {
-         "@id": "family_id"
       },
       "aggregated_parameters": {
          "@id": "aggregated_parameters"

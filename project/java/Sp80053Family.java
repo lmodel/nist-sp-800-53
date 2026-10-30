@@ -16,9 +16,9 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class Sp80053Family  {
 
+  private String familyId;
   private String title;
   private String description;
-  private String familyId;
   private List<Sp80053Control> familyControls;
 
 
