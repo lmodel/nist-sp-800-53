@@ -22,6 +22,7 @@ jobs:
   sp-800-53-copies:
     name: SP 800-53 edition and copies are current and intact
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: read
       issues: write  # open or update the finding's issue
