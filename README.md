@@ -27,20 +27,30 @@ The security and privacy controls that the National Institute of Standards and T
 
 The schema header's `version` is the release of Revision 5, 5.2.0, as NIST's Cybersecurity and Privacy Reference Tool numbers it (`SP_800_53_5_2_0`). Its `source` is the publication's digital object identifier (DOI). NIST also publishes the catalog, with the SP 800-53A procedures inside it, and the four baselines in the Open Security Controls Assessment Language (OSCAL). [src/nist_sp_800_53/schema/oscal-content/](src/nist_sp_800_53/schema/oscal-content) holds those five files as usnistgov/oscal-content released them in v1.6.0, matched to the release by git object hash. `tests/test_upstream.py` derives the whole release from the copies, validates it, and holds it to the counts above. A weekly workflow opens an issue when NIST registers the next final edition, changes a copied file, or the copy drifts.
 
-Revision 5 was published in September 2020 and updated in December 2020; Release 5.2.0 is its current release, and no later release or Revision 6 exists. Release tags number the schema's versions.
+Revision 5 was published in September 2020 and updated in December 2020. Release 5.2.0 is its current release, and no later release or Revision 6 exists. Release tags number the schema's versions.
 
 ## Influences
 
-None beyond SP 800-53, SP 800-53A and SP 800-53B themselves: the schema renders the three publications. Its layout follows [lmodel/nist-sp-800-218](https://github.com/lmodel/nist-sp-800-218), and its release asset and governance files follow [lmodel/slsa](https://github.com/lmodel/slsa).
+None beyond SP 800-53, SP 800-53A and SP 800-53B: the schema renders the three publications. Its layout follows [lmodel/nist-sp-800-218](https://github.com/lmodel/nist-sp-800-218), and its release asset and governance files follow [lmodel/slsa](https://github.com/lmodel/slsa).
 
 ## Mappings
 
-The schema crosses to OSCAL and borrows nothing from it. NIST's catalog renders a family as an OSCAL group, a control and an enhancement as controls, a statement, a discussion, an assessment objective and an assessment method as parts, a parameter as a parameter, a reference as a back-matter resource and a baseline as a profile. Each class names its counterpart in [lmodel/oscal](https://github.com/lmodel/oscal) in `broad_mappings`, because the OSCAL class is the more general one.
+The schema crosses to OSCAL and borrows nothing from it. NIST's catalog renders each element as an OSCAL one:
+
+* a family as a group;
+* a control and an enhancement as controls;
+* a statement, a discussion, an assessment objective and an assessment method as parts;
+* a parameter as a parameter;
+* a reference as a back-matter resource;
+* a baseline as a profile.
+
+Each class names its counterpart in [lmodel/oscal](https://github.com/lmodel/oscal) in `broad_mappings`, because the OSCAL class is the more general one.
 
 ## Not modelled here
 
 * The four resolved baseline catalogs that usnistgov/oscal-content publishes beside the profiles: they repeat the catalog's controls, and a baseline here is the list of identifiers the profile selects.
-* The catalog's own OSCAL metadata and the back-matter entries about itself, such as the links to the PDF and to earlier OSCAL releases, and each objective's link to the statement item it assesses, which the nesting of the objectives already shows.
+* The catalog's own OSCAL metadata and the back-matter entries about the catalog, such as the links to the PDF and to earlier OSCAL releases.
+* Each objective's link to the statement item it assesses, which the nesting of the objectives already shows.
 * NIST's Cybersecurity and Privacy Reference Tool exports of the same release: the tool gives no release or hash to pin, and the identifier it gives the release is in the schema's annotations.
 * SP 800-53 Revision 4, which usnistgov/oscal-content still carries, and the parts of SP 800-53A and SP 800-53B that the catalog and the profiles do not carry, such as SP 800-53B's tailoring guidance.
 * The rules no pattern can check, which [docs/index.md](docs/index.md) lists.

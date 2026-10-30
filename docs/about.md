@@ -32,11 +32,17 @@ repository keeps beside the schema.
 ## What is left out
 
 The schema models what the catalog and the four baseline profiles carry at
-Release 5.2.0. It leaves out the resolved baseline catalogs, the catalog's
-own metadata and back-matter entries about itself, each objective's link to
-the statement item it assesses, NIST's Cybersecurity and Privacy Reference
-Tool exports, Revision 4, and the prose of SP 800-53A and SP 800-53B outside
-the catalog and the profiles. A withdrawn control or enhancement stays, with
+Release 5.2.0. It leaves out:
+
+- the resolved baseline catalogs;
+- the catalog's own metadata and back-matter entries about the catalog;
+- each objective's link to the statement item it assesses;
+- NIST's Cybersecurity and Privacy Reference Tool exports;
+- Revision 4;
+- the prose of SP 800-53A and SP 800-53B outside the catalog and the
+  profiles.
+
+A withdrawn control or enhancement stays, with
 where it went.
 
 ## Reference
