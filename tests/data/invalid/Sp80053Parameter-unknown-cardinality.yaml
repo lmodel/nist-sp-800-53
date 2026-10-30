@@ -1,0 +1,6 @@
+# Invalid: a selection takes one choice or one or more, never a fixed two.
+parameter_id: ac-01_odp.03
+selection_choices:
+  - organization-level
+  - system-level
+selection_cardinality: TWO

@@ -1,0 +1,74 @@
+# A catalog cut down to one family, one control with one enhancement, one
+# baseline and one reference. The texts paraphrase SP 800-53;
+# tests/test_upstream.py derives the whole of Release 5.2.0 from NIST's
+# catalog and baselines and validates it as one of these.
+catalog_release: 5.2.0
+control_families:
+  - family_id: AC
+    title: Access Control
+    family_controls:
+      - control_identifier: AC-2
+        title: Account Management
+        control_statement:
+          statement_items:
+            - item_label: a.
+              item_text: Decide and write down which kinds of account the system may and may not use.
+            - item_label: b.
+              item_text: Name the people who manage accounts.
+        control_discussion: >-
+          Account types include individual, shared, group, system, guest and
+          service accounts, among others.
+        related_control_ids:
+          - AC-3
+          - AC-5
+        control_references:
+          - SP 800-162
+        assessment_objective:
+          objective_label: AC-02
+          sub_objectives:
+            - objective_label: AC-02a.
+              sub_objectives:
+                - objective_label: AC-02a.[01]
+                  objective_text: the kinds of account the system may use are decided and written down;
+        assessment_methods:
+          - assessment_method: EXAMINE
+            assessment_objects:
+              - access control policy
+              - the list of active accounts
+        implementation_level:
+          - ORGANIZATION
+        control_enhancements:
+          - enhancement_id: AC-2(1)
+            title: Automated System Account Management
+            required_controls:
+              - AC-2
+            control_statement:
+              statement_text: "Manage system accounts with {{ insert: param, ac-02.01_odp }}."
+            control_discussion: >-
+              Automated mechanisms can notify account managers and watch for
+              accounts that are no longer used.
+            control_parameters:
+              - parameter_id: ac-02.01_odp
+                assessment_label: AC-02(01)_ODP
+                parameter_label: automated mechanisms
+                parameter_guidelines:
+                  - the automated mechanisms used to manage system accounts are defined;
+            assessment_objective:
+              objective_label: AC-02(01)
+              objective_text: system accounts are managed with the defined automated mechanisms.
+            assessment_methods:
+              - assessment_method: TEST
+                assessment_objects:
+                  - the mechanisms that manage accounts
+            implementation_level:
+              - SYSTEM
+control_baselines:
+  - baseline_level: LOW
+    title: The low-impact baseline, cut down
+    baseline_controls:
+      - AC-1
+      - AC-2
+catalog_references:
+  - reference_label: SP 800-162
+    reference_citation: NIST Special Publication 800-162, a guide to attribute-based access control.
+    reference_url: https://doi.org/10.6028/NIST.SP.800-162

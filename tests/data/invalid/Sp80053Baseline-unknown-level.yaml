@@ -1,0 +1,4 @@
+# Invalid: SP 800-53B defines four baselines, and CRITICAL is not one.
+baseline_level: CRITICAL
+baseline_controls:
+  - AC-1

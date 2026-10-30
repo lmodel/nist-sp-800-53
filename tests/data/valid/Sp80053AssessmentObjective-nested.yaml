@@ -1,0 +1,8 @@
+# The objective of one statement item, grouping two determination
+# statements, in the schema's own words.
+objective_label: AC-02a.
+sub_objectives:
+  - objective_label: AC-02a.[01]
+    objective_text: the kinds of account the system may use are decided and written down;
+  - objective_label: AC-02a.[02]
+    objective_text: the kinds of account the system may not use are decided and written down;

@@ -1,0 +1,8 @@
+# A lettered item with two numbered items under it.
+item_label: d.
+item_text: "Specify:"
+statement_items:
+  - item_label: "1."
+    item_text: who may use the system;
+  - item_label: "2."
+    item_text: group and role membership.

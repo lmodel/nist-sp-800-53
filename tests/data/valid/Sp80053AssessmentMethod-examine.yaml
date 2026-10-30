@@ -1,0 +1,6 @@
+# One method with three of the objects an assessor selects from.
+assessment_method: EXAMINE
+assessment_objects:
+  - access control policy
+  - the list of active accounts
+  - system audit records

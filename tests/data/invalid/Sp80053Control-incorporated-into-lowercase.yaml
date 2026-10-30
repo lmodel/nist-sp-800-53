@@ -1,0 +1,5 @@
+# Invalid: a withdrawal target is written as the publication prints it, in capitals.
+control_identifier: AC-13
+control_status: WITHDRAWN
+incorporated_into:
+  - ac-2

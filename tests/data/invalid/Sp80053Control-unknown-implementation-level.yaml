@@ -1,0 +1,4 @@
+# Invalid: the implementation level is the organization, the system or both.
+control_identifier: AC-2
+implementation_level:
+  - CONTRACTOR

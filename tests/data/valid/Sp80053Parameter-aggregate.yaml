@@ -1,0 +1,7 @@
+# A parameter that stands for two organization-defined parameters at once,
+# which the statement's placeholder names.
+parameter_id: ac-1_prm_1
+parameter_label: organization-defined personnel or roles
+aggregated_parameters:
+  - ac-01_odp.01
+  - ac-01_odp.02

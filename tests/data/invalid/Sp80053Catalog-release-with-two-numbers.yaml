@@ -1,0 +1,4 @@
+# Invalid: a release has three numbers, such as 5.2.0.
+catalog_release: "5.2"
+control_families:
+  - family_id: AC

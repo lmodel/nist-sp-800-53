@@ -1,0 +1,4 @@
+# One of the publications the controls cite, by the label the catalog uses.
+reference_label: SP 800-162
+reference_citation: NIST Special Publication 800-162, a guide to attribute-based access control.
+reference_url: https://doi.org/10.6028/NIST.SP.800-162

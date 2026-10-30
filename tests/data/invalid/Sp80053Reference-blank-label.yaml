@@ -1,0 +1,2 @@
+# Invalid: a reference label is more than white space.
+reference_label: " "

@@ -1,0 +1,4 @@
+# Invalid: a selected control is named as the publication prints it, in capitals.
+baseline_level: LOW
+baseline_controls:
+  - ac-2

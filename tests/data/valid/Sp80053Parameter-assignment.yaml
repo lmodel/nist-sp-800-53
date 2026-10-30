@@ -1,0 +1,9 @@
+# An assignment: the organization fills the value in, and SP 800-53A gives
+# it a label and a guideline.
+parameter_id: ac-01_odp.05
+assessment_label: AC-01_ODP[05]
+parameter_label: frequency
+parameter_guidelines:
+  - the frequency at which the access control policy is reviewed and updated is defined;
+alternative_identifiers:
+  - ac-1_prm_4

@@ -1,0 +1,8 @@
+# The privacy baseline cut down to four of its selections.
+baseline_level: PRIVACY
+title: The privacy baseline
+baseline_controls:
+  - AC-1
+  - AC-3(14)
+  - PT-1
+  - PT-2

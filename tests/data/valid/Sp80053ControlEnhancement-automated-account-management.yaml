@@ -1,0 +1,26 @@
+# Enhancement AC-2(1) as a knowledge bundle might record it: a bundle
+# relates it to AC-2 with isPartOf, and required_controls says what it needs.
+enhancement_id: AC-2(1)
+title: Automated System Account Management
+required_controls:
+  - AC-2
+control_statement:
+  statement_text: "Manage system accounts with {{ insert: param, ac-02.01_odp }}."
+control_discussion: >-
+  Automated mechanisms can notify account managers when an account is created,
+  changed or removed, and watch for accounts that are no longer used.
+control_parameters:
+  - parameter_id: ac-02.01_odp
+    assessment_label: AC-02(01)_ODP
+    parameter_label: automated mechanisms
+    parameter_guidelines:
+      - the automated mechanisms used to manage system accounts are defined;
+assessment_objective:
+  objective_label: AC-02(01)
+  objective_text: system accounts are managed with the defined automated mechanisms.
+assessment_methods:
+  - assessment_method: EXAMINE
+    assessment_objects:
+      - the design of the account management mechanisms
+implementation_level:
+  - SYSTEM

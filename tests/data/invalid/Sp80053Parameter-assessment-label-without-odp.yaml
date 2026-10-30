@@ -1,0 +1,4 @@
+# Invalid: an SP 800-53A parameter label carries _ODP; this is an objective's label.
+parameter_id: ac-02_odp.01
+assessment_label: AC-02a.[01]
+parameter_label: prerequisites

@@ -1,0 +1,4 @@
+# Invalid: a reference label is more than white space.
+control_identifier: AC-2
+control_references:
+  - " "
