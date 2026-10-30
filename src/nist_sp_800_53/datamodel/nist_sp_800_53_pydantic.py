@@ -322,7 +322,7 @@ class Sp80053BaselineLevel(str, Enum):
 
 class Sp80053Catalog(ConfiguredBaseModel):
     """
-    One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the controls cite.
+    One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the catalog lists.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['oscal:Catalog'],
          'class_uri': 'nist_sp_800_53:Catalog',
@@ -333,7 +333,7 @@ class Sp80053Catalog(ConfiguredBaseModel):
     catalog_release: str = Field(default=..., description="""The release of Revision 5 the catalog carries, as NIST numbers it, such as 5.2.0.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Catalog']} })
     control_families: list[Sp80053Family] = Field(default=..., description="""The twenty control families, in the order SP 800-53 gives them.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Catalog']} })
     control_baselines: Optional[list[Sp80053Baseline]] = Field(default=None, description="""The control baselines of SP 800-53B that select from the catalog.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Catalog']} })
-    catalog_references: Optional[list[Sp80053Reference]] = Field(default=None, description="""The publications the controls cite, as the catalog's references list them.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Catalog']} })
+    catalog_references: Optional[list[Sp80053Reference]] = Field(default=None, description="""The publications the catalog's references list, most of which a control cites.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Catalog']} })
 
     @field_validator('catalog_release')
     def pattern_catalog_release(cls, v):
@@ -356,9 +356,10 @@ class Sp80053Family(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['oscal:Group'],
          'class_uri': 'nist_sp_800_53:Family',
          'from_schema': 'https://w3id.org/lmodel/nist-sp-800-53',
-         'see_also': ['https://csrc.nist.gov/projects/risk-management/sp800-53-controls']})
+         'see_also': ['https://csrc.nist.gov/projects/risk-management/sp800-53-controls'],
+         'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
-    title: Optional[str] = Field(default=None, description="""The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
+    title: str = Field(default=..., description="""The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
          'domain_of': ['Sp80053Family',
@@ -382,9 +383,10 @@ class Sp80053Control(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['oscal:Control'],
          'class_uri': 'nist_sp_800_53:Control',
          'from_schema': 'https://w3id.org/lmodel/nist-sp-800-53',
-         'see_also': ['https://csrc.nist.gov/projects/risk-management/sp800-53-controls']})
+         'see_also': ['https://csrc.nist.gov/projects/risk-management/sp800-53-controls'],
+         'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
-    title: Optional[str] = Field(default=None, description="""The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
+    title: str = Field(default=..., description="""The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
          'domain_of': ['Sp80053Family',
@@ -414,7 +416,7 @@ class Sp80053Control(ConfiguredBaseModel):
 
     @field_validator('control_references')
     def pattern_control_references(cls, v):
-        pattern=re.compile(r"\S")
+        pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.search(element):
@@ -433,9 +435,10 @@ class Sp80053ControlEnhancement(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['oscal:Control'],
          'class_uri': 'nist_sp_800_53:ControlEnhancement',
          'from_schema': 'https://w3id.org/lmodel/nist-sp-800-53',
-         'see_also': ['https://csrc.nist.gov/projects/risk-management/sp800-53-controls']})
+         'see_also': ['https://csrc.nist.gov/projects/risk-management/sp800-53-controls'],
+         'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
-    title: Optional[str] = Field(default=None, description="""The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
+    title: str = Field(default=..., description="""The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
          'domain_of': ['Sp80053Family',
@@ -461,11 +464,11 @@ class Sp80053ControlEnhancement(ConfiguredBaseModel):
     implementation_level: Optional[list[Sp80053ImplementationLevel]] = Field(default=None, description="""Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Control', 'Sp80053ControlEnhancement']} })
     contributes_to_assurance: Optional[bool] = Field(default=None, description="""True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Control', 'Sp80053ControlEnhancement']} })
     enhancement_id: str = Field(default=..., description="""The enhancement's identifier, such as AC-2(1).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053ControlEnhancement']} })
-    required_controls: Optional[list[str]] = Field(default=None, description="""The control, or in one case the enhancement, that must be implemented for the enhancement to apply, as NIST's catalog links it; its own control for every enhancement but SC-42(2), which requires SC-42(1).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053ControlEnhancement']} })
+    required_controls: Optional[list[str]] = Field(default=None, description="""The controls and enhancements that must be implemented for the enhancement to apply, as NIST's catalog links them: its own control, and for SC-42(2) also SC-42(1).""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053ControlEnhancement']} })
 
     @field_validator('control_references')
     def pattern_control_references(cls, v):
-        pattern=re.compile(r"\S")
+        pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.search(element):
@@ -519,9 +522,9 @@ class Sp80053StatementItem(ConfiguredBaseModel):
 
 class Sp80053Parameter(ConfiguredBaseModel):
     """
-    An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A gives each a label and a guideline of its own.
+    An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A labels each parameter but the ones that aggregate others, and gives most a guideline.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['oscal:OscalParameter'],
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['oscal:Parameter'],
          'class_uri': 'nist_sp_800_53:Parameter',
          'from_schema': 'https://w3id.org/lmodel/nist-sp-800-53',
          'see_also': ['https://doi.org/10.6028/NIST.SP.800-53Ar5']})
@@ -531,14 +534,14 @@ class Sp80053Parameter(ConfiguredBaseModel):
     parameter_label: Optional[str] = Field(default=None, description="""For an assignment, what the organization defines, such as personnel or roles.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Parameter']} })
     parameter_guidelines: Optional[list[str]] = Field(default=None, description="""The guidelines that say what a value must settle, such as that the frequency of a review is defined.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Parameter']} })
     selection_choices: Optional[list[str]] = Field(default=None, description="""For a selection, the choices the publication lists, in order.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Parameter']} })
-    selection_cardinality: Optional[Sp80053SelectionCardinality] = Field(default=None, description="""For a selection, how many choices the organization picks. The catalog marks one or more and leaves exactly one unwritten.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Parameter']} })
+    selection_cardinality: Optional[Sp80053SelectionCardinality] = Field(default=None, description="""For a selection, how many choices the organization picks. The catalog marks one or more, and leaves the slot out when one choice is allowed, which is how OSCAL reads an absent how-many.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Parameter']} })
     aggregated_parameters: Optional[list[str]] = Field(default=None, description="""For a parameter that stands for several, the parameters it aggregates, by identifier.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Parameter']} })
     alternative_identifiers: Optional[list[str]] = Field(default=None, description="""The identifiers an earlier release of the catalog gave the parameter, such as ac-1_prm_2 for ac-01_odp.03.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Parameter']} })
     alternative_label: Optional[str] = Field(default=None, description="""The label SP 800-53 prints where it differs from the one SP 800-53A gives.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp80053Parameter']} })
 
     @field_validator('assessment_label')
     def pattern_assessment_label(cls, v):
-        pattern=re.compile(r"^[A-Z]{2}-[0-9]{2}\S*_ODP(\[[0-9]{2}\])?$")
+        pattern=re.compile(r"^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\([0-9]{2}\)|\.[0-9]{2})?_ODP(\[[0-9]{2}\])?$")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.search(element):
@@ -565,7 +568,7 @@ class Sp80053AssessmentObjective(ConfiguredBaseModel):
 
     @field_validator('objective_label')
     def pattern_objective_label(cls, v):
-        pattern=re.compile(r"^[A-Z]{2}-[0-9]{2}")
+        pattern=re.compile(r"^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\([0-9]{2}\))?([a-z]\.([0-9]{2})?)?(\([a-z]\)(\([0-9]{2}\))?)?(\[[0-9]{2}\])*$")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.search(element):
@@ -591,7 +594,7 @@ class Sp80053AssessmentMethod(ConfiguredBaseModel):
 
     @field_validator('assessment_objects')
     def pattern_assessment_objects(cls, v):
-        pattern=re.compile(r"\S")
+        pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.search(element):
@@ -605,7 +608,7 @@ class Sp80053AssessmentMethod(ConfiguredBaseModel):
 
 class Sp80053Reference(ConfiguredBaseModel):
     """
-    A publication the controls cite, as the catalog's references list it: its label, its citation and its address.
+    A publication the catalog's references list, as they list it: its label, its citation and its address.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['oscal:Resource'],
          'class_uri': 'nist_sp_800_53:Reference',
@@ -618,7 +621,7 @@ class Sp80053Reference(ConfiguredBaseModel):
 
     @field_validator('reference_label')
     def pattern_reference_label(cls, v):
-        pattern=re.compile(r"\S")
+        pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.search(element):
@@ -637,9 +640,10 @@ class Sp80053Baseline(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['oscal:Profile'],
          'class_uri': 'nist_sp_800_53:Baseline',
          'from_schema': 'https://w3id.org/lmodel/nist-sp-800-53',
-         'see_also': ['https://doi.org/10.6028/NIST.SP.800-53B']})
+         'see_also': ['https://doi.org/10.6028/NIST.SP.800-53B'],
+         'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
-    title: Optional[str] = Field(default=None, description="""The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
+    title: str = Field(default=..., description="""The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
          'domain_of': ['Sp80053Family',

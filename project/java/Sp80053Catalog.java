@@ -10,7 +10,7 @@ import java.util.List;
 import lombok.*;
 
 /**
-  One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the controls cite.
+  One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the catalog lists.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)

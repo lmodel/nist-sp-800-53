@@ -10,7 +10,7 @@ import java.util.List;
 import lombok.*;
 
 /**
-  An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A gives each a label and a guideline of its own.
+  An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A labels each parameter but the ones that aggregate others, and gives most a guideline.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)

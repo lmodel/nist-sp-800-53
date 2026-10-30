@@ -78,7 +78,7 @@ linkml:Sparqlpath xsd:string
 }
 
 <Sp80053Baseline> CLOSED {
-    (  $<Sp80053Baseline_tes> (  schema1:name @linkml:String ? ;
+    (  $<Sp80053Baseline_tes> (  schema1:name @linkml:String ;
           <baseline_level> [ <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#LOW>
              <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#MODERATE>
              <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel#HIGH>
@@ -100,7 +100,7 @@ linkml:Sparqlpath xsd:string
 }
 
 <Sp80053Control> CLOSED {
-    (  $<Sp80053Control_tes> (  schema1:name @linkml:String ? ;
+    (  $<Sp80053Control_tes> (  schema1:name @linkml:String ;
           <control_statement> @<Sp80053Statement> ? ;
           <control_discussion> @linkml:String ? ;
           <control_parameters> @<Sp80053Parameter> * ;
@@ -123,7 +123,7 @@ linkml:Sparqlpath xsd:string
 }
 
 <Sp80053ControlEnhancement> CLOSED {
-    (  $<Sp80053ControlEnhancement_tes> (  schema1:name @linkml:String ? ;
+    (  $<Sp80053ControlEnhancement_tes> (  schema1:name @linkml:String ;
           <control_statement> @<Sp80053Statement> ? ;
           <control_discussion> @linkml:String ? ;
           <control_parameters> @<Sp80053Parameter> * ;
@@ -146,7 +146,7 @@ linkml:Sparqlpath xsd:string
 }
 
 <Sp80053Family> CLOSED {
-    (  $<Sp80053Family_tes> (  schema1:name @linkml:String ? ;
+    (  $<Sp80053Family_tes> (  schema1:name @linkml:String ;
           schema1:description @linkml:String ? ;
           <family_id> @<Sp80053FamilyIdentifier> ;
           <family_controls> @<Sp80053Control> *

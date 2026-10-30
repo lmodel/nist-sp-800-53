@@ -121,7 +121,7 @@ slots:
     description: The publications the control or enhancement cites, by the labels the catalog's references
       carry, such as SP 800-12 or OMB A-130.
     multivalued: true
-    pattern: \S
+    pattern: ^\s*\S
   assessment_objective:
     description: 'The assessment objective SP 800-53A gives the control or enhancement: the determination
       statements an assessor checks, nested as the statement''s items are.'
@@ -171,7 +171,7 @@ classes:
   Sp80053Catalog:
     class_uri: nist_sp_800_53:Catalog
     description: 'One release of the control catalog as a whole: its families, each holding its controls
-      and their enhancements, the baselines that select from them, and the publications the controls cite.'
+      and their enhancements, the baselines that select from them, and the publications the catalog lists.'
     see_also:
     - https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
     broad_mappings:
@@ -195,7 +195,7 @@ classes:
         inlined: true
         inlined_as_list: true
       catalog_references:
-        description: The publications the controls cite, as the catalog's references list them.
+        description: The publications the catalog's references list, most of which a control cites.
         range: Sp80053Reference
         multivalued: true
         inlined: true
@@ -211,6 +211,12 @@ classes:
     slots:
     - title
     - description
+    slot_usage:
+      title:
+        required: true
+        range: string
+      description:
+        range: string
     attributes:
       family_id:
         description: The family's two letters, such as AC for Access Control.
@@ -223,11 +229,6 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-    slot_usage:
-      title:
-        range: string
-      description:
-        range: string
     is_a: Concept
   Sp80053Control:
     class_uri: nist_sp_800_53:Control
@@ -254,6 +255,10 @@ classes:
     - withdrawal_reason
     - implementation_level
     - contributes_to_assurance
+    slot_usage:
+      title:
+        required: true
+        range: string
     attributes:
       control_identifier:
         description: The control's identifier, such as AC-2.
@@ -266,9 +271,6 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-    slot_usage:
-      title:
-        range: string
     is_a: Concept
   Sp80053ControlEnhancement:
     class_uri: nist_sp_800_53:ControlEnhancement
@@ -294,20 +296,20 @@ classes:
     - withdrawal_reason
     - implementation_level
     - contributes_to_assurance
+    slot_usage:
+      title:
+        required: true
+        range: string
     attributes:
       enhancement_id:
         description: The enhancement's identifier, such as AC-2(1).
         range: sp80053_enhancement_identifier
         required: true
       required_controls:
-        description: The control, or in one case the enhancement, that must be implemented for the enhancement
-          to apply, as NIST's catalog links it; its own control for every enhancement but SC-42(2), which
-          requires SC-42(1).
+        description: 'The controls and enhancements that must be implemented for the enhancement to apply,
+          as NIST''s catalog links them: its own control, and for SC-42(2) also SC-42(1).'
         range: sp80053_control_or_enhancement_identifier
         multivalued: true
-    slot_usage:
-      title:
-        range: string
     is_a: Concept
   Sp80053Statement:
     class_uri: nist_sp_800_53:Statement
@@ -344,11 +346,11 @@ classes:
     class_uri: nist_sp_800_53:Parameter
     description: 'An organization-defined parameter: a value the control statement leaves to the organization,
       either an assignment the organization fills in or a selection from the choices the publication lists.
-      SP 800-53A gives each a label and a guideline of its own.'
+      SP 800-53A labels each parameter but the ones that aggregate others, and gives most a guideline.'
     see_also:
     - https://doi.org/10.6028/NIST.SP.800-53Ar5
     broad_mappings:
-    - oscal:OscalParameter
+    - oscal:Parameter
     attributes:
       parameter_id:
         description: The parameter's identifier in NIST's catalog, such as ac-02_odp.01.
@@ -357,7 +359,7 @@ classes:
       assessment_label:
         description: The label SP 800-53A gives the parameter, such as AC-02_ODP[01]. A parameter that
           aggregates several has none.
-        pattern: ^[A-Z]{2}-[0-9]{2}\S*_ODP(\[[0-9]{2}\])?$
+        pattern: ^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\([0-9]{2}\)|\.[0-9]{2})?_ODP(\[[0-9]{2}\])?$
       parameter_label:
         description: For an assignment, what the organization defines, such as personnel or roles.
       parameter_guidelines:
@@ -369,7 +371,8 @@ classes:
         multivalued: true
       selection_cardinality:
         description: For a selection, how many choices the organization picks. The catalog marks one or
-          more and leaves exactly one unwritten.
+          more, and leaves the slot out when one choice is allowed, which is how OSCAL reads an absent
+          how-many.
         range: Sp80053SelectionCardinality
       aggregated_parameters:
         description: For a parameter that stands for several, the parameters it aggregates, by identifier.
@@ -394,7 +397,7 @@ classes:
       objective_label:
         description: The label SP 800-53A gives the objective, such as AC-02a.[01].
         required: true
-        pattern: ^[A-Z]{2}-[0-9]{2}
+        pattern: ^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\([0-9]{2}\))?([a-z]\.([0-9]{2})?)?(\([a-z]\)(\([0-9]{2}\))?)?(\[[0-9]{2}\])*$
       objective_text:
         description: The determination statement, with the same placeholders for parameters as the control
           statement. A heading has none.
@@ -422,11 +425,11 @@ classes:
         description: The objects the method is applied to, in the order the publication lists them.
         required: true
         multivalued: true
-        pattern: \S
+        pattern: ^\s*\S
   Sp80053Reference:
     class_uri: nist_sp_800_53:Reference
-    description: 'A publication the controls cite, as the catalog''s references list it: its label, its
-      citation and its address.'
+    description: 'A publication the catalog''s references list, as they list it: its label, its citation
+      and its address.'
     see_also:
     - https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
     broad_mappings:
@@ -435,7 +438,7 @@ classes:
       reference_label:
         description: The label the controls cite the publication by, such as SP 800-12.
         required: true
-        pattern: \S
+        pattern: ^\s*\S
       reference_citation:
         description: The citation, as the catalog prints it.
       reference_url:
@@ -451,6 +454,10 @@ classes:
     - oscal:Profile
     slots:
     - title
+    slot_usage:
+      title:
+        required: true
+        range: string
     attributes:
       baseline_level:
         description: Which of the four baselines this is.
@@ -462,9 +469,6 @@ classes:
         range: sp80053_control_or_enhancement_identifier
         required: true
         multivalued: true
-    slot_usage:
-      title:
-        range: string
     is_a: Concept
 enums:
   Sp80053ControlStatus:

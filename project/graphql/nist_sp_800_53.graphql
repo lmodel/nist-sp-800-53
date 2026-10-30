@@ -47,7 +47,7 @@ type Sp80053AssessmentObjective
 
 type Sp80053Baseline
   {
-    title: String
+    title: String!
     baselineLevel: Sp80053BaselineLevel!
     baselineControls: [Sp80053ControlOrEnhancementIdentifier]!
   }
@@ -62,7 +62,7 @@ type Sp80053Catalog
 
 type Sp80053Control
   {
-    title: String
+    title: String!
     controlStatement: Sp80053Statement
     controlDiscussion: String
     controlParameters: [Sp80053Parameter]
@@ -82,7 +82,7 @@ type Sp80053Control
 
 type Sp80053ControlEnhancement
   {
-    title: String
+    title: String!
     controlStatement: Sp80053Statement
     controlDiscussion: String
     controlParameters: [Sp80053Parameter]
@@ -102,7 +102,7 @@ type Sp80053ControlEnhancement
 
 type Sp80053Family
   {
-    title: String
+    title: String!
     description: String
     familyId: Sp80053FamilyIdentifier!
     familyControls: [Sp80053Control]

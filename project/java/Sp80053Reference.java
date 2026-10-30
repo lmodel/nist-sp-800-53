@@ -10,7 +10,7 @@ import java.util.List;
 import lombok.*;
 
 /**
-  A publication the controls cite, as the catalog's references list it: its label, its citation and its address.
+  A publication the catalog's references list, as they list it: its label, its citation and its address.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)

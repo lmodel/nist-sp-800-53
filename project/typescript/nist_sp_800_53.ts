@@ -55,7 +55,7 @@ export enum Sp80053BaselineLevel {
 
 
 /**
- * One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the controls cite.
+ * One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the catalog lists.
  */
 export interface Sp80053Catalog {
     /** The release of Revision 5 the catalog carries, as NIST numbers it, such as 5.2.0. */
@@ -64,7 +64,7 @@ export interface Sp80053Catalog {
     control_families: Sp80053Family[],
     /** The control baselines of SP 800-53B that select from the catalog. */
     control_baselines?: Sp80053Baseline[],
-    /** The publications the controls cite, as the catalog's references list them. */
+    /** The publications the catalog's references list, most of which a control cites. */
     catalog_references?: Sp80053Reference[],
 }
 
@@ -73,8 +73,8 @@ export interface Sp80053Catalog {
  * One of the twenty families SP 800-53 sorts its controls into, such as Access Control or Supply Chain Risk Management.
  */
 export interface Sp80053Family {
-    /** The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline. */
-    title?: string,
+    /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
+    title: string,
     /** What the family is about, in the words of whoever records it. SP 800-53 gives the Program Management family an overview of its own, and the other families none. */
     description?: string,
     /** The family's two letters, such as AC for Access Control. */
@@ -88,8 +88,8 @@ export interface Sp80053Family {
  * A security or privacy control: a safeguard with an identifier, a statement of what it requires, a discussion, parameters the organization defines, related controls, references, the assessment objective and methods SP 800-53A gives it, and its enhancements. A control Revision 5 withdrew keeps its identifier and says where it went.
  */
 export interface Sp80053Control {
-    /** The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline. */
-    title?: string,
+    /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
+    title: string,
     /** The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both. */
     control_statement?: Sp80053Statement,
     /** The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require. */
@@ -127,8 +127,8 @@ export interface Sp80053Control {
  * A control enhancement: added functionality or strength for a control, with an identifier of its own, which the publication and other documents cite apart from the control. It carries what a control carries, and names the control or enhancement it requires.
  */
 export interface Sp80053ControlEnhancement {
-    /** The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline. */
-    title?: string,
+    /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
+    title: string,
     /** The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both. */
     control_statement?: Sp80053Statement,
     /** The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require. */
@@ -157,7 +157,7 @@ export interface Sp80053ControlEnhancement {
     contributes_to_assurance?: boolean,
     /** The enhancement's identifier, such as AC-2(1). */
     enhancement_id: string,
-    /** The control, or in one case the enhancement, that must be implemented for the enhancement to apply, as NIST's catalog links it; its own control for every enhancement but SC-42(2), which requires SC-42(1). */
+    /** The controls and enhancements that must be implemented for the enhancement to apply, as NIST's catalog links them: its own control, and for SC-42(2) also SC-42(1). */
     required_controls?: string[],
 }
 
@@ -187,7 +187,7 @@ export interface Sp80053StatementItem {
 
 
 /**
- * An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A gives each a label and a guideline of its own.
+ * An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A labels each parameter but the ones that aggregate others, and gives most a guideline.
  */
 export interface Sp80053Parameter {
     /** The parameter's identifier in NIST's catalog, such as ac-02_odp.01. */
@@ -200,7 +200,7 @@ export interface Sp80053Parameter {
     parameter_guidelines?: string[],
     /** For a selection, the choices the publication lists, in order. */
     selection_choices?: string[],
-    /** For a selection, how many choices the organization picks. The catalog marks one or more and leaves exactly one unwritten. */
+    /** For a selection, how many choices the organization picks. The catalog marks one or more, and leaves the slot out when one choice is allowed, which is how OSCAL reads an absent how-many. */
     selection_cardinality?: string,
     /** For a parameter that stands for several, the parameters it aggregates, by identifier. */
     aggregated_parameters?: string[],
@@ -236,7 +236,7 @@ export interface Sp80053AssessmentMethod {
 
 
 /**
- * A publication the controls cite, as the catalog's references list it: its label, its citation and its address.
+ * A publication the catalog's references list, as they list it: its label, its citation and its address.
  */
 export interface Sp80053Reference {
     /** The label the controls cite the publication by, such as SP 800-12. */
@@ -252,8 +252,8 @@ export interface Sp80053Reference {
  * One of the four control baselines SP 800-53B defines: the controls and enhancements selected for systems at the low, moderate or high impact level, or for privacy.
  */
 export interface Sp80053Baseline {
-    /** The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline. */
-    title?: string,
+    /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
+    title: string,
     /** Which of the four baselines this is. */
     baseline_level: string,
     /** The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them. */

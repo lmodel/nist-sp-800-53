@@ -127,7 +127,7 @@ class Sp80053ParameterIdentifier(String):
 class Sp80053Catalog(YAMLRoot):
     """
     One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the
-    baselines that select from them, and the publications the controls cite.
+    baselines that select from them, and the publications the catalog lists.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -149,9 +149,9 @@ class Sp80053Catalog(YAMLRoot):
 
         if self._is_empty(self.control_families):
             self.MissingRequiredField("control_families")
-        self._normalize_inlined_as_list(slot_name="control_families", slot_type=Sp80053Family, key_name="family_id", keyed=False)
+        self._normalize_inlined_as_list(slot_name="control_families", slot_type=Sp80053Family, key_name="title", keyed=False)
 
-        self._normalize_inlined_as_list(slot_name="control_baselines", slot_type=Sp80053Baseline, key_name="baseline_level", keyed=False)
+        self._normalize_inlined_as_list(slot_name="control_baselines", slot_type=Sp80053Baseline, key_name="title", keyed=False)
 
         self._normalize_inlined_as_list(slot_name="catalog_references", slot_type=Sp80053Reference, key_name="reference_label", keyed=False)
 
@@ -171,24 +171,26 @@ class Sp80053Family(YAMLRoot):
     class_name: ClassVar[str] = "Sp80053Family"
     class_model_uri: ClassVar[URIRef] = NIST_SP_800_53.Sp80053Family
 
+    title: str = None
     family_id: Union[str, Sp80053FamilyIdentifier] = None
-    title: Optional[str] = None
     description: Optional[str] = None
     family_controls: Optional[Union[Union[dict, "Sp80053Control"], list[Union[dict, "Sp80053Control"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.title):
+            self.MissingRequiredField("title")
+        if not isinstance(self.title, str):
+            self.title = str(self.title)
+
         if self._is_empty(self.family_id):
             self.MissingRequiredField("family_id")
         if not isinstance(self.family_id, Sp80053FamilyIdentifier):
             self.family_id = Sp80053FamilyIdentifier(self.family_id)
 
-        if self.title is not None and not isinstance(self.title, str):
-            self.title = str(self.title)
-
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
 
-        self._normalize_inlined_as_list(slot_name="family_controls", slot_type=Sp80053Control, key_name="control_identifier", keyed=False)
+        self._normalize_inlined_as_list(slot_name="family_controls", slot_type=Sp80053Control, key_name="title", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -207,8 +209,8 @@ class Sp80053Control(YAMLRoot):
     class_name: ClassVar[str] = "Sp80053Control"
     class_model_uri: ClassVar[URIRef] = NIST_SP_800_53.Sp80053Control
 
+    title: str = None
     control_identifier: Union[str, Sp80053ControlIdentifier] = None
-    title: Optional[str] = None
     control_statement: Optional[Union[dict, "Sp80053Statement"]] = None
     control_discussion: Optional[str] = None
     control_parameters: Optional[Union[Union[dict, "Sp80053Parameter"], list[Union[dict, "Sp80053Parameter"]]]] = empty_list()
@@ -225,13 +227,15 @@ class Sp80053Control(YAMLRoot):
     control_enhancements: Optional[Union[Union[dict, "Sp80053ControlEnhancement"], list[Union[dict, "Sp80053ControlEnhancement"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.title):
+            self.MissingRequiredField("title")
+        if not isinstance(self.title, str):
+            self.title = str(self.title)
+
         if self._is_empty(self.control_identifier):
             self.MissingRequiredField("control_identifier")
         if not isinstance(self.control_identifier, Sp80053ControlIdentifier):
             self.control_identifier = Sp80053ControlIdentifier(self.control_identifier)
-
-        if self.title is not None and not isinstance(self.title, str):
-            self.title = str(self.title)
 
         if self.control_statement is not None and not isinstance(self.control_statement, Sp80053Statement):
             self.control_statement = Sp80053Statement(**as_dict(self.control_statement))
@@ -275,7 +279,7 @@ class Sp80053Control(YAMLRoot):
         if self.contributes_to_assurance is not None and not isinstance(self.contributes_to_assurance, Bool):
             self.contributes_to_assurance = Bool(self.contributes_to_assurance)
 
-        self._normalize_inlined_as_list(slot_name="control_enhancements", slot_type=Sp80053ControlEnhancement, key_name="enhancement_id", keyed=False)
+        self._normalize_inlined_as_list(slot_name="control_enhancements", slot_type=Sp80053ControlEnhancement, key_name="title", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -294,8 +298,8 @@ class Sp80053ControlEnhancement(YAMLRoot):
     class_name: ClassVar[str] = "Sp80053ControlEnhancement"
     class_model_uri: ClassVar[URIRef] = NIST_SP_800_53.Sp80053ControlEnhancement
 
+    title: str = None
     enhancement_id: Union[str, Sp80053EnhancementIdentifier] = None
-    title: Optional[str] = None
     control_statement: Optional[Union[dict, "Sp80053Statement"]] = None
     control_discussion: Optional[str] = None
     control_parameters: Optional[Union[Union[dict, "Sp80053Parameter"], list[Union[dict, "Sp80053Parameter"]]]] = empty_list()
@@ -312,13 +316,15 @@ class Sp80053ControlEnhancement(YAMLRoot):
     required_controls: Optional[Union[Union[str, Sp80053ControlOrEnhancementIdentifier], list[Union[str, Sp80053ControlOrEnhancementIdentifier]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.title):
+            self.MissingRequiredField("title")
+        if not isinstance(self.title, str):
+            self.title = str(self.title)
+
         if self._is_empty(self.enhancement_id):
             self.MissingRequiredField("enhancement_id")
         if not isinstance(self.enhancement_id, Sp80053EnhancementIdentifier):
             self.enhancement_id = Sp80053EnhancementIdentifier(self.enhancement_id)
-
-        if self.title is not None and not isinstance(self.title, str):
-            self.title = str(self.title)
 
         if self.control_statement is not None and not isinstance(self.control_statement, Sp80053Statement):
             self.control_statement = Sp80053Statement(**as_dict(self.control_statement))
@@ -429,8 +435,8 @@ class Sp80053StatementItem(YAMLRoot):
 class Sp80053Parameter(YAMLRoot):
     """
     An organization-defined parameter: a value the control statement leaves to the organization, either an assignment
-    the organization fills in or a selection from the choices the publication lists. SP 800-53A gives each a label and
-    a guideline of its own.
+    the organization fills in or a selection from the choices the publication lists. SP 800-53A labels each parameter
+    but the ones that aggregate others, and gives most a guideline.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -551,7 +557,7 @@ class Sp80053AssessmentMethod(YAMLRoot):
 @dataclass(repr=False)
 class Sp80053Reference(YAMLRoot):
     """
-    A publication the controls cite, as the catalog's references list it: its label, its citation and its address.
+    A publication the catalog's references list, as they list it: its label, its citation and its address.
     """
     _inherited_slots: ClassVar[list[str]] = []
 
@@ -592,11 +598,16 @@ class Sp80053Baseline(YAMLRoot):
     class_name: ClassVar[str] = "Sp80053Baseline"
     class_model_uri: ClassVar[URIRef] = NIST_SP_800_53.Sp80053Baseline
 
+    title: str = None
     baseline_level: Union[str, "Sp80053BaselineLevel"] = None
     baseline_controls: Union[Union[str, Sp80053ControlOrEnhancementIdentifier], list[Union[str, Sp80053ControlOrEnhancementIdentifier]]] = None
-    title: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.title):
+            self.MissingRequiredField("title")
+        if not isinstance(self.title, str):
+            self.title = str(self.title)
+
         if self._is_empty(self.baseline_level):
             self.MissingRequiredField("baseline_level")
         if not isinstance(self.baseline_level, Sp80053BaselineLevel):
@@ -607,9 +618,6 @@ class Sp80053Baseline(YAMLRoot):
         if not isinstance(self.baseline_controls, list):
             self.baseline_controls = [self.baseline_controls] if self.baseline_controls is not None else []
         self.baseline_controls = [v if isinstance(v, Sp80053ControlOrEnhancementIdentifier) else Sp80053ControlOrEnhancementIdentifier(v) for v in self.baseline_controls]
-
-        if self.title is not None and not isinstance(self.title, str):
-            self.title = str(self.title)
 
         super().__post_init__(**kwargs)
 
@@ -725,7 +733,7 @@ slots.related_control_ids = Slot(uri=NIST_SP_800_53.related_control_ids, name="r
 
 slots.control_references = Slot(uri=NIST_SP_800_53.control_references, name="control_references", curie=NIST_SP_800_53.curie('control_references'),
                    model_uri=NIST_SP_800_53.control_references, domain=None, range=Optional[Union[str, list[str]]],
-                   pattern=re.compile(r'\S'))
+                   pattern=re.compile(r'^\s*\S'))
 
 slots.assessment_objective = Slot(uri=NIST_SP_800_53.assessment_objective, name="assessment_objective", curie=NIST_SP_800_53.curie('assessment_objective'),
                    model_uri=NIST_SP_800_53.assessment_objective, domain=None, range=Optional[Union[dict, Sp80053AssessmentObjective]])
@@ -800,7 +808,7 @@ slots.sp80053Parameter__parameter_id = Slot(uri=NIST_SP_800_53.parameter_id, nam
 
 slots.sp80053Parameter__assessment_label = Slot(uri=NIST_SP_800_53.assessment_label, name="sp80053Parameter__assessment_label", curie=NIST_SP_800_53.curie('assessment_label'),
                    model_uri=NIST_SP_800_53.sp80053Parameter__assessment_label, domain=None, range=Optional[str],
-                   pattern=re.compile(r'^[A-Z]{2}-[0-9]{2}\S*_ODP(\[[0-9]{2}\])?$'))
+                   pattern=re.compile(r'^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\([0-9]{2}\)|\.[0-9]{2})?_ODP(\[[0-9]{2}\])?$'))
 
 slots.sp80053Parameter__parameter_label = Slot(uri=NIST_SP_800_53.parameter_label, name="sp80053Parameter__parameter_label", curie=NIST_SP_800_53.curie('parameter_label'),
                    model_uri=NIST_SP_800_53.sp80053Parameter__parameter_label, domain=None, range=Optional[str])
@@ -825,7 +833,7 @@ slots.sp80053Parameter__alternative_label = Slot(uri=NIST_SP_800_53.alternative_
 
 slots.sp80053AssessmentObjective__objective_label = Slot(uri=NIST_SP_800_53.objective_label, name="sp80053AssessmentObjective__objective_label", curie=NIST_SP_800_53.curie('objective_label'),
                    model_uri=NIST_SP_800_53.sp80053AssessmentObjective__objective_label, domain=None, range=str,
-                   pattern=re.compile(r'^[A-Z]{2}-[0-9]{2}'))
+                   pattern=re.compile(r'^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\([0-9]{2}\))?([a-z]\.([0-9]{2})?)?(\([a-z]\)(\([0-9]{2}\))?)?(\[[0-9]{2}\])*$'))
 
 slots.sp80053AssessmentObjective__objective_text = Slot(uri=NIST_SP_800_53.objective_text, name="sp80053AssessmentObjective__objective_text", curie=NIST_SP_800_53.curie('objective_text'),
                    model_uri=NIST_SP_800_53.sp80053AssessmentObjective__objective_text, domain=None, range=Optional[str])
@@ -838,11 +846,11 @@ slots.sp80053AssessmentMethod__assessment_method = Slot(uri=NIST_SP_800_53.asses
 
 slots.sp80053AssessmentMethod__assessment_objects = Slot(uri=NIST_SP_800_53.assessment_objects, name="sp80053AssessmentMethod__assessment_objects", curie=NIST_SP_800_53.curie('assessment_objects'),
                    model_uri=NIST_SP_800_53.sp80053AssessmentMethod__assessment_objects, domain=None, range=Union[str, list[str]],
-                   pattern=re.compile(r'\S'))
+                   pattern=re.compile(r'^\s*\S'))
 
 slots.sp80053Reference__reference_label = Slot(uri=NIST_SP_800_53.reference_label, name="sp80053Reference__reference_label", curie=NIST_SP_800_53.curie('reference_label'),
                    model_uri=NIST_SP_800_53.sp80053Reference__reference_label, domain=None, range=str,
-                   pattern=re.compile(r'\S'))
+                   pattern=re.compile(r'^\s*\S'))
 
 slots.sp80053Reference__reference_citation = Slot(uri=NIST_SP_800_53.reference_citation, name="sp80053Reference__reference_citation", curie=NIST_SP_800_53.curie('reference_citation'),
                    model_uri=NIST_SP_800_53.sp80053Reference__reference_citation, domain=None, range=Optional[str])
@@ -855,3 +863,15 @@ slots.sp80053Baseline__baseline_level = Slot(uri=NIST_SP_800_53.baseline_level, 
 
 slots.sp80053Baseline__baseline_controls = Slot(uri=NIST_SP_800_53.baseline_controls, name="sp80053Baseline__baseline_controls", curie=NIST_SP_800_53.curie('baseline_controls'),
                    model_uri=NIST_SP_800_53.sp80053Baseline__baseline_controls, domain=None, range=Union[Union[str, Sp80053ControlOrEnhancementIdentifier], list[Union[str, Sp80053ControlOrEnhancementIdentifier]]])
+
+slots.Sp80053Family_title = Slot(uri=SCHEMA.name, name="Sp80053Family_title", curie=SCHEMA.curie('name'),
+                   model_uri=NIST_SP_800_53.Sp80053Family_title, domain=Sp80053Family, range=str)
+
+slots.Sp80053Control_title = Slot(uri=SCHEMA.name, name="Sp80053Control_title", curie=SCHEMA.curie('name'),
+                   model_uri=NIST_SP_800_53.Sp80053Control_title, domain=Sp80053Control, range=str)
+
+slots.Sp80053ControlEnhancement_title = Slot(uri=SCHEMA.name, name="Sp80053ControlEnhancement_title", curie=SCHEMA.curie('name'),
+                   model_uri=NIST_SP_800_53.Sp80053ControlEnhancement_title, domain=Sp80053ControlEnhancement, range=str)
+
+slots.Sp80053Baseline_title = Slot(uri=SCHEMA.name, name="Sp80053Baseline_title", curie=SCHEMA.curie('name'),
+                   model_uri=NIST_SP_800_53.Sp80053Baseline_title, domain=Sp80053Baseline, range=str)

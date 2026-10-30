@@ -7,68 +7,68 @@
 nist_sp_800_53:AssessmentMethod a sh:NodeShape ;
 	rdfs:comment "One assessment method SP 800-53A gives a control or enhancement, with the objects an assessor selects from: documents and records to examine, people to interview, or mechanisms and activities to test." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n36 ;
-	sh:property _:c14n47 , _:c14n63 ;
+	sh:ignoredProperties _:c14n37 ;
+	sh:property _:c14n6 , _:c14n65 ;
 	sh:targetClass nist_sp_800_53:AssessmentMethod .
 nist_sp_800_53:AssessmentObjective a sh:NodeShape ;
 	rdfs:comment "An assessment objective of SP 800-53A: a determination statement an assessor checks, or a heading that groups the determination statements of one item of the control statement." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n34 ;
-	sh:property _:c14n19 , _:c14n32 , _:c14n71 ;
+	sh:ignoredProperties _:c14n35 ;
+	sh:property _:c14n20 , _:c14n3 , _:c14n33 ;
 	sh:targetClass nist_sp_800_53:AssessmentObjective .
 nist_sp_800_53:Baseline a sh:NodeShape ;
 	rdfs:comment "One of the four control baselines SP 800-53B defines: the controls and enhancements selected for systems at the low, moderate or high impact level, or for privacy." ;
 	sh:closed true ;
 	sh:ignoredProperties _:c14n17 ;
-	sh:property _:c14n56 , _:c14n65 , _:c14n77 ;
+	sh:property _:c14n29 , _:c14n67 , _:c14n79 ;
 	sh:targetClass nist_sp_800_53:Baseline .
 nist_sp_800_53:Catalog a sh:NodeShape ;
-	rdfs:comment "One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the controls cite." ;
+	rdfs:comment "One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the catalog lists." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n39 ;
-	sh:property _:c14n15 , _:c14n3 , _:c14n40 , _:c14n59 ;
+	sh:ignoredProperties _:c14n40 ;
+	sh:property _:c14n15 , _:c14n42 , _:c14n50 , _:c14n61 ;
 	sh:targetClass nist_sp_800_53:Catalog .
 nist_sp_800_53:Control a sh:NodeShape ;
 	rdfs:comment "A security or privacy control: a safeguard with an identifier, a statement of what it requires, a discussion, parameters the organization defines, related controls, references, the assessment objective and methods SP 800-53A gives it, and its enhancements. A control Revision 5 withdrew keeps its identifier and says where it went." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n23 ;
-	sh:property _:c14n1 , _:c14n2 , _:c14n27 , _:c14n30 , _:c14n44 , _:c14n48 , _:c14n53 , _:c14n55 , _:c14n57 , _:c14n64 , _:c14n69 , _:c14n7 , _:c14n72 , _:c14n73 , _:c14n79 , _:c14n84 ;
+	sh:ignoredProperties _:c14n24 ;
+	sh:property _:c14n1 , _:c14n18 , _:c14n2 , _:c14n31 , _:c14n44 , _:c14n51 , _:c14n56 , _:c14n58 , _:c14n59 , _:c14n66 , _:c14n7 , _:c14n71 , _:c14n74 , _:c14n75 , _:c14n80 , _:c14n84 ;
 	sh:targetClass nist_sp_800_53:Control .
 nist_sp_800_53:ControlEnhancement a sh:NodeShape ;
 	rdfs:comment "A control enhancement: added functionality or strength for a control, with an identifier of its own, which the publication and other documents cite apart from the control. It carries what a control carries, and names the control or enhancement it requires." ;
 	sh:closed true ;
 	sh:ignoredProperties _:c14n12 ;
-	sh:property _:c14n0 , _:c14n10 , _:c14n11 , _:c14n13 , _:c14n16 , _:c14n18 , _:c14n24 , _:c14n28 , _:c14n38 , _:c14n43 , _:c14n45 , _:c14n5 , _:c14n60 , _:c14n67 , _:c14n78 , _:c14n81 ;
+	sh:property _:c14n0 , _:c14n10 , _:c14n11 , _:c14n13 , _:c14n16 , _:c14n19 , _:c14n25 , _:c14n39 , _:c14n41 , _:c14n45 , _:c14n46 , _:c14n47 , _:c14n62 , _:c14n69 , _:c14n73 , _:c14n82 ;
 	sh:targetClass nist_sp_800_53:ControlEnhancement .
 nist_sp_800_53:Family a sh:NodeShape ;
 	rdfs:comment "One of the twenty families SP 800-53 sorts its controls into, such as Access Control or Supply Chain Risk Management." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n66 ;
-	sh:property _:c14n49 , _:c14n58 , _:c14n8 , _:c14n9 ;
+	sh:ignoredProperties _:c14n68 ;
+	sh:property _:c14n48 , _:c14n60 , _:c14n8 , _:c14n9 ;
 	sh:targetClass nist_sp_800_53:Family .
 nist_sp_800_53:Parameter a sh:NodeShape ;
-	rdfs:comment "An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A gives each a label and a guideline of its own." ;
+	rdfs:comment "An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A labels each parameter but the ones that aggregate others, and gives most a guideline." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n70 ;
-	sh:property _:c14n20 , _:c14n21 , _:c14n29 , _:c14n37 , _:c14n42 , _:c14n46 , _:c14n54 , _:c14n76 , _:c14n83 ;
+	sh:ignoredProperties _:c14n72 ;
+	sh:property _:c14n21 , _:c14n22 , _:c14n27 , _:c14n30 , _:c14n38 , _:c14n49 , _:c14n52 , _:c14n57 , _:c14n78 ;
 	sh:targetClass nist_sp_800_53:Parameter .
 nist_sp_800_53:Reference a sh:NodeShape ;
-	rdfs:comment "A publication the controls cite, as the catalog's references list it: its label, its citation and its address." ;
+	rdfs:comment "A publication the catalog's references list, as they list it: its label, its citation and its address." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n61 ;
-	sh:property _:c14n33 , _:c14n51 , _:c14n82 ;
+	sh:ignoredProperties _:c14n63 ;
+	sh:property _:c14n34 , _:c14n54 , _:c14n83 ;
 	sh:targetClass nist_sp_800_53:Reference .
 nist_sp_800_53:Statement a sh:NodeShape ;
 	rdfs:comment "A control statement: the text of what a control or enhancement requires, and the items it is divided into." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n41 ;
-	sh:property _:c14n25 , _:c14n80 ;
+	sh:ignoredProperties _:c14n43 ;
+	sh:property _:c14n26 , _:c14n81 ;
 	sh:targetClass nist_sp_800_53:Statement .
 nist_sp_800_53:StatementItem a sh:NodeShape ;
 	rdfs:comment "One lettered or numbered item of a control statement, which may hold items of its own." ;
 	sh:closed true ;
-	sh:ignoredProperties _:c14n68 ;
-	sh:property _:c14n35 , _:c14n4 , _:c14n52 ;
+	sh:ignoredProperties _:c14n70 ;
+	sh:property _:c14n36 , _:c14n4 , _:c14n55 ;
 	sh:targetClass nist_sp_800_53:StatementItem .
 _:c14n0 sh:datatype xsd:string ;
 	sh:description "The controls and enhancements the publication lists as related, by identifier." ;
@@ -121,17 +121,18 @@ _:c14n16 sh:class nist_sp_800_53:Parameter ;
 _:c14n17 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
 _:c14n18 sh:datatype xsd:string ;
+	sh:description "The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 0 ;
+	sh:path schema1:name .
+_:c14n19 sh:datatype xsd:string ;
 	sh:description "The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path nist_sp_800_53:control_discussion .
-_:c14n19 sh:datatype xsd:string ;
-	sh:description "The determination statement, with the same placeholders for parameters as the control statement. A heading has none." ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 1 ;
-	sh:path nist_sp_800_53:objective_text .
 _:c14n2 sh:class nist_sp_800_53:AssessmentObjective ;
 	sh:description "The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are." ;
 	sh:maxCount 1 ;
@@ -139,73 +140,84 @@ _:c14n2 sh:class nist_sp_800_53:AssessmentObjective ;
 	sh:order 6 ;
 	sh:path nist_sp_800_53:assessment_objective .
 _:c14n20 sh:datatype xsd:string ;
+	sh:description "The determination statement, with the same placeholders for parameters as the control statement. A heading has none." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path nist_sp_800_53:objective_text .
+_:c14n21 sh:datatype xsd:string ;
 	sh:description "The identifiers an earlier release of the catalog gave the parameter, such as ac-1_prm_2 for ac-01_odp.03." ;
 	sh:nodeKind sh:Literal ;
 	sh:order 7 ;
 	sh:path nist_sp_800_53:alternative_identifiers ;
 	sh:pattern "^[a-z]{2}-[0-9]{2}(\\.[0-9]{2})?_odp(\\.[0-9]{2})?$|^[a-z]{2}-[1-9][0-9]*(\\.[1-9][0-9]*)?_prm_[1-9][0-9]*$" .
-_:c14n21 sh:datatype xsd:string ;
+_:c14n22 sh:datatype xsd:string ;
 	sh:description "The guidelines that say what a value must settle, such as that the frequency of a review is defined." ;
 	sh:nodeKind sh:Literal ;
 	sh:order 3 ;
 	sh:path nist_sp_800_53:parameter_guidelines .
-_:c14n22 rdf:first "ONE" ;
-	rdf:rest _:c14n50 .
-_:c14n23 rdf:first rdf:type ;
+_:c14n23 rdf:first "ONE" ;
+	rdf:rest _:c14n53 .
+_:c14n24 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n24 sh:description "Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both." ;
-	sh:in _:c14n88 ;
+_:c14n25 sh:description "Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both." ;
+	sh:in _:c14n86 ;
 	sh:order 12 ;
 	sh:path nist_sp_800_53:implementation_level .
-_:c14n25 sh:class nist_sp_800_53:StatementItem ;
+_:c14n26 sh:class nist_sp_800_53:StatementItem ;
 	sh:description "The lettered or numbered items of the statement, in order, each of which may hold items of its own." ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 0 ;
 	sh:path nist_sp_800_53:statement_items .
-_:c14n26 rdf:first "PRIVACY" ;
-	rdf:rest rdf:nil .
 _:c14n27 sh:datatype xsd:string ;
-	sh:description "The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline." ;
+	sh:description "The label SP 800-53A gives the parameter, such as AC-02_ODP[01]. A parameter that aggregates several has none." ;
 	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path nist_sp_800_53:assessment_label ;
+	sh:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\\([0-9]{2}\\)|\\.[0-9]{2})?_ODP(\\[[0-9]{2}\\])?$" .
+_:c14n28 rdf:first "PRIVACY" ;
+	rdf:rest rdf:nil .
+_:c14n29 sh:datatype xsd:string ;
+	sh:description "The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 0 ;
 	sh:path schema1:name .
-_:c14n28 sh:datatype xsd:string ;
-	sh:description "The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130." ;
+_:c14n3 sh:datatype xsd:string ;
+	sh:description "The label SP 800-53A gives the objective, such as AC-02a.[01]." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
-	sh:order 5 ;
-	sh:path nist_sp_800_53:control_references ;
-	sh:pattern "\\S" .
-_:c14n29 sh:datatype xsd:string ;
+	sh:order 0 ;
+	sh:path nist_sp_800_53:objective_label ;
+	sh:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\\([0-9]{2}\\))?([a-z]\\.([0-9]{2})?)?(\\([a-z]\\)(\\([0-9]{2}\\))?)?(\\[[0-9]{2}\\])*$" .
+_:c14n30 sh:datatype xsd:string ;
 	sh:description "For a selection, the choices the publication lists, in order." ;
 	sh:nodeKind sh:Literal ;
 	sh:order 4 ;
 	sh:path nist_sp_800_53:selection_choices .
-_:c14n3 sh:class nist_sp_800_53:Reference ;
-	sh:description "The publications the controls cite, as the catalog's references list them." ;
-	sh:nodeKind sh:BlankNodeOrIRI ;
-	sh:order 3 ;
-	sh:path nist_sp_800_53:catalog_references .
-_:c14n30 sh:description "Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both." ;
-	sh:in _:c14n86 ;
+_:c14n31 sh:description "Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both." ;
+	sh:in _:c14n88 ;
 	sh:order 12 ;
 	sh:path nist_sp_800_53:implementation_level .
-_:c14n31 rdf:first "MODERATE" ;
-	rdf:rest _:c14n62 .
-_:c14n32 sh:class nist_sp_800_53:AssessmentObjective ;
+_:c14n32 rdf:first "MODERATE" ;
+	rdf:rest _:c14n64 .
+_:c14n33 sh:class nist_sp_800_53:AssessmentObjective ;
 	sh:description "The objectives grouped under this one, in order." ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 2 ;
 	sh:path nist_sp_800_53:sub_objectives .
-_:c14n33 sh:datatype xsd:string ;
+_:c14n34 sh:datatype xsd:string ;
 	sh:description "The citation, as the catalog prints it." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path nist_sp_800_53:reference_citation .
-_:c14n34 rdf:first rdf:type ;
+_:c14n35 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n35 sh:datatype xsd:string ;
+_:c14n36 sh:datatype xsd:string ;
 	sh:description "The item's label as the publication prints it, such as a., 1. or (a)." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
@@ -213,21 +225,19 @@ _:c14n35 sh:datatype xsd:string ;
 	sh:order 1 ;
 	sh:path nist_sp_800_53:item_label ;
 	sh:pattern "^(([a-z]|[1-9][0-9]*)\\.|\\(([a-z]|[1-9][0-9]*)\\))$" .
-_:c14n36 rdf:first rdf:type ;
+_:c14n37 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n37 sh:datatype xsd:string ;
+_:c14n38 sh:datatype xsd:string ;
 	sh:description "For an assignment, what the organization defines, such as personnel or roles." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path nist_sp_800_53:parameter_label .
-_:c14n38 sh:class nist_sp_800_53:AssessmentMethod ;
+_:c14n39 sh:class nist_sp_800_53:AssessmentMethod ;
 	sh:description "The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to." ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 7 ;
 	sh:path nist_sp_800_53:assessment_methods .
-_:c14n39 rdf:first rdf:type ;
-	rdf:rest rdf:nil .
 _:c14n4 sh:datatype xsd:string ;
 	sh:description "The item's text, with the same placeholders for parameters as the statement's text." ;
 	sh:maxCount 1 ;
@@ -235,85 +245,93 @@ _:c14n4 sh:datatype xsd:string ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path nist_sp_800_53:item_text .
-_:c14n40 sh:class nist_sp_800_53:Baseline ;
+_:c14n40 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n41 sh:datatype xsd:string ;
+	sh:description "The controls and enhancements that must be implemented for the enhancement to apply, as NIST's catalog links them: its own control, and for SC-42(2) also SC-42(1)." ;
+	sh:nodeKind sh:Literal ;
+	sh:order 15 ;
+	sh:path nist_sp_800_53:required_controls ;
+	sh:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$" .
+_:c14n42 sh:class nist_sp_800_53:Baseline ;
 	sh:description "The control baselines of SP 800-53B that select from the catalog." ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 2 ;
 	sh:path nist_sp_800_53:control_baselines .
-_:c14n41 rdf:first rdf:type ;
+_:c14n43 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n42 sh:datatype xsd:string ;
-	sh:description "The label SP 800-53A gives the parameter, such as AC-02_ODP[01]. A parameter that aggregates several has none." ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 1 ;
-	sh:path nist_sp_800_53:assessment_label ;
-	sh:pattern "^[A-Z]{2}-[0-9]{2}\\S*_ODP(\\[[0-9]{2}\\])?$" .
-_:c14n43 sh:datatype xsd:string ;
-	sh:description "For a withdrawn control or enhancement, what it was incorporated into, as the publication states it." ;
-	sh:nodeKind sh:Literal ;
-	sh:order 9 ;
-	sh:path nist_sp_800_53:incorporated_into ;
-	sh:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)(-[1-9][0-9]*(\\([1-9][0-9]*\\))?([a-z](\\.[1-9][0-9]*)*|\\([a-z]\\)(\\([1-9][0-9]*\\))*)?)?$" .
 _:c14n44 sh:datatype xsd:string ;
 	sh:description "The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130." ;
 	sh:nodeKind sh:Literal ;
 	sh:order 5 ;
 	sh:path nist_sp_800_53:control_references ;
-	sh:pattern "\\S" .
-_:c14n45 sh:class nist_sp_800_53:Statement ;
+	sh:pattern "^\\s*\\S" .
+_:c14n45 sh:datatype xsd:string ;
+	sh:description "For a withdrawn control or enhancement, what it was incorporated into, as the publication states it." ;
+	sh:nodeKind sh:Literal ;
+	sh:order 9 ;
+	sh:path nist_sp_800_53:incorporated_into ;
+	sh:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)(-[1-9][0-9]*(\\([1-9][0-9]*\\))?([a-z](\\.[1-9][0-9]*)*|\\([a-z]\\)(\\([1-9][0-9]*\\))*)?)?$" .
+_:c14n46 sh:datatype xsd:string ;
+	sh:description "The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 0 ;
+	sh:path schema1:name .
+_:c14n47 sh:class nist_sp_800_53:Statement ;
 	sh:description "The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 1 ;
 	sh:path nist_sp_800_53:control_statement .
-_:c14n46 sh:datatype xsd:string ;
+_:c14n48 sh:datatype xsd:string ;
+	sh:description "The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 0 ;
+	sh:path schema1:name .
+_:c14n49 sh:datatype xsd:string ;
 	sh:description "The label SP 800-53 prints where it differs from the one SP 800-53A gives." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 8 ;
 	sh:path nist_sp_800_53:alternative_label .
-_:c14n47 sh:datatype xsd:string ;
-	sh:description "The objects the method is applied to, in the order the publication lists them." ;
-	sh:minCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 1 ;
-	sh:path nist_sp_800_53:assessment_objects ;
-	sh:pattern "\\S" .
-_:c14n48 sh:datatype xsd:string ;
+_:c14n5 rdf:first "EXAMINE" ;
+	rdf:rest _:c14n76 .
+_:c14n50 sh:class nist_sp_800_53:Reference ;
+	sh:description "The publications the catalog's references list, most of which a control cites." ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 3 ;
+	sh:path nist_sp_800_53:catalog_references .
+_:c14n51 sh:datatype xsd:string ;
 	sh:description "For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it." ;
 	sh:nodeKind sh:Literal ;
 	sh:order 10 ;
 	sh:path nist_sp_800_53:moved_to ;
 	sh:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$" .
-_:c14n49 sh:datatype xsd:string ;
-	sh:description "The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline." ;
+_:c14n52 sh:description "For a selection, how many choices the organization picks. The catalog marks one or more, and leaves the slot out when one choice is allowed, which is how OSCAL reads an absent how-many." ;
+	sh:in _:c14n23 ;
 	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 0 ;
-	sh:path schema1:name .
-_:c14n5 sh:datatype xsd:string ;
-	sh:description "The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline." ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 0 ;
-	sh:path schema1:name .
-_:c14n50 rdf:first "ONE_OR_MORE" ;
+	sh:order 5 ;
+	sh:path nist_sp_800_53:selection_cardinality .
+_:c14n53 rdf:first "ONE_OR_MORE" ;
 	rdf:rest rdf:nil .
-_:c14n51 sh:datatype xsd:string ;
+_:c14n54 sh:datatype xsd:string ;
 	sh:description "The label the controls cite the publication by, such as SP 800-12." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 0 ;
 	sh:path nist_sp_800_53:reference_label ;
-	sh:pattern "\\S" .
-_:c14n52 sh:class nist_sp_800_53:StatementItem ;
+	sh:pattern "^\\s*\\S" .
+_:c14n55 sh:class nist_sp_800_53:StatementItem ;
 	sh:description "The lettered or numbered items of the statement, in order, each of which may hold items of its own." ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 0 ;
 	sh:path nist_sp_800_53:statement_items .
-_:c14n53 sh:datatype xsd:string ;
+_:c14n56 sh:datatype xsd:string ;
 	sh:description "The control's identifier, such as AC-2." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
@@ -321,86 +339,78 @@ _:c14n53 sh:datatype xsd:string ;
 	sh:order 14 ;
 	sh:path nist_sp_800_53:control_identifier ;
 	sh:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*$" .
-_:c14n54 sh:datatype xsd:string ;
+_:c14n57 sh:datatype xsd:string ;
 	sh:description "For a parameter that stands for several, the parameters it aggregates, by identifier." ;
 	sh:nodeKind sh:Literal ;
 	sh:order 6 ;
 	sh:path nist_sp_800_53:aggregated_parameters ;
 	sh:pattern "^[a-z]{2}-[0-9]{2}(\\.[0-9]{2})?_odp(\\.[0-9]{2})?$|^[a-z]{2}-[1-9][0-9]*(\\.[1-9][0-9]*)?_prm_[1-9][0-9]*$" .
-_:c14n55 sh:class nist_sp_800_53:AssessmentMethod ;
+_:c14n58 sh:class nist_sp_800_53:AssessmentMethod ;
 	sh:description "The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to." ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 7 ;
 	sh:path nist_sp_800_53:assessment_methods .
-_:c14n56 sh:datatype xsd:string ;
-	sh:description "The name SP 800-53 gives the family, control or control enhancement, or SP 800-53B gives the baseline." ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 0 ;
-	sh:path schema1:name .
-_:c14n57 sh:datatype xsd:string ;
+_:c14n59 sh:datatype xsd:string ;
 	sh:description "The controls and enhancements the publication lists as related, by identifier." ;
 	sh:nodeKind sh:Literal ;
 	sh:order 4 ;
 	sh:path nist_sp_800_53:related_control_ids ;
 	sh:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$" .
-_:c14n58 sh:datatype xsd:string ;
+_:c14n6 sh:datatype xsd:string ;
+	sh:description "The objects the method is applied to, in the order the publication lists them." ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path nist_sp_800_53:assessment_objects ;
+	sh:pattern "^\\s*\\S" .
+_:c14n60 sh:datatype xsd:string ;
 	sh:description "What the family is about, in the words of whoever records it. SP 800-53 gives the Program Management family an overview of its own, and the other families none." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 1 ;
 	sh:path schema1:description .
-_:c14n59 sh:class nist_sp_800_53:Family ;
+_:c14n61 sh:class nist_sp_800_53:Family ;
 	sh:description "The twenty control families, in the order SP 800-53 gives them." ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 1 ;
 	sh:path nist_sp_800_53:control_families .
-_:c14n6 rdf:first "EXAMINE" ;
-	rdf:rest _:c14n74 .
-_:c14n60 sh:datatype xsd:boolean ;
+_:c14n62 sh:datatype xsd:boolean ;
 	sh:description "True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 13 ;
 	sh:path nist_sp_800_53:contributes_to_assurance .
-_:c14n61 rdf:first rdf:type ;
+_:c14n63 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n62 rdf:first "HIGH" ;
-	rdf:rest _:c14n26 .
-_:c14n63 sh:description "Which of the three methods this is." ;
-	sh:in _:c14n6 ;
+_:c14n64 rdf:first "HIGH" ;
+	rdf:rest _:c14n28 .
+_:c14n65 sh:description "Which of the three methods this is." ;
+	sh:in _:c14n5 ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:order 0 ;
 	sh:path nist_sp_800_53:assessment_method .
-_:c14n64 sh:description "The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none." ;
+_:c14n66 sh:description "The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none." ;
 	sh:in _:c14n89 ;
 	sh:maxCount 1 ;
 	sh:order 8 ;
 	sh:path nist_sp_800_53:control_status .
-_:c14n65 sh:datatype xsd:string ;
+_:c14n67 sh:datatype xsd:string ;
 	sh:description "The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them." ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path nist_sp_800_53:baseline_controls ;
 	sh:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$" .
-_:c14n66 rdf:first rdf:type ;
+_:c14n68 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n67 sh:class nist_sp_800_53:AssessmentObjective ;
+_:c14n69 sh:class nist_sp_800_53:AssessmentObjective ;
 	sh:description "The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 6 ;
 	sh:path nist_sp_800_53:assessment_objective .
-_:c14n68 rdf:first rdf:type ;
-	rdf:rest rdf:nil .
-_:c14n69 sh:class nist_sp_800_53:ControlEnhancement ;
-	sh:description "The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead." ;
-	sh:nodeKind sh:BlankNodeOrIRI ;
-	sh:order 15 ;
-	sh:path nist_sp_800_53:control_enhancements .
 _:c14n7 sh:datatype xsd:string ;
 	sh:description "For a withdrawn control or enhancement, what it was incorporated into, as the publication states it." ;
 	sh:nodeKind sh:Literal ;
@@ -409,30 +419,35 @@ _:c14n7 sh:datatype xsd:string ;
 	sh:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)(-[1-9][0-9]*(\\([1-9][0-9]*\\))?([a-z](\\.[1-9][0-9]*)*|\\([a-z]\\)(\\([1-9][0-9]*\\))*)?)?$" .
 _:c14n70 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
-_:c14n71 sh:datatype xsd:string ;
-	sh:description "The label SP 800-53A gives the objective, such as AC-02a.[01]." ;
-	sh:maxCount 1 ;
-	sh:minCount 1 ;
+_:c14n71 sh:class nist_sp_800_53:ControlEnhancement ;
+	sh:description "The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead." ;
+	sh:nodeKind sh:BlankNodeOrIRI ;
+	sh:order 15 ;
+	sh:path nist_sp_800_53:control_enhancements .
+_:c14n72 rdf:first rdf:type ;
+	rdf:rest rdf:nil .
+_:c14n73 sh:datatype xsd:string ;
+	sh:description "The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130." ;
 	sh:nodeKind sh:Literal ;
-	sh:order 0 ;
-	sh:path nist_sp_800_53:objective_label ;
-	sh:pattern "^[A-Z]{2}-[0-9]{2}" .
-_:c14n72 sh:class nist_sp_800_53:Parameter ;
+	sh:order 5 ;
+	sh:path nist_sp_800_53:control_references ;
+	sh:pattern "^\\s*\\S" .
+_:c14n74 sh:class nist_sp_800_53:Parameter ;
 	sh:description "The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them." ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 3 ;
 	sh:path nist_sp_800_53:control_parameters .
-_:c14n73 sh:datatype xsd:boolean ;
+_:c14n75 sh:datatype xsd:boolean ;
 	sh:description "True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 13 ;
 	sh:path nist_sp_800_53:contributes_to_assurance .
-_:c14n74 rdf:first "INTERVIEW" ;
+_:c14n76 rdf:first "INTERVIEW" ;
 	rdf:rest _:c14n14 .
-_:c14n75 rdf:first "LOW" ;
-	rdf:rest _:c14n31 .
-_:c14n76 sh:datatype xsd:string ;
+_:c14n77 rdf:first "LOW" ;
+	rdf:rest _:c14n32 .
+_:c14n78 sh:datatype xsd:string ;
 	sh:description "The parameter's identifier in NIST's catalog, such as ac-02_odp.01." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
@@ -440,51 +455,40 @@ _:c14n76 sh:datatype xsd:string ;
 	sh:order 0 ;
 	sh:path nist_sp_800_53:parameter_id ;
 	sh:pattern "^[a-z]{2}-[0-9]{2}(\\.[0-9]{2})?_odp(\\.[0-9]{2})?$|^[a-z]{2}-[1-9][0-9]*(\\.[1-9][0-9]*)?_prm_[1-9][0-9]*$" .
-_:c14n77 sh:description "Which of the four baselines this is." ;
-	sh:in _:c14n75 ;
+_:c14n79 sh:description "Which of the four baselines this is." ;
+	sh:in _:c14n77 ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:order 1 ;
 	sh:path nist_sp_800_53:baseline_level .
-_:c14n78 sh:datatype xsd:string ;
-	sh:description "The control, or in one case the enhancement, that must be implemented for the enhancement to apply, as NIST's catalog links it; its own control for every enhancement but SC-42(2), which requires SC-42(1)." ;
-	sh:nodeKind sh:Literal ;
-	sh:order 15 ;
-	sh:path nist_sp_800_53:required_controls ;
-	sh:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$" .
-_:c14n79 sh:datatype xsd:string ;
-	sh:description "For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring." ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 11 ;
-	sh:path nist_sp_800_53:withdrawal_reason .
 _:c14n8 sh:class nist_sp_800_53:Control ;
 	sh:description "The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead." ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 3 ;
 	sh:path nist_sp_800_53:family_controls .
 _:c14n80 sh:datatype xsd:string ;
-	sh:description "The statement's own text, before any items. A placeholder of the form {{ insert: param, <identifier> }} marks where an organization-defined parameter is inserted." ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 1 ;
-	sh:path nist_sp_800_53:statement_text .
-_:c14n81 sh:datatype xsd:string ;
 	sh:description "For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 11 ;
 	sh:path nist_sp_800_53:withdrawal_reason .
-_:c14n82 sh:description "The address the catalog gives for the publication." ;
+_:c14n81 sh:datatype xsd:string ;
+	sh:description "The statement's own text, before any items. A placeholder of the form {{ insert: param, <identifier> }} marks where an organization-defined parameter is inserted." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path nist_sp_800_53:statement_text .
+_:c14n82 sh:datatype xsd:string ;
+	sh:description "For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 11 ;
+	sh:path nist_sp_800_53:withdrawal_reason .
+_:c14n83 sh:description "The address the catalog gives for the publication." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 2 ;
 	sh:path nist_sp_800_53:reference_url .
-_:c14n83 sh:description "For a selection, how many choices the organization picks. The catalog marks one or more and leaves exactly one unwritten." ;
-	sh:in _:c14n22 ;
-	sh:maxCount 1 ;
-	sh:order 5 ;
-	sh:path nist_sp_800_53:selection_cardinality .
 _:c14n84 sh:class nist_sp_800_53:Statement ;
 	sh:description "The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both." ;
 	sh:maxCount 1 ;
