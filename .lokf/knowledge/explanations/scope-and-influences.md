@@ -19,7 +19,7 @@ sources:
     title: the What is left out section
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T08:34:38Z"
+  at: "2026-10-30T08:48:31Z"
 status: draft
 ---
 
@@ -46,7 +46,7 @@ The README and `docs/about.md` leave out:
 - Revision 4;
 - the prose of SP 800-53A and SP 800-53B outside the catalog and the profiles.
 
-A withdrawn control or enhancement stays, with where it went.[^about.md]
+A withdrawn control or enhancement stays, with where it went or, for SC-19 and CP-10(3), why it was withdrawn.[^about.md]
 
 [^readme.md]: README.md, What it models, Influences, Mappings and Not modelled here
 [^changelog.md]: CHANGELOG.md, the Changed and Removed entries under Unreleased
