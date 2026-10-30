@@ -25,7 +25,7 @@ status: draft
 
 # Control enhancement
 
-The schema's `Sp80053ControlEnhancement` carries what a control carries, its identifier in `enhancement_id`, and in `required_controls` the controls and enhancements that must be implemented for it to apply: its own control, and for SC-42(2) also SC-42(1).[^nist_sp_800_53.yaml] In NIST's catalog an enhancement is a control of class `SP800-53-enhancement` nested in its control, with a `required` link.[^nist_sp-800-53_rev5_catalog.json]
+The schema's `Sp80053ControlEnhancement` carries what a control carries, with its identifier in `enhancement_id`. Its `required_controls` names the controls and enhancements that must be implemented for it to apply: its own control, and for SC-42(2) also SC-42(1).[^nist_sp_800_53.yaml] In NIST's catalog an enhancement is a control of class `SP800-53-enhancement` nested in its control, with a `required` link.[^nist_sp-800-53_rev5_catalog.json]
 
 [^nist_sp_800_53.yaml]: src/nist_sp_800_53/schema/nist_sp_800_53.yaml, the class Sp80053ControlEnhancement and its slots
 [^nist_sp-800-53_rev5_catalog.json]: src/nist_sp_800_53/schema/oscal-content/NIST_SP-800-53_rev5_catalog.json, the controls of class SP800-53-enhancement and their required links

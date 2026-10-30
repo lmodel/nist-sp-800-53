@@ -29,10 +29,10 @@ verified:
 
 # Cut a release
 
-1. Write the change under `## [Unreleased]` in `CHANGELOG.md` as you go; the release job runs `changelog-release.mjs check` and refuses an empty section.[^changelog-release.mjs]
-2. Type the commit for what the change is. Only `feat:`, `fix:`, `security:` and a breaking `!` start a release; `.releaserc.json` maps `security` to a patch and a breaking change to a minor bump, so the schema stays below 1.0.0.[^releaserc.json] A pull request that would release must carry a releasing type in its title too, since a squash merge takes its subject from it.[^contributing.md]
-3. Before the first releasing merge, push the `v0.0.0` baseline tag on `main`; both release jobs refuse to run without a `v*` tag, and the first release is then 0.1.0.[^changelog.md]
-4. On merge, `semantic-release.yml` promotes the section to `## [X.Y.Z] - YYYY-MM-DD`, commits `CHANGELOG.md`, tags `vX.Y.Z`, publishes the GitHub release, and dispatches Knowledge Release once `KNOWLEDGE_RELEASE_ENABLED` is `true`, which attaches `schema-<tag>-nist-sp-800-53.yaml`, its checksum and the bundle.[^contributing.md]
+1. Write the change under `## [Unreleased]` in `CHANGELOG.md` as you go. The release job runs `changelog-release.mjs check` and refuses an empty section.[^changelog-release.mjs]
+2. Type the commit for what the change is. Only `feat:`, `fix:`, `security:` and a breaking `!` start a release. `.releaserc.json` maps `security` to a patch and a breaking change to a minor bump, so the schema stays below 1.0.0.[^releaserc.json] A pull request that would release must carry a releasing type in its title too, since a squash merge takes its subject from it.[^contributing.md]
+3. Before the first releasing merge, push the `v0.0.0` baseline tag on `main`. Both release jobs refuse to run without a `v*` tag, and the first release is then 0.1.0.[^changelog.md]
+4. On merge, `semantic-release.yml` promotes the section to `## [X.Y.Z] - YYYY-MM-DD`, commits `CHANGELOG.md`, tags `vX.Y.Z` and publishes the GitHub release. Once `KNOWLEDGE_RELEASE_ENABLED` is `true`, it dispatches Knowledge Release, which attaches `schema-<tag>-nist-sp-800-53.yaml`, its checksum and the bundle.[^contributing.md]
 5. Configure required reviewers on the `release` Environment, or every qualifying merge releases unattended.
 
 [^changelog-release.mjs]: .github/scripts/changelog-release.mjs, the header comment and the check command

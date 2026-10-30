@@ -35,7 +35,9 @@ status: draft
 
 `just gen-project` runs `gen-project` with `.linkml/generators.yaml` into `project/`, moves the Python dataclasses to `src/nist_sp_800_53/datamodel/`, writes the Pydantic models beside them with `gen-pydantic`, and runs `gen-java`, `gen-typescript` and `gen-owl` separately. `just gen-doc` writes the merged schema to `docs/schema/nist_sp_800_53.yaml` and the element pages to `docs/elements/`, which git ignores. `just test` regenerates into `tmp/`, runs pytest and runs the examples.[^justfile] `.linkml/generators.yaml` excludes only the markdown generator from `gen-project` and merges imports in every other.[^generators.yaml]
 
-`project/` holds one folder per generator: `excel`, `graphql`, `java`, `jsonld`, `jsonschema`, `owl`, `prefixmap`, `protobuf`, `shacl`, `shex`, `sqlschema` and `typescript`. The pre-commit hooks skip `project/`, the datamodel, `docs/schema/`, the adapt copy and NIST's copies, so no hook rewrites a generated or copied file.[^pre-commit-config.yaml] [nist-sp-800-53 LinkML schema](nist-sp-800-53-linkml-schema.md) says how `.lokf/nist-sp-800-53.yaml` is written, and [Regenerate and test after a schema change](../playbooks/regenerate-and-test.md) when to run each recipe.
+`project/` holds one folder per generator: `excel`, `graphql`, `java`, `jsonld`, `jsonschema`, `owl`, `prefixmap`, `protobuf`, `shacl`, `shex`, `sqlschema` and `typescript`. The pre-commit hooks skip `project/`, the datamodel, `docs/schema/`, the adapt copy and NIST's copies, so no hook rewrites a generated or copied file.[^pre-commit-config.yaml]
+
+[nist-sp-800-53 LinkML schema](nist-sp-800-53-linkml-schema.md) says how `.lokf/nist-sp-800-53.yaml` is written. [Regenerate and test after a schema change](../playbooks/regenerate-and-test.md) says when to run each recipe.
 
 [^justfile]: justfile, gen-project, gen-python, gen-doc, _gen-yaml and test
 [^generators.yaml]: .linkml/generators.yaml, excludes and generator_args

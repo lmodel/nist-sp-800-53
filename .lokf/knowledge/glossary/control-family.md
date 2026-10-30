@@ -28,7 +28,7 @@ verified:
 
 # Control family
 
-The schema's `Sp80053Family` describes one of the twenty families SP 800-53 sorts its controls into, with the family's two letters in `family_id`, its name in `title`, an optional `description` and its controls in `family_controls`.[^nist_sp_800_53.yaml] In NIST's catalog each family is a group of class `family`, labelled with its letters, and only the Program Management group carries an overview part.[^nist_sp-800-53_rev5_catalog.json] The [families](../families/index.md) concepts hold each one.
+The schema's `Sp80053Family` describes one of the twenty families SP 800-53 sorts its controls into. It carries the family's two letters in `family_id`, its name in `title`, an optional `description` and its controls in `family_controls`.[^nist_sp_800_53.yaml] In NIST's catalog each family is a group of class `family`, labelled with its letters, and only the Program Management group carries an overview part.[^nist_sp-800-53_rev5_catalog.json] The [families](../families/index.md) concepts hold each one.
 
 [^nist_sp_800_53.yaml]: src/nist_sp_800_53/schema/nist_sp_800_53.yaml, the class Sp80053Family and its slots
 [^nist_sp-800-53_rev5_catalog.json]: src/nist_sp_800_53/schema/oscal-content/NIST_SP-800-53_rev5_catalog.json, the groups of class family

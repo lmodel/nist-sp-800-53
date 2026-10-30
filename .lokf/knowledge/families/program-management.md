@@ -21,9 +21,18 @@ status: draft
 
 # Program Management (PM)
 
-The catalog's group `pm`, labelled PM, holds 32 controls and 5 control enhancements in Release 5.2.0; 0 controls and 0 enhancements carry the status withdrawn.[^nist_sp-800-53_rev5_catalog.json] Its controls, with the number of enhancements each holds:
+The catalog's group `pm`, labelled PM, holds 32 controls and 5 control enhancements in Release 5.2.0; 0 controls and 0 enhancements carry the status withdrawn.[^nist_sp-800-53_rev5_catalog.json]
 
-The catalog gives this family alone an overview. It says that FISMA, the Privacy Act and OMB Circular A-130 require federal agencies to run organization-wide information security and privacy programs; that the PM controls are implemented at the organization level and are not directed at individual systems; that they help organizations comply with federal laws, executive orders, directives, policies, regulations and standards; and that, being independent of the FIPS 200 impact levels, they are not associated with the baselines of SP 800-53B. Organizations document them in the information security and privacy program plans, which together with the system plans cover every control the organization employs.[^nist_sp-800-53_rev5_catalog.json]
+The catalog gives this family alone an overview. It says that:
+
+- FISMA, the Privacy Act and OMB Circular A-130 require federal agencies to run organization-wide information security and privacy programs;
+- the PM controls are implemented at the organization level and are not directed at individual systems;
+- they help organizations comply with federal laws, executive orders, directives, policies, regulations and standards;
+- being independent of the FIPS 200 impact levels, they are not associated with the baselines of SP 800-53B.
+
+Organizations document them in the information security and privacy program plans, which together with the system plans cover every control the organization employs.[^nist_sp-800-53_rev5_catalog.json]
+
+Its controls, with the number of enhancements each holds:
 
 - `PM-1` Information Security Program Plan
 - `PM-2` Information Security Program Leadership Role

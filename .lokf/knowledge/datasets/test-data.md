@@ -30,11 +30,37 @@ status: draft
 
 # Test data and tests
 
-`tests/data/valid/` holds sixteen examples, at least one per class, written in the project's own words with the publication's real identifiers, and `tests/data/invalid/` holds forty-one counter-examples, one per constraint the schema states, each opening with a `# Fails at:` line that names where the validator must report it, and a comment saying why. `tests/test_data.py` loads each valid example into the generated dataclass, holds each example to the validator, which must pass a valid one and fail a counter-example at the place its first line names, and checks that every class has an example.[^test_data.py]
+`tests/data/valid/` holds sixteen examples, at least one per class, written in the project's own words with the publication's real identifiers. `tests/data/invalid/` holds forty-one counter-examples, one per constraint the schema states. Each opens with a `# Fails at:` line that names where the validator must report it, and a comment saying why. `tests/test_data.py` loads each valid example into the generated dataclass and holds each example to the validator, which must pass a valid one and fail a counter-example at the place its first line names. It also checks that every class has an example.[^test_data.py]
 
-`tests/test_upstream.py` checks that the copies in `src/nist_sp_800_53/schema/oscal-content/` carry the pinned git object hashes, that the header's pins match the watch's, and that the catalog and the profiles carry the version the header names. It derives an `Sp80053Catalog` from them, validates it, and holds it to the release's counts: 20 families, 324 controls of which 24 are withdrawn, 872 enhancements of which 158 are withdrawn, 166 incorporated-into and 34 moved-to targets, 1,600 parameters, 3,720 assessment objectives, 2,931 methods, 838 control references to 160 of the 192 listed documents, and baselines of 149, 287, 370 and 96 selections. It also checks the rules no pattern can express: identifiers nest and never repeat, a parameter's identifier starts with its element's, every cited identifier names an element, a withdrawn element says where it went and holds nothing else in the catalog, a statement has text or items, a parameter is an assignment or a selection, and every reference a control cites is listed. A valid example that names an element of the catalog must give its title, its withdrawn status and where it went as the catalog does.[^test_upstream.py]
+`tests/test_upstream.py` checks that the copies in `src/nist_sp_800_53/schema/oscal-content/` carry the pinned git object hashes, that the header's pins match the watch's, and that the catalog and the profiles carry the version the header names. It derives an `Sp80053Catalog` from them, validates it, and holds it to the release's counts:
 
-`tests/test_schema_rules.py` checks that `tests/neighbours/` holds exactly the released adapt copies of slsa v0.7.0, github-actions v0.2.1, oscal v0.1.0, spdx v0.1.0 and nist-sp-800-218 v0.1.0, each pinned by sha256, that no class, enum, type or subset name of the copy is LOKF's or a neighbour's, that the copy shares no key with a neighbour, that it re-roots exactly the four concept classes on `Concept`, that every mapping is a CURIE whose prefix the copy binds, and that every `oscal:` mapping names a class of oscal's copy.[^test_schema_rules.py]
+- 20 families;
+- 324 controls, of which 24 are withdrawn, and 872 enhancements, of which 158 are withdrawn;
+- 166 incorporated-into and 34 moved-to targets;
+- 1,600 parameters, 3,720 assessment objectives and 2,931 methods;
+- 838 control references to 160 of the 192 listed documents;
+- baselines of 149, 287, 370 and 96 selections.
+
+It also checks the rules no pattern can express:
+
+- identifiers nest and never repeat;
+- a parameter's identifier starts with its element's;
+- every cited identifier names an element;
+- a withdrawn element says where it went and holds nothing else in the catalog;
+- a statement has text or items;
+- a parameter is an assignment or a selection;
+- every reference a control cites is listed.
+
+A valid example that names an element of the catalog must give its title, its withdrawn status and where it went as the catalog does.[^test_upstream.py]
+
+`tests/test_schema_rules.py` checks that:
+
+- `tests/neighbours/` holds exactly the released adapt copies of slsa v0.7.0, github-actions v0.2.1, oscal v0.1.0, spdx v0.1.0 and nist-sp-800-218 v0.1.0, each pinned by sha256;
+- no class, enum, type or subset name of the copy is LOKF's or a neighbour's;
+- the copy shares no key with a neighbour;
+- it re-roots exactly the four concept classes on `Concept`;
+- every mapping is a CURIE whose prefix the copy binds;
+- every `oscal:` mapping names a class of oscal's copy.[^test_schema_rules.py]
 
 `tests/test_watch.py` runs `scripts/check_upstream_release.py` against a stubbed GitHub API and doi.org, and checks that it reports a newer release without the pinned folder, a changed file, a network failure, a file NIST adds and a tag that names another commit.[^test_watch.py]
 

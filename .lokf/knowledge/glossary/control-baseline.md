@@ -28,7 +28,7 @@ verified:
 
 # Control baseline
 
-The schema's `Sp80053Baseline` carries the level in `baseline_level`, one of `LOW`, `MODERATE`, `HIGH` and `PRIVACY`, and the selected identifiers in `baseline_controls`.[^nist_sp_800_53.yaml] NIST publishes each baseline as an OSCAL profile that imports the catalog and lists its selections under `include-controls` as `with-ids`; the catalog itself carries no baseline.[^nist_sp-800-53_rev5_catalog.json] The [baselines](../baselines/index.md) concepts hold each selection.
+The schema's `Sp80053Baseline` carries the level in `baseline_level`, one of `LOW`, `MODERATE`, `HIGH` and `PRIVACY`, and the selected identifiers in `baseline_controls`.[^nist_sp_800_53.yaml] NIST publishes each baseline as an OSCAL profile that imports the catalog and lists its selections under `include-controls` as `with-ids`. The catalog carries no baseline.[^nist_sp-800-53_rev5_catalog.json] The [baselines](../baselines/index.md) concepts hold each selection.
 
 [^nist_sp_800_53.yaml]: src/nist_sp_800_53/schema/nist_sp_800_53.yaml, the class Sp80053Baseline and its slots
 [^nist_sp-800-53_rev5_catalog.json]: src/nist_sp_800_53/schema/oscal-content/NIST_SP-800-53_rev5_catalog.json, the absence of baselines in the catalog, which the profiles carry

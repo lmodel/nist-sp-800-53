@@ -28,7 +28,7 @@ verified:
 
 # Assessment objective
 
-The schema's `Sp80053AssessmentObjective` carries the SP 800-53A label in `objective_label`, the determination statement in `objective_text`, which a heading lacks, and the objectives grouped under it in `sub_objectives`.[^nist_sp_800_53.yaml] In NIST's catalog each active control and enhancement has one `assessment-objective` part whose nested objectives follow the statement's items.[^nist_sp-800-53_rev5_catalog.json]
+The schema's `Sp80053AssessmentObjective` carries the SP 800-53A label in `objective_label`, the determination statement in `objective_text` and the objectives grouped under it in `sub_objectives`. A heading has no determination statement.[^nist_sp_800_53.yaml] In NIST's catalog each active control and enhancement has one `assessment-objective` part whose nested objectives follow the statement's items.[^nist_sp-800-53_rev5_catalog.json]
 
 [^nist_sp_800_53.yaml]: src/nist_sp_800_53/schema/nist_sp_800_53.yaml, the class Sp80053AssessmentObjective and its slots
 [^nist_sp-800-53_rev5_catalog.json]: src/nist_sp_800_53/schema/oscal-content/NIST_SP-800-53_rev5_catalog.json, the parts named assessment-objective

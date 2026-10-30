@@ -28,7 +28,7 @@ verified:
 
 # Assessment method
 
-The schema's `Sp80053AssessmentMethod` carries one of `EXAMINE`, `INTERVIEW` and `TEST` in `assessment_method` and the objects it is applied to in `assessment_objects`.[^nist_sp_800_53.yaml] In NIST's catalog each active control and enhancement has up to three `assessment-method` parts, each with a `method` property and an `assessment-objects` part that lists the objects.[^nist_sp-800-53_rev5_catalog.json]
+The schema's `Sp80053AssessmentMethod` carries one of `EXAMINE`, `INTERVIEW` and `TEST` in `assessment_method`, and the objects it is applied to in `assessment_objects`.[^nist_sp_800_53.yaml] In NIST's catalog each active control and enhancement has up to three `assessment-method` parts, each with a `method` property and an `assessment-objects` part that lists the objects.[^nist_sp-800-53_rev5_catalog.json]
 
 [^nist_sp_800_53.yaml]: src/nist_sp_800_53/schema/nist_sp_800_53.yaml, the class Sp80053AssessmentMethod and its slots
 [^nist_sp-800-53_rev5_catalog.json]: src/nist_sp_800_53/schema/oscal-content/NIST_SP-800-53_rev5_catalog.json, the parts named assessment-method

@@ -28,7 +28,15 @@ verified:
 
 # Control
 
-The schema's `Sp80053Control` carries the control's identifier in `control_identifier`, its `title`, its `control_statement`, `control_discussion`, `control_parameters`, `related_control_ids` and `control_references`, the `assessment_objective` and `assessment_methods` of SP 800-53A, the `implementation_level` and `contributes_to_assurance` facts of NIST's reference data, and its `control_enhancements`. A control Revision 5 withdrew carries `control_status: WITHDRAWN` and `incorporated_into`, `moved_to` or `withdrawal_reason`.[^nist_sp_800_53.yaml] In NIST's catalog a control is a control of class `SP800-53` with a plain label such as `AC-2`, a zero-padded one such as `AC-02` and a sort id.[^nist_sp-800-53_rev5_catalog.json]
+The schema's `Sp80053Control` carries:
+
+- the control's identifier in `control_identifier`, and its `title`;
+- its `control_statement`, `control_discussion`, `control_parameters`, `related_control_ids` and `control_references`;
+- the `assessment_objective` and `assessment_methods` of SP 800-53A;
+- the `implementation_level` and `contributes_to_assurance` facts of NIST's reference data;
+- its `control_enhancements`.
+
+A control Revision 5 withdrew carries `control_status: WITHDRAWN` and `incorporated_into`, `moved_to` or `withdrawal_reason`.[^nist_sp_800_53.yaml] In NIST's catalog a control is a control of class `SP800-53` with a plain label such as `AC-2`, a zero-padded one such as `AC-02` and a sort id.[^nist_sp-800-53_rev5_catalog.json]
 
 [^nist_sp_800_53.yaml]: src/nist_sp_800_53/schema/nist_sp_800_53.yaml, the class Sp80053Control and its slots
 [^nist_sp-800-53_rev5_catalog.json]: src/nist_sp_800_53/schema/oscal-content/NIST_SP-800-53_rev5_catalog.json, the controls of class SP800-53

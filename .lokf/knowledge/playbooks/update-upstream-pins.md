@@ -23,14 +23,22 @@ status: draft
 
 # Update the upstream pins
 
-The watch opens an issue titled "Upstream watch: NIST's SP 800-53 has changed" when `scripts/check_upstream_release.py` exits 1, which it does when NIST has registered `10.6028/NIST.SP.800-53r6`, when usnistgov/oscal-content's latest release changes a copied file, no longer holds the pinned folder or holds a folder for another edition, when the pinned tag names another commit, when a copy differs from its pinned blob, or when a check could not finish. A file NIST adds to the pinned folder is reported for information only.[^upstream-watch.yaml][^check_upstream_release.py]
+The watch opens an issue titled "Upstream watch: NIST's SP 800-53 has changed" when `scripts/check_upstream_release.py` exits 1, which it does when:
+
+- NIST has registered `10.6028/NIST.SP.800-53r6`;
+- usnistgov/oscal-content's latest release changes a copied file, no longer holds the pinned folder or holds a folder for another edition;
+- the pinned tag names another commit;
+- a copy differs from its pinned blob;
+- a check could not finish.
+
+A file NIST adds to the pinned folder is reported for information only.[^upstream-watch.yaml][^check_upstream_release.py]
 
 1. Read the issue's report. A newer edition is a decision: read the publication and decide whether the schema moves to it. A changed catalog or baseline of the pinned edition is a replacement.
 2. Replace every file in `src/nist_sp_800_53/schema/oscal-content/` from one release of usnistgov/oscal-content, byte for byte, with `curl -sfL` from `raw.githubusercontent.com/usnistgov/oscal-content/<tag>/...`, and never edit one.
 3. Move `PINNED_TAG`, `PINNED_COMMIT` and each hash in `PINNED_BLOBS` in the script, and `oscal_content_tag`, `oscal_content_commit`, `version`, `publication_date` and `cprt_framework_version` in the schema header, together.[^check_upstream_release.py]
 4. Run `just gen-project`, `just gen-doc` and `just lokf-adapt`, and commit what they change: the header's values reach `project/`, the datamodel, `docs/schema/` and `.lokf/nist-sp-800-53.yaml`, and `just lokf-adapt-check` fails in CI on a stale copy.
-5. Run `just test`: `tests/test_upstream.py` checks the hashes, the header's pins and the counts, and a new release changes the counts it holds.[^test_upstream.py]
-6. Run `python3 scripts/check_upstream_release.py` by hand; it should report every copy matching and the latest release the pinned one.
+5. Run `just test`. `tests/test_upstream.py` checks the hashes, the header's pins and the counts, and a new release changes the counts it holds.[^test_upstream.py]
+6. Run `python3 scripts/check_upstream_release.py` by hand. It should report every copy matching and the latest release the pinned one.
 
 [^upstream-watch.yaml]: .github/workflows/upstream-watch.yaml, the header comment, the cron and the issue step
 [^check_upstream_release.py]: scripts/check_upstream_release.py, the module docstring, PINNED_TAG, PINNED_COMMIT, PINNED_BLOBS and the DOIs

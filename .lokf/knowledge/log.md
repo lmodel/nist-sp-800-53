@@ -2,6 +2,7 @@
 
 ## 2026-10-30
 
+* **Prose**: reworded 33 concept bodies in plain English. No fact, link, number or frontmatter changed.
 * **Changed**: the generators' settings moved from `config.yaml` to `.linkml/generators.yaml`.
 * **Changed**: nist-sp-800-53 LinkML schema: the four concept classes require a title, the parameter maps to `oscal:Parameter`, and the README says how many references a control cites.
 * **Changed**: NIST's SP 800-53 catalog and baseline copies: two withdrawn elements give a reason rather than a link, and the watch checks that the tag still names the pinned commit.

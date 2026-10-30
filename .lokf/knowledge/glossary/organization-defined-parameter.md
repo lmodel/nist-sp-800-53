@@ -25,7 +25,15 @@ status: draft
 
 # Organization-defined parameter
 
-The schema's `Sp80053Parameter` carries the catalog's identifier in `parameter_id`, such as `ac-02_odp.01`, the SP 800-53A label in `assessment_label`, an assignment's `parameter_label` and `parameter_guidelines`, a selection's `selection_choices` and `selection_cardinality`, and, for a parameter that stands for several, `aggregated_parameters`.[^nist_sp_800_53.yaml] In NIST's catalog a parameter is a `params` entry with a `label` or a `select`, `guidelines` and props, and a statement names it in a placeholder of the form `{{ insert: param, <identifier> }}`.[^nist_sp-800-53_rev5_catalog.json]
+The schema's `Sp80053Parameter` carries:
+
+- the catalog's identifier in `parameter_id`, such as `ac-02_odp.01`;
+- the SP 800-53A label in `assessment_label`;
+- an assignment's `parameter_label` and `parameter_guidelines`;
+- a selection's `selection_choices` and `selection_cardinality`;
+- for a parameter that stands for several, `aggregated_parameters`.[^nist_sp_800_53.yaml]
+
+In NIST's catalog a parameter is a `params` entry with a `label` or a `select`, `guidelines` and props, and a statement names it in a placeholder of the form `{{ insert: param, <identifier> }}`.[^nist_sp-800-53_rev5_catalog.json]
 
 [^nist_sp_800_53.yaml]: src/nist_sp_800_53/schema/nist_sp_800_53.yaml, the class Sp80053Parameter and its slots
 [^nist_sp-800-53_rev5_catalog.json]: src/nist_sp_800_53/schema/oscal-content/NIST_SP-800-53_rev5_catalog.json, the params of the controls and the placeholders in their statements
