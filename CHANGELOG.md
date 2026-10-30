@@ -6,6 +6,8 @@ The `v0.0.0` tag is a baseline, not a release: it marks where versioning starts 
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-30
+
 ### Added
 
 - **A LinkML schema of the security and privacy controls of NIST Special Publication (SP) 800-53, Revision 5, at Release 5.2.0**, with the assessment procedures of SP 800-53A and the baselines of SP 800-53B. It holds the twenty families, the 324 controls and 872 control enhancements with their statements, discussions, organization-defined parameters, related controls and references, the assessment objectives and methods of each, the 182 withdrawn controls and enhancements with where each went or why, and the Low, Moderate, High and Privacy baselines.
