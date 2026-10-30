@@ -1,0 +1,5 @@
+# Fails at: /assessment_objects/0
+# Invalid: an assessment object is more than white space.
+assessment_method: EXAMINE
+assessment_objects:
+  - " "

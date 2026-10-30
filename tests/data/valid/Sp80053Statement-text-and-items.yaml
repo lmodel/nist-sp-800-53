@@ -1,0 +1,7 @@
+# A statement with a lead text and two items, in the schema's own words.
+statement_text: "The organization does the following:"
+statement_items:
+  - item_label: a.
+    item_text: writes the policy down;
+  - item_label: b.
+    item_text: "reviews it every {{ insert: param, ac-01_odp.05 }}."

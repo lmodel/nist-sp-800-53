@@ -1,0 +1,4 @@
+# Fails at: /reference_url
+# Invalid: a reference's address is a URI.
+reference_label: SP 800-162
+reference_url: not a uri at all

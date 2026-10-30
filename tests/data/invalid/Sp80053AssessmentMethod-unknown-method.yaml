@@ -1,0 +1,5 @@
+# Fails at: /assessment_method
+# Invalid: SP 800-53A has three methods, and OBSERVE is not one.
+assessment_method: OBSERVE
+assessment_objects:
+  - the account management process

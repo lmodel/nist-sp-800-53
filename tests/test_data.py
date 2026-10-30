@@ -1,66 +1,80 @@
 """Data test."""
-import os
+
 import glob
-import subprocess
-import sys
-import pytest
+import os
 from pathlib import Path
 
-DATA_DIR_VALID = Path(__file__).parent / "data" / "schema-valid"
-DATA_DIR_INVALID = Path(__file__).parent / "data" / "schema-invalid"
-SCHEMA = Path(__file__).parent.parent / "src" / "nist_sp_800_53" / "schema" / "nist_sp_800_53.yaml"
+import pytest
+import yaml
+from linkml.validator import validate
+from linkml_runtime.loaders import yaml_loader
 
-VALID_EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR_VALID, '*.yaml'))
-INVALID_EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR_INVALID, '*.yaml'))
+import nist_sp_800_53.datamodel.nist_sp_800_53
 
-TARGET_CLASS_OVERRIDES = {
-    # Some LinkML versions (notably in Python 3.9 dependency resolution)
-    # reject abstract classes as `-C` validation targets.
-    "CatalogElement": "IdentifiedElement",
-}
+DATA_DIR_VALID = Path(__file__).parent / "data" / "valid"
+DATA_DIR_INVALID = Path(__file__).parent / "data" / "invalid"
 
+VALID_EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR_VALID, "*.yaml"))
+INVALID_EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR_INVALID, "*.yaml"))
 
-def _target_class(filepath: str) -> str:
-    """Derive the LinkML target class name from the filename stem prefix."""
-    stem_prefix = Path(filepath).stem.split("-")[0]
-    return TARGET_CLASS_OVERRIDES.get(stem_prefix, stem_prefix)
+SCHEMA = (
+    Path(__file__).parent.parent
+    / "src"
+    / "nist_sp_800_53"
+    / "schema"
+    / "nist_sp_800_53.yaml"
+)
 
 
 @pytest.mark.parametrize("filepath", VALID_EXAMPLE_FILES)
 def test_valid_data_files(filepath):
-    """Valid data files must pass linkml validate with zero errors."""
-    result = subprocess.run(
-        [
-            sys.executable, "-m", "linkml.cli",
-            "validate",
-            "-s", str(SCHEMA),
-            "-C", _target_class(filepath),
-            filepath,
-        ],
-        capture_output=True,
-        text=True,
+    """Test loading of all valid data files."""
+    target_class_name = Path(filepath).stem.split("-")[0]
+    tgt_class = getattr(
+        nist_sp_800_53.datamodel.nist_sp_800_53,
+        target_class_name,
     )
-    assert result.returncode == 0, (
-        f"linkml validate failed for {filepath}:\n{result.stdout}\n{result.stderr}"
+    obj = yaml_loader.load(filepath, target_class=tgt_class)
+    assert obj
+
+
+# The JSON Schema the validator generates is the one check that applies every
+# constraint (docs/index.md says what the generated models leave out), so each
+# example is held to it: a valid one must pass, and a counter-example must fail.
+@pytest.mark.parametrize("filepath", VALID_EXAMPLE_FILES)
+def test_valid_data_files_validate(filepath):
+    """Every valid example passes the validator."""
+    report = validate(
+        yaml.safe_load(Path(filepath).read_text()),
+        str(SCHEMA),
+        Path(filepath).stem.split("-")[0],
     )
+    assert not report.results, [r.message for r in report.results]
 
 
 @pytest.mark.parametrize("filepath", INVALID_EXAMPLE_FILES)
-def test_invalid_data_files(filepath):
-    """Invalid data files must be rejected by linkml validate (non-zero exit)."""
-    result = subprocess.run(
-        [
-            sys.executable, "-m", "linkml.cli",
-            "validate",
-            "-s", str(SCHEMA),
-            "-C", _target_class(filepath),
-            filepath,
-        ],
-        capture_output=True,
-        text=True,
+def test_invalid_data_files_fail(filepath):
+    """Every counter-example fails the validator, and fails where its first
+    line, `# Fails at: <JSON pointer>`, says, so a counter-example that fails
+    for another reason fails this test."""
+    text = Path(filepath).read_text()
+    first, _, _ = text.partition("\n")
+    prefix = "# Fails at: "
+    assert first.startswith(prefix), f"{filepath} has no '{prefix}' first line"
+    pointer = first[len(prefix) :].strip()
+    report = validate(
+        yaml.safe_load(text),
+        str(SCHEMA),
+        Path(filepath).stem.split("-")[0],
     )
-    assert result.returncode != 0, (
-        f"linkml validate unexpectedly passed for {filepath}:\n{result.stdout}\n{result.stderr}"
-    )
+    messages = [r.message for r in report.results]
+    assert messages
+    assert any(m.endswith(f" in {pointer}") for m in messages), messages
 
 
+def test_every_concept_class_has_an_example():
+    """Each class a knowledge-bundle concept may name as its type, and each
+    class those hold, has a valid example."""
+    classes = set(yaml.safe_load(SCHEMA.read_text())["classes"])
+    examples = {Path(f).stem.split("-")[0] for f in VALID_EXAMPLE_FILES}
+    assert classes <= examples, sorted(classes - examples)

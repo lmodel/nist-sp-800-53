@@ -1,0 +1,4 @@
+# Fails at: /parameter_id
+# Invalid: the catalog writes a parameter identifier in lower case.
+parameter_id: AC-02_ODP.01
+parameter_label: frequency

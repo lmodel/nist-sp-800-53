@@ -1,0 +1,5 @@
+# Fails at: /
+# Invalid: every class is closed, so a key the class does not declare fails.
+family_id: AC
+title: Access Control
+family_name: Access Control

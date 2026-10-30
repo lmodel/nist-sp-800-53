@@ -1,0 +1,54 @@
+# Control AC-2 with two statement items, one parameter, its related
+# controls, one reference, a cut-down assessment objective and the three
+# methods. The texts paraphrase SP 800-53 and SP 800-53A.
+control_identifier: AC-2
+title: Account Management
+control_statement:
+  statement_items:
+    - item_label: a.
+      item_text: Decide and write down which kinds of account the system may and may not use.
+    - item_label: d.
+      item_text: "Specify:"
+      statement_items:
+        - item_label: "1."
+          item_text: who may use the system;
+        - item_label: "2."
+          item_text: group and role membership.
+control_discussion: >-
+  Account types include individual, shared, group, system, guest and service
+  accounts, among others. Which types a system needs follows from its
+  mission.
+control_parameters:
+  - parameter_id: ac-02_odp.04
+    assessment_label: AC-02_ODP[04]
+    parameter_label: policy, procedures, prerequisites and criteria
+    parameter_guidelines:
+      - the policy, procedures, prerequisites and criteria for managing accounts are defined;
+related_control_ids:
+  - AC-3
+  - AC-5
+  - IA-2
+control_references:
+  - SP 800-162
+assessment_objective:
+  objective_label: AC-02
+  sub_objectives:
+    - objective_label: AC-02a.
+      sub_objectives:
+        - objective_label: AC-02a.[01]
+          objective_text: the kinds of account the system may use are decided and written down;
+        - objective_label: AC-02a.[02]
+          objective_text: the kinds of account the system may not use are decided and written down;
+assessment_methods:
+  - assessment_method: EXAMINE
+    assessment_objects:
+      - access control policy
+      - the list of active accounts
+  - assessment_method: INTERVIEW
+    assessment_objects:
+      - people who manage accounts
+  - assessment_method: TEST
+    assessment_objects:
+      - the mechanisms that manage accounts
+implementation_level:
+  - ORGANIZATION

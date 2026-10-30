@@ -1,712 +1,404 @@
--- # Class: SP80053Document Description: Unified root wrapper for catalog, profile, or CPRT content
+-- # Class: Sp80053Catalog Description: One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the catalog lists.
 --     * Slot: id
---     * Slot: catalog_id Description: Root catalog payload
---     * Slot: profile_id Description: Root profile payload
---     * Slot: response_id Description: Top-level CPRT API response wrapper
--- # Class: Catalog Description: Top-level wrapper that mirrors OSCAL catalog shape
+--     * Slot: catalog_release Description: The release of Revision 5 the catalog carries, as NIST numbers it, such as 5.2.0.
+-- # Class: Sp80053Family Description: One of the twenty families SP 800-53 sorts its controls into, such as Access Control or Supply Chain Risk Management.
 --     * Slot: id
---     * Slot: catalog_id Description: Root catalog payload
--- # Class: ProfileDocument Description: Top-level wrapper for OSCAL profile files
+--     * Slot: family_id Description: The family's two letters, such as AC for Access Control.
+--     * Slot: title Description: The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
+--     * Slot: description Description: What the family is about, in the words of whoever records it. SP 800-53 gives the Program Management family an overview of its own, and the other families none.
+--     * Slot: Sp80053Catalog_id Description: Autocreated FK slot
+-- # Class: Sp80053Control Description: A security or privacy control: a safeguard with an identifier, a statement of what it requires, a discussion, parameters the organization defines, related controls, references, the assessment objective and methods SP 800-53A gives it, and its enhancements. A control Revision 5 withdrew keeps its identifier and says where it went.
 --     * Slot: id
---     * Slot: profile_id Description: Root profile payload
--- # Class: CatalogBody Description: Main catalog object
+--     * Slot: control_identifier Description: The control's identifier, such as AC-2.
+--     * Slot: title Description: The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
+--     * Slot: control_discussion Description: The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require.
+--     * Slot: control_status Description: The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none.
+--     * Slot: withdrawal_reason Description: For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.
+--     * Slot: contributes_to_assurance Description: True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.
+--     * Slot: Sp80053Family_id Description: Autocreated FK slot
+--     * Slot: control_statement_id Description: The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both.
+--     * Slot: assessment_objective_id Description: The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are.
+-- # Class: Sp80053ControlEnhancement Description: A control enhancement: added functionality or strength for a control, with an identifier of its own, which the publication and other documents cite apart from the control. It carries what a control carries, and names the control or enhancement it requires.
 --     * Slot: id
---     * Slot: uuid Description: UUID for profile, metadata, or resource element
---     * Slot: metadata_id Description: Profile and Catalog metadata
---     * Slot: back_matter_id Description: Back-matter references and resources
--- # Class: ProfileBody Description: OSCAL profile body
+--     * Slot: enhancement_id Description: The enhancement's identifier, such as AC-2(1).
+--     * Slot: title Description: The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
+--     * Slot: control_discussion Description: The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require.
+--     * Slot: control_status Description: The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none.
+--     * Slot: withdrawal_reason Description: For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring.
+--     * Slot: contributes_to_assurance Description: True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise.
+--     * Slot: Sp80053Control_id Description: Autocreated FK slot
+--     * Slot: control_statement_id Description: The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both.
+--     * Slot: assessment_objective_id Description: The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are.
+-- # Class: Sp80053Statement Description: A control statement: the text of what a control or enhancement requires, and the items it is divided into.
 --     * Slot: id
---     * Slot: uuid Description: UUID for profile, metadata, or resource element
---     * Slot: metadata_id Description: Profile and Catalog metadata
---     * Slot: merge_id Description: Merge behavior settings
---     * Slot: modify_id Description: Profile modification directives — parameter overrides and control alterations
---     * Slot: back_matter_id Description: Back-matter references and resources
--- # Class: Metadata Description: OSCAL metadata section used in catalogs and profiles
+--     * Slot: statement_text Description: The statement's own text, before any items. A placeholder of the form {{ insert: param, <identifier> }} marks where an organization-defined parameter is inserted.
+-- # Class: Sp80053StatementItem Description: One lettered or numbered item of a control statement, which may hold items of its own.
 --     * Slot: id
---     * Slot: title Description: Human-readable title
---     * Slot: last_modified Description: Last modification timestamp
---     * Slot: version Description: Version identifier
---     * Slot: oscal_version Description: OSCAL version identifier
---     * Slot: remarks Description: Supplemental remarks
--- # Class: Revision Description: Metadata revision entry
+--     * Slot: item_label Description: The item's label as the publication prints it, such as a., 1. or (a).
+--     * Slot: item_text Description: The item's text, with the same placeholders for parameters as the statement's text.
+--     * Slot: Sp80053Statement_id Description: Autocreated FK slot
+--     * Slot: Sp80053StatementItem_id Description: Autocreated FK slot
+-- # Class: Sp80053Parameter Description: An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A labels each parameter but the ones that aggregate others, and gives most a guideline.
 --     * Slot: id
---     * Slot: title Description: Human-readable title
---     * Slot: last_modified Description: Last modification timestamp
---     * Slot: version Description: Version identifier
---     * Slot: oscal_version Description: OSCAL version identifier
---     * Slot: remarks Description: Supplemental remarks
---     * Slot: Metadata_id Description: Autocreated FK slot
--- # Class: Role Description: Role definition
---     * Slot: uid
---     * Slot: id Description: Unique identifier for an element
---     * Slot: title Description: Human-readable title
---     * Slot: Metadata_id Description: Autocreated FK slot
--- # Class: Party Description: Party definition
+--     * Slot: parameter_id Description: The parameter's identifier in NIST's catalog, such as ac-02_odp.01.
+--     * Slot: assessment_label Description: The label SP 800-53A gives the parameter, such as AC-02_ODP[01]. A parameter that aggregates several has none.
+--     * Slot: parameter_label Description: For an assignment, what the organization defines, such as personnel or roles.
+--     * Slot: selection_cardinality Description: For a selection, how many choices the organization picks. The catalog marks one or more, and leaves the slot out when one choice is allowed, which is how OSCAL reads an absent how-many.
+--     * Slot: alternative_label Description: The label SP 800-53 prints where it differs from the one SP 800-53A gives.
+--     * Slot: Sp80053Control_id Description: Autocreated FK slot
+--     * Slot: Sp80053ControlEnhancement_id Description: Autocreated FK slot
+-- # Class: Sp80053AssessmentObjective Description: An assessment objective of SP 800-53A: a determination statement an assessor checks, or a heading that groups the determination statements of one item of the control statement.
 --     * Slot: id
---     * Slot: uuid Description: UUID for profile, metadata, or resource element
---     * Slot: type Description: Party type
---     * Slot: name Description: Name of a property, part, or party
---     * Slot: short_name Description: Short display name
---     * Slot: Metadata_id Description: Autocreated FK slot
--- # Class: Address Description: Postal address
+--     * Slot: objective_label Description: The label SP 800-53A gives the objective, such as AC-02a.[01].
+--     * Slot: objective_text Description: The determination statement, with the same placeholders for parameters as the control statement. A heading has none.
+--     * Slot: Sp80053AssessmentObjective_id Description: Autocreated FK slot
+-- # Class: Sp80053AssessmentMethod Description: One assessment method SP 800-53A gives a control or enhancement, with the objects an assessor selects from: documents and records to examine, people to interview, or mechanisms and activities to test.
 --     * Slot: id
---     * Slot: city Description: City name
---     * Slot: state Description: State or region
---     * Slot: postal_code Description: Postal code
---     * Slot: Party_id Description: Autocreated FK slot
--- # Class: ResponsibleParty Description: Assignment of parties to a role
+--     * Slot: assessment_method Description: Which of the three methods this is.
+--     * Slot: Sp80053Control_id Description: Autocreated FK slot
+--     * Slot: Sp80053ControlEnhancement_id Description: Autocreated FK slot
+-- # Class: Sp80053Reference Description: A publication the catalog's references list, as they list it: its label, its citation and its address.
 --     * Slot: id
---     * Slot: role_id Description: Assigned role identifier
---     * Slot: Metadata_id Description: Autocreated FK slot
--- # Class: BackMatter Description: OSCAL back-matter section
+--     * Slot: reference_label Description: The label the controls cite the publication by, such as SP 800-12.
+--     * Slot: reference_citation Description: The citation, as the catalog prints it.
+--     * Slot: reference_url Description: The address the catalog gives for the publication.
+--     * Slot: Sp80053Catalog_id Description: Autocreated FK slot
+-- # Class: Sp80053Baseline Description: One of the four control baselines SP 800-53B defines: the controls and enhancements selected for systems at the low, moderate or high impact level, or for privacy.
 --     * Slot: id
--- # Class: Resource Description: Referenced resource
---     * Slot: id
---     * Slot: uuid Description: UUID for profile, metadata, or resource element
---     * Slot: title Description: Human-readable title
---     * Slot: description Description: Resource description
---     * Slot: BackMatter_id Description: Autocreated FK slot
---     * Slot: citation_id Description: Citation details for a resource
--- # Class: Citation Description: Citation wrapper
---     * Slot: id
---     * Slot: text Description: Citation text
--- # Class: ResourceLink Description: Reference link for a resource
---     * Slot: id
---     * Slot: href Description: Link or resource reference
---     * Slot: media_type Description: Media type for a resource link
---     * Slot: Resource_id Description: Autocreated FK slot
--- # Abstract Class: CatalogElement Description: Base class for catalog elements
---     * Slot: uid
---     * Slot: id Description: Unique identifier for an element
--- # Class: IdentifiedElement Description: A catalog element with required id and optional title/class
---     * Slot: uid
---     * Slot: title Description: Human-readable title
---     * Slot: class Description: Classification of a catalog element or property
---     * Slot: label Description: Human-readable label
---     * Slot: id Description: Unique identifier for an element
--- # Class: ControlGroup Description: A group of controls (family)
---     * Slot: uid
---     * Slot: title Description: Human-readable title
---     * Slot: class Description: Classification of a catalog element or property
---     * Slot: label Description: Human-readable label
---     * Slot: id Description: Unique identifier for an element
---     * Slot: CatalogBody_id Description: Autocreated FK slot
---     * Slot: ControlGroup_uid Description: Autocreated FK slot
--- # Class: Control Description: A security control
---     * Slot: uid
---     * Slot: title Description: Human-readable title
---     * Slot: class Description: Classification of a catalog element or property
---     * Slot: label Description: Human-readable label
---     * Slot: id Description: Unique identifier for an element
---     * Slot: ControlGroup_uid Description: Autocreated FK slot
--- # Class: ControlEnhancement Description: An enhancement to a control
---     * Slot: uid
---     * Slot: title Description: Human-readable title
---     * Slot: class Description: Classification of a catalog element or property
---     * Slot: label Description: Human-readable label
---     * Slot: id Description: Unique identifier for an element
---     * Slot: Control_uid Description: Autocreated FK slot
---     * Slot: ControlEnhancement_uid Description: Autocreated FK slot
--- # Class: Parameter Description: A configurable parameter used by a control
---     * Slot: uid
---     * Slot: depends_on Description: Identifier of another parameter this one depends on (SP 800-53 Rev 4 only)
---     * Slot: title Description: Human-readable title
---     * Slot: class Description: Classification of a catalog element or property
---     * Slot: label Description: Human-readable label
---     * Slot: id Description: Unique identifier for an element
---     * Slot: Control_uid Description: Autocreated FK slot
---     * Slot: ControlEnhancement_uid Description: Autocreated FK slot
---     * Slot: select_id Description: Selection parameters for a parameter definition
--- # Class: Guideline Description: Additional prose guidance associated with a parameter
---     * Slot: id
---     * Slot: prose Description: Free-text prose content
---     * Slot: Parameter_uid Description: Autocreated FK slot
--- # Class: Property Description: A name-value property with optional namespace and class attributes
---     * Slot: id
---     * Slot: name Description: Name of a property, part, or party
---     * Slot: value Description: Property value
---     * Slot: ns Description: Namespace URI for a property
---     * Slot: class Description: Classification of a catalog element or property
---     * Slot: Metadata_id Description: Autocreated FK slot
---     * Slot: CatalogElement_uid Description: Autocreated FK slot
---     * Slot: IdentifiedElement_uid Description: Autocreated FK slot
---     * Slot: ControlGroup_uid Description: Autocreated FK slot
---     * Slot: Control_uid Description: Autocreated FK slot
---     * Slot: ControlEnhancement_uid Description: Autocreated FK slot
---     * Slot: Parameter_uid Description: Autocreated FK slot
---     * Slot: Part_uid Description: Autocreated FK slot
---     * Slot: ProfileAdd_id Description: Autocreated FK slot
--- # Class: Selection Description: Selection criteria for a parameter
---     * Slot: id
---     * Slot: how_many Description: How many selections are allowed
--- # Class: Link Description: Relationship link
---     * Slot: id
---     * Slot: href Description: Link or resource reference
---     * Slot: rel Description: Relationship type for a link
---     * Slot: Metadata_id Description: Autocreated FK slot
---     * Slot: Revision_id Description: Autocreated FK slot
---     * Slot: CatalogElement_uid Description: Autocreated FK slot
---     * Slot: IdentifiedElement_uid Description: Autocreated FK slot
---     * Slot: ControlGroup_uid Description: Autocreated FK slot
---     * Slot: Control_uid Description: Autocreated FK slot
---     * Slot: ControlEnhancement_uid Description: Autocreated FK slot
---     * Slot: Parameter_uid Description: Autocreated FK slot
---     * Slot: Part_uid Description: Autocreated FK slot
--- # Class: Part Description: Structured narrative part that can contain nested parts
---     * Slot: uid
---     * Slot: name Description: Name of a property, part, or party
---     * Slot: prose Description: Free-text prose content
---     * Slot: title Description: Human-readable title
---     * Slot: class Description: Classification of a catalog element or property
---     * Slot: label Description: Human-readable label
---     * Slot: id Description: Unique identifier for an element
---     * Slot: CatalogElement_uid Description: Autocreated FK slot
---     * Slot: IdentifiedElement_uid Description: Autocreated FK slot
---     * Slot: ControlGroup_uid Description: Autocreated FK slot
---     * Slot: Control_uid Description: Autocreated FK slot
---     * Slot: ControlEnhancement_uid Description: Autocreated FK slot
---     * Slot: Parameter_uid Description: Autocreated FK slot
---     * Slot: Part_uid Description: Autocreated FK slot
---     * Slot: ProfileAdd_id Description: Autocreated FK slot
--- # Class: ImportResource Description: Imported profile or catalog reference
---     * Slot: id
---     * Slot: href Description: Link or resource reference
---     * Slot: ProfileBody_id Description: Autocreated FK slot
--- # Class: IncludeControlsSelection Description: Control inclusion selector
---     * Slot: id
---     * Slot: ImportResource_id Description: Autocreated FK slot
--- # Class: MergeRules Description: Merge configuration
---     * Slot: id
---     * Slot: as_is Description: Keep source order and content during merge
---     * Slot: flat_id Description: Flat merge strategy — de-duplicate and merge all controls without source hierarchy
--- # Class: FlatMerge Description: Marker object indicating flat merge strategy for profile resolution
---     * Slot: id
--- # Class: ControlPattern Description: Glob or regex pattern for selecting controls by identifier
---     * Slot: id
---     * Slot: pattern Description: Glob or regex pattern for matching control identifiers
---     * Slot: IncludeControlsSelection_id Description: Autocreated FK slot
---     * Slot: ExcludeControlsSelection_id Description: Autocreated FK slot
--- # Class: ExcludeControlsSelection Description: Selection of controls to explicitly exclude from a profile import
---     * Slot: id
---     * Slot: ImportResource_id Description: Autocreated FK slot
--- # Class: ProfileModify Description: Profile modification section containing parameter overrides and control alterations
---     * Slot: id
--- # Class: ProfileSetParameter Description: Override the value of a parameter in a referenced control
---     * Slot: id
---     * Slot: param_id Description: Identifier of the parameter to be set
---     * Slot: label Description: Human-readable label
---     * Slot: ProfileModify_id Description: Autocreated FK slot
--- # Class: ProfileAlter Description: Alteration to a referenced control — adds or removes parts
---     * Slot: id
---     * Slot: control_id Description: Identifier of the control to alter
---     * Slot: ProfileModify_id Description: Autocreated FK slot
--- # Class: ProfileAdd Description: Content to be added to a control via profile alteration
---     * Slot: id
---     * Slot: position Description: Position at which to add content relative to the by-id anchor
---     * Slot: by_id Description: Identifier of the anchor part relative to which additions are positioned
---     * Slot: ProfileAlter_id Description: Autocreated FK slot
--- # Class: CPRTDocument Description: Semantic class for NIST CPRT (Cybersecurity and Privacy Reference Tool) export documents covering SP 800-53, SP 800-53A, and SP 800-53B. Validate with: linkml validate -C SP80053Document -s <schema> <file.json>
---     * Slot: id
---     * Slot: response_id Description: Top-level CPRT API response wrapper
--- # Class: CPRTResponse Description: CPRT API response container holding document metadata, typed elements (controls, enhancements, ODPs, assessment objectives, baselines), relationship types, and element relationships
---     * Slot: id
--- # Class: Party_email_addresses
---     * Slot: Party_id Description: Autocreated FK slot
---     * Slot: email_addresses Description: Party email addresses
--- # Class: Address_addr_lines
---     * Slot: Address_id Description: Autocreated FK slot
---     * Slot: addr_lines Description: Address lines
--- # Class: ResponsibleParty_party_uuids
---     * Slot: ResponsibleParty_id Description: Autocreated FK slot
---     * Slot: party_uuids Description: Referenced party UUIDs
--- # Class: Selection_choice
---     * Slot: Selection_id Description: Autocreated FK slot
---     * Slot: choice Description: List of selection options
--- # Class: IncludeControlsSelection_with_ids
---     * Slot: IncludeControlsSelection_id Description: Autocreated FK slot
---     * Slot: with_ids Description: Explicit control identifiers to include
--- # Class: ExcludeControlsSelection_with_ids
---     * Slot: ExcludeControlsSelection_id Description: Autocreated FK slot
---     * Slot: with_ids Description: Explicit control identifiers to include
+--     * Slot: baseline_level Description: Which of the four baselines this is.
+--     * Slot: title Description: The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline.
+--     * Slot: Sp80053Catalog_id Description: Autocreated FK slot
+-- # Class: Sp80053Control_related_control_ids
+--     * Slot: Sp80053Control_id Description: Autocreated FK slot
+--     * Slot: related_control_ids Description: The controls and enhancements the publication lists as related, by identifier.
+-- # Class: Sp80053Control_control_references
+--     * Slot: Sp80053Control_id Description: Autocreated FK slot
+--     * Slot: control_references Description: The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130.
+-- # Class: Sp80053Control_incorporated_into
+--     * Slot: Sp80053Control_id Description: Autocreated FK slot
+--     * Slot: incorporated_into Description: For a withdrawn control or enhancement, what it was incorporated into, as the publication states it.
+-- # Class: Sp80053Control_moved_to
+--     * Slot: Sp80053Control_id Description: Autocreated FK slot
+--     * Slot: moved_to Description: For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it.
+-- # Class: Sp80053Control_implementation_level
+--     * Slot: Sp80053Control_id Description: Autocreated FK slot
+--     * Slot: implementation_level Description: Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.
+-- # Class: Sp80053ControlEnhancement_related_control_ids
+--     * Slot: Sp80053ControlEnhancement_id Description: Autocreated FK slot
+--     * Slot: related_control_ids Description: The controls and enhancements the publication lists as related, by identifier.
+-- # Class: Sp80053ControlEnhancement_control_references
+--     * Slot: Sp80053ControlEnhancement_id Description: Autocreated FK slot
+--     * Slot: control_references Description: The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130.
+-- # Class: Sp80053ControlEnhancement_incorporated_into
+--     * Slot: Sp80053ControlEnhancement_id Description: Autocreated FK slot
+--     * Slot: incorporated_into Description: For a withdrawn control or enhancement, what it was incorporated into, as the publication states it.
+-- # Class: Sp80053ControlEnhancement_moved_to
+--     * Slot: Sp80053ControlEnhancement_id Description: Autocreated FK slot
+--     * Slot: moved_to Description: For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it.
+-- # Class: Sp80053ControlEnhancement_implementation_level
+--     * Slot: Sp80053ControlEnhancement_id Description: Autocreated FK slot
+--     * Slot: implementation_level Description: Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both.
+-- # Class: Sp80053ControlEnhancement_required_controls
+--     * Slot: Sp80053ControlEnhancement_id Description: Autocreated FK slot
+--     * Slot: required_controls Description: The controls and enhancements that must be implemented for the enhancement to apply, as NIST's catalog links them: its own control, and for SC-42(2) also SC-42(1).
+-- # Class: Sp80053Parameter_parameter_guidelines
+--     * Slot: Sp80053Parameter_id Description: Autocreated FK slot
+--     * Slot: parameter_guidelines Description: The guidelines that say what a value must settle, such as that the frequency of a review is defined.
+-- # Class: Sp80053Parameter_selection_choices
+--     * Slot: Sp80053Parameter_id Description: Autocreated FK slot
+--     * Slot: selection_choices Description: For a selection, the choices the publication lists, in order.
+-- # Class: Sp80053Parameter_aggregated_parameters
+--     * Slot: Sp80053Parameter_id Description: Autocreated FK slot
+--     * Slot: aggregated_parameters Description: For a parameter that stands for several, the parameters it aggregates, by identifier.
+-- # Class: Sp80053Parameter_alternative_identifiers
+--     * Slot: Sp80053Parameter_id Description: Autocreated FK slot
+--     * Slot: alternative_identifiers Description: The identifiers an earlier release of the catalog gave the parameter, such as ac-1_prm_2 for ac-01_odp.03.
+-- # Class: Sp80053AssessmentMethod_assessment_objects
+--     * Slot: Sp80053AssessmentMethod_id Description: Autocreated FK slot
+--     * Slot: assessment_objects Description: The objects the method is applied to, in the order the publication lists them.
+-- # Class: Sp80053Baseline_baseline_controls
+--     * Slot: Sp80053Baseline_id Description: Autocreated FK slot
+--     * Slot: baseline_controls Description: The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them.
 
-CREATE TABLE "Metadata" (
+CREATE TABLE "Sp80053Catalog" (
 	id INTEGER NOT NULL,
-	title TEXT,
-	last_modified TEXT,
-	version TEXT,
-	oscal_version TEXT,
-	remarks TEXT,
+	catalog_release TEXT NOT NULL,
 	PRIMARY KEY (id)
 );
-CREATE INDEX "ix_Metadata_id" ON "Metadata" (id);
+CREATE INDEX "ix_Sp80053Catalog_id" ON "Sp80053Catalog" (id);
 
-CREATE TABLE "BackMatter" (
+CREATE TABLE "Sp80053Statement" (
 	id INTEGER NOT NULL,
+	statement_text TEXT,
 	PRIMARY KEY (id)
 );
-CREATE INDEX "ix_BackMatter_id" ON "BackMatter" (id);
+CREATE INDEX "ix_Sp80053Statement_id" ON "Sp80053Statement" (id);
 
-CREATE TABLE "Citation" (
+CREATE TABLE "Sp80053AssessmentObjective" (
 	id INTEGER NOT NULL,
-	text TEXT,
-	PRIMARY KEY (id)
-);
-CREATE INDEX "ix_Citation_id" ON "Citation" (id);
-
-CREATE TABLE "CatalogElement" (
-	uid INTEGER NOT NULL,
-	id TEXT,
-	PRIMARY KEY (uid)
-);
-CREATE INDEX "ix_CatalogElement_uid" ON "CatalogElement" (uid);
-
-CREATE TABLE "IdentifiedElement" (
-	uid INTEGER NOT NULL,
-	title TEXT,
-	class VARCHAR(20),
-	label TEXT,
-	id TEXT,
-	PRIMARY KEY (uid)
-);
-CREATE INDEX "ix_IdentifiedElement_uid" ON "IdentifiedElement" (uid);
-
-CREATE TABLE "Selection" (
-	id INTEGER NOT NULL,
-	how_many TEXT,
-	PRIMARY KEY (id)
-);
-CREATE INDEX "ix_Selection_id" ON "Selection" (id);
-
-CREATE TABLE "FlatMerge" (
-	id INTEGER NOT NULL,
-	PRIMARY KEY (id)
-);
-CREATE INDEX "ix_FlatMerge_id" ON "FlatMerge" (id);
-
-CREATE TABLE "ProfileModify" (
-	id INTEGER NOT NULL,
-	PRIMARY KEY (id)
-);
-CREATE INDEX "ix_ProfileModify_id" ON "ProfileModify" (id);
-
-CREATE TABLE "CPRTResponse" (
-	id INTEGER NOT NULL,
-	PRIMARY KEY (id)
-);
-CREATE INDEX "ix_CPRTResponse_id" ON "CPRTResponse" (id);
-
-CREATE TABLE "CatalogBody" (
-	id INTEGER NOT NULL,
-	uuid TEXT,
-	metadata_id INTEGER,
-	back_matter_id INTEGER,
+	objective_label TEXT NOT NULL,
+	objective_text TEXT,
+	"Sp80053AssessmentObjective_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY(metadata_id) REFERENCES "Metadata" (id),
-	FOREIGN KEY(back_matter_id) REFERENCES "BackMatter" (id)
+	FOREIGN KEY("Sp80053AssessmentObjective_id") REFERENCES "Sp80053AssessmentObjective" (id)
 );
-CREATE INDEX "ix_CatalogBody_id" ON "CatalogBody" (id);
+CREATE INDEX "ix_Sp80053AssessmentObjective_id" ON "Sp80053AssessmentObjective" (id);
 
-CREATE TABLE "Revision" (
+CREATE TABLE "Sp80053Family" (
 	id INTEGER NOT NULL,
-	title TEXT,
-	last_modified TEXT,
-	version TEXT,
-	oscal_version TEXT,
-	remarks TEXT,
-	"Metadata_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id)
-);
-CREATE INDEX "ix_Revision_id" ON "Revision" (id);
-
-CREATE TABLE "Role" (
-	uid INTEGER NOT NULL,
-	id TEXT,
-	title TEXT,
-	"Metadata_id" INTEGER,
-	PRIMARY KEY (uid),
-	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id)
-);
-CREATE INDEX "ix_Role_uid" ON "Role" (uid);
-
-CREATE TABLE "Party" (
-	id INTEGER NOT NULL,
-	uuid TEXT,
-	type TEXT,
-	name TEXT,
-	short_name TEXT,
-	"Metadata_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id)
-);
-CREATE INDEX "ix_Party_id" ON "Party" (id);
-
-CREATE TABLE "ResponsibleParty" (
-	id INTEGER NOT NULL,
-	role_id TEXT,
-	"Metadata_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id)
-);
-CREATE INDEX "ix_ResponsibleParty_id" ON "ResponsibleParty" (id);
-
-CREATE TABLE "Resource" (
-	id INTEGER NOT NULL,
-	uuid TEXT,
-	title TEXT,
+	family_id TEXT NOT NULL,
+	title TEXT NOT NULL,
 	description TEXT,
-	"BackMatter_id" INTEGER,
-	citation_id INTEGER,
+	"Sp80053Catalog_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY("BackMatter_id") REFERENCES "BackMatter" (id),
-	FOREIGN KEY(citation_id) REFERENCES "Citation" (id)
+	FOREIGN KEY("Sp80053Catalog_id") REFERENCES "Sp80053Catalog" (id)
 );
-CREATE INDEX "ix_Resource_id" ON "Resource" (id);
+CREATE INDEX "ix_Sp80053Family_id" ON "Sp80053Family" (id);
 
-CREATE TABLE "MergeRules" (
+CREATE TABLE "Sp80053StatementItem" (
 	id INTEGER NOT NULL,
-	as_is BOOLEAN,
-	flat_id INTEGER,
+	item_label TEXT NOT NULL,
+	item_text TEXT NOT NULL,
+	"Sp80053Statement_id" INTEGER,
+	"Sp80053StatementItem_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY(flat_id) REFERENCES "FlatMerge" (id)
+	FOREIGN KEY("Sp80053Statement_id") REFERENCES "Sp80053Statement" (id),
+	FOREIGN KEY("Sp80053StatementItem_id") REFERENCES "Sp80053StatementItem" (id)
 );
-CREATE INDEX "ix_MergeRules_id" ON "MergeRules" (id);
+CREATE INDEX "ix_Sp80053StatementItem_id" ON "Sp80053StatementItem" (id);
 
-CREATE TABLE "ProfileSetParameter" (
+CREATE TABLE "Sp80053Reference" (
 	id INTEGER NOT NULL,
-	param_id TEXT,
-	label TEXT,
-	"ProfileModify_id" INTEGER,
+	reference_label TEXT NOT NULL,
+	reference_citation TEXT,
+	reference_url TEXT,
+	"Sp80053Catalog_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY("ProfileModify_id") REFERENCES "ProfileModify" (id)
+	FOREIGN KEY("Sp80053Catalog_id") REFERENCES "Sp80053Catalog" (id)
 );
-CREATE INDEX "ix_ProfileSetParameter_id" ON "ProfileSetParameter" (id);
+CREATE INDEX "ix_Sp80053Reference_id" ON "Sp80053Reference" (id);
 
-CREATE TABLE "ProfileAlter" (
+CREATE TABLE "Sp80053Baseline" (
 	id INTEGER NOT NULL,
-	control_id TEXT,
-	"ProfileModify_id" INTEGER,
+	baseline_level VARCHAR(8) NOT NULL,
+	title TEXT NOT NULL,
+	"Sp80053Catalog_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY("ProfileModify_id") REFERENCES "ProfileModify" (id)
+	FOREIGN KEY("Sp80053Catalog_id") REFERENCES "Sp80053Catalog" (id)
 );
-CREATE INDEX "ix_ProfileAlter_id" ON "ProfileAlter" (id);
+CREATE INDEX "ix_Sp80053Baseline_id" ON "Sp80053Baseline" (id);
 
-CREATE TABLE "CPRTDocument" (
+CREATE TABLE "Sp80053Control" (
 	id INTEGER NOT NULL,
-	response_id INTEGER,
+	control_identifier TEXT NOT NULL,
+	title TEXT NOT NULL,
+	control_discussion TEXT,
+	control_status VARCHAR(9),
+	withdrawal_reason TEXT,
+	contributes_to_assurance BOOLEAN,
+	"Sp80053Family_id" INTEGER,
+	control_statement_id INTEGER,
+	assessment_objective_id INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY(response_id) REFERENCES "CPRTResponse" (id)
+	FOREIGN KEY("Sp80053Family_id") REFERENCES "Sp80053Family" (id),
+	FOREIGN KEY(control_statement_id) REFERENCES "Sp80053Statement" (id),
+	FOREIGN KEY(assessment_objective_id) REFERENCES "Sp80053AssessmentObjective" (id)
 );
-CREATE INDEX "ix_CPRTDocument_id" ON "CPRTDocument" (id);
+CREATE INDEX "ix_Sp80053Control_id" ON "Sp80053Control" (id);
 
-CREATE TABLE "Selection_choice" (
-	"Selection_id" INTEGER,
-	choice TEXT,
-	PRIMARY KEY ("Selection_id", choice),
-	FOREIGN KEY("Selection_id") REFERENCES "Selection" (id)
+CREATE TABLE "Sp80053Baseline_baseline_controls" (
+	"Sp80053Baseline_id" INTEGER,
+	baseline_controls TEXT NOT NULL,
+	PRIMARY KEY ("Sp80053Baseline_id", baseline_controls),
+	FOREIGN KEY("Sp80053Baseline_id") REFERENCES "Sp80053Baseline" (id)
 );
-CREATE INDEX "ix_Selection_choice_choice" ON "Selection_choice" (choice);
-CREATE INDEX "ix_Selection_choice_Selection_id" ON "Selection_choice" ("Selection_id");
+CREATE INDEX "ix_Sp80053Baseline_baseline_controls_Sp80053Baseline_id" ON "Sp80053Baseline_baseline_controls" ("Sp80053Baseline_id");
+CREATE INDEX "ix_Sp80053Baseline_baseline_controls_baseline_controls" ON "Sp80053Baseline_baseline_controls" (baseline_controls);
 
-CREATE TABLE "Catalog" (
+CREATE TABLE "Sp80053ControlEnhancement" (
 	id INTEGER NOT NULL,
-	catalog_id INTEGER,
+	enhancement_id TEXT NOT NULL,
+	title TEXT NOT NULL,
+	control_discussion TEXT,
+	control_status VARCHAR(9),
+	withdrawal_reason TEXT,
+	contributes_to_assurance BOOLEAN,
+	"Sp80053Control_id" INTEGER,
+	control_statement_id INTEGER,
+	assessment_objective_id INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY(catalog_id) REFERENCES "CatalogBody" (id)
+	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id),
+	FOREIGN KEY(control_statement_id) REFERENCES "Sp80053Statement" (id),
+	FOREIGN KEY(assessment_objective_id) REFERENCES "Sp80053AssessmentObjective" (id)
 );
-CREATE INDEX "ix_Catalog_id" ON "Catalog" (id);
+CREATE INDEX "ix_Sp80053ControlEnhancement_id" ON "Sp80053ControlEnhancement" (id);
 
-CREATE TABLE "ProfileBody" (
+CREATE TABLE "Sp80053Control_related_control_ids" (
+	"Sp80053Control_id" INTEGER,
+	related_control_ids TEXT,
+	PRIMARY KEY ("Sp80053Control_id", related_control_ids),
+	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id)
+);
+CREATE INDEX "ix_Sp80053Control_related_control_ids_Sp80053Control_id" ON "Sp80053Control_related_control_ids" ("Sp80053Control_id");
+CREATE INDEX "ix_Sp80053Control_related_control_ids_related_control_ids" ON "Sp80053Control_related_control_ids" (related_control_ids);
+
+CREATE TABLE "Sp80053Control_control_references" (
+	"Sp80053Control_id" INTEGER,
+	control_references TEXT,
+	PRIMARY KEY ("Sp80053Control_id", control_references),
+	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id)
+);
+CREATE INDEX "ix_Sp80053Control_control_references_Sp80053Control_id" ON "Sp80053Control_control_references" ("Sp80053Control_id");
+CREATE INDEX "ix_Sp80053Control_control_references_control_references" ON "Sp80053Control_control_references" (control_references);
+
+CREATE TABLE "Sp80053Control_incorporated_into" (
+	"Sp80053Control_id" INTEGER,
+	incorporated_into TEXT,
+	PRIMARY KEY ("Sp80053Control_id", incorporated_into),
+	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id)
+);
+CREATE INDEX "ix_Sp80053Control_incorporated_into_Sp80053Control_id" ON "Sp80053Control_incorporated_into" ("Sp80053Control_id");
+CREATE INDEX "ix_Sp80053Control_incorporated_into_incorporated_into" ON "Sp80053Control_incorporated_into" (incorporated_into);
+
+CREATE TABLE "Sp80053Control_moved_to" (
+	"Sp80053Control_id" INTEGER,
+	moved_to TEXT,
+	PRIMARY KEY ("Sp80053Control_id", moved_to),
+	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id)
+);
+CREATE INDEX "ix_Sp80053Control_moved_to_Sp80053Control_id" ON "Sp80053Control_moved_to" ("Sp80053Control_id");
+CREATE INDEX "ix_Sp80053Control_moved_to_moved_to" ON "Sp80053Control_moved_to" (moved_to);
+
+CREATE TABLE "Sp80053Control_implementation_level" (
+	"Sp80053Control_id" INTEGER,
+	implementation_level VARCHAR(12),
+	PRIMARY KEY ("Sp80053Control_id", implementation_level),
+	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id)
+);
+CREATE INDEX "ix_Sp80053Control_implementation_level_implementation_level" ON "Sp80053Control_implementation_level" (implementation_level);
+CREATE INDEX "ix_Sp80053Control_implementation_level_Sp80053Control_id" ON "Sp80053Control_implementation_level" ("Sp80053Control_id");
+
+CREATE TABLE "Sp80053Parameter" (
 	id INTEGER NOT NULL,
-	uuid TEXT,
-	metadata_id INTEGER,
-	merge_id INTEGER,
-	modify_id INTEGER,
-	back_matter_id INTEGER,
+	parameter_id TEXT NOT NULL,
+	assessment_label TEXT,
+	parameter_label TEXT,
+	selection_cardinality VARCHAR(11),
+	alternative_label TEXT,
+	"Sp80053Control_id" INTEGER,
+	"Sp80053ControlEnhancement_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY(metadata_id) REFERENCES "Metadata" (id),
-	FOREIGN KEY(merge_id) REFERENCES "MergeRules" (id),
-	FOREIGN KEY(modify_id) REFERENCES "ProfileModify" (id),
-	FOREIGN KEY(back_matter_id) REFERENCES "BackMatter" (id)
+	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id),
+	FOREIGN KEY("Sp80053ControlEnhancement_id") REFERENCES "Sp80053ControlEnhancement" (id)
 );
-CREATE INDEX "ix_ProfileBody_id" ON "ProfileBody" (id);
+CREATE INDEX "ix_Sp80053Parameter_id" ON "Sp80053Parameter" (id);
 
-CREATE TABLE "Address" (
+CREATE TABLE "Sp80053AssessmentMethod" (
 	id INTEGER NOT NULL,
-	city TEXT,
-	state TEXT,
-	postal_code TEXT,
-	"Party_id" INTEGER,
+	assessment_method VARCHAR(9) NOT NULL,
+	"Sp80053Control_id" INTEGER,
+	"Sp80053ControlEnhancement_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY("Party_id") REFERENCES "Party" (id)
+	FOREIGN KEY("Sp80053Control_id") REFERENCES "Sp80053Control" (id),
+	FOREIGN KEY("Sp80053ControlEnhancement_id") REFERENCES "Sp80053ControlEnhancement" (id)
 );
-CREATE INDEX "ix_Address_id" ON "Address" (id);
+CREATE INDEX "ix_Sp80053AssessmentMethod_id" ON "Sp80053AssessmentMethod" (id);
 
-CREATE TABLE "ResourceLink" (
-	id INTEGER NOT NULL,
-	href TEXT,
-	media_type TEXT,
-	"Resource_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("Resource_id") REFERENCES "Resource" (id)
+CREATE TABLE "Sp80053ControlEnhancement_related_control_ids" (
+	"Sp80053ControlEnhancement_id" INTEGER,
+	related_control_ids TEXT,
+	PRIMARY KEY ("Sp80053ControlEnhancement_id", related_control_ids),
+	FOREIGN KEY("Sp80053ControlEnhancement_id") REFERENCES "Sp80053ControlEnhancement" (id)
 );
-CREATE INDEX "ix_ResourceLink_id" ON "ResourceLink" (id);
+CREATE INDEX "ix_Sp80053ControlEnhancement_related_control_ids_related_control_ids" ON "Sp80053ControlEnhancement_related_control_ids" (related_control_ids);
+CREATE INDEX "ix_Sp80053ControlEnhancement_related_control_ids_Sp80053ControlEnhancement_id" ON "Sp80053ControlEnhancement_related_control_ids" ("Sp80053ControlEnhancement_id");
 
-CREATE TABLE "ControlGroup" (
-	uid INTEGER NOT NULL,
-	title TEXT,
-	class VARCHAR(20),
-	label TEXT,
-	id TEXT,
-	"CatalogBody_id" INTEGER,
-	"ControlGroup_uid" INTEGER,
-	PRIMARY KEY (uid),
-	FOREIGN KEY("CatalogBody_id") REFERENCES "CatalogBody" (id),
-	FOREIGN KEY("ControlGroup_uid") REFERENCES "ControlGroup" (uid)
+CREATE TABLE "Sp80053ControlEnhancement_control_references" (
+	"Sp80053ControlEnhancement_id" INTEGER,
+	control_references TEXT,
+	PRIMARY KEY ("Sp80053ControlEnhancement_id", control_references),
+	FOREIGN KEY("Sp80053ControlEnhancement_id") REFERENCES "Sp80053ControlEnhancement" (id)
 );
-CREATE INDEX "ix_ControlGroup_uid" ON "ControlGroup" (uid);
+CREATE INDEX "ix_Sp80053ControlEnhancement_control_references_Sp80053ControlEnhancement_id" ON "Sp80053ControlEnhancement_control_references" ("Sp80053ControlEnhancement_id");
+CREATE INDEX "ix_Sp80053ControlEnhancement_control_references_control_references" ON "Sp80053ControlEnhancement_control_references" (control_references);
 
-CREATE TABLE "ProfileAdd" (
-	id INTEGER NOT NULL,
-	position TEXT,
-	by_id TEXT,
-	"ProfileAlter_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("ProfileAlter_id") REFERENCES "ProfileAlter" (id)
+CREATE TABLE "Sp80053ControlEnhancement_incorporated_into" (
+	"Sp80053ControlEnhancement_id" INTEGER,
+	incorporated_into TEXT,
+	PRIMARY KEY ("Sp80053ControlEnhancement_id", incorporated_into),
+	FOREIGN KEY("Sp80053ControlEnhancement_id") REFERENCES "Sp80053ControlEnhancement" (id)
 );
-CREATE INDEX "ix_ProfileAdd_id" ON "ProfileAdd" (id);
+CREATE INDEX "ix_Sp80053ControlEnhancement_incorporated_into_incorporated_into" ON "Sp80053ControlEnhancement_incorporated_into" (incorporated_into);
+CREATE INDEX "ix_Sp80053ControlEnhancement_incorporated_into_Sp80053ControlEnhancement_id" ON "Sp80053ControlEnhancement_incorporated_into" ("Sp80053ControlEnhancement_id");
 
-CREATE TABLE "Party_email_addresses" (
-	"Party_id" INTEGER,
-	email_addresses TEXT,
-	PRIMARY KEY ("Party_id", email_addresses),
-	FOREIGN KEY("Party_id") REFERENCES "Party" (id)
+CREATE TABLE "Sp80053ControlEnhancement_moved_to" (
+	"Sp80053ControlEnhancement_id" INTEGER,
+	moved_to TEXT,
+	PRIMARY KEY ("Sp80053ControlEnhancement_id", moved_to),
+	FOREIGN KEY("Sp80053ControlEnhancement_id") REFERENCES "Sp80053ControlEnhancement" (id)
 );
-CREATE INDEX "ix_Party_email_addresses_Party_id" ON "Party_email_addresses" ("Party_id");
-CREATE INDEX "ix_Party_email_addresses_email_addresses" ON "Party_email_addresses" (email_addresses);
+CREATE INDEX "ix_Sp80053ControlEnhancement_moved_to_moved_to" ON "Sp80053ControlEnhancement_moved_to" (moved_to);
+CREATE INDEX "ix_Sp80053ControlEnhancement_moved_to_Sp80053ControlEnhancement_id" ON "Sp80053ControlEnhancement_moved_to" ("Sp80053ControlEnhancement_id");
 
-CREATE TABLE "ResponsibleParty_party_uuids" (
-	"ResponsibleParty_id" INTEGER,
-	party_uuids TEXT,
-	PRIMARY KEY ("ResponsibleParty_id", party_uuids),
-	FOREIGN KEY("ResponsibleParty_id") REFERENCES "ResponsibleParty" (id)
+CREATE TABLE "Sp80053ControlEnhancement_implementation_level" (
+	"Sp80053ControlEnhancement_id" INTEGER,
+	implementation_level VARCHAR(12),
+	PRIMARY KEY ("Sp80053ControlEnhancement_id", implementation_level),
+	FOREIGN KEY("Sp80053ControlEnhancement_id") REFERENCES "Sp80053ControlEnhancement" (id)
 );
-CREATE INDEX "ix_ResponsibleParty_party_uuids_ResponsibleParty_id" ON "ResponsibleParty_party_uuids" ("ResponsibleParty_id");
-CREATE INDEX "ix_ResponsibleParty_party_uuids_party_uuids" ON "ResponsibleParty_party_uuids" (party_uuids);
+CREATE INDEX "ix_Sp80053ControlEnhancement_implementation_level_Sp80053ControlEnhancement_id" ON "Sp80053ControlEnhancement_implementation_level" ("Sp80053ControlEnhancement_id");
+CREATE INDEX "ix_Sp80053ControlEnhancement_implementation_level_implementation_level" ON "Sp80053ControlEnhancement_implementation_level" (implementation_level);
 
-CREATE TABLE "SP80053Document" (
-	id INTEGER NOT NULL,
-	catalog_id INTEGER,
-	profile_id INTEGER,
-	response_id INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY(catalog_id) REFERENCES "CatalogBody" (id),
-	FOREIGN KEY(profile_id) REFERENCES "ProfileBody" (id),
-	FOREIGN KEY(response_id) REFERENCES "CPRTResponse" (id)
+CREATE TABLE "Sp80053ControlEnhancement_required_controls" (
+	"Sp80053ControlEnhancement_id" INTEGER,
+	required_controls TEXT,
+	PRIMARY KEY ("Sp80053ControlEnhancement_id", required_controls),
+	FOREIGN KEY("Sp80053ControlEnhancement_id") REFERENCES "Sp80053ControlEnhancement" (id)
 );
-CREATE INDEX "ix_SP80053Document_id" ON "SP80053Document" (id);
+CREATE INDEX "ix_Sp80053ControlEnhancement_required_controls_Sp80053ControlEnhancement_id" ON "Sp80053ControlEnhancement_required_controls" ("Sp80053ControlEnhancement_id");
+CREATE INDEX "ix_Sp80053ControlEnhancement_required_controls_required_controls" ON "Sp80053ControlEnhancement_required_controls" (required_controls);
 
-CREATE TABLE "ProfileDocument" (
-	id INTEGER NOT NULL,
-	profile_id INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY(profile_id) REFERENCES "ProfileBody" (id)
+CREATE TABLE "Sp80053Parameter_parameter_guidelines" (
+	"Sp80053Parameter_id" INTEGER,
+	parameter_guidelines TEXT,
+	PRIMARY KEY ("Sp80053Parameter_id", parameter_guidelines),
+	FOREIGN KEY("Sp80053Parameter_id") REFERENCES "Sp80053Parameter" (id)
 );
-CREATE INDEX "ix_ProfileDocument_id" ON "ProfileDocument" (id);
+CREATE INDEX "ix_Sp80053Parameter_parameter_guidelines_parameter_guidelines" ON "Sp80053Parameter_parameter_guidelines" (parameter_guidelines);
+CREATE INDEX "ix_Sp80053Parameter_parameter_guidelines_Sp80053Parameter_id" ON "Sp80053Parameter_parameter_guidelines" ("Sp80053Parameter_id");
 
-CREATE TABLE "Control" (
-	uid INTEGER NOT NULL,
-	title TEXT,
-	class VARCHAR(20),
-	label TEXT,
-	id TEXT,
-	"ControlGroup_uid" INTEGER,
-	PRIMARY KEY (uid),
-	FOREIGN KEY("ControlGroup_uid") REFERENCES "ControlGroup" (uid)
+CREATE TABLE "Sp80053Parameter_selection_choices" (
+	"Sp80053Parameter_id" INTEGER,
+	selection_choices TEXT,
+	PRIMARY KEY ("Sp80053Parameter_id", selection_choices),
+	FOREIGN KEY("Sp80053Parameter_id") REFERENCES "Sp80053Parameter" (id)
 );
-CREATE INDEX "ix_Control_uid" ON "Control" (uid);
+CREATE INDEX "ix_Sp80053Parameter_selection_choices_selection_choices" ON "Sp80053Parameter_selection_choices" (selection_choices);
+CREATE INDEX "ix_Sp80053Parameter_selection_choices_Sp80053Parameter_id" ON "Sp80053Parameter_selection_choices" ("Sp80053Parameter_id");
 
-CREATE TABLE "ImportResource" (
-	id INTEGER NOT NULL,
-	href TEXT,
-	"ProfileBody_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("ProfileBody_id") REFERENCES "ProfileBody" (id)
+CREATE TABLE "Sp80053Parameter_aggregated_parameters" (
+	"Sp80053Parameter_id" INTEGER,
+	aggregated_parameters TEXT,
+	PRIMARY KEY ("Sp80053Parameter_id", aggregated_parameters),
+	FOREIGN KEY("Sp80053Parameter_id") REFERENCES "Sp80053Parameter" (id)
 );
-CREATE INDEX "ix_ImportResource_id" ON "ImportResource" (id);
+CREATE INDEX "ix_Sp80053Parameter_aggregated_parameters_aggregated_parameters" ON "Sp80053Parameter_aggregated_parameters" (aggregated_parameters);
+CREATE INDEX "ix_Sp80053Parameter_aggregated_parameters_Sp80053Parameter_id" ON "Sp80053Parameter_aggregated_parameters" ("Sp80053Parameter_id");
 
-CREATE TABLE "Address_addr_lines" (
-	"Address_id" INTEGER,
-	addr_lines TEXT,
-	PRIMARY KEY ("Address_id", addr_lines),
-	FOREIGN KEY("Address_id") REFERENCES "Address" (id)
+CREATE TABLE "Sp80053Parameter_alternative_identifiers" (
+	"Sp80053Parameter_id" INTEGER,
+	alternative_identifiers TEXT,
+	PRIMARY KEY ("Sp80053Parameter_id", alternative_identifiers),
+	FOREIGN KEY("Sp80053Parameter_id") REFERENCES "Sp80053Parameter" (id)
 );
-CREATE INDEX "ix_Address_addr_lines_Address_id" ON "Address_addr_lines" ("Address_id");
-CREATE INDEX "ix_Address_addr_lines_addr_lines" ON "Address_addr_lines" (addr_lines);
+CREATE INDEX "ix_Sp80053Parameter_alternative_identifiers_Sp80053Parameter_id" ON "Sp80053Parameter_alternative_identifiers" ("Sp80053Parameter_id");
+CREATE INDEX "ix_Sp80053Parameter_alternative_identifiers_alternative_identifiers" ON "Sp80053Parameter_alternative_identifiers" (alternative_identifiers);
 
-CREATE TABLE "ControlEnhancement" (
-	uid INTEGER NOT NULL,
-	title TEXT,
-	class VARCHAR(20),
-	label TEXT,
-	id TEXT,
-	"Control_uid" INTEGER,
-	"ControlEnhancement_uid" INTEGER,
-	PRIMARY KEY (uid),
-	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
-	FOREIGN KEY("ControlEnhancement_uid") REFERENCES "ControlEnhancement" (uid)
+CREATE TABLE "Sp80053AssessmentMethod_assessment_objects" (
+	"Sp80053AssessmentMethod_id" INTEGER,
+	assessment_objects TEXT NOT NULL,
+	PRIMARY KEY ("Sp80053AssessmentMethod_id", assessment_objects),
+	FOREIGN KEY("Sp80053AssessmentMethod_id") REFERENCES "Sp80053AssessmentMethod" (id)
 );
-CREATE INDEX "ix_ControlEnhancement_uid" ON "ControlEnhancement" (uid);
-
-CREATE TABLE "IncludeControlsSelection" (
-	id INTEGER NOT NULL,
-	"ImportResource_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("ImportResource_id") REFERENCES "ImportResource" (id)
-);
-CREATE INDEX "ix_IncludeControlsSelection_id" ON "IncludeControlsSelection" (id);
-
-CREATE TABLE "ExcludeControlsSelection" (
-	id INTEGER NOT NULL,
-	"ImportResource_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("ImportResource_id") REFERENCES "ImportResource" (id)
-);
-CREATE INDEX "ix_ExcludeControlsSelection_id" ON "ExcludeControlsSelection" (id);
-
-CREATE TABLE "Parameter" (
-	uid INTEGER NOT NULL,
-	depends_on TEXT,
-	title TEXT,
-	class VARCHAR(20),
-	label TEXT,
-	id TEXT,
-	"Control_uid" INTEGER,
-	"ControlEnhancement_uid" INTEGER,
-	select_id INTEGER,
-	PRIMARY KEY (uid),
-	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
-	FOREIGN KEY("ControlEnhancement_uid") REFERENCES "ControlEnhancement" (uid),
-	FOREIGN KEY(select_id) REFERENCES "Selection" (id)
-);
-CREATE INDEX "ix_Parameter_uid" ON "Parameter" (uid);
-
-CREATE TABLE "ControlPattern" (
-	id INTEGER NOT NULL,
-	pattern TEXT,
-	"IncludeControlsSelection_id" INTEGER,
-	"ExcludeControlsSelection_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("IncludeControlsSelection_id") REFERENCES "IncludeControlsSelection" (id),
-	FOREIGN KEY("ExcludeControlsSelection_id") REFERENCES "ExcludeControlsSelection" (id)
-);
-CREATE INDEX "ix_ControlPattern_id" ON "ControlPattern" (id);
-
-CREATE TABLE "IncludeControlsSelection_with_ids" (
-	"IncludeControlsSelection_id" INTEGER,
-	with_ids TEXT,
-	PRIMARY KEY ("IncludeControlsSelection_id", with_ids),
-	FOREIGN KEY("IncludeControlsSelection_id") REFERENCES "IncludeControlsSelection" (id)
-);
-CREATE INDEX "ix_IncludeControlsSelection_with_ids_IncludeControlsSelection_id" ON "IncludeControlsSelection_with_ids" ("IncludeControlsSelection_id");
-CREATE INDEX "ix_IncludeControlsSelection_with_ids_with_ids" ON "IncludeControlsSelection_with_ids" (with_ids);
-
-CREATE TABLE "ExcludeControlsSelection_with_ids" (
-	"ExcludeControlsSelection_id" INTEGER,
-	with_ids TEXT,
-	PRIMARY KEY ("ExcludeControlsSelection_id", with_ids),
-	FOREIGN KEY("ExcludeControlsSelection_id") REFERENCES "ExcludeControlsSelection" (id)
-);
-CREATE INDEX "ix_ExcludeControlsSelection_with_ids_with_ids" ON "ExcludeControlsSelection_with_ids" (with_ids);
-CREATE INDEX "ix_ExcludeControlsSelection_with_ids_ExcludeControlsSelection_id" ON "ExcludeControlsSelection_with_ids" ("ExcludeControlsSelection_id");
-
-CREATE TABLE "Guideline" (
-	id INTEGER NOT NULL,
-	prose TEXT,
-	"Parameter_uid" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("Parameter_uid") REFERENCES "Parameter" (uid)
-);
-CREATE INDEX "ix_Guideline_id" ON "Guideline" (id);
-
-CREATE TABLE "Part" (
-	uid INTEGER NOT NULL,
-	name TEXT,
-	prose TEXT,
-	title TEXT,
-	class VARCHAR(20),
-	label TEXT,
-	id TEXT,
-	"CatalogElement_uid" INTEGER,
-	"IdentifiedElement_uid" INTEGER,
-	"ControlGroup_uid" INTEGER,
-	"Control_uid" INTEGER,
-	"ControlEnhancement_uid" INTEGER,
-	"Parameter_uid" INTEGER,
-	"Part_uid" INTEGER,
-	"ProfileAdd_id" INTEGER,
-	PRIMARY KEY (uid),
-	FOREIGN KEY("CatalogElement_uid") REFERENCES "CatalogElement" (uid),
-	FOREIGN KEY("IdentifiedElement_uid") REFERENCES "IdentifiedElement" (uid),
-	FOREIGN KEY("ControlGroup_uid") REFERENCES "ControlGroup" (uid),
-	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
-	FOREIGN KEY("ControlEnhancement_uid") REFERENCES "ControlEnhancement" (uid),
-	FOREIGN KEY("Parameter_uid") REFERENCES "Parameter" (uid),
-	FOREIGN KEY("Part_uid") REFERENCES "Part" (uid),
-	FOREIGN KEY("ProfileAdd_id") REFERENCES "ProfileAdd" (id)
-);
-CREATE INDEX "ix_Part_uid" ON "Part" (uid);
-
-CREATE TABLE "Property" (
-	id INTEGER NOT NULL,
-	name TEXT,
-	value TEXT,
-	ns TEXT,
-	class VARCHAR(11),
-	"Metadata_id" INTEGER,
-	"CatalogElement_uid" INTEGER,
-	"IdentifiedElement_uid" INTEGER,
-	"ControlGroup_uid" INTEGER,
-	"Control_uid" INTEGER,
-	"ControlEnhancement_uid" INTEGER,
-	"Parameter_uid" INTEGER,
-	"Part_uid" INTEGER,
-	"ProfileAdd_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id),
-	FOREIGN KEY("CatalogElement_uid") REFERENCES "CatalogElement" (uid),
-	FOREIGN KEY("IdentifiedElement_uid") REFERENCES "IdentifiedElement" (uid),
-	FOREIGN KEY("ControlGroup_uid") REFERENCES "ControlGroup" (uid),
-	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
-	FOREIGN KEY("ControlEnhancement_uid") REFERENCES "ControlEnhancement" (uid),
-	FOREIGN KEY("Parameter_uid") REFERENCES "Parameter" (uid),
-	FOREIGN KEY("Part_uid") REFERENCES "Part" (uid),
-	FOREIGN KEY("ProfileAdd_id") REFERENCES "ProfileAdd" (id)
-);
-CREATE INDEX "ix_Property_id" ON "Property" (id);
-
-CREATE TABLE "Link" (
-	id INTEGER NOT NULL,
-	href TEXT,
-	rel TEXT,
-	"Metadata_id" INTEGER,
-	"Revision_id" INTEGER,
-	"CatalogElement_uid" INTEGER,
-	"IdentifiedElement_uid" INTEGER,
-	"ControlGroup_uid" INTEGER,
-	"Control_uid" INTEGER,
-	"ControlEnhancement_uid" INTEGER,
-	"Parameter_uid" INTEGER,
-	"Part_uid" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id),
-	FOREIGN KEY("Revision_id") REFERENCES "Revision" (id),
-	FOREIGN KEY("CatalogElement_uid") REFERENCES "CatalogElement" (uid),
-	FOREIGN KEY("IdentifiedElement_uid") REFERENCES "IdentifiedElement" (uid),
-	FOREIGN KEY("ControlGroup_uid") REFERENCES "ControlGroup" (uid),
-	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
-	FOREIGN KEY("ControlEnhancement_uid") REFERENCES "ControlEnhancement" (uid),
-	FOREIGN KEY("Parameter_uid") REFERENCES "Parameter" (uid),
-	FOREIGN KEY("Part_uid") REFERENCES "Part" (uid)
-);
-CREATE INDEX "ix_Link_id" ON "Link" (id);
+CREATE INDEX "ix_Sp80053AssessmentMethod_assessment_objects_assessment_objects" ON "Sp80053AssessmentMethod_assessment_objects" (assessment_objects);
+CREATE INDEX "ix_Sp80053AssessmentMethod_assessment_objects_Sp80053AssessmentMethod_id" ON "Sp80053AssessmentMethod_assessment_objects" ("Sp80053AssessmentMethod_id");

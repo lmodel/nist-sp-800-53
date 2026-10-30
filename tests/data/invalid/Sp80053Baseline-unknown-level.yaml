@@ -1,0 +1,6 @@
+# Fails at: /baseline_level
+# Invalid: SP 800-53B defines four baselines, and CRITICAL is not one.
+baseline_level: CRITICAL
+title: CRITICAL IMPACT BASELINE
+baseline_controls:
+  - AC-1

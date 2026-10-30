@@ -1,0 +1,4 @@
+# Fails at: /control_identifier
+# Invalid: an enhancement identifier is not a control identifier.
+control_identifier: AC-2(1)
+title: Automated System Account Management

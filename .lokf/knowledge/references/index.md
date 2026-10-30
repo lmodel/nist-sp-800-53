@@ -1,0 +1,5 @@
+# References
+
+* [NIST SP 800-53 Revision 5, Release 5.2.0](sp-800-53.md) - NIST Special Publication 800-53, Revision 5, Security and Privacy Controls for Information Systems and Organizations (September 2020, updated December 2020; Release 5.2.0 of August 2025; <https://doi.org/10.6028/NIST.SP.800-53r5>), the publication the schema renders at its current release.
+* [NIST SP 800-53A Revision 5](sp-800-53a.md) - NIST Special Publication 800-53A, Revision 5, Assessing Security and Privacy Controls in Information Systems and Organizations (<https://doi.org/10.6028/NIST.SP.800-53Ar5>): the assessment objectives, methods and parameter labels that NIST's catalog carries for each control and enhancement, and that the schema renders.
+* [NIST SP 800-53B](sp-800-53b.md) - NIST Special Publication 800-53B, Control Baselines for Information Systems and Organizations (<https://doi.org/10.6028/NIST.SP.800-53B>): the Low, Moderate, High and Privacy baselines, which NIST publishes as four OSCAL profiles at Release 5.2.0 and the schema renders as `Sp80053Baseline`.

@@ -1,549 +1,263 @@
 /**
-* Allowed values for element-level class values
+* The one status the catalog marks: withdrawn. A control or enhancement that Revision 5 keeps carries no status.
 */
-export enum CatalogElementClassValue {
+export enum Sp80053ControlStatus {
     
-    family = "family",
-    SP800_53 = "SP800-53",
-    SP800_53_enhancement = "SP800-53-enhancement",
-    assessment_objective = "assessment-objective",
+    /** Revision 5 withdrew the control or enhancement; incorporated_into, moved_to or withdrawal_reason says where it went. */
+    WITHDRAWN = "WITHDRAWN",
 };
 /**
-* Allowed values for property-level class values
+* Who implements a control or enhancement, as NIST's reference data marks it.
 */
-export enum CatalogPropertyClassValue {
+export enum Sp80053ImplementationLevel {
     
-    sp800_53 = "sp800-53",
-    sp800_53a = "sp800-53a",
-    zero_padded = "zero-padded",
+    /** The organization implements it, through its processes and people. */
+    ORGANIZATION = "ORGANIZATION",
+    /** The system implements it, through its mechanisms. */
+    SYSTEM = "SYSTEM",
 };
 /**
-* Allowed element_type values in NIST CPRT export data
+* How many of a selection's choices the organization picks.
 */
-export enum CPRTElementTypeValue {
+export enum Sp80053SelectionCardinality {
     
-    /** SP 800-53 control family (e.g. AC, AU) */
-    family = "family",
-    /** Top-level security or privacy control (e.g. AC-1) */
-    control = "control",
-    /** Control enhancement (e.g. AC-1(1)) */
-    control_enhancement = "control_enhancement",
-    /** Normative control statement text */
-    control_statement = "control_statement",
-    /** Non-normative discussion text for a control */
-    discussion = "discussion",
-    /** Organization-Defined Parameter */
-    odp = "odp",
-    /** ODP category (e.g. assignment, selection) */
-    odp_type = "odp_type",
-    /** Full ODP statement text */
-    odp_statement = "odp_statement",
-    /** SP 800-53A Examine assessment objective */
-    examine = "examine",
-    /** SP 800-53A Interview assessment objective */
-    interview = "interview",
-    /** SP 800-53A Test assessment objective */
-    test = "test",
-    /** Assessment determination criterion */
-    determination = "determination",
-    /** Reason a control was withdrawn from SP 800-53 */
-    withdraw_reason = "withdraw_reason",
-    /** Informational reference to an external publication */
-    reference = "reference",
-    /** Security baseline designation (LOW / MODERATE / HIGH / NOT SELECTED) */
-    security_baseline = "security_baseline",
-    /** Privacy baseline designation (P-HIGH / NOT SELECTED) */
-    privacy_baseline = "privacy_baseline",
-    /** Sort-order key for display purposes */
-    sort = "sort",
-    /** Sort-order key for control name ordering */
-    control_name_sort = "control_name_sort",
+    /** Exactly one choice, which the catalog leaves unwritten. */
+    ONE = "ONE",
+    /** One or more choices, which the publication writes as Selection (one or more). */
+    ONE_OR_MORE = "ONE_OR_MORE",
 };
 /**
-* Relationship type identifiers used in NIST CPRT export data
+* The three assessment methods of SP 800-53A, as its catalog writes them.
 */
-export enum CPRTRelationshipTypeValue {
+export enum Sp80053AssessmentMethodKind {
     
-    /** Represents a relationship between two elements */
-    projection = "projection",
-    /** Denotes where a control is related to another control */
-    related = "related",
-    /** Denotes where a withdrawn control was incorporated into another */
-    incorporated_into = "incorporated_into",
-    /** Denotes where a withdrawn control was moved to */
-    moved_to = "moved_to",
+    /** Review, inspect, observe, study or analyze specifications, mechanisms or activities. */
+    EXAMINE = "EXAMINE",
+    /** Hold discussions with individuals or groups. */
+    INTERVIEW = "INTERVIEW",
+    /** Exercise mechanisms or activities under specified conditions. */
+    TEST = "TEST",
+};
+/**
+* The four control baselines SP 800-53B defines.
+*/
+export enum Sp80053BaselineLevel {
+    
+    /** The baseline for a low-impact system. */
+    LOW = "LOW",
+    /** The baseline for a moderate-impact system. */
+    MODERATE = "MODERATE",
+    /** The baseline for a high-impact system. */
+    HIGH = "HIGH",
+    /** The privacy baseline, which applies regardless of impact level. */
+    PRIVACY = "PRIVACY",
 };
 
 
 /**
- * Unified root wrapper for catalog, profile, or CPRT content
+ * One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the catalog lists.
  */
-export interface SP80053Document {
-    /** Root catalog payload */
-    catalog?: CatalogBody,
-    /** Root profile payload */
-    profile?: ProfileBody,
-    /** Top-level CPRT API response wrapper */
-    response?: CPRTResponse,
+export interface Sp80053Catalog {
+    /** The release of Revision 5 the catalog carries, as NIST numbers it, such as 5.2.0. */
+    catalog_release: string,
+    /** The twenty control families, in the order SP 800-53 gives them. */
+    control_families: Sp80053Family[],
+    /** The control baselines of SP 800-53B that select from the catalog. */
+    control_baselines?: Sp80053Baseline[],
+    /** The publications the catalog's references list, most of which a control cites. */
+    catalog_references?: Sp80053Reference[],
 }
 
 
 /**
- * Top-level wrapper that mirrors OSCAL catalog shape
+ * One of the twenty families SP 800-53 sorts its controls into, such as Access Control or Supply Chain Risk Management.
  */
-export interface Catalog {
-    /** Root catalog payload */
-    catalog?: CatalogBody,
-}
-
-
-/**
- * Top-level wrapper for OSCAL profile files
- */
-export interface ProfileDocument {
-    /** Root profile payload */
-    profile?: ProfileBody,
-}
-
-
-/**
- * Main catalog object
- */
-export interface CatalogBody {
-    /** UUID for profile, metadata, or resource element */
-    uuid?: string,
-    /** Profile and Catalog metadata */
-    metadata?: Metadata,
-    /** List of control groups in the catalog */
-    groups?: ControlGroup[],
-    /** Back-matter references and resources */
-    back_matter?: BackMatter,
-}
-
-
-/**
- * OSCAL profile body
- */
-export interface ProfileBody {
-    /** UUID for profile, metadata, or resource element */
-    uuid?: string,
-    /** Profile and Catalog metadata */
-    metadata?: Metadata,
-    /** Imported catalogs or profiles */
-    imports?: ImportResource[],
-    /** Merge behavior settings */
-    merge?: MergeRules,
-    /** Profile modification directives — parameter overrides and control alterations */
-    modify?: ProfileModify,
-    /** Back-matter references and resources */
-    back_matter?: BackMatter,
-}
-
-
-/**
- * OSCAL metadata section used in catalogs and profiles
- */
-export interface Metadata {
-    /** Human-readable title */
-    title?: string,
-    /** Last modification timestamp */
-    last_modified?: string,
-    /** Version identifier */
-    version?: string,
-    /** OSCAL version identifier */
-    oscal_version?: string,
-    /** Metadata revisions */
-    revisions?: Revision[],
-    /** List of properties */
-    props?: Property[],
-    /** List of links and relationships */
-    links?: Link[],
-    /** Roles used in metadata */
-    roles?: Role[],
-    /** Parties used in metadata */
-    parties?: Party[],
-    /** Responsible party assignments */
-    responsible_parties?: ResponsibleParty[],
-    /** Supplemental remarks */
-    remarks?: string,
-}
-
-
-/**
- * Metadata revision entry
- */
-export interface Revision {
-    /** Human-readable title */
-    title?: string,
-    /** Last modification timestamp */
-    last_modified?: string,
-    /** Version identifier */
-    version?: string,
-    /** OSCAL version identifier */
-    oscal_version?: string,
-    /** List of links and relationships */
-    links?: Link[],
-    /** Supplemental remarks */
-    remarks?: string,
-}
-
-
-/**
- * Role definition
- */
-export interface Role {
-    /** Unique identifier for an element */
-    id?: string,
-    /** Human-readable title */
-    title?: string,
-}
-
-
-/**
- * Party definition
- */
-export interface Party {
-    /** UUID for profile, metadata, or resource element */
-    uuid?: string,
-    /** Party type */
-    type?: string,
-    /** Name of a property, part, or party */
-    name?: string,
-    /** Short display name */
-    short_name?: string,
-    /** Party email addresses */
-    email_addresses?: string[],
-    /** Postal addresses */
-    addresses?: Address[],
-}
-
-
-/**
- * Postal address
- */
-export interface Address {
-    /** Address lines */
-    addr_lines?: string[],
-    /** City name */
-    city?: string,
-    /** State or region */
-    state?: string,
-    /** Postal code */
-    postal_code?: string,
-}
-
-
-/**
- * Assignment of parties to a role
- */
-export interface ResponsibleParty {
-    /** Assigned role identifier */
-    role_id?: string,
-    /** Referenced party UUIDs */
-    party_uuids?: string[],
-}
-
-
-/**
- * OSCAL back-matter section
- */
-export interface BackMatter {
-    /** Back-matter resources */
-    resources?: Resource[],
-}
-
-
-/**
- * Referenced resource
- */
-export interface Resource {
-    /** UUID for profile, metadata, or resource element */
-    uuid?: string,
-    /** Human-readable title */
-    title?: string,
-    /** Resource description */
+export interface Sp80053Family {
+    /** The family's two letters, such as AC for Access Control. */
+    family_id: string,
+    /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
+    title: string,
+    /** What the family is about, in the words of whoever records it. SP 800-53 gives the Program Management family an overview of its own, and the other families none. */
     description?: string,
-    /** Citation details for a resource */
-    citation?: Citation,
-    /** Resource links */
-    rlinks?: ResourceLink[],
+    /** The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead. */
+    family_controls?: Sp80053Control[],
 }
 
 
 /**
- * Citation wrapper
+ * A security or privacy control: a safeguard with an identifier, a statement of what it requires, a discussion, parameters the organization defines, related controls, references, the assessment objective and methods SP 800-53A gives it, and its enhancements. A control Revision 5 withdrew keeps its identifier and says where it went.
  */
-export interface Citation {
-    /** Citation text */
-    text?: string,
+export interface Sp80053Control {
+    /** The control's identifier, such as AC-2. */
+    control_identifier: string,
+    /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
+    title: string,
+    /** The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both. */
+    control_statement?: Sp80053Statement,
+    /** The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require. */
+    control_discussion?: string,
+    /** The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them. */
+    control_parameters?: Sp80053Parameter[],
+    /** The controls and enhancements the publication lists as related, by identifier. */
+    related_control_ids?: string[],
+    /** The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130. */
+    control_references?: string[],
+    /** The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are. */
+    assessment_objective?: Sp80053AssessmentObjective,
+    /** The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to. */
+    assessment_methods?: Sp80053AssessmentMethod[],
+    /** The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none. */
+    control_status?: string,
+    /** For a withdrawn control or enhancement, what it was incorporated into, as the publication states it. */
+    incorporated_into?: string[],
+    /** For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it. */
+    moved_to?: string[],
+    /** For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring. */
+    withdrawal_reason?: string,
+    /** Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both. */
+    implementation_level?: string,
+    /** True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise. */
+    contributes_to_assurance?: boolean,
+    /** The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead. */
+    control_enhancements?: Sp80053ControlEnhancement[],
 }
 
 
 /**
- * Reference link for a resource
+ * A control enhancement: added functionality or strength for a control, with an identifier of its own, which the publication and other documents cite apart from the control. It carries what a control carries, and names the control or enhancement it requires.
  */
-export interface ResourceLink {
-    /** Link or resource reference */
-    href?: string,
-    /** Media type for a resource link */
-    media_type?: string,
+export interface Sp80053ControlEnhancement {
+    /** The enhancement's identifier, such as AC-2(1). */
+    enhancement_id: string,
+    /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
+    title: string,
+    /** The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both. */
+    control_statement?: Sp80053Statement,
+    /** The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require. */
+    control_discussion?: string,
+    /** The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them. */
+    control_parameters?: Sp80053Parameter[],
+    /** The controls and enhancements the publication lists as related, by identifier. */
+    related_control_ids?: string[],
+    /** The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130. */
+    control_references?: string[],
+    /** The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are. */
+    assessment_objective?: Sp80053AssessmentObjective,
+    /** The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to. */
+    assessment_methods?: Sp80053AssessmentMethod[],
+    /** The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none. */
+    control_status?: string,
+    /** For a withdrawn control or enhancement, what it was incorporated into, as the publication states it. */
+    incorporated_into?: string[],
+    /** For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it. */
+    moved_to?: string[],
+    /** For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring. */
+    withdrawal_reason?: string,
+    /** Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both. */
+    implementation_level?: string,
+    /** True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise. */
+    contributes_to_assurance?: boolean,
+    /** The controls and enhancements that must be implemented for the enhancement to apply, as NIST's catalog links them: its own control, and for SC-42(2) also SC-42(1). */
+    required_controls?: string[],
 }
 
 
 /**
- * Base class for catalog elements
+ * A control statement: the text of what a control or enhancement requires, and the items it is divided into.
  */
-export interface CatalogElement {
-    /** Unique identifier for an element */
-    id?: string,
-    /** List of properties */
-    props?: Property[],
-    /** List of links and relationships */
-    links?: Link[],
-    /** Nested parts that provide prose and structure */
-    parts?: Part[],
+export interface Sp80053Statement {
+    /** The lettered or numbered items of the statement, in order, each of which may hold items of its own. */
+    statement_items?: Sp80053StatementItem[],
+    /** The statement's own text, before any items. A placeholder of the form {{ insert: param, <identifier> }} marks where an organization-defined parameter is inserted. */
+    statement_text?: string,
 }
 
 
 /**
- * A catalog element with required id and optional title/class
+ * One lettered or numbered item of a control statement, which may hold items of its own.
  */
-export interface IdentifiedElement extends CatalogElement {
-    /** Human-readable title */
-    title?: string,
-    /** Classification of a catalog element or property */
-    class?: string,
-    /** Human-readable label */
-    label?: string,
+export interface Sp80053StatementItem {
+    /** The lettered or numbered items of the statement, in order, each of which may hold items of its own. */
+    statement_items?: Sp80053StatementItem[],
+    /** The item's label as the publication prints it, such as a., 1. or (a). */
+    item_label: string,
+    /** The item's text, with the same placeholders for parameters as the statement's text. */
+    item_text: string,
 }
 
 
 /**
- * A group of controls (family)
+ * An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A labels each parameter but the ones that aggregate others, and gives most a guideline.
  */
-export interface ControlGroup extends IdentifiedElement {
-    /** List of control groups in the catalog */
-    groups?: ControlGroup[],
-    /** List of controls in a group */
-    controls?: Control[],
+export interface Sp80053Parameter {
+    /** The parameter's identifier in NIST's catalog, such as ac-02_odp.01. */
+    parameter_id: string,
+    /** The label SP 800-53A gives the parameter, such as AC-02_ODP[01]. A parameter that aggregates several has none. */
+    assessment_label?: string,
+    /** For an assignment, what the organization defines, such as personnel or roles. */
+    parameter_label?: string,
+    /** The guidelines that say what a value must settle, such as that the frequency of a review is defined. */
+    parameter_guidelines?: string[],
+    /** For a selection, the choices the publication lists, in order. */
+    selection_choices?: string[],
+    /** For a selection, how many choices the organization picks. The catalog marks one or more, and leaves the slot out when one choice is allowed, which is how OSCAL reads an absent how-many. */
+    selection_cardinality?: string,
+    /** For a parameter that stands for several, the parameters it aggregates, by identifier. */
+    aggregated_parameters?: string[],
+    /** The identifiers an earlier release of the catalog gave the parameter, such as ac-1_prm_2 for ac-01_odp.03. */
+    alternative_identifiers?: string[],
+    /** The label SP 800-53 prints where it differs from the one SP 800-53A gives. */
+    alternative_label?: string,
 }
 
 
 /**
- * A security control
+ * An assessment objective of SP 800-53A: a determination statement an assessor checks, or a heading that groups the determination statements of one item of the control statement.
  */
-export interface Control extends IdentifiedElement {
-    /** List of parameters for a control */
-    params?: Parameter[],
-    /** List of controls in a group */
-    controls?: ControlEnhancement[],
+export interface Sp80053AssessmentObjective {
+    /** The label SP 800-53A gives the objective, such as AC-02a.[01]. */
+    objective_label: string,
+    /** The determination statement, with the same placeholders for parameters as the control statement. A heading has none. */
+    objective_text?: string,
+    /** The objectives grouped under this one, in order. */
+    sub_objectives?: Sp80053AssessmentObjective[],
 }
 
 
 /**
- * An enhancement to a control
+ * One assessment method SP 800-53A gives a control or enhancement, with the objects an assessor selects from: documents and records to examine, people to interview, or mechanisms and activities to test.
  */
-export interface ControlEnhancement extends IdentifiedElement {
-    /** List of parameters for a control */
-    params?: Parameter[],
-    /** List of controls in a group */
-    controls?: ControlEnhancement[],
+export interface Sp80053AssessmentMethod {
+    /** Which of the three methods this is. */
+    assessment_method: string,
+    /** The objects the method is applied to, in the order the publication lists them. */
+    assessment_objects: string[],
 }
 
 
 /**
- * A configurable parameter used by a control
+ * A publication the catalog's references list, as they list it: its label, its citation and its address.
  */
-export interface Parameter extends IdentifiedElement {
-    /** List of guidelines */
-    guidelines?: Guideline[],
-    /** Selection parameters for a parameter definition */
-    select?: Selection,
-    /** Identifier of another parameter this one depends on (SP 800-53 Rev 4 only) */
-    depends_on?: string,
+export interface Sp80053Reference {
+    /** The label the controls cite the publication by, such as SP 800-12. */
+    reference_label: string,
+    /** The citation, as the catalog prints it. */
+    reference_citation?: string,
+    /** The address the catalog gives for the publication. */
+    reference_url?: string,
 }
 
 
 /**
- * Additional prose guidance associated with a parameter
+ * One of the four control baselines SP 800-53B defines: the controls and enhancements selected for systems at the low, moderate or high impact level, or for privacy.
  */
-export interface Guideline {
-    /** Free-text prose content */
-    prose?: string,
-}
-
-
-/**
- * A name-value property with optional namespace and class attributes
- */
-export interface Property {
-    /** Name of a property, part, or party */
-    name?: string,
-    /** Property value */
-    value?: string,
-    /** Namespace URI for a property */
-    ns?: string,
-    /** Classification of a catalog element or property */
-    class?: string,
-}
-
-
-/**
- * Selection criteria for a parameter
- */
-export interface Selection {
-    /** How many selections are allowed */
-    how_many?: string,
-    /** List of selection options */
-    choice?: string[],
-}
-
-
-/**
- * Relationship link
- */
-export interface Link {
-    /** Link or resource reference */
-    href?: string,
-    /** Relationship type for a link */
-    rel?: string,
-}
-
-
-/**
- * Structured narrative part that can contain nested parts
- */
-export interface Part extends IdentifiedElement {
-    /** Name of a property, part, or party */
-    name?: string,
-    /** Free-text prose content */
-    prose?: string,
-}
-
-
-/**
- * Imported profile or catalog reference
- */
-export interface ImportResource {
-    /** Link or resource reference */
-    href?: string,
-    /** Include-controls selectors */
-    include_controls?: IncludeControlsSelection[],
-    /** Controls to explicitly exclude from an import */
-    exclude_controls?: ExcludeControlsSelection[],
-}
-
-
-/**
- * Control inclusion selector
- */
-export interface IncludeControlsSelection {
-    /** Explicit control identifiers to include */
-    with_ids?: string[],
-    /** Pattern-based control selectors using glob or regex patterns */
-    matching?: ControlPattern[],
-}
-
-
-/**
- * Merge configuration
- */
-export interface MergeRules {
-    /** Keep source order and content during merge */
-    as_is?: boolean,
-    /** Flat merge strategy — de-duplicate and merge all controls without source hierarchy */
-    flat?: FlatMerge,
-}
-
-
-/**
- * Marker object indicating flat merge strategy for profile resolution
- */
-export interface FlatMerge {
-}
-
-
-/**
- * Glob or regex pattern for selecting controls by identifier
- */
-export interface ControlPattern {
-    /** Glob or regex pattern for matching control identifiers */
-    pattern?: string,
-}
-
-
-/**
- * Selection of controls to explicitly exclude from a profile import
- */
-export interface ExcludeControlsSelection {
-    /** Explicit control identifiers to include */
-    with_ids?: string[],
-    /** Pattern-based control selectors using glob or regex patterns */
-    matching?: ControlPattern[],
-}
-
-
-/**
- * Profile modification section containing parameter overrides and control alterations
- */
-export interface ProfileModify {
-    /** Parameter value overrides applied by the profile */
-    set_parameters?: ProfileSetParameter[],
-    /** Control alterations — add or remove parts from referenced controls */
-    alters?: ProfileAlter[],
-}
-
-
-/**
- * Override the value of a parameter in a referenced control
- */
-export interface ProfileSetParameter {
-    /** Identifier of the parameter to be set */
-    param_id?: string,
-    /** Human-readable label */
-    label?: string,
-}
-
-
-/**
- * Alteration to a referenced control — adds or removes parts
- */
-export interface ProfileAlter {
-    /** Identifier of the control to alter */
-    control_id?: string,
-    /** Parts, parameters, or properties added to a control by an alteration */
-    adds?: ProfileAdd[],
-}
-
-
-/**
- * Content to be added to a control via profile alteration
- */
-export interface ProfileAdd {
-    /** Position at which to add content relative to the by-id anchor */
-    position?: string,
-    /** Identifier of the anchor part relative to which additions are positioned */
-    by_id?: string,
-    /** Nested parts that provide prose and structure */
-    parts?: Part[],
-    /** List of properties */
-    props?: Property[],
-}
-
-
-/**
- * Semantic class for NIST CPRT (Cybersecurity and Privacy Reference Tool) export documents covering SP 800-53, SP 800-53A, and SP 800-53B. Validate with: linkml validate -C SP80053Document -s <schema> <file.json>
- */
-export interface CPRTDocument {
-    /** Top-level CPRT API response wrapper */
-    response?: CPRTResponse,
-}
-
-
-/**
- * CPRT API response container holding document metadata, typed elements (controls, enhancements, ODPs, assessment objectives, baselines), relationship types, and element relationships
- */
-export interface CPRTResponse {
+export interface Sp80053Baseline {
+    /** Which of the four baselines this is. */
+    baseline_level: string,
+    /** The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline. */
+    title: string,
+    /** The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them. */
+    baseline_controls: string[],
 }
 
 

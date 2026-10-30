@@ -1,0 +1,7 @@
+# The AC family as a knowledge bundle might record it, with no controls
+# inlined: a bundle relates a control to its family with isPartOf.
+family_id: AC
+title: Access Control
+description: >-
+  The controls that limit who and what may use the system and its
+  information, and how.

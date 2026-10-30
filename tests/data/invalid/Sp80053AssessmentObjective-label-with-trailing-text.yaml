@@ -1,0 +1,3 @@
+# Fails at: /objective_label
+# Invalid: an objective label is the label alone, with nothing after it.
+objective_label: AC-02 anything at all

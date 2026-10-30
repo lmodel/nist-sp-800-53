@@ -1,0 +1,7 @@
+# Control SA-12, which Revision 5 withdrew and incorporated into the Supply
+# Chain Risk Management family as a whole.
+control_identifier: SA-12
+title: Supply Chain Protection
+control_status: WITHDRAWN
+incorporated_into:
+  - SR

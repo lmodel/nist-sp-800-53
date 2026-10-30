@@ -1,0 +1,6 @@
+# Enhancement CP-10(3), which Revision 5 withdrew without moving or
+# incorporating it: the catalog says tailoring addresses it.
+enhancement_id: CP-10(3)
+title: Compensating Security Controls
+control_status: WITHDRAWN
+withdrawal_reason: Addressed through tailoring.
