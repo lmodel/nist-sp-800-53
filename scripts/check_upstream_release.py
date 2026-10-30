@@ -15,10 +15,16 @@ the GitHub API for usnistgov/oscal-content's latest release and for a few
 folder listings, and compares every copied file with its blob by git object
 hash, so nothing is downloaded but listings. It asks doi.org whether NIST
 has registered the identifier of the next final edition, because NIST
-registers one for every publication. It prints a Markdown report and exits
-1 when a newer edition is out, a copied file changed upstream or a copy
-differs, when the pinned tag no longer names the pinned commit, when a newer
-release no longer holds the pinned folder, or when a check could not finish.
+registers one for every publication.
+
+It prints a Markdown report, and exits 1 when:
+
+- a newer edition is out;
+- a copied file changed upstream, or a copy differs;
+- the pinned tag no longer names the pinned commit;
+- a newer release no longer holds the pinned folder;
+- a check could not finish.
+
 A file NIST adds to the pinned folder is reported for information.
 
 Set ``GITHUB_TOKEN`` to raise the API rate limit. Usage::

@@ -2,7 +2,7 @@
 
 scripts/check_upstream_release.py reads the network through one function,
 `_get`. These tests replace it with a stub that answers as usnistgov/oscal-content
-and doi.org would, so they run offline, and check what the script reports
+and doi.org would, so they run offline. They check what the script reports
 when NIST moves something: a newer release without the pinned folder, a
 network failure, a file NIST adds, and a tag that names another commit.
 """
