@@ -57,7 +57,55 @@ export const DOCS = { dir: "docs", exclude: ["templates-linkml"] };
 // names. An entry whose key and value both end in /[...slug] stands for one
 // redirect per schema page.
 //   export const REDIRECTS = { "/elements": "/schema/", "/elements/[...slug]": "/schema/[...slug]", "/about": "/docs/about/" };
-export const REDIRECTS = { "/elements": "/schema/", "/elements/[...slug]": "/schema/[...slug]", "/about": "/docs/about/" };
+export const REDIRECTS = {
+  // The retired schema's class and enum pages: each to the class that renders
+  // the same element now, or to the schema's index where none does.
+  "/elements/Catalog": "/schema/Sp80053Catalog/",
+  "/elements/CatalogBody": "/schema/Sp80053Catalog/",
+  "/elements/SP80053Document": "/schema/Sp80053Catalog/",
+  "/elements/ControlGroup": "/schema/Sp80053Family/",
+  "/elements/Control": "/schema/Sp80053Control/",
+  "/elements/ControlEnhancement": "/schema/Sp80053ControlEnhancement/",
+  "/elements/Parameter": "/schema/Sp80053Parameter/",
+  "/elements/Guideline": "/schema/Sp80053Parameter/",
+  "/elements/Selection": "/schema/Sp80053Parameter/",
+  "/elements/BackMatter": "/schema/Sp80053Reference/",
+  "/elements/Resource": "/schema/Sp80053Reference/",
+  "/elements/Citation": "/schema/Sp80053Reference/",
+  "/elements/ResourceLink": "/schema/Sp80053Reference/",
+  "/elements/ProfileDocument": "/schema/Sp80053Baseline/",
+  "/elements/ProfileBody": "/schema/Sp80053Baseline/",
+  "/elements/ImportResource": "/schema/Sp80053Baseline/",
+  "/elements/IncludeControlsSelection": "/schema/Sp80053Baseline/",
+  "/elements/Address": "/schema/",
+  "/elements/CPRTDocument": "/schema/",
+  "/elements/CPRTResponse": "/schema/",
+  "/elements/CatalogElement": "/schema/",
+  "/elements/ControlPattern": "/schema/",
+  "/elements/ExcludeControlsSelection": "/schema/",
+  "/elements/FlatMerge": "/schema/",
+  "/elements/IdentifiedElement": "/schema/",
+  "/elements/Link": "/schema/",
+  "/elements/MergeRules": "/schema/",
+  "/elements/Metadata": "/schema/",
+  "/elements/Part": "/schema/",
+  "/elements/Party": "/schema/",
+  "/elements/ProfileAdd": "/schema/",
+  "/elements/ProfileAlter": "/schema/",
+  "/elements/ProfileModify": "/schema/",
+  "/elements/ProfileSetParameter": "/schema/",
+  "/elements/Property": "/schema/",
+  "/elements/ResponsibleParty": "/schema/",
+  "/elements/Revision": "/schema/",
+  "/elements/Role": "/schema/",
+  "/elements/CPRTElementTypeValue": "/schema/",
+  "/elements/CPRTRelationshipTypeValue": "/schema/",
+  "/elements/CatalogElementClassValue": "/schema/",
+  "/elements/CatalogPropertyClassValue": "/schema/",
+  "/elements": "/schema/",
+  "/elements/[...slug]": "/schema/[...slug]",
+  "/about": "/docs/about/",
+};
 
 // A Keep a Changelog file, read as a page per release. "auto" takes
 // CHANGELOG.md when it holds a released version.
