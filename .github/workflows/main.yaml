@@ -71,7 +71,7 @@ jobs:
       - name: Run test suite
         run: just test
 
-      # .lokf/nist-sp-800-53.yaml is the copy the knowledge bundle validates
+      # .lokf/schema/nist-sp-800-53.yaml is the copy the knowledge bundle validates
       # against and the release attaches, so it must match the schema and
       # lokf.yaml.
       - name: Check the adapted schema copy

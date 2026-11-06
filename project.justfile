@@ -6,8 +6,8 @@
 
 # ============ Knowledge bundle: the adapted domain schema ============
 
-# `.lokf/nist-sp-800-53.yaml` is the copy `lokf adapt` writes from the schema
-# so that it can sit beside `.lokf/lokf.yaml` (`lokf adapt --help` lists the
+# `.lokf/schema/nist-sp-800-53.yaml` is the copy `lokf adapt` writes from the schema
+# so that it can sit beside `.lokf/schema/lokf.yaml` (`lokf adapt --help` lists the
 # moves). The roots are the classes a knowledge concept may use as its
 # `type`: the family, the control, the control enhancement and the baseline,
 # the four elements that SP 800-53 and SP 800-53B give an identifier and that
@@ -20,12 +20,12 @@
 lokf_cmd := env_var_or_default("LOKF_CMD", "uv run --project .lokf lokf")
 lokf_adapt_roots := "--root Sp80053Family --root Sp80053Control --root Sp80053ControlEnhancement --root Sp80053Baseline"
 
-# Rewrite .lokf/nist-sp-800-53.yaml from the schema (run after every schema change)
+# Rewrite .lokf/schema/nist-sp-800-53.yaml from the schema (run after every schema change)
 [group('knowledge bundle')]
 lokf-adapt:
-  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/lokf.yaml -o .lokf/nist-sp-800-53.yaml
+  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/schema/lokf.yaml -o .lokf/schema/nist-sp-800-53.yaml
 
-# Fail when .lokf/nist-sp-800-53.yaml is stale against the schema or .lokf/lokf.yaml
+# Fail when .lokf/schema/nist-sp-800-53.yaml is stale against the schema or .lokf/schema/lokf.yaml
 [group('knowledge bundle')]
 lokf-adapt-check:
-  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/lokf.yaml -o .lokf/nist-sp-800-53.yaml --check
+  {{lokf_cmd}} adapt {{source_schema_path}} {{lokf_adapt_roots}} --lokf .lokf/schema/lokf.yaml -o .lokf/schema/nist-sp-800-53.yaml --check
