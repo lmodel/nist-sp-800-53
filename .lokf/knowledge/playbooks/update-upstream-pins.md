@@ -17,7 +17,7 @@ sources:
     title: the schedule and the issue step
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T08:34:38Z"
+  at: "2026-11-06T21:23:15Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -39,7 +39,7 @@ A file NIST adds to the pinned folder is reported for information only.[^upstrea
 1. Read the issue's report. A newer edition is a decision: read the publication and decide whether the schema moves to it. A changed catalog or baseline of the pinned edition is a replacement.
 2. Replace every file in `src/nist_sp_800_53/schema/oscal-content/` from one release of usnistgov/oscal-content, byte for byte, with `curl -sfL` from `raw.githubusercontent.com/usnistgov/oscal-content/<tag>/...`, and never edit one.
 3. Move `PINNED_TAG`, `PINNED_COMMIT` and each hash in `PINNED_BLOBS` in the script, and `oscal_content_tag`, `oscal_content_commit`, `version`, `publication_date` and `cprt_framework_version` in the schema header, together.[^check_upstream_release.py]
-4. Run `just gen-project`, `just gen-doc` and `just lokf-adapt`, and commit what they change: the header's values reach `project/`, the datamodel, `docs/schema/` and `.lokf/nist-sp-800-53.yaml`, and `just lokf-adapt-check` fails in CI on a stale copy.
+4. Run `just gen-project`, `just gen-doc` and `just lokf-adapt`, and commit what they change: the header's values reach `project/`, the datamodel, `docs/schema/` and `.lokf/schema/nist-sp-800-53.yaml`, and `just lokf-adapt-check` fails in CI on a stale copy.
 5. Run `just test`. `tests/test_upstream.py` checks the hashes, the header's pins and the counts, and a new release changes the counts it holds.[^test_upstream.py]
 6. Run `python3 scripts/check_upstream_release.py` by hand. It should report every copy matching and the latest release the pinned one.
 
