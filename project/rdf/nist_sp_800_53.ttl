@@ -1,0 +1,1063 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix pav: <http://purl.org/pav/> .
+<https://w3id.org/lmodel/nist-sp-800-53/EXAMINE> linkml:description "Review, inspect, observe, study or analyze specifications, mechanisms or activities." .
+<https://w3id.org/lmodel/nist-sp-800-53/HIGH> linkml:description "The baseline for a high-impact system." .
+<https://w3id.org/lmodel/nist-sp-800-53/INTERVIEW> linkml:description "Hold discussions with individuals or groups." .
+<https://w3id.org/lmodel/nist-sp-800-53/LOW> linkml:description "The baseline for a low-impact system." .
+<https://w3id.org/lmodel/nist-sp-800-53/MODERATE> linkml:description "The baseline for a moderate-impact system." .
+<https://w3id.org/lmodel/nist-sp-800-53/ONE> linkml:description "Exactly one choice, which the catalog leaves unwritten." .
+<https://w3id.org/lmodel/nist-sp-800-53/ONE_OR_MORE> linkml:description "One or more choices, which the publication writes as Selection (one or more)." .
+<https://w3id.org/lmodel/nist-sp-800-53/ORGANIZATION> linkml:description "The organization implements it, through its processes and people." .
+<https://w3id.org/lmodel/nist-sp-800-53/PRIVACY> linkml:description "The privacy baseline, which applies regardless of impact level." .
+<https://w3id.org/lmodel/nist-sp-800-53/SYSTEM> linkml:description "The system implements it, through its mechanisms." .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethod> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://doi.org/10.6028/NIST.SP.800-53Ar5"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Part"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_53:AssessmentMethod"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-53/assessment_method> , <https://w3id.org/lmodel/nist-sp-800-53/assessment_objects> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-53/AssessmentMethod"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethod"^^xsd:anyURI ;
+	linkml:description "One assessment method SP 800-53A gives a control or enhancement, with the objects an assessor selects from: documents and records to examine, people to interview, or mechanisms and activities to test." ;
+	linkml:slot_usage _:c14n16 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentMethod__assessment_method> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentMethod__assessment_objects> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethodKind> skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethodKind"^^xsd:anyURI ;
+	linkml:description "The three assessment methods of SP 800-53A, as its catalog writes them." ;
+	linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-53/EXAMINE> , <https://w3id.org/lmodel/nist-sp-800-53/INTERVIEW> , <https://w3id.org/lmodel/nist-sp-800-53/TEST> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://doi.org/10.6028/NIST.SP.800-53Ar5"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Part"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_53:AssessmentObjective"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-53/objective_label> , <https://w3id.org/lmodel/nist-sp-800-53/objective_text> , <https://w3id.org/lmodel/nist-sp-800-53/sub_objectives> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-53/AssessmentObjective"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective"^^xsd:anyURI ;
+	linkml:description "An assessment objective of SP 800-53A: a determination statement an assessor checks, or a heading that groups the determination statements of one item of the control statement." ;
+	linkml:slot_usage _:c14n1 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentObjective__objective_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentObjective__objective_text> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentObjective__sub_objectives> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://doi.org/10.6028/NIST.SP.800-53B"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Profile"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_53:Baseline"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-53/baseline_controls> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-53/Baseline"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline"^^xsd:anyURI ;
+	linkml:description "One of the four control baselines SP 800-53B defines: the controls and enhancements selected for systems at the low, moderate or high impact level, or for privacy." ;
+	linkml:slot_usage _:c14n15 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline_title> , <https://w3id.org/lmodel/nist-sp-800-53/baseline_level> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Baseline__baseline_controls> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel> skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel"^^xsd:anyURI ;
+	linkml:description "The four control baselines SP 800-53B defines." ;
+	linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-53/HIGH> , <https://w3id.org/lmodel/nist-sp-800-53/LOW> , <https://w3id.org/lmodel/nist-sp-800-53/MODERATE> , <https://w3id.org/lmodel/nist-sp-800-53/PRIVACY> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline_title> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/name"^^xsd:anyURI ;
+	skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." ;
+	skos:prefLabel "title" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/title"^^xsd:anyURI ;
+	linkml:description "The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline." ;
+	linkml:domain <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> ;
+	linkml:is_a <https://w3id.org/lmodel/nist-sp-800-53/title> ;
+	linkml:is_usage_slot true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:required true ;
+	linkml:slot_uri "http://schema.org/name"^^xsd:anyURI ;
+	linkml:usage_slot_name "title" .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Catalog"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_53:Catalog"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-53/catalog_references> , <https://w3id.org/lmodel/nist-sp-800-53/catalog_release> , <https://w3id.org/lmodel/nist-sp-800-53/control_baselines> , <https://w3id.org/lmodel/nist-sp-800-53/control_families> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-53/Catalog"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog"^^xsd:anyURI ;
+	linkml:description "One release of the control catalog as a whole: its families, each holding its controls and their enhancements, the baselines that select from them, and the publications the catalog lists." ;
+	linkml:slot_usage _:c14n9 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__catalog_references> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__catalog_release> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__control_baselines> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__control_families> ;
+	linkml:tree_root true .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/projects/risk-management/sp800-53-controls"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Control"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_53:Control"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-53/control_enhancements> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-53/Control"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control"^^xsd:anyURI ;
+	linkml:description "A security or privacy control: a safeguard with an identifier, a statement of what it requires, a discussion, parameters the organization defines, related controls, references, the assessment objective and methods SP 800-53A gives it, and its enhancements. A control Revision 5 withdrew keeps its identifier and says where it went." ;
+	linkml:slot_usage _:c14n2 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control_title> , <https://w3id.org/lmodel/nist-sp-800-53/assessment_methods> , <https://w3id.org/lmodel/nist-sp-800-53/assessment_objective> , <https://w3id.org/lmodel/nist-sp-800-53/contributes_to_assurance> , <https://w3id.org/lmodel/nist-sp-800-53/control_discussion> , <https://w3id.org/lmodel/nist-sp-800-53/control_identifier> , <https://w3id.org/lmodel/nist-sp-800-53/control_parameters> , <https://w3id.org/lmodel/nist-sp-800-53/control_references> , <https://w3id.org/lmodel/nist-sp-800-53/control_statement> , <https://w3id.org/lmodel/nist-sp-800-53/control_status> , <https://w3id.org/lmodel/nist-sp-800-53/implementation_level> , <https://w3id.org/lmodel/nist-sp-800-53/incorporated_into> , <https://w3id.org/lmodel/nist-sp-800-53/moved_to> , <https://w3id.org/lmodel/nist-sp-800-53/related_control_ids> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Control__control_enhancements> , <https://w3id.org/lmodel/nist-sp-800-53/withdrawal_reason> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/projects/risk-management/sp800-53-controls"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Control"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_53:ControlEnhancement"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-53/required_controls> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-53/ControlEnhancement"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement"^^xsd:anyURI ;
+	linkml:description "A control enhancement: added functionality or strength for a control, with an identifier of its own, which the publication and other documents cite apart from the control. It carries what a control carries, and names the control or enhancement it requires." ;
+	linkml:slot_usage _:c14n8 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement_title> , <https://w3id.org/lmodel/nist-sp-800-53/assessment_methods> , <https://w3id.org/lmodel/nist-sp-800-53/assessment_objective> , <https://w3id.org/lmodel/nist-sp-800-53/contributes_to_assurance> , <https://w3id.org/lmodel/nist-sp-800-53/control_discussion> , <https://w3id.org/lmodel/nist-sp-800-53/control_parameters> , <https://w3id.org/lmodel/nist-sp-800-53/control_references> , <https://w3id.org/lmodel/nist-sp-800-53/control_statement> , <https://w3id.org/lmodel/nist-sp-800-53/control_status> , <https://w3id.org/lmodel/nist-sp-800-53/enhancement_id> , <https://w3id.org/lmodel/nist-sp-800-53/implementation_level> , <https://w3id.org/lmodel/nist-sp-800-53/incorporated_into> , <https://w3id.org/lmodel/nist-sp-800-53/moved_to> , <https://w3id.org/lmodel/nist-sp-800-53/related_control_ids> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053ControlEnhancement__required_controls> , <https://w3id.org/lmodel/nist-sp-800-53/withdrawal_reason> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement_title> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/name"^^xsd:anyURI ;
+	skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." ;
+	skos:prefLabel "title" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/title"^^xsd:anyURI ;
+	linkml:description "The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline." ;
+	linkml:domain <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:is_a <https://w3id.org/lmodel/nist-sp-800-53/title> ;
+	linkml:is_usage_slot true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:required true ;
+	linkml:slot_uri "http://schema.org/name"^^xsd:anyURI ;
+	linkml:usage_slot_name "title" .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlStatus> skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlStatus"^^xsd:anyURI ;
+	linkml:description "The one status the catalog marks: withdrawn. A control or enhancement that Revision 5 keeps carries no status." ;
+	linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-53/WITHDRAWN> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control_title> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/name"^^xsd:anyURI ;
+	skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." ;
+	skos:prefLabel "title" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/title"^^xsd:anyURI ;
+	linkml:description "The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline." ;
+	linkml:domain <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> ;
+	linkml:is_a <https://w3id.org/lmodel/nist-sp-800-53/title> ;
+	linkml:is_usage_slot true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:required true ;
+	linkml:slot_uri "http://schema.org/name"^^xsd:anyURI ;
+	linkml:usage_slot_name "title" .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/projects/risk-management/sp800-53-controls"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Group"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_53:Family"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-53/family_controls> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-53/Family"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family"^^xsd:anyURI ;
+	linkml:description "One of the twenty families SP 800-53 sorts its controls into, such as Access Control or Supply Chain Risk Management." ;
+	linkml:slot_usage _:c14n18 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family_title> , <https://w3id.org/lmodel/nist-sp-800-53/description> , <https://w3id.org/lmodel/nist-sp-800-53/family_id> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Family__family_controls> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family_title> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/name"^^xsd:anyURI ;
+	skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." ;
+	skos:prefLabel "title" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/title"^^xsd:anyURI ;
+	linkml:description "The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline." ;
+	linkml:domain <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:is_a <https://w3id.org/lmodel/nist-sp-800-53/title> ;
+	linkml:is_usage_slot true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:required true ;
+	linkml:slot_uri "http://schema.org/name"^^xsd:anyURI ;
+	linkml:usage_slot_name "title" .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel> skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel"^^xsd:anyURI ;
+	linkml:description "Who implements a control or enhancement, as NIST's reference data marks it." ;
+	linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-53/ORGANIZATION> , <https://w3id.org/lmodel/nist-sp-800-53/SYSTEM> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://doi.org/10.6028/NIST.SP.800-53Ar5"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Parameter"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_53:Parameter"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-53/aggregated_parameters> , <https://w3id.org/lmodel/nist-sp-800-53/alternative_identifiers> , <https://w3id.org/lmodel/nist-sp-800-53/alternative_label> , <https://w3id.org/lmodel/nist-sp-800-53/assessment_label> , <https://w3id.org/lmodel/nist-sp-800-53/parameter_guidelines> , <https://w3id.org/lmodel/nist-sp-800-53/parameter_id> , <https://w3id.org/lmodel/nist-sp-800-53/parameter_label> , <https://w3id.org/lmodel/nist-sp-800-53/selection_cardinality> , <https://w3id.org/lmodel/nist-sp-800-53/selection_choices> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-53/Parameter"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter"^^xsd:anyURI ;
+	linkml:description "An organization-defined parameter: a value the control statement leaves to the organization, either an assignment the organization fills in or a selection from the choices the publication lists. SP 800-53A labels each parameter but the ones that aggregate others, and gives most a guideline." ;
+	linkml:slot_usage _:c14n19 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__aggregated_parameters> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__alternative_identifiers> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__alternative_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__assessment_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__parameter_guidelines> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__parameter_id> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__parameter_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__selection_cardinality> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__selection_choices> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Resource"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_53:Reference"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-53/reference_citation> , <https://w3id.org/lmodel/nist-sp-800-53/reference_label> , <https://w3id.org/lmodel/nist-sp-800-53/reference_url> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-53/Reference"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference"^^xsd:anyURI ;
+	linkml:description "A publication the catalog's references list, as they list it: its label, its citation and its address." ;
+	linkml:slot_usage _:c14n0 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/sp80053Reference__reference_citation> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Reference__reference_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Reference__reference_url> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053SelectionCardinality> skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053SelectionCardinality"^^xsd:anyURI ;
+	linkml:description "How many of a selection's choices the organization picks." ;
+	linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-53/ONE> , <https://w3id.org/lmodel/nist-sp-800-53/ONE_OR_MORE> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053Statement> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/projects/risk-management/sp800-53-controls"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Part"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_53:Statement"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-53/statement_text> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-53/Statement"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053Statement"^^xsd:anyURI ;
+	linkml:description "A control statement: the text of what a control or enhancement requires, and the items it is divided into." ;
+	linkml:slot_usage _:c14n7 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/sp80053Statement__statement_text> , <https://w3id.org/lmodel/nist-sp-800-53/statement_items> .
+<https://w3id.org/lmodel/nist-sp-800-53/Sp80053StatementItem> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/projects/risk-management/sp800-53-controls"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Part"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_53:StatementItem"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-53/item_label> , <https://w3id.org/lmodel/nist-sp-800-53/item_text> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-53/StatementItem"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053StatementItem"^^xsd:anyURI ;
+	linkml:description "One lettered or numbered item of a control statement, which may hold items of its own." ;
+	linkml:slot_usage _:c14n17 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/sp80053StatementItem__item_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053StatementItem__item_text> , <https://w3id.org/lmodel/nist-sp-800-53/statement_items> .
+<https://w3id.org/lmodel/nist-sp-800-53/TEST> linkml:description "Exercise mechanisms or activities under specified conditions." .
+<https://w3id.org/lmodel/nist-sp-800-53/WITHDRAWN> linkml:description "Revision 5 withdrew the control or enhancement; incorporated_into, moved_to or withdrawal_reason says where it went." .
+<https://w3id.org/lmodel/nist-sp-800-53/aggregated_parameters> a linkml:SlotDefinition ;
+	linkml:description "For a parameter that stands for several, the parameters it aggregates, by identifier." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_parameter_identifier> .
+<https://w3id.org/lmodel/nist-sp-800-53/alternative_identifiers> a linkml:SlotDefinition ;
+	linkml:description "The identifiers an earlier release of the catalog gave the parameter, such as ac-1_prm_2 for ac-01_odp.03." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_parameter_identifier> .
+<https://w3id.org/lmodel/nist-sp-800-53/alternative_label> a linkml:SlotDefinition ;
+	linkml:description "The label SP 800-53 prints where it differs from the one SP 800-53A gives." .
+<https://w3id.org/lmodel/nist-sp-800-53/assessment_label> a linkml:SlotDefinition ;
+	linkml:description "The label SP 800-53A gives the parameter, such as AC-02_ODP[01]. A parameter that aggregates several has none." ;
+	linkml:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\\([0-9]{2}\\)|\\.[0-9]{2})?_ODP(\\[[0-9]{2}\\])?$" .
+<https://w3id.org/lmodel/nist-sp-800-53/assessment_method> a linkml:SlotDefinition ;
+	linkml:description "Which of the three methods this is." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethodKind> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-53/assessment_methods> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/assessment_methods"^^xsd:anyURI ;
+	linkml:description "The assessment methods SP 800-53A gives the control or enhancement, each with the objects it is applied to." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethod> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/assessment_methods"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/assessment_objective> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/assessment_objective"^^xsd:anyURI ;
+	linkml:description "The assessment objective SP 800-53A gives the control or enhancement: the determination statements an assessor checks, nested as the statement's items are." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/assessment_objective"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/assessment_objects> a linkml:SlotDefinition ;
+	linkml:description "The objects the method is applied to, in the order the publication lists them." ;
+	linkml:multivalued true ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-53/baseline_controls> a linkml:SlotDefinition ;
+	linkml:description "The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_control_or_enhancement_identifier> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-53/baseline_level> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/baseline_level"^^xsd:anyURI ;
+	linkml:description "Which of the four baselines this is." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/baseline_level"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/boolean> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"." ;
+	skos:exactMatch "schema:Boolean"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "Bool" ;
+	linkml:definition_uri "https://w3id.org/linkml/Boolean"^^xsd:anyURI ;
+	linkml:description "A binary (true or false) value" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "bool" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#boolean"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/catalog_references> a linkml:SlotDefinition ;
+	linkml:description "The publications the catalog's references list, most of which a control cites." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference> .
+<https://w3id.org/lmodel/nist-sp-800-53/catalog_release> a linkml:SlotDefinition ;
+	linkml:description "The release of Revision 5 the catalog carries, as NIST numbers it, such as 5.2.0." ;
+	linkml:pattern "^[0-9]+\\.[0-9]+\\.[0-9]+$" ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-53/contributes_to_assurance> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/contributes_to_assurance"^^xsd:anyURI ;
+	linkml:description "True where NIST's reference data marks the control or enhancement as one that contributes to assurance; absent otherwise." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/boolean> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/contributes_to_assurance"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/control_baselines> a linkml:SlotDefinition ;
+	linkml:description "The control baselines of SP 800-53B that select from the catalog." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> .
+<https://w3id.org/lmodel/nist-sp-800-53/control_discussion> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:note "Where the catalog links a control or a statement item inside the text, a derivation keeps the link's text, which is the identifier as the publication prints it, and where it links a reference, the reference's label in brackets." ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/control_discussion"^^xsd:anyURI ;
+	linkml:description "The discussion that follows the statement: context and guidance that help apply the control, which the publication does not require." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/control_discussion"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/control_enhancements> a linkml:SlotDefinition ;
+	linkml:description "The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> .
+<https://w3id.org/lmodel/nist-sp-800-53/control_families> a linkml:SlotDefinition ;
+	linkml:description "The twenty control families, in the order SP 800-53 gives them." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-53/control_identifier> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/control_identifier"^^xsd:anyURI ;
+	linkml:description "The control's identifier, such as AC-2." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_control_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/control_identifier"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/control_parameters> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/control_parameters"^^xsd:anyURI ;
+	linkml:description "The organization-defined parameters the statement leaves to the organization, in the order the catalog gives them." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/control_parameters"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/control_references> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/control_references"^^xsd:anyURI ;
+	linkml:description "The publications the control or enhancement cites, by the labels the catalog's references carry, such as SP 800-12 or OMB A-130." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/control_references"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/control_statement> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/control_statement"^^xsd:anyURI ;
+	linkml:description "The control statement: what the control or enhancement requires, as one text, a lettered or numbered list of items, or both." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Statement> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/control_statement"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/control_status> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/control_status"^^xsd:anyURI ;
+	linkml:description "The status the catalog gives a control or enhancement that Revision 5 withdrew. An active one carries none." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlStatus> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/control_status"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/curie> dcterms:conformsTo "https://www.w3.org/TR/curie/" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "in RDF serializations this MUST be expanded to a URI" , "in non-RDF serializations MAY be serialized as the compact representation" ;
+	linkml:base "Curie" ;
+	linkml:definition_uri "https://w3id.org/linkml/Curie"^^xsd:anyURI ;
+	linkml:description "a compact URI" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/date> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\"." , "URI is dateTime because OWL reasoners don't work with straight date or time" ;
+	skos:exactMatch "schema:Date"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDDate" ;
+	linkml:definition_uri "https://w3id.org/linkml/Date"^^xsd:anyURI ;
+	linkml:description "a date (year, month and day) in an idealized calendar" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#date"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/date_or_datetime> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/DateOrDatetime"^^xsd:anyURI ;
+	linkml:description "Either a date or a datetime" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "https://w3id.org/linkml/DateOrDatetime"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/datetime> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"." ;
+	skos:exactMatch "schema:DateTime"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDDateTime" ;
+	linkml:definition_uri "https://w3id.org/linkml/Datetime"^^xsd:anyURI ;
+	linkml:description "The combination of a date and time" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#dateTime"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/decimal> a linkml:TypeDefinition ;
+	skos:broadMatch "schema:Number"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "Decimal" ;
+	linkml:definition_uri "https://w3id.org/linkml/Decimal"^^xsd:anyURI ;
+	linkml:description "A real number with arbitrary precision that conforms to the xsd:decimal specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#decimal"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/description> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/description"^^xsd:anyURI ;
+	skos:note "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key." ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/description"^^xsd:anyURI ;
+	linkml:description "What the family is about, in the words of whoever records it. SP 800-53 gives the Program Management family an overview of its own, and the other families none." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "http://schema.org/description"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/double> a linkml:TypeDefinition ;
+	skos:closeMatch "schema:Float"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "float" ;
+	linkml:definition_uri "https://w3id.org/linkml/Double"^^xsd:anyURI ;
+	linkml:description "A real number that conforms to the xsd:double specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#double"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/enhancement_id> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/enhancement_id"^^xsd:anyURI ;
+	linkml:description "The enhancement's identifier, such as AC-2(1)." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_enhancement_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/enhancement_id"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/family_controls> a linkml:SlotDefinition ;
+	linkml:description "The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> .
+<https://w3id.org/lmodel/nist-sp-800-53/family_id> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/family_id"^^xsd:anyURI ;
+	linkml:description "The family's two letters, such as AC for Access Control." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_family_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/family_id"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/float> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"." ;
+	skos:exactMatch "schema:Float"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "float" ;
+	linkml:definition_uri "https://w3id.org/linkml/Float"^^xsd:anyURI ;
+	linkml:description "A real number that conforms to the xsd:float specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#float"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/implementation_level> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/implementation_level"^^xsd:anyURI ;
+	linkml:description "Who implements the control or enhancement, as NIST's reference data marks it: the organization, the system, or both." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/implementation_level"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/incorporated_into> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/incorporated_into"^^xsd:anyURI ;
+	linkml:description "For a withdrawn control or enhancement, what it was incorporated into, as the publication states it." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_withdrawal_target> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/incorporated_into"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/integer> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"." ;
+	skos:exactMatch "schema:Integer"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "int" ;
+	linkml:definition_uri "https://w3id.org/linkml/Integer"^^xsd:anyURI ;
+	linkml:description "An integer" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#integer"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/item_label> a linkml:SlotDefinition ;
+	linkml:description "The item's label as the publication prints it, such as a., 1. or (a)." ;
+	linkml:pattern "^(([a-z]|[1-9][0-9]*)\\.|\\(([a-z]|[1-9][0-9]*)\\))$" ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-53/item_text> a linkml:SlotDefinition ;
+	linkml:description "The item's text, with the same placeholders for parameters as the statement's text." ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-53/jsonpath> dcterms:conformsTo "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Jsonpath"^^xsd:anyURI ;
+	linkml:description "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/jsonpointer> dcterms:conformsTo "https://datatracker.ietf.org/doc/html/rfc6901" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Jsonpointer"^^xsd:anyURI ;
+	linkml:description "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/moved_to> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/moved_to"^^xsd:anyURI ;
+	linkml:description "For a withdrawn control or enhancement, the control or enhancement it moved to, as the publication states it." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_control_or_enhancement_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/moved_to"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/ncname> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "NCName" ;
+	linkml:definition_uri "https://w3id.org/linkml/Ncname"^^xsd:anyURI ;
+	linkml:description "Prefix part of CURIE" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/nist_sp_800_53> dcterms:license "Apache-2.0" ;
+	dcterms:source "https://doi.org/10.6028/NIST.SP.800-53r5"^^xsd:anyURI ;
+	dcterms:title "NIST SP 800-53 Security and Privacy Controls, Release 5.2.0" ;
+	pav:version "5.2.0" ;
+	a linkml:SchemaDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/News/2025/nist-releases-revision-to-sp-800-53-controls"^^xsd:anyURI , "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"^^xsd:anyURI , "https://doi.org/10.6028/NIST.SP.800-53Ar5"^^xsd:anyURI , "https://doi.org/10.6028/NIST.SP.800-53B"^^xsd:anyURI , "https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/SP800-53/rev5"^^xsd:anyURI , "https://lmodel.github.io/nist-sp-800-53"^^xsd:anyURI ;
+	skos:note "NIST's catalog renders each family as an OSCAL group, each control and control enhancement as an OSCAL control, each statement, discussion, assessment objective and assessment method as a part, each organization-defined parameter as a parameter, each reference as a back-matter resource, and each baseline as a profile. The broad_mappings name those lmodel/oscal classes." , "SP 800-53, SP 800-53A and SP 800-53B are works of the United States Government and are not subject to copyright in the United States. The descriptions here are this project's own words; NIST's text of each control, parameter, objective and method stays in the catalog copy." , "The version is the release of Revision 5 that the catalog carries, 5.2.0 of August 2025, and publication_date is that release's date; Revision 5 itself was published in September 2020 and updated in December 2020. source is the publication's digital object identifier. NIST's Cybersecurity and Privacy Reference Tool names the same release SP_800_53_5_2_0, and the catalog and the four baseline profiles NIST publishes for it in usnistgov/oscal-content are copied to src/nist_sp_800_53/schema/oscal-content/ at the tag and commit in the annotations. scripts/check_upstream_release.py reads the same pins and reports when NIST publishes a newer edition or changes a copied file. The release tags are the schema's own versions." ;
+	sh:declare _:c14n11 , _:c14n13 , _:c14n14 , _:c14n3 , _:c14n6 ;
+	linkml:annotations _:c14n10 , _:c14n12 , _:c14n4 , _:c14n5 ;
+	linkml:classes <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethod> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Statement> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053StatementItem> ;
+	linkml:default_prefix "nist_sp_800_53" ;
+	linkml:default_range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:description "A LinkML model of the security and privacy controls that NIST Special Publication 800-53, Revision 5, defines at Release 5.2.0: its twenty control families, their controls and control enhancements, each with its statement, discussion, organization-defined parameters, related controls and references; the assessment objectives and methods that SP 800-53A gives each control; and the four control baselines of SP 800-53B." ;
+	linkml:enums <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethodKind> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053BaselineLevel> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlStatus> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ImplementationLevel> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053SelectionCardinality> ;
+	linkml:id "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:imports "linkml:types"^^xsd:anyURI ;
+	linkml:metamodel_version "1.12.0" ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline_title> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement_title> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control_title> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family_title> , <https://w3id.org/lmodel/nist-sp-800-53/assessment_methods> , <https://w3id.org/lmodel/nist-sp-800-53/assessment_objective> , <https://w3id.org/lmodel/nist-sp-800-53/baseline_level> , <https://w3id.org/lmodel/nist-sp-800-53/contributes_to_assurance> , <https://w3id.org/lmodel/nist-sp-800-53/control_discussion> , <https://w3id.org/lmodel/nist-sp-800-53/control_identifier> , <https://w3id.org/lmodel/nist-sp-800-53/control_parameters> , <https://w3id.org/lmodel/nist-sp-800-53/control_references> , <https://w3id.org/lmodel/nist-sp-800-53/control_statement> , <https://w3id.org/lmodel/nist-sp-800-53/control_status> , <https://w3id.org/lmodel/nist-sp-800-53/description> , <https://w3id.org/lmodel/nist-sp-800-53/enhancement_id> , <https://w3id.org/lmodel/nist-sp-800-53/family_id> , <https://w3id.org/lmodel/nist-sp-800-53/implementation_level> , <https://w3id.org/lmodel/nist-sp-800-53/incorporated_into> , <https://w3id.org/lmodel/nist-sp-800-53/moved_to> , <https://w3id.org/lmodel/nist-sp-800-53/related_control_ids> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentMethod__assessment_method> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentMethod__assessment_objects> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentObjective__objective_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentObjective__objective_text> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentObjective__sub_objectives> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Baseline__baseline_controls> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__catalog_references> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__catalog_release> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__control_baselines> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__control_families> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053ControlEnhancement__required_controls> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Control__control_enhancements> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Family__family_controls> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__aggregated_parameters> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__alternative_identifiers> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__alternative_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__assessment_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__parameter_guidelines> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__parameter_id> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__parameter_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__selection_cardinality> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__selection_choices> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Reference__reference_citation> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Reference__reference_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Reference__reference_url> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053StatementItem__item_label> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053StatementItem__item_text> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053Statement__statement_text> , <https://w3id.org/lmodel/nist-sp-800-53/statement_items> , <https://w3id.org/lmodel/nist-sp-800-53/title> , <https://w3id.org/lmodel/nist-sp-800-53/withdrawal_reason> ;
+	linkml:source_file "nist_sp_800_53.yaml" ;
+	linkml:source_file_date "2026-11-07T02:04:03"^^xsd:dateTime ;
+	linkml:source_file_size 24707 ;
+	linkml:types <https://w3id.org/lmodel/nist-sp-800-53/boolean> , <https://w3id.org/lmodel/nist-sp-800-53/curie> , <https://w3id.org/lmodel/nist-sp-800-53/date> , <https://w3id.org/lmodel/nist-sp-800-53/date_or_datetime> , <https://w3id.org/lmodel/nist-sp-800-53/datetime> , <https://w3id.org/lmodel/nist-sp-800-53/decimal> , <https://w3id.org/lmodel/nist-sp-800-53/double> , <https://w3id.org/lmodel/nist-sp-800-53/float> , <https://w3id.org/lmodel/nist-sp-800-53/integer> , <https://w3id.org/lmodel/nist-sp-800-53/jsonpath> , <https://w3id.org/lmodel/nist-sp-800-53/jsonpointer> , <https://w3id.org/lmodel/nist-sp-800-53/ncname> , <https://w3id.org/lmodel/nist-sp-800-53/nodeidentifier> , <https://w3id.org/lmodel/nist-sp-800-53/objectidentifier> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053_control_identifier> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053_control_or_enhancement_identifier> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053_enhancement_identifier> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053_family_identifier> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053_parameter_identifier> , <https://w3id.org/lmodel/nist-sp-800-53/sp80053_withdrawal_target> , <https://w3id.org/lmodel/nist-sp-800-53/sparqlpath> , <https://w3id.org/lmodel/nist-sp-800-53/string> , <https://w3id.org/lmodel/nist-sp-800-53/time> , <https://w3id.org/lmodel/nist-sp-800-53/uri> , <https://w3id.org/lmodel/nist-sp-800-53/uriorcurie> .
+<https://w3id.org/lmodel/nist-sp-800-53/nodeidentifier> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "NodeIdentifier" ;
+	linkml:definition_uri "https://w3id.org/linkml/Nodeidentifier"^^xsd:anyURI ;
+	linkml:description "A URI, CURIE or BNODE that represents a node in a model." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/ns/shex#nonLiteral"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/objectidentifier> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "Used for inheritance and type checking" ;
+	linkml:base "ElementIdentifier" ;
+	linkml:definition_uri "https://w3id.org/linkml/Objectidentifier"^^xsd:anyURI ;
+	linkml:description "A URI or CURIE that represents an object in the model." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/ns/shex#iri"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/objective_label> a linkml:SlotDefinition ;
+	linkml:description "The label SP 800-53A gives the objective, such as AC-02a.[01]." ;
+	linkml:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\\([0-9]{2}\\))?([a-z]\\.([0-9]{2})?)?(\\([a-z]\\)(\\([0-9]{2}\\))?)?(\\[[0-9]{2}\\])*$" ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-53/objective_text> a linkml:SlotDefinition ;
+	linkml:description "The determination statement, with the same placeholders for parameters as the control statement. A heading has none." .
+<https://w3id.org/lmodel/nist-sp-800-53/parameter_guidelines> a linkml:SlotDefinition ;
+	linkml:description "The guidelines that say what a value must settle, such as that the frequency of a review is defined." ;
+	linkml:multivalued true .
+<https://w3id.org/lmodel/nist-sp-800-53/parameter_id> a linkml:SlotDefinition ;
+	linkml:description "The parameter's identifier in NIST's catalog, such as ac-02_odp.01." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_parameter_identifier> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-53/parameter_label> a linkml:SlotDefinition ;
+	linkml:description "For an assignment, what the organization defines, such as personnel or roles." .
+<https://w3id.org/lmodel/nist-sp-800-53/reference_citation> a linkml:SlotDefinition ;
+	linkml:description "The citation, as the catalog prints it." .
+<https://w3id.org/lmodel/nist-sp-800-53/reference_label> a linkml:SlotDefinition ;
+	linkml:description "The label the controls cite the publication by, such as SP 800-12." ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-53/reference_url> a linkml:SlotDefinition ;
+	linkml:description "The address the catalog gives for the publication." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/uri> .
+<https://w3id.org/lmodel/nist-sp-800-53/related_control_ids> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/related_control_ids"^^xsd:anyURI ;
+	linkml:description "The controls and enhancements the publication lists as related, by identifier." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_control_or_enhancement_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/related_control_ids"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/required_controls> a linkml:SlotDefinition ;
+	linkml:description "The controls and enhancements that must be implemented for the enhancement to apply, as NIST's catalog links them: its own control, and for SC-42(2) also SC-42(1)." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_control_or_enhancement_identifier> .
+<https://w3id.org/lmodel/nist-sp-800-53/selection_cardinality> a linkml:SlotDefinition ;
+	linkml:description "For a selection, how many choices the organization picks. The catalog marks one or more, and leaves the slot out when one choice is allowed, which is how OSCAL reads an absent how-many." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053SelectionCardinality> .
+<https://w3id.org/lmodel/nist-sp-800-53/selection_choices> a linkml:SlotDefinition ;
+	linkml:description "For a selection, the choices the publication lists, in order." ;
+	linkml:multivalued true .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentMethod__assessment_method> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "assessment_method" ;
+	linkml:description "Which of the three methods this is." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethod> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethod> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethodKind> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/assessment_method"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentMethod__assessment_objects> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "assessment_objects" ;
+	linkml:description "The objects the method is applied to, in the order the publication lists them." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethod> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentMethod> ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/assessment_objects"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentObjective__objective_label> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "objective_label" ;
+	linkml:description "The label SP 800-53A gives the objective, such as AC-02a.[01]." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective> ;
+	linkml:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\\([0-9]{2}\\))?([a-z]\\.([0-9]{2})?)?(\\([a-z]\\)(\\([0-9]{2}\\))?)?(\\[[0-9]{2}\\])*$" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/objective_label"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentObjective__objective_text> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "objective_text" ;
+	linkml:description "The determination statement, with the same placeholders for parameters as the control statement. A heading has none." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/objective_text"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053AssessmentObjective__sub_objectives> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "sub_objectives" ;
+	linkml:description "The objectives grouped under this one, in order." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/sub_objectives"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Baseline__baseline_controls> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "baseline_controls" ;
+	linkml:description "The controls and enhancements the baseline selects, by identifier, in the order the catalog gives them." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_control_or_enhancement_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/baseline_controls"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__catalog_references> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "catalog_references" ;
+	linkml:description "The publications the catalog's references list, most of which a control cites." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/catalog_references"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__catalog_release> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "catalog_release" ;
+	linkml:description "The release of Revision 5 the catalog carries, as NIST numbers it, such as 5.2.0." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog> ;
+	linkml:pattern "^[0-9]+\\.[0-9]+\\.[0-9]+$" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/catalog_release"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__control_baselines> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "control_baselines" ;
+	linkml:description "The control baselines of SP 800-53B that select from the catalog." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/control_baselines"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Catalog__control_families> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "control_families" ;
+	linkml:description "The twenty control families, in the order SP 800-53 gives them." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Catalog> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/control_families"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053ControlEnhancement__required_controls> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "required_controls" ;
+	linkml:description "The controls and enhancements that must be implemented for the enhancement to apply, as NIST's catalog links them: its own control, and for SC-42(2) also SC-42(1)." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_control_or_enhancement_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/required_controls"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Control__control_enhancements> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "control_enhancements" ;
+	linkml:description "The control's enhancements. A knowledge bundle relates an enhancement to its control with isPartOf instead." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/control_enhancements"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Family__family_controls> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "family_controls" ;
+	linkml:description "The controls of the family. A knowledge bundle relates a control to its family with isPartOf instead." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/family_controls"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__aggregated_parameters> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "aggregated_parameters" ;
+	linkml:description "For a parameter that stands for several, the parameters it aggregates, by identifier." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_parameter_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/aggregated_parameters"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__alternative_identifiers> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "alternative_identifiers" ;
+	linkml:description "The identifiers an earlier release of the catalog gave the parameter, such as ac-1_prm_2 for ac-01_odp.03." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_parameter_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/alternative_identifiers"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__alternative_label> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "alternative_label" ;
+	linkml:description "The label SP 800-53 prints where it differs from the one SP 800-53A gives." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/alternative_label"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__assessment_label> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "assessment_label" ;
+	linkml:description "The label SP 800-53A gives the parameter, such as AC-02_ODP[01]. A parameter that aggregates several has none." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[0-9]{2}(\\([0-9]{2}\\)|\\.[0-9]{2})?_ODP(\\[[0-9]{2}\\])?$" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/assessment_label"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__parameter_guidelines> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "parameter_guidelines" ;
+	linkml:description "The guidelines that say what a value must settle, such as that the frequency of a review is defined." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/parameter_guidelines"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__parameter_id> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "parameter_id" ;
+	linkml:description "The parameter's identifier in NIST's catalog, such as ac-02_odp.01." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/sp80053_parameter_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/parameter_id"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__parameter_label> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "parameter_label" ;
+	linkml:description "For an assignment, what the organization defines, such as personnel or roles." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/parameter_label"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__selection_cardinality> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "selection_cardinality" ;
+	linkml:description "For a selection, how many choices the organization picks. The catalog marks one or more, and leaves the slot out when one choice is allowed, which is how OSCAL reads an absent how-many." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053SelectionCardinality> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/selection_cardinality"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Parameter__selection_choices> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "selection_choices" ;
+	linkml:description "For a selection, the choices the publication lists, in order." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/selection_choices"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Reference__reference_citation> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "reference_citation" ;
+	linkml:description "The citation, as the catalog prints it." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/reference_citation"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Reference__reference_label> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "reference_label" ;
+	linkml:description "The label the controls cite the publication by, such as SP 800-12." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference> ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/reference_label"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Reference__reference_url> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "reference_url" ;
+	linkml:description "The address the catalog gives for the publication." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Reference> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/uri> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/reference_url"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053StatementItem__item_label> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "item_label" ;
+	linkml:description "The item's label as the publication prints it, such as a., 1. or (a)." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053StatementItem> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053StatementItem> ;
+	linkml:pattern "^(([a-z]|[1-9][0-9]*)\\.|\\(([a-z]|[1-9][0-9]*)\\))$" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/item_label"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053StatementItem__item_text> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "item_text" ;
+	linkml:description "The item's text, with the same placeholders for parameters as the statement's text." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053StatementItem> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053StatementItem> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/item_text"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053Statement__statement_text> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:prefLabel "statement_text" ;
+	linkml:description "The statement's own text, before any items. A placeholder of the form {{ insert: param, <identifier> }} marks where an organization-defined parameter is inserted." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Statement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Statement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/statement_text"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053_control_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlIdentifier"^^xsd:anyURI ;
+	linkml:description "A control's identifier: its family's letters, a hyphen and the control's number within the family, such as AC-2." ;
+	linkml:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053_control_or_enhancement_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlOrEnhancementIdentifier"^^xsd:anyURI ;
+	linkml:description "The identifier of a control or of a control enhancement, such as AC-2 or AC-2(1), where the publication cites either." ;
+	linkml:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*(\\([1-9][0-9]*\\))?$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053_enhancement_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053EnhancementIdentifier"^^xsd:anyURI ;
+	linkml:description "A control enhancement's identifier: its control's identifier and the enhancement's number in parentheses, such as AC-2(1)." ;
+	linkml:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)-[1-9][0-9]*\\([1-9][0-9]*\\)$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053_family_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053FamilyIdentifier"^^xsd:anyURI ;
+	linkml:description "The two letters that name one of the twenty control families, such as AC for Access Control." ;
+	linkml:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053_parameter_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053ParameterIdentifier"^^xsd:anyURI ;
+	linkml:description "The identifier NIST's catalog gives an organization-defined parameter, in lower case: the zero-padded control identifier, _odp and the parameter's number, such as ac-02_odp.01, or, for a parameter that aggregates several, the control identifier, _prm_ and a number, such as ac-1_prm_1." ;
+	linkml:pattern "^[a-z]{2}-[0-9]{2}(\\.[0-9]{2})?_odp(\\.[0-9]{2})?$|^[a-z]{2}-[1-9][0-9]*(\\.[1-9][0-9]*)?_prm_[1-9][0-9]*$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sp80053_withdrawal_target> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/Sp80053WithdrawalTarget"^^xsd:anyURI ;
+	linkml:description "Where a withdrawn control or enhancement was incorporated, as the publication names it: a control or enhancement, such as AC-2 or AC-2(1), one item of a control's statement, such as AC-2k, or a whole family, such as SR." ;
+	linkml:pattern "^(AC|AT|AU|CA|CM|CP|IA|IR|MA|MP|PE|PL|PM|PS|PT|RA|SA|SC|SI|SR)(-[1-9][0-9]*(\\([1-9][0-9]*\\))?([a-z](\\.[1-9][0-9]*)*|\\([a-z]\\)(\\([1-9][0-9]*\\))*)?)?$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sparqlpath> dcterms:conformsTo "https://www.w3.org/TR/sparql11-query/#propertypaths" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Sparqlpath"^^xsd:anyURI ;
+	linkml:description "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/statement_items> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/statement_items"^^xsd:anyURI ;
+	linkml:description "The lettered or numbered items of the statement, in order, each of which may hold items of its own." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Statement> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053StatementItem> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053StatementItem> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053StatementItem> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/statement_items"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/statement_text> a linkml:SlotDefinition ;
+	linkml:description "The statement's own text, before any items. A placeholder of the form {{ insert: param, <identifier> }} marks where an organization-defined parameter is inserted." .
+<https://w3id.org/lmodel/nist-sp-800-53/string> a linkml:TypeDefinition ;
+	skos:editorialNote "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"." ;
+	skos:exactMatch "schema:Text"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/String"^^xsd:anyURI ;
+	linkml:description "A character string" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/sub_objectives> a linkml:SlotDefinition ;
+	linkml:description "The objectives grouped under this one, in order." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/Sp80053AssessmentObjective> .
+<https://w3id.org/lmodel/nist-sp-800-53/time> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\"." , "URI is dateTime because OWL reasoners do not work with straight date or time" ;
+	skos:exactMatch "schema:Time"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDTime" ;
+	linkml:definition_uri "https://w3id.org/linkml/Time"^^xsd:anyURI ;
+	linkml:description "A time object represents a (local) time of day, independent of any particular day" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#time"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/title> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/name"^^xsd:anyURI ;
+	skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/title"^^xsd:anyURI ;
+	linkml:description "The name SP 800-53 gives the family, control or control enhancement, or the title NIST's profile gives the baseline." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Family> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Baseline> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "http://schema.org/name"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/uri> dcterms:conformsTo "https://www.ietf.org/rfc/rfc3987.txt" ;
+	a linkml:TypeDefinition ;
+	skos:closeMatch "schema:URL"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node" ;
+	linkml:base "URI" ;
+	linkml:definition_uri "https://w3id.org/linkml/Uri"^^xsd:anyURI ;
+	linkml:description "a complete URI" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#anyURI"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/uriorcurie> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "URIorCURIE" ;
+	linkml:definition_uri "https://w3id.org/linkml/Uriorcurie"^^xsd:anyURI ;
+	linkml:description "a URI or a CURIE" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#anyURI"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-53/withdrawal_reason> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-53"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-53/withdrawal_reason"^^xsd:anyURI ;
+	linkml:description "For a withdrawn control or enhancement that the publication neither moved nor incorporated, what it says instead, such as that the enhancement is addressed through tailoring." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-53/Sp80053Control> , <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-53/Sp80053ControlEnhancement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-53/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-53/withdrawal_reason"^^xsd:anyURI .
+_:c14n10 skos:example "f0de6d8d8c059d374f15e0ae07508d82e370fc1d" ;
+	linkml:tag "oscal_content_commit"^^xsd:anyURI .
+_:c14n11 sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ;
+	sh:prefix "xsd" .
+_:c14n12 skos:example "SP_800_53_5_2_0" ;
+	linkml:tag "cprt_framework_version"^^xsd:anyURI .
+_:c14n13 sh:namespace "https://w3id.org/lmodel/nist-sp-800-53/"^^xsd:anyURI ;
+	sh:prefix "nist_sp_800_53" .
+_:c14n14 sh:namespace "http://schema.org/"^^xsd:anyURI ;
+	sh:prefix "schema" .
+_:c14n3 sh:namespace "https://w3id.org/linkml/"^^xsd:anyURI ;
+	sh:prefix "linkml" .
+_:c14n4 skos:example "v1.6.0" ;
+	linkml:tag "oscal_content_tag"^^xsd:anyURI .
+_:c14n5 skos:example "2025-08" ;
+	linkml:tag "publication_date"^^xsd:anyURI .
+_:c14n6 sh:namespace "https://w3id.org/lmodel/oscal/"^^xsd:anyURI ;
+	sh:prefix "oscal" .
+
