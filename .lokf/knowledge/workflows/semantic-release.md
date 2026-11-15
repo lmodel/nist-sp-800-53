@@ -10,11 +10,11 @@ sources:
     resource: .github/workflows/semantic-release.yml
     title: the header comment, the on key and the two jobs
   - id: release-tools
-    resource: .github/release
+    resource: .release
     title: the release tools' package.json and package-lock.json
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T09:09:14Z"
+  at: "2026-11-15T20:59:32Z"
 status: draft
 ---
 
@@ -22,7 +22,7 @@ status: draft
 
 `.github/workflows/semantic-release.yml` is the workflow named "Semantic release". Its `plan` job runs on a pull request into `main`, including a retitling, and stops after 10 minutes. It:
 
-- installs semantic-release and its plugins from `.github/release/package-lock.json` with `npm ci --ignore-scripts`, as the `release` job does;[^release-tools]
+- installs semantic-release and its plugins from `.release/package-lock.json` with `npm ci --ignore-scripts`, as the `release` job does;[^release-tools]
 - reads whether the commits would release;
 - refuses to release before a `v*` tag exists;
 - refuses an empty `## [Unreleased]` section when they would release;
@@ -32,4 +32,4 @@ status: draft
 Its `release` job runs on a push to `main`, in the `release` Environment with `contents: write` and `actions: write`, and stops after 20 minutes. It repeats the baseline check and runs semantic-release, which promotes the changelog through `changelog-release.mjs`, tags and publishes. It then dispatches `knowledge-release.yaml` for the tag once `KNOWLEDGE_RELEASE_ENABLED` is `true`. [Cut a release](../playbooks/release.md) says how to prepare a change for it.[^semantic-release.yml]
 
 [^semantic-release.yml]: .github/workflows/semantic-release.yml, the header comment, the on key and the two jobs
-[^release-tools]: .github/release, package.json and package-lock.json
+[^release-tools]: .release, package.json and package-lock.json
