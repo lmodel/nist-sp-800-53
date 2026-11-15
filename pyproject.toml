@@ -67,7 +67,7 @@ skip = [
   "src/nist_sp_800_53/schema/oscal-content/*",
   "tests/neighbours/*",
   ".lokf/scripts/*",
-  "website/package-lock.json",
+  "website/uv.lock",
 ]
 
 # Reminder: words have to be lowercased for the ignore-words-list. covert is
@@ -90,5 +90,5 @@ extend-exclude = [
   "src/nist_sp_800_53/schema/oscal-content/*",
   "tests/neighbours/*",
   ".lokf/scripts/*",
-  "website/package-lock.json",
+  "website/uv.lock",
 ]

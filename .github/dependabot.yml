@@ -42,9 +42,9 @@ updates:
     commit-message:
       prefix: "chore(lokf)"
 
-  # The knowledge website's npm packages. A bump makes website/package-lock.json
-  # differ from the ktl-website template, and that drift is expected.
-  - package-ecosystem: npm
+  # The website's build tools, Hugo and Pagefind (website/pyproject.toml
+  # and uv.lock).
+  - package-ecosystem: uv
     directory: "/website"
     schedule:
       interval: monthly
