@@ -12,15 +12,12 @@ sources:
   - id: license
     resource: LICENSE
     title: the Apache License, Version 2.0
-  - id: website-notice
-    resource: website/NOTICE
-    title: the adapted graph explorer
   - id: readme.md
     resource: README.md
     title: the License section
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T09:09:14Z"
+  at: "2026-11-15T02:57:28Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -37,9 +34,8 @@ The schema and the code are licensed under the Apache License, Version 2.0, the 
 - the justfile and scaffolding derive from linkml-project-copier under the MIT licence;
 - the sidecar's scripts, the knowledge workflows and the website derive from Knowledge Trust Ladder's templates under Apache 2.0.[^notice]
 
-`website/NOTICE` adds that the graph explorer is adapted from the LOKF toolkit's site, also under Apache 2.0.[^website-notice] The README repeats the licence and the disclaimer, and says that the knowledge bundle in `.lokf/knowledge/` is under the Creative Commons Attribution 4.0 International licence (CC BY 4.0), as its `index.md` declares.[^readme.md]
+The README repeats the licence and the disclaimer, and says that the knowledge bundle in `.lokf/knowledge/` is under the Creative Commons Attribution 4.0 International licence (CC BY 4.0), as its `index.md` declares.[^readme.md]
 
 [^license]: LICENSE, the whole file
 [^notice]: NOTICE, the header, the NIST sections, linkml-project-copier and Knowledge bundle
-[^website-notice]: website/NOTICE, the whole file
 [^readme.md]: README.md, the License section

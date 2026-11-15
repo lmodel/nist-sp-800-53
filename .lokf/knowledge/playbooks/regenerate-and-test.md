@@ -17,7 +17,7 @@ sources:
     title: the Commands section
 generated:
   by: process:ktl-librarian
-  at: "2026-11-06T21:23:15Z"
+  at: "2026-11-15T10:37:30Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -26,7 +26,7 @@ verified:
 
 # Regenerate and test after a schema change
 
-1. Install with `uv sync --group dev`. You need Python 3.10 or later, uv and just.[^contributing.md]
+1. Install with `uv sync --group dev`. You need Python 3.11 or later, uv and just.[^contributing.md]
 2. Edit `src/nist_sp_800_53/schema/nist_sp_800_53.yaml`, rendering what SP 800-53, SP 800-53A or SP 800-53B defines in your own words, and name the section or table in the pull request.
 3. Run `just lint`, which runs linkml-lint with errors only under `.linkmllint.yaml`.[^justfile]
 4. Run `just gen-project`, `just gen-doc` and `just lokf-adapt`, and commit their output. `project/`, `src/nist_sp_800_53/datamodel/`, `docs/schema/` and `.lokf/schema/nist-sp-800-53.yaml` are generated.

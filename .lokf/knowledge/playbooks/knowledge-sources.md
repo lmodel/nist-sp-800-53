@@ -99,7 +99,7 @@ exclusions:
     reason: The sidecar's git settings.
 generated:
   by: process:ktl-librarian
-  at: "2026-11-06T21:23:15Z"
+  at: "2026-11-15T02:57:28Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -126,8 +126,8 @@ Each concept derived from a file or folder of this repository names it by its pa
 | `.releaserc.json`, `.github/scripts/changelog-release.mjs`, `CHANGELOG.md`, the Releasing section of `CONTRIBUTING.md` | `playbooks/release` | re-read the release rules, the commands and the baseline paragraph |
 | the nine files in `.github/workflows/` | the nine `workflows/` concepts | re-read each file's `on` keys, its jobs' permissions and environments, and the variables and secrets it reads |
 | `.github/release/` | `workflows/semantic-release` | re-read `package.json` and the versions the lockfile pins |
-| `website/` | `services/documentation-site` | re-read `site.config.mjs` and `website/README.md` |
-| `NOTICE`, `LICENSE`, `website/NOTICE`, the License section of `README.md` | `policies/license-and-attribution` | re-read each third-party entry |
+| `website/` | `services/documentation-site` | re-read `site.toml` and `website/README.md` |
+| `NOTICE`, `LICENSE`, the License section of `README.md` | `policies/license-and-attribution` | re-read each third-party entry |
 | `SECURITY.md`, `.github/dependabot.yml` | `policies/security-policy` | re-read the table of surfaces and the settings not yet in force |
 | `AI_COVENANT.md` | `policies/ai-covenant` | re-read the project note and the section on agent automation |
 | <https://doi.org/10.6028/NIST.SP.800-53r5>, <https://doi.org/10.6028/NIST.SP.800-53Ar5>, <https://doi.org/10.6028/NIST.SP.800-53B> and the pages the schema header's `see_also` lists | the `resource` of each `references/` concept | external pages, named but not read by this bootstrap, which took the publications' facts from NOTICE, the schema header and the catalog's metadata; read them when the upstream watch reports a new edition |
